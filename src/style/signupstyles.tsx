@@ -105,8 +105,8 @@ export default StyleSheet.create({
     flex: 1,
     fontSize: wp(4),
     color: '#333',
-    marginLeft: wp(2),
-    marginTop: 2,
+    marginLeft: wp(0),
+    marginTop: wp(1)
    
   },
   linkText: {

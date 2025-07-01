@@ -8,12 +8,12 @@ import {
   ScrollView,
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import Ionicons from 'react-native-vector-icons/Ionicons';
 import { Picker } from '@react-native-picker/picker';
 import styles from '../style/signupstyles';
-
+import CheckBox from '@react-native-community/checkbox';
 const SignUpScreen = () => {
   const navigation = useNavigation();
+  const [rememberMe, setRememberMe] = useState(false);
   const [gender, setGender] = useState('');
   const [agree, setAgree] = useState(false);
   const [month, setMonth] = useState('');
@@ -25,7 +25,10 @@ const SignUpScreen = () => {
       source={require('../../assets/image/background.png')}
       style={styles.bgimg}
     >
-      <ScrollView contentContainerStyle={styles.container} keyboardShouldPersistTaps="handled">
+      <ScrollView
+        contentContainerStyle={styles.container}
+        keyboardShouldPersistTaps="handled"
+      >
         <Text style={styles.title}>Sign up</Text>
 
         <Text style={styles.label}>Full Name</Text>
@@ -57,10 +60,7 @@ const SignUpScreen = () => {
           </View>
 
           <View style={styles.datePicker}>
-            <Picker
-              selectedValue={day}
-              onValueChange={value => setDay(value)}
-            >
+            <Picker selectedValue={day} onValueChange={value => setDay(value)}>
               <Picker.Item label="DD" value="" />
               {[...Array(31)].map((_, i) => (
                 <Picker.Item key={i} label={`${i + 1}`} value={`${i + 1}`} />
@@ -84,7 +84,10 @@ const SignUpScreen = () => {
 
         <Text style={styles.label}>Select your gender</Text>
         <View style={styles.genderPicker}>
-          <Picker selectedValue={gender} onValueChange={value => setGender(value)}>
+          <Picker
+            selectedValue={gender}
+            onValueChange={value => setGender(value)}
+          >
             <Picker.Item label="Select" value="" />
             <Picker.Item label="Male" value="male" />
             <Picker.Item label="Female" value="female" />
@@ -115,10 +118,10 @@ const SignUpScreen = () => {
 
         <View style={styles.termsRow}>
           <TouchableOpacity onPress={() => setAgree(!agree)}>
-            <Ionicons
-              name={agree ? 'checkbox' : 'square-outline'}
-              size={20}
-              color="#003300"
+            <CheckBox
+              value={rememberMe}
+              onValueChange={setRememberMe}
+              tintColors={{ true: '#5DFFCD', false: '#000' }}
             />
           </TouchableOpacity>
           <Text style={styles.termsText}>
