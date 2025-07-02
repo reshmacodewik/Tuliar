@@ -50,7 +50,7 @@ const LoginScreen: React.FC = () => {
           />
           <TouchableOpacity onPress={() => setSecure(!secure)}>
             <Ionicons
-              name={secure ? 'eye-off' : 'eye'}
+              name={secure ? 'eye-off-outline' : 'eye-outline'}
               size={wp(5)}
               color="#999"
             />
@@ -71,6 +71,7 @@ const LoginScreen: React.FC = () => {
             styles.loginButton,
             { height: hp(6), borderRadius: wp(10), marginTop: hp(4) },
           ]}
+           onPress={() => navigation.navigate('HomeScreen')}
         >
           <Text style={[styles.loginText, { fontSize: wp(4.5) }]}>Login</Text>
         </TouchableOpacity>
