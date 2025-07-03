@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
   },
   image: {
     width: wp(100),
-    height: hp(45),
+    height: hp(48),
     resizeMode: 'contain',
   },
   dotContainer: {
@@ -54,18 +54,21 @@ const styles = StyleSheet.create({
     marginHorizontal: wp(1),
   },
   title: {
-    fontSize: wp(8),
-    fontWeight: '700',
+    fontSize: wp(8.5),
     color: '#000',
     marginTop: hp(1),
+    textAlign:'center',
+    fontFamily:"Urbanist-SemiBold"
   },
   desc: {
     textAlign: 'center',
     color: '#6E6E6E',
-    fontSize: wp(4.5),
+    fontSize: wp(3.5),
     marginTop: hp(1),
     width: wp(80),
-    fontWeight: '300',
+    lineHeight:24,
+    fontFamily:"Montserrat-Light"
+   
   },
   button: {
     backgroundColor: '#264734',
@@ -82,13 +85,14 @@ const styles = StyleSheet.create({
     fontWeight: '600',
   },
   bottomText: {
-    color: '#6E6E6E',
+    color: '#000',
     fontSize: wp(3.5),
     marginTop: hp(1.5),
+    fontFamily:"Poppins-Light"
   },
   signUpText: {
-    color: '#0C7C59',
-    fontWeight: '600',
+    color: '#275258',
+    fontFamily:"Poppins-Medium"
   },
 });
 

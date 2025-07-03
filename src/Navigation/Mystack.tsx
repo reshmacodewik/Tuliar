@@ -6,7 +6,10 @@ import LoginScreen from '../Screens/LoginScreen';
 import SignUpScreen from '../Screens/SignUpScreen';
 import VerificationCode from '../Screens/VerificationCode';
 import SuccessScreen from '../Screens/SuccessScreen';
-import HomeScreen from '../Screens/HomeScreen';
+import BottomTabs from './MyTab';
+import ExploreScreen from '../Screens/ExploreScreen';
+import JournalScreen from '../Screens/JournalScreen';
+import SearchScreen from '../Screens/SearchScreen';
 
 export type RootStackParamList = {
   splashScreen: undefined;
@@ -16,6 +19,9 @@ export type RootStackParamList = {
   VerificationCode: undefined;
   SuccessScreen: undefined;
   HomeScreen: undefined;
+  ExploreScreen: undefined;
+ JournalScreen: undefined;
+ SearchScreen: undefined;
 };
 
 const Stack = createStackNavigator<RootStackParamList>();
@@ -29,7 +35,10 @@ const MyStack: React.FC = () => {
       <Stack.Screen name="SignUpScreen" component={SignUpScreen} />
       <Stack.Screen name="VerificationCode" component={VerificationCode} />
       <Stack.Screen name="SuccessScreen" component={SuccessScreen} />
-      <Stack.Screen name="HomeScreen" component={HomeScreen}/>
+      <Stack.Screen name="HomeScreen" component={BottomTabs} />
+      <Stack.Screen name="ExploreScreen" component={ExploreScreen} />
+      <Stack.Screen name="JournalScreen" component={JournalScreen} />
+       <Stack.Screen name="SearchScreen" component={SearchScreen} />
     </Stack.Navigator>
   );
 };

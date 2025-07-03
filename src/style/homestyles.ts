@@ -2,15 +2,25 @@ import { StyleSheet } from 'react-native';
 
 const styles = (wp: any, hp: any) =>
   StyleSheet.create({
-    container: {
-      padding: wp(4),
-      marginTop: hp(2),
-     
+    bgimg: {
+      flex: 1,
+      resizeMode: 'cover',
     },
-     bgimg:{
-    flex: 1, 
-    resizeMode: 'cover' 
-  },
+    innercontainer: {
+      backgroundColor: '#fff',
+      borderRadius: 15,
+      height: hp(61),
+      justifyContent: 'center',
+      alignContent: 'center',
+      paddingHorizontal: hp(2),
+      paddingTop: hp(2),
+      marginTop: hp(-2),
+    },
+    container: {
+      flex: 1,
+      padding: wp(4),
+      marginTop: hp(1.5),
+    },
     header: {
       flexDirection: 'row',
       justifyContent: 'space-between',
@@ -18,20 +28,27 @@ const styles = (wp: any, hp: any) =>
       marginBottom: hp(3),
     },
     logo: {
-      width: wp(35),
+      width: wp(40),
       height: hp(6),
       resizeMode: 'contain',
     },
-    rightHeader: {
+    headerText: {
+      fontSize: wp(3),
+      marginTop: hp(0),
+      color: '#000',
+      marginLeft: hp(1),
+      fontFamily: 'Quicksand-SemiBold',
+    },
+    headerIcons: {
       flexDirection: 'row',
       alignItems: 'center',
     },
-    icon: {
+    bellIcon: {
       width: wp(6),
       height: wp(6),
-      marginRight: wp(4),
+      marginRight: wp(3),
     },
-    avatar: {
+    userIcon: {
       width: wp(8),
       height: wp(8),
       borderRadius: wp(4),
@@ -41,71 +58,84 @@ const styles = (wp: any, hp: any) =>
       justifyContent: 'space-between',
       flexWrap: 'wrap',
       marginBottom: hp(3),
+      marginTop: hp(1.5),
+      marginHorizontal: hp(2.4),
     },
-    featureButton: {
-      width: wp(21),
-      alignItems: 'center',
-      padding: wp(2),
-      marginBottom: hp(-2),
+    featureBtn: {
+      width: wp(19),
+      height: wp(21),
       borderWidth: 1,
       borderColor: '#F97316',
-      borderRadius: wp(3),
-     
+      borderRadius: wp(2.5),
+      alignItems: 'center',
+      justifyContent: 'center',
+      marginBottom: hp(2),
+      backgroundColor: 'white',
     },
     featureIcon: {
       width: wp(8),
       height: wp(8),
       marginBottom: hp(1),
-      resizeMode: 'contain',
     },
     featureText: {
-      textAlign: 'center',
       fontSize: wp(2.8),
+      textAlign: 'center',
+      fontFamily: 'Poppins-SemiBold',
+    },
+    sectionHeader: {
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      marginBottom: hp(2),
     },
     sectionTitle: {
       fontSize: wp(5),
       fontWeight: '700',
-      marginBottom: hp(0.8),
+      fontFamily: 'Poppins-Bold',
     },
-    sessionCard: {
+    arrow: {
+      fontSize: wp(10),
+      color: '#000',
+    },
+    journeyCard: {
       width: wp(55),
       backgroundColor: '#fff',
-      borderRadius: wp(4),
+      borderRadius: wp(3),
       padding: wp(3),
       marginRight: wp(4),
-      marginBottom: wp(2),
-      shadowColor: '#000',
-      shadowOffset: { width: 0, height: 2 },
-      shadowOpacity: 0.1,
-      shadowRadius: 4,
-      elevation: 3,
     },
-    sessionImage: {
+    journeyImg: {
       width: '100%',
       height: hp(12),
       borderRadius: wp(0),
       marginBottom: hp(1),
     },
-    sessionTitle: {
-      fontWeight: 'bold',
+    journeyTitle: {
       fontSize: wp(4),
-      marginBottom: hp(0.5),
+      marginBottom: hp(0),
+      fontFamily: 'Poppins-Bold',
     },
-    sessionTime: {
-      fontSize: wp(3.3),
-      color: '#555',
+    journeyText: {
+      fontSize: wp(3.2),
+      color: '#979797',
       marginBottom: hp(1),
+      fontFamily: 'Poppins-Medium',
     },
-    sessionButton: {
+    detailsBtn: {
       backgroundColor: '#003300',
       paddingVertical: hp(1),
       borderRadius: wp(10),
       alignItems: 'center',
+      shadowColor: '#FFE0BD',
+      shadowOffset: { width: 0, height: 4 },
+      shadowOpacity: 0.5,
+      shadowRadius: 6,
+      elevation: 2,
     },
-    buttonText: {
+    detailsText: {
       color: '#fff',
-      fontSize: wp(3.5),
-      fontWeight: 'bold',
+      fontSize: wp(3.8),
+      fontFamily: 'Poppins-Bold',
     },
     eventCard: {
       flexDirection: 'row',
@@ -113,80 +143,134 @@ const styles = (wp: any, hp: any) =>
       borderRadius: wp(3),
       padding: wp(3),
       marginBottom: hp(2),
-      shadowColor: '#000',
-      shadowOffset: { width: 0, height: 2 },
-      shadowOpacity: 0.1,
-      shadowRadius: 4,
-      elevation: 2,
     },
-    eventImage: {
+    eventImg: {
       width: wp(22),
-      height: wp(30),
+      height: wp(28),
       borderRadius: wp(2),
       marginRight: wp(4),
     },
     eventContent: {
       flex: 1,
     },
-    eventTag: {
-      backgroundColor: '#003300',
-      alignSelf: 'flex-start',
+    tagsRow: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      marginBottom: hp(1),
+      justifyContent: 'space-between',
+    },
+    fromTag: {
+      backgroundColor: '#264734',
       paddingHorizontal: wp(2),
       paddingVertical: wp(0.5),
-      borderRadius: wp(2),
-      marginBottom: hp(1),
+      borderRadius: wp(5),
+      marginRight: wp(2),
     },
-    eventTagText: {
-      color: '#fff',
+    typeTag: {
+      paddingHorizontal: wp(4),
+      paddingVertical: wp(0),
+      borderRadius: wp(5),
+    },
+    tagText: {
       fontSize: wp(3),
+      color: '#fff',
+      fontFamily: 'Poppins-Bold',
     },
     eventTitle: {
-      fontWeight: '700',
       fontSize: wp(3.5),
+      fontFamily: 'Poppins-SemiBold',
       marginBottom: hp(0.5),
     },
     eventDesc: {
-      fontSize: wp(3.2),
-      color: '#555',
+      fontSize: wp(3.1),
+      color: '#979797',
+       fontFamily: 'Poppins-Medium',
     },
-    feedCard: {
-  backgroundColor: '#fff',
-  padding: wp(4),
-  borderRadius: wp(3),
-  marginBottom: hp(2),
-  shadowColor: '#000',
-  shadowOffset: { width: 0, height: 2 },
-  shadowOpacity: 0.1,
-  shadowRadius: 4,
-  elevation: 2,
-},
-feedHeader: {
-  flexDirection: 'row',
-  alignItems: 'center',
-  marginBottom: hp(1),
-},
-feedAvatar: {
-  width: wp(8),
-  height: wp(8),
-  borderRadius: wp(4),
-  marginRight: wp(2),
-},
-feedUser: {
-  fontWeight: '600',
-  fontSize: wp(4),
-},
-feedText: {
-  fontSize: wp(3.5),
-  color: '#333',
-  marginVertical: hp(1),
-},
-feedStats: {
-  flexDirection: 'row',
-  gap:15,
-  paddingTop: hp(1),
-  
-},
+    outercontainer: {
+      position: 'absolute',
+      bottom: hp(0),
+      right: wp(0),
+      flexDirection: 'column',
+      alignItems: 'center',
+    },
+    fab: {
+      width: wp(17),
+      height: wp(17),
+      borderRadius: wp(10),
+      backgroundColor: '#003300',
+      borderWidth: 1,
+      borderColor: '#F97316',
+      justifyContent: 'center',
+      alignItems: 'center',
+      elevation: 5,
+      shadowColor: '#000',
+      shadowOffset: { width: 0, height: 2 },
+      shadowOpacity: 0.3,
+      shadowRadius: 3,
+    },
+    icon: {
+      width: wp(8),
+      height: wp(8),
+      resizeMode: 'contain',
+    },
+    textContainer: {
+      marginLeft: wp(2),
+      paddingHorizontal: wp(3),
+      paddingVertical: hp(0.8),
+    },
+    text: {
+      fontSize: wp(3.5),
+      color: '#000',
+    },
 
+    feedCard: {
+      backgroundColor: '#fff',
+      padding: wp(4),
+      borderRadius: wp(3),
+      marginBottom: hp(2),
+      borderWidth: 1,
+    },
+    feedHeader: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      marginBottom: hp(1),
+    },
+    feedAvatar: {
+      width: wp(8),
+      height: wp(8),
+      borderRadius: wp(4),
+      marginRight: wp(2),
+    },
+    feedUser: {
+      fontWeight: '600',
+      fontSize: wp(4),
+    },
+    feedText: {
+      fontSize: wp(3.5),
+      color: '#333',
+      marginVertical: hp(1),
+    },
+    feedStats: {
+      flexDirection: 'row',
+      gap: 0,
+      paddingTop: hp(1),
+    },
+
+    statItem: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      marginRight: wp(4),
+    },
+    feedicon: {
+      width: wp(5),
+      height: wp(5),
+      resizeMode: 'contain',
+      marginRight: wp(1),
+    },
+    statText: {
+      fontSize: wp(3.2),
+      color: '#000',
+    },
   });
 
 export default styles;
