@@ -11,7 +11,7 @@ import {
 } from 'react-native';
 import { useResponsive } from 'react-native-responsive-hook';
 import styles from '../style/search';
-
+import { useNavigation, NavigationProp } from '@react-navigation/native';
 const recentSearches = [
   'Relationship Expert',
   'Therapy',
@@ -43,7 +43,7 @@ const experts = [
 
 const SearchScreen = () => {
   const { wp, hp } = useResponsive();
-
+  const navigation = useNavigation<NavigationProp<any>>();
   return (
     <ImageBackground
       source={require('../../assets/image/background.png')}
@@ -181,18 +181,22 @@ const SearchScreen = () => {
               </View>
 
               <View style={styles.iconRow}>
+                 <TouchableOpacity onPress={() => navigation.navigate('VideoCallScreen')}>
                 <Image
                   source={require('../../assets/image/video.png')}
                   style={styles.icon}
                 />
+                </TouchableOpacity>
                 <Image
                   source={require('../../assets/image/message.png')}
                   style={styles.icon}
                 />
+               <TouchableOpacity onPress={() => navigation.navigate('IncomingCallScreen')}>
                 <Image
                   source={require('../../assets/image/call.png')}
                   style={styles.icon}
                 />
+                </TouchableOpacity>
               </View>
 
               <Text style={[styles.priceText, { fontSize: wp(3.8) }]}>

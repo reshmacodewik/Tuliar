@@ -2,6 +2,17 @@ import { StyleSheet } from 'react-native';
 
 const styles = (wp: any, hp: any) =>
   StyleSheet.create({
+    menuItem: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      paddingVertical: hp(1),
+    },
+    menuText: {
+      marginLeft: wp(2),
+      fontSize: wp(3.8),
+      color: '#000',
+    },
+
     bgimg: {
       flex: 1,
       resizeMode: 'cover',
@@ -167,7 +178,6 @@ const styles = (wp: any, hp: any) =>
       marginRight: wp(2),
     },
     typeTag: {
-      paddingHorizontal: wp(4),
       paddingVertical: wp(0),
       borderRadius: wp(5),
     },
@@ -184,7 +194,7 @@ const styles = (wp: any, hp: any) =>
     eventDesc: {
       fontSize: wp(3.1),
       color: '#979797',
-       fontFamily: 'Poppins-Medium',
+      fontFamily: 'Poppins-Medium',
     },
     outercontainer: {
       position: 'absolute',
@@ -270,6 +280,26 @@ const styles = (wp: any, hp: any) =>
     statText: {
       fontSize: wp(3.2),
       color: '#000',
+    },
+    scrollContent: {
+      flexGrow: 1,
+      justifyContent: 'center',
+      alignItems: 'center',
+      paddingTop: hp(10),
+    },
+    backButton: {
+      top: hp(3),
+      width: wp(10),
+      height: wp(10),
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
+    title: {
+      fontSize: wp(5),
+      fontFamily: 'Poppins-Bold',
+      marginTop: hp(-1),
+      marginRight: hp(10),
+      textAlign: 'center',
     },
   });
 

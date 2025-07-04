@@ -10,6 +10,11 @@ import BottomTabs from './MyTab';
 import ExploreScreen from '../Screens/ExploreScreen';
 import JournalScreen from '../Screens/JournalScreen';
 import SearchScreen from '../Screens/SearchScreen';
+import EventDetailsScreen from '../Screens/Event/EventDetailsScreen';
+import ReviewPaymentScreen from '../Screens/Event/ReviewPaymentScreen';
+import MyJourneyScreen from '../Screens/Home/MyJourneyScreen';
+import IncomingCallScreen from '../Screens/call/IncomingCallScreen';
+import VideoCallScreen from '../Screens/call/VideoCallScreen';
 
 export type RootStackParamList = {
   splashScreen: undefined;
@@ -20,8 +25,13 @@ export type RootStackParamList = {
   SuccessScreen: undefined;
   HomeScreen: undefined;
   ExploreScreen: undefined;
- JournalScreen: undefined;
- SearchScreen: undefined;
+  JournalScreen: undefined;
+  SearchScreen: undefined;
+  EventDetailsScreen: undefined;
+  ReviewPaymentScreen: undefined;
+  MyJourneyScreen: undefined;
+  IncomingCallScreen: undefined;
+  VideoCallScreen: undefined;
 };
 
 const Stack = createStackNavigator<RootStackParamList>();
@@ -38,7 +48,12 @@ const MyStack: React.FC = () => {
       <Stack.Screen name="HomeScreen" component={BottomTabs} />
       <Stack.Screen name="ExploreScreen" component={ExploreScreen} />
       <Stack.Screen name="JournalScreen" component={JournalScreen} />
-       <Stack.Screen name="SearchScreen" component={SearchScreen} />
+      <Stack.Screen name="SearchScreen" component={SearchScreen} />
+      <Stack.Screen name="EventDetailsScreen" component={EventDetailsScreen} />
+      <Stack.Screen name="ReviewPaymentScreen" component={ReviewPaymentScreen}/>
+      <Stack.Screen name="MyJourneyScreen" component={MyJourneyScreen}/>
+       <Stack.Screen name="IncomingCallScreen" component={IncomingCallScreen}/>
+           <Stack.Screen name="VideoCallScreen" component={VideoCallScreen}/>
     </Stack.Navigator>
   );
 };

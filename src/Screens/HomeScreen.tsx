@@ -1,3 +1,4 @@
+/* eslint-disable react-native/no-inline-styles */
 import React from 'react';
 import {
   View,
@@ -10,6 +11,15 @@ import {
 import { useResponsive } from 'react-native-responsive-hook';
 import styles from '../style/homestyles';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import { useNavigation, NavigationProp } from '@react-navigation/native';
+import {
+  Menu,
+  MenuOptions,
+  MenuOption,
+  MenuTrigger,
+} from 'react-native-popup-menu';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import Feather from 'react-native-vector-icons/Feather';
 const feedPosts = [
   {
     id: '1',
@@ -32,8 +42,18 @@ const feedPosts = [
     shares: '5k',
   },
 ];
+
 const HomeScreen = () => {
   const { wp, hp } = useResponsive();
+  const navigation = useNavigation<NavigationProp<any>>();
+  const handleMenuSelect = (value: string) => {
+    console.log('Selected:', value);
+    if (value === 'profile') {
+      navigation.navigate('ProfileScreen');
+    } else if (value === 'logout') {
+      console.log('Logging out...');
+    }
+  };
 
   return (
     <ImageBackground
@@ -58,14 +78,56 @@ const HomeScreen = () => {
                 style={styles(wp, hp).bellIcon}
               />
             </TouchableOpacity>
-            <Image
-              source={require('../../assets/image/homeuser.png')}
-              style={styles(wp, hp).userIcon}
-            />
+            <Menu onSelect={handleMenuSelect}>
+              <MenuTrigger>
+                <Image
+                  source={require('../../assets/image/homeuser.png')}
+                  style={styles(wp, hp).userIcon}
+                />
+              </MenuTrigger>
+              <MenuOptions customStyles={{
+                optionsContainer: {
+                  borderRadius: wp(3),
+                  padding: wp(2),
+                  backgroundColor: '#fff',
+                  elevation: 5,
+                  width: wp(40),
+                },
+              }}>
+                <MenuOption value="profile">
+                  <View style={styles(wp, hp).menuItem}>
+                    <Feather name="user" size={wp(5)} color="#000" />
+                    <Text style={styles(wp, hp).menuText}>My Profile</Text>
+                  </View>
+                </MenuOption>
+                  <MenuOption value="settings">
+                  <View style={styles(wp, hp).menuItem}>
+                    <Feather name="message-circle" size={wp(5)} color="#000" />
+                    <Text style={styles(wp, hp).menuText}>Message</Text>
+                  </View>
+                </MenuOption>
+                <MenuOption value="settings">
+                  <View style={styles(wp, hp).menuItem}>
+                    <Ionicons name="settings-outline" size={wp(5)} color="#000" />
+                    <Text style={styles(wp, hp).menuText}>Settings</Text>
+                  </View>
+                </MenuOption>
+                  <MenuOption value="settings">
+                  <View style={styles(wp, hp).menuItem}>
+                    <MaterialIcons name="payment" size={wp(5)} color="#000" />
+                    <Text style={styles(wp, hp).menuText}>Payments</Text>
+                  </View>
+                </MenuOption>
+                <MenuOption value="logout">
+                  <View style={styles(wp, hp).menuItem}>
+                    <Ionicons name="log-out-outline" size={wp(5)} color="#000" />
+                    <Text style={styles(wp, hp).menuText}>Logout</Text>
+                  </View>
+                </MenuOption>
+              </MenuOptions>
+            </Menu>
           </View>
         </View>
-
-        {/* Feature Buttons */}
         <View style={styles(wp, hp).featureRow}>
           <TouchableOpacity style={styles(wp, hp).featureBtn}>
             <Image
@@ -103,9 +165,8 @@ const HomeScreen = () => {
             {/* My Journey */}
             <View style={styles(wp, hp).sectionHeader}>
               <Text style={styles(wp, hp).sectionTitle}>My Journey</Text>
-              <TouchableOpacity>
-             <Ionicons name="chevron-forward" size={wp(7)} color="#000" />
-
+              <TouchableOpacity onPress={() => navigation.navigate('MyJourneyScreen')}>
+                <Ionicons name="chevron-forward" size={wp(7)} color="#000" />
               </TouchableOpacity>
             </View>
 
@@ -126,17 +187,16 @@ const HomeScreen = () => {
                 </View>
               ))}
             </ScrollView>
-
-            {/* Events */}
             <View style={styles(wp, hp).sectionHeader}>
               <Text style={styles(wp, hp).sectionTitle}>Events</Text>
-              <TouchableOpacity>
-                 <Ionicons name="chevron-forward" size={wp(7)} color="#000" />
+              <TouchableOpacity onPress={() => navigation.navigate('EventsScreen')}>
+                <Ionicons name="chevron-forward" size={wp(7)} color="#000" />
               </TouchableOpacity>
             </View>
-
+            
             {[{ premium: true }, { premium: false }].map((item, index) => (
-              <View key={index} style={styles(wp, hp).eventCard}>
+              <TouchableOpacity onPress={() => navigation.navigate('EventDetailsScreen')}>
+              <View key={index} style={styles(wp, hp).eventCard} >
                 <Image
                   source={require('../../assets/image/events.png')}
                   style={styles(wp, hp).eventImg}
@@ -150,7 +210,8 @@ const HomeScreen = () => {
                       style={[
                         styles(wp, hp).typeTag,
                         {
-                          backgroundColor: item.premium ? '#FACC15' : '#22C55E',
+                          backgroundColor: item.premium ? '#264734' : '#F6B500',
+                          paddingHorizontal: item.premium ? wp(3.5) : wp(6),
                         },
                       ]}
                     >
@@ -169,12 +230,14 @@ const HomeScreen = () => {
                   </Text>
                 </View>
               </View>
+              </TouchableOpacity>
             ))}
+          
             {/* User Feed */}
             <View style={styles(wp, hp).sectionHeader}>
               <Text style={styles(wp, hp).sectionTitle}>User Feed</Text>
-                <TouchableOpacity>
-                 <Ionicons name="chevron-forward" size={wp(7)} color="#000" />
+              <TouchableOpacity>
+                <Ionicons name="chevron-forward" size={wp(7)} color="#000" />
               </TouchableOpacity>
             </View>
 
@@ -236,5 +299,5 @@ const HomeScreen = () => {
     </ImageBackground>
   );
 };
-
 export default HomeScreen;
+
