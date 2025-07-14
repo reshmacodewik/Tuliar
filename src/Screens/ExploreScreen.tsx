@@ -63,6 +63,13 @@ const ExploreScreen = () => {
   const { wp, hp } = useResponsiveScreen();
 
   const renderExpert = ({ item }: { item: Expert }) => (
+    <TouchableOpacity
+   
+    onPress={() => {
+      navigation.navigate('DoctorProfileScreen', { expert: item });
+    }}
+
+  >
     <View style={[styles(wp, hp).card, { backgroundColor: '#fff' }]}>
       <View style={styles(wp, hp).row}>
         <Image source={item.image} style={styles(wp, hp).avatar} />
@@ -142,6 +149,7 @@ const ExploreScreen = () => {
         </Text>
       </View>
     </View>
+    </TouchableOpacity>
   );
 
   return (

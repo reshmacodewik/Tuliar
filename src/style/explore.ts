@@ -49,10 +49,7 @@ const styles = (wp: any, hp: any) =>
       borderRadius: wp(3),
       padding: wp(4),
       marginBottom: hp(2),
-      shadowColor: '#000',
-      shadowOpacity: 0.1,
-      shadowRadius: 4,
-      elevation: 3,
+ 
     },
     row: {
       flexDirection: 'row',

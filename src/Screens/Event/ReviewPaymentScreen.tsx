@@ -1,23 +1,21 @@
+/* eslint-disable react-native/no-inline-styles */
 import React from 'react';
 import {
   View,
   Text,
-  TextInput,
   TouchableOpacity,
-  ScrollView,
   ImageBackground,
+  Image,
 } from 'react-native';
 import { useResponsive } from 'react-native-responsive-hook';
 import styles from '../../style/ReviewPaymentStyles';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import { RadioButton } from 'react-native-paper';
 import { useNavigation, NavigationProp } from '@react-navigation/native';
 
 const ReviewPaymentScreen = () => {
   const { wp, hp } = useResponsive();
   const navigation = useNavigation<NavigationProp<any>>();
   const themedStyles = styles(wp, hp);
-  const [paymentMethod, setPaymentMethod] = React.useState('card');
 
   return (
     <ImageBackground
@@ -25,7 +23,15 @@ const ReviewPaymentScreen = () => {
       style={themedStyles.bgimg}
     >
       <View style={themedStyles.container}>
-        <View>
+        {/* Header */}
+        <View
+          style={{
+            flexDirection: 'row',
+            alignItems: 'center',
+            marginTop: hp(-2),
+            marginBottom: hp(8),
+          }}
+        >
           <TouchableOpacity
             style={themedStyles.backButton}
             onPress={() => navigation.goBack()}
@@ -36,65 +42,216 @@ const ReviewPaymentScreen = () => {
               color="#000"
             />
           </TouchableOpacity>
+          <Text style={themedStyles.title}>Review & Payment</Text>
         </View>
 
-        <Text style={themedStyles.title}>Review & Payment</Text>
-
-        <ScrollView contentContainerStyle={themedStyles.scrollContent}>
-          <View style={themedStyles.card}>
-            <Text style={themedStyles.amount}>$500.00</Text>
-            <Text style={themedStyles.subText}>Goods and Services</Text>
-
-            <View style={themedStyles.dividerRow}>
-              <View style={themedStyles.dividerLine} />
-              <Text style={themedStyles.payWith}>Pay with</Text>
-              <View style={themedStyles.dividerLine} />
-            </View>
-
-            <Text style={themedStyles.howToPay}>
-              How would you like to pay?
-            </Text>
-            <View style={themedStyles.radioRow}>
-              <RadioButton
-                value="card"
-                status={paymentMethod === 'card' ? 'checked' : 'unchecked'}
-                onPress={() => setPaymentMethod('card')}
-                color="#F4A825" // Optional: to match orange
-              />
-              <Text style={themedStyles.radioLabel}>Credit or Debit card</Text>
-            </View>
-
-            <Text style={themedStyles.cardInfoLabel}>Card Informations</Text>
-
-            <TextInput
-              style={themedStyles.input}
-              placeholder="Card Number"
-              placeholderTextColor="#999"
+        {/* Logo */}
+        <View>
+          <View style={{ alignItems: 'center', marginBottom: hp(0) }}>
+            <Image
+              source={require('../../../assets/image/logo1.png')}
+              style={{ width: wp(35), height: wp(18), resizeMode: 'contain' }}
             />
-            <TextInput
-              style={themedStyles.input}
-              placeholder="Confirm Card Number"
-              placeholderTextColor="#999"
-            />
-
-            <View style={themedStyles.row}>
-              <TextInput
-                style={[themedStyles.input, themedStyles.halfInput]}
-                placeholder="MM/YY"
-                placeholderTextColor="#999"
-              />
-              <TextInput
-                style={[themedStyles.input, themedStyles.halfInput]}
-                placeholder="CVV"
-                placeholderTextColor="#999"
-              />
-            </View>
           </View>
-        </ScrollView>
 
-        <TouchableOpacity style={themedStyles.payButton}>
-          <Text style={themedStyles.payButtonText}>Pay</Text>
-        </TouchableOpacity>
+          {/* Confirm Payment */}
+          <View style={{ alignItems: 'center', marginBottom: hp(1.5) }}>
+            <Text
+              style={{
+                fontFamily: 'Poppins-Bold',
+                fontSize: wp(4),
+                color: '#222',
+              }}
+            >
+              Confirm Payment
+            </Text>
+            <Text
+              style={{
+                fontFamily: 'Poppins-Medium',
+                fontSize: wp(3),
+                color: '#222',
+                marginTop: hp(0.5),
+              }}
+            >
+              Mindfulness Group Session
+            </Text>
+            <Text
+              style={{
+                fontFamily: 'Poppins-Medium',
+                fontSize: wp(2.8),
+                color: '#222',
+              }}
+            >
+              June 20, 2025 – 12:00 PM
+            </Text>
+          </View>
+
+          <View
+            style={{
+              borderBottomWidth: 1,
+              borderBottomColor: '#E5E5E5',
+              marginVertical: hp(2),
+              marginHorizontal: hp(1.5),
+            }}
+          />
+
+          {/* Balance Section */}
+          <View
+            style={{
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+              marginBottom: hp(1),
+              marginHorizontal: hp(1.5),
+            }}
+          >
+            <Text
+              style={{
+                fontFamily: 'Poppins-Bold',
+                fontSize: wp(3.8),
+                color: '#222',
+              }}
+            >
+              Your Balance
+            </Text>
+            <Text
+              style={{
+                fontFamily: 'Poppins-Meidum',
+                fontSize: wp(3.8),
+                color: '#222',
+              }}
+            >
+              KES 1,200
+            </Text>
+          </View>
+          <View
+            style={{
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+              marginBottom: hp(-0.5),
+              marginHorizontal: hp(1.5),
+            }}
+          >
+            <Text
+              style={{
+                fontFamily: 'Poppins-Medium',
+                fontSize: wp(3.5),
+                color: '#222',
+              }}
+            >
+              Wallet Balance
+            </Text>
+            <Text
+              style={{
+                fontFamily: 'Poppins-Medium',
+                fontSize: wp(3.5),
+                color: '#222',
+              }}
+            >
+              KES 1,200
+            </Text>
+          </View>
+          <View
+            style={{
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+              marginBottom: hp(1.5),
+              marginHorizontal: hp(1.5),
+            }}
+          >
+            <Text
+              style={{
+                fontFamily: 'Poppins-Medium',
+                fontSize: wp(3.5),
+                color: '#222',
+              }}
+            >
+              Tuliar Points
+            </Text>
+            <Text
+              style={{
+                fontFamily: 'Poppins-Medium',
+                fontSize: wp(3.5),
+                color: '#222',
+              }}
+            >
+              50 (worth KES 25)
+            </Text>
+          </View>
+          <View
+            style={{
+              borderBottomWidth: 1,
+              borderBottomColor: '#E5E5E5',
+              marginBottom: hp(2),
+              marginHorizontal: hp(1.5),
+            }}
+          />
+          {/* Info Text */}
+          <Text
+            style={{
+              fontFamily: 'Poppins-Medium',
+              fontSize: wp(3),
+              color: '#222',
+              marginBottom: hp(2),
+              marginHorizontal: hp(1.5),
+            }}
+          >
+            Available balance can be applied to this payment. You top if needed.
+          </Text>
+
+          {/* Pay Button Row */}
+          <View
+            style={{
+              flexDirection: 'row',
+              alignItems: 'center',
+              justifyContent: 'center',
+              marginBottom: hp(1.5),
+              marginHorizontal: hp(1.5),
+            }}
+          >
+            <TouchableOpacity
+              style={{
+                flex: 1,
+                backgroundColor: '#264734',
+                paddingVertical: hp(1),
+                borderRadius: wp(10),
+                alignItems: 'center',
+                flexDirection: 'row',
+                justifyContent: 'center',
+                elevation: 3,
+                shadowColor: '#000',
+                shadowOffset: { width: 0, height: 2 },
+                shadowOpacity: 0.1,
+                shadowRadius: 2,
+              }}
+            onPress={() => navigation.navigate('PaymentConfirmationScreen')}>
+              <Text
+                style={{
+                  color: '#fff',
+                  fontSize: wp(4),
+                  fontFamily: 'Poppins-Bold',
+                }}
+              >
+                Pay
+              </Text>
+            
+            </TouchableOpacity>
+          </View>
+
+          {/* Top Up Wallet Link */}
+          <TouchableOpacity
+            style={{ alignItems: 'center', marginTop: hp(0.5) }}
+          >
+            <Text
+              style={{
+                color: '#264734',
+                fontSize: wp(3.5),
+                fontFamily: 'Poppins-SemiBold',
+              }}
+            >
+              Top Up Wallet
+            </Text>
+          </TouchableOpacity>
+        </View>
       </View>
     </ImageBackground>
   );

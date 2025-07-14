@@ -2,7 +2,7 @@
 /* eslint-disable react/no-unstable-nested-components */
 
 import React from 'react';
-import { View, Text, StyleSheet, Platform } from 'react-native';
+import { View, Text, StyleSheet, Platform, Image } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Icon from 'react-native-vector-icons/Feather';
@@ -14,7 +14,6 @@ import ExploreScreen from '../Screens/ExploreScreen';
 import JournalScreen from '../Screens/JournalScreen';
 import SearchScreen from '../Screens/SearchScreen';
 import EventScreen from '../Screens/Event/Eventscreen';
-
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator(); // ✅ Added Stack navigator
@@ -51,10 +50,7 @@ const BottomTabs = () => {
           ),
           tabBarLabel: ({ focused }) => (
             <Text
-              style={[
-                styles.label,
-                { color: focused ? '#FFA726' : '#B0B0B0' },
-              ]}
+              style={[styles.label, { color: focused ? '#FFA726' : '#B0B0B0' }]}
             >
               Home
             </Text>
@@ -76,10 +72,7 @@ const BottomTabs = () => {
           ),
           tabBarLabel: ({ focused }) => (
             <Text
-              style={[
-                styles.label,
-                { color: focused ? '#FFA726' : '#B0B0B0' },
-              ]}
+              style={[styles.label, { color: focused ? '#FFA726' : '#B0B0B0' }]}
             >
               Journal
             </Text>
@@ -106,7 +99,13 @@ const BottomTabs = () => {
               <Icon name="plus" size={wp(7)} color="#fff" />
             </View>
           ),
-          tabBarLabel: () => null, // No label for Mood
+          tabBarLabel: ({ focused }) => (
+            <Text
+              style={[styles.label, { color: focused ? '#FFA726' : '#B0B0B0' }]}
+            >
+              Check-In?
+            </Text>
+          ),
         }}
       />
 
@@ -116,18 +115,23 @@ const BottomTabs = () => {
         component={ExploreScreen}
         options={{
           tabBarIcon: ({ focused }) => (
-            <Icon
-              name="heart"
-              size={wp(6)}
-              color={focused ? '#FFA726' : '#B0B0B0'}
+            <Image
+              source={
+                focused
+                  ? require('../../assets/icon/explore.png')
+                  : require('../../assets/icon/explore.png')
+              }
+              style={{
+                width: wp(20),
+                height: wp(20),
+                resizeMode: 'contain',
+                tintColor: focused ? '#FFA726' : '#B0B0B0', // Optional: tint for monochrome images
+              }}
             />
           ),
           tabBarLabel: ({ focused }) => (
             <Text
-              style={[
-                styles.label,
-                { color: focused ? '#FFA726' : '#B0B0B0' },
-              ]}
+              style={[styles.label, { color: focused ? '#FFA726' : '#B0B0B0' }]}
             >
               Explore
             </Text>
@@ -141,20 +145,25 @@ const BottomTabs = () => {
         component={SearchScreen}
         options={{
           tabBarIcon: ({ focused }) => (
-            <Icon
-              name="search"
-              size={wp(6)}
-              color={focused ? '#FFA726' : '#B0B0B0'}
+            <Image
+              source={
+                focused
+                  ? require('../../assets/icon/tabsearch.png')
+                  : require('../../assets/icon/tabsearch.png')
+              }
+              style={{
+                width: wp(8),
+                height: wp(8),
+                resizeMode: 'contain',
+                tintColor: focused ? '#FFA726' : '#B0B0B0', // Optional: tint for monochrome images
+              }}
             />
           ),
           tabBarLabel: ({ focused }) => (
             <Text
-              style={[
-                styles.label,
-                { color: focused ? '#FFA726' : '#B0B0B0' },
-              ]}
+              style={[styles.label, { color: focused ? '#FFA726' : '#B0B0B0' }]}
             >
-              Search
+              Talk More
             </Text>
           ),
         }}

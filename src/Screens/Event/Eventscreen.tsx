@@ -31,7 +31,7 @@ const EventScreen = () => {
       style={themedStyles.bgimg}
     >
       <View style={themedStyles.container}>
-        <View>
+        <View >
           <TouchableOpacity
             onPress={() => navigation.goBack()}
             style={themedStyles.backButton}
@@ -71,18 +71,16 @@ const EventScreen = () => {
                   <View style={themedStyles.fromTag}>
                     <Text style={themedStyles.tagText}>From Tuliar</Text>
                   </View>
-                  <View
-                    style={[
-                      themedStyles.typeTag,
-                      {
-                        backgroundColor: item.premium ? '#264734' : '#F6B500',
-                        paddingHorizontal: item.premium ? wp(4) : wp(6),
-                      },
-                    ]}
-                  >
-                    <Text style={themedStyles.tagText}>
-                      {item.premium ? 'Premium' : 'Free'}
-                    </Text>
+                  <View style={[themedStyles.typeTag]}>
+                    <Image
+                      source={
+                        item.premium
+                          ? require('../../../assets/icon/badge.png')
+                          : require('../../../assets/icon/free.png')
+                      }
+                      style={{ width: wp(5), height: wp(5) }}
+                      resizeMode="contain"
+                    />
                   </View>
                 </View>
                 <Text style={[themedStyles.eventTitle, { marginTop: hp(1) }]}>

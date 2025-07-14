@@ -24,7 +24,6 @@ const styles = (wp: any, hp: any) =>
     },
     backButton: {
       top: hp(0),
-      
       width: wp(10),
       height: wp(10),
       justifyContent: 'center',
@@ -70,7 +69,7 @@ const styles = (wp: any, hp: any) =>
     },
     typeTag: {
       paddingVertical: wp(0),
-      borderRadius: wp(5),
+      borderRadius: wp(0),
     },
     tagText: {
       fontSize: wp(3),

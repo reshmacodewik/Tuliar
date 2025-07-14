@@ -78,11 +78,13 @@ const EventDetailsScreen = () => {
                 <Text style={[themedStyles.title, { fontSize: wp(3.2) }]}>
                   Wellness & Mental Health workshop
                 </Text>
-                <View style={themedStyles.freeTag}>
-                  <Text style={[themedStyles.freeText, { fontSize: wp(3) }]}>
-                    Free
-                  </Text>
-                </View>
+                <Image
+                  source={require('../../../assets/icon/free.png')}
+                  style={[
+                    themedStyles.freeImage,
+                 
+                  ]}
+                />
               </View>
 
               <Text style={[themedStyles.dateText, { fontSize: wp(3.5) }]}>

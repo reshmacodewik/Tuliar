@@ -149,17 +149,18 @@ const styles = (wp: any, hp: any) =>
       fontFamily: 'Poppins-Bold',
     },
     eventCard: {
-      flexDirection: 'row',
+      width: wp(65),
       backgroundColor: '#fff',
       borderRadius: wp(3),
       padding: wp(3),
       marginBottom: hp(2),
     },
     eventImg: {
-      width: wp(22),
-      height: wp(28),
+      width: '100%',
+      height: hp(18),
       borderRadius: wp(2),
       marginRight: wp(4),
+      marginBottom: hp(1),
     },
     eventContent: {
       flex: 1,

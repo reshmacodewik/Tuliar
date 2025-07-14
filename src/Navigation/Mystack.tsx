@@ -12,9 +12,13 @@ import JournalScreen from '../Screens/JournalScreen';
 import SearchScreen from '../Screens/SearchScreen';
 import EventDetailsScreen from '../Screens/Event/EventDetailsScreen';
 import ReviewPaymentScreen from '../Screens/Event/ReviewPaymentScreen';
+import PaymentConfirmationScreen from '../Screens/Event/PaymentConfirmationScreen';
 import MyJourneyScreen from '../Screens/Home/MyJourneyScreen';
 import IncomingCallScreen from '../Screens/call/IncomingCallScreen';
 import VideoCallScreen from '../Screens/call/VideoCallScreen';
+import MessageScreen from '../Screens/menu/MessageScreen';
+import DoctorProfileScreen from '../Screens/Doctor/DoctorProfileScreen';
+
 
 export type RootStackParamList = {
   splashScreen: undefined;
@@ -32,6 +36,9 @@ export type RootStackParamList = {
   MyJourneyScreen: undefined;
   IncomingCallScreen: undefined;
   VideoCallScreen: undefined;
+  MessageScreen: undefined;
+  PaymentConfirmationScreen: undefined;
+  DoctorProfileScreen: undefined;
 };
 
 const Stack = createStackNavigator<RootStackParamList>();
@@ -50,10 +57,19 @@ const MyStack: React.FC = () => {
       <Stack.Screen name="JournalScreen" component={JournalScreen} />
       <Stack.Screen name="SearchScreen" component={SearchScreen} />
       <Stack.Screen name="EventDetailsScreen" component={EventDetailsScreen} />
-      <Stack.Screen name="ReviewPaymentScreen" component={ReviewPaymentScreen}/>
-      <Stack.Screen name="MyJourneyScreen" component={MyJourneyScreen}/>
-       <Stack.Screen name="IncomingCallScreen" component={IncomingCallScreen}/>
-           <Stack.Screen name="VideoCallScreen" component={VideoCallScreen}/>
+      <Stack.Screen
+        name="ReviewPaymentScreen"
+        component={ReviewPaymentScreen}
+      />
+      <Stack.Screen
+        name="PaymentConfirmationScreen"
+        component={PaymentConfirmationScreen}
+      />
+      <Stack.Screen name="DoctorProfileScreen" component={DoctorProfileScreen} />
+      <Stack.Screen name="MyJourneyScreen" component={MyJourneyScreen} />
+      <Stack.Screen name="IncomingCallScreen" component={IncomingCallScreen} />
+      <Stack.Screen name="VideoCallScreen" component={VideoCallScreen} />
+       <Stack.Screen name="MessageScreen" component={MessageScreen} />
     </Stack.Navigator>
   );
 };

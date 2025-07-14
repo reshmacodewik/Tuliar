@@ -68,10 +68,7 @@ const styles = (wp: any, hp: any) =>
       fontFamily: 'Poppins-Bold',
     },
     freeTag: {
-      backgroundColor: '#F4A825',
-      paddingVertical: hp(0.3),
-      paddingHorizontal: wp(7),
-      borderRadius: wp(5),
+      
     },
     freeText: {
       color: '#fff',
@@ -116,6 +113,10 @@ const styles = (wp: any, hp: any) =>
     },
     speakerImage: {
       borderRadius: wp(10),
+    },
+    freeImage: {
+      width: wp(8), 
+      height: wp(8)
     },
     speakerInfo: {
       marginLeft: wp(2),

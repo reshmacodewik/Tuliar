@@ -46,15 +46,21 @@ const feedPosts = [
 const HomeScreen = () => {
   const { wp, hp } = useResponsive();
   const navigation = useNavigation<NavigationProp<any>>();
+
   const handleMenuSelect = (value: string) => {
-    console.log('Selected:', value);
     if (value === 'profile') {
       navigation.navigate('ProfileScreen');
+    } else if (value === 'message') {
+      navigation.navigate('MessageScreen');
+    } else if (value === 'settings') {
+      navigation.navigate('SettingsScreen');
+    } else if (value === 'payments') {
+      navigation.navigate('PaymentsScreen');
     } else if (value === 'logout') {
       console.log('Logging out...');
     }
+    handleMenuSelect(value);
   };
-
   return (
     <ImageBackground
       source={require('../../assets/image/background.png')}
@@ -85,34 +91,41 @@ const HomeScreen = () => {
                   style={styles(wp, hp).userIcon}
                 />
               </MenuTrigger>
-              <MenuOptions customStyles={{
-                optionsContainer: {
-                  borderRadius: wp(3),
-                  padding: wp(2),
-                  backgroundColor: '#fff',
-                  elevation: 5,
-                  width: wp(40),
-                },
-              }}>
+              <MenuOptions
+                customStyles={{
+                  optionsContainer: {
+                    borderRadius: wp(3),
+                    padding: wp(2),
+                    backgroundColor: '#fff',
+                    elevation: 5,
+                    width: wp(40),
+                  },
+                }}
+              >
                 <MenuOption value="profile">
                   <View style={styles(wp, hp).menuItem}>
                     <Feather name="user" size={wp(5)} color="#000" />
                     <Text style={styles(wp, hp).menuText}>My Profile</Text>
                   </View>
                 </MenuOption>
-                  <MenuOption value="settings">
+                <MenuOption value="message">
                   <View style={styles(wp, hp).menuItem}>
                     <Feather name="message-circle" size={wp(5)} color="#000" />
                     <Text style={styles(wp, hp).menuText}>Message</Text>
                   </View>
                 </MenuOption>
+
                 <MenuOption value="settings">
                   <View style={styles(wp, hp).menuItem}>
-                    <Ionicons name="settings-outline" size={wp(5)} color="#000" />
+                    <Ionicons
+                      name="settings-outline"
+                      size={wp(5)}
+                      color="#000"
+                    />
                     <Text style={styles(wp, hp).menuText}>Settings</Text>
                   </View>
                 </MenuOption>
-                  <MenuOption value="settings">
+                <MenuOption value="settings">
                   <View style={styles(wp, hp).menuItem}>
                     <MaterialIcons name="payment" size={wp(5)} color="#000" />
                     <Text style={styles(wp, hp).menuText}>Payments</Text>
@@ -120,7 +133,11 @@ const HomeScreen = () => {
                 </MenuOption>
                 <MenuOption value="logout">
                   <View style={styles(wp, hp).menuItem}>
-                    <Ionicons name="log-out-outline" size={wp(5)} color="#000" />
+                    <Ionicons
+                      name="log-out-outline"
+                      size={wp(5)}
+                      color="#000"
+                    />
                     <Text style={styles(wp, hp).menuText}>Logout</Text>
                   </View>
                 </MenuOption>
@@ -165,7 +182,9 @@ const HomeScreen = () => {
             {/* My Journey */}
             <View style={styles(wp, hp).sectionHeader}>
               <Text style={styles(wp, hp).sectionTitle}>My Journey</Text>
-              <TouchableOpacity onPress={() => navigation.navigate('MyJourneyScreen')}>
+              <TouchableOpacity
+                onPress={() => navigation.navigate('MyJourneyScreen')}
+              >
                 <Ionicons name="chevron-forward" size={wp(7)} color="#000" />
               </TouchableOpacity>
             </View>
@@ -189,52 +208,64 @@ const HomeScreen = () => {
             </ScrollView>
             <View style={styles(wp, hp).sectionHeader}>
               <Text style={styles(wp, hp).sectionTitle}>Events</Text>
-              <TouchableOpacity onPress={() => navigation.navigate('EventsScreen')}>
+              <TouchableOpacity
+                onPress={() => navigation.navigate('EventsScreen')}
+              >
                 <Ionicons name="chevron-forward" size={wp(7)} color="#000" />
               </TouchableOpacity>
             </View>
-            
-            {[{ premium: true }, { premium: false }].map((item, index) => (
-              <TouchableOpacity onPress={() => navigation.navigate('EventDetailsScreen')}>
-              <View key={index} style={styles(wp, hp).eventCard} >
-                <Image
-                  source={require('../../assets/image/events.png')}
-                  style={styles(wp, hp).eventImg}
-                />
-                <View style={styles(wp, hp).eventContent}>
-                  <View style={styles(wp, hp).tagsRow}>
-                    <View style={styles(wp, hp).fromTag}>
-                      <Text style={styles(wp, hp).tagText}>From Tuliar</Text>
-                    </View>
-                    <View
-                      style={[
-                        styles(wp, hp).typeTag,
-                        {
-                          backgroundColor: item.premium ? '#264734' : '#F6B500',
-                          paddingHorizontal: item.premium ? wp(3.5) : wp(6),
-                        },
-                      ]}
-                    >
-                      <Text style={styles(wp, hp).tagText}>
-                        {item.premium ? 'Premium' : 'Free'}
+
+            <ScrollView
+              horizontal
+              showsHorizontalScrollIndicator={false}
+              style={{ marginVertical: wp(2) }}
+            >
+              {[{ premium: true }, { premium: false }].map((item, index) => (
+                <TouchableOpacity
+                  key={index}
+                  onPress={() => navigation.navigate('EventDetailsScreen')}
+                  style={{ marginRight: wp(3) }}
+                >
+                  <View style={styles(wp, hp).eventCard}>
+                    <Image
+                      source={require('../../assets/image/events.png')}
+                      style={styles(wp, hp).eventImg}
+                    />
+                    <View style={styles(wp, hp).eventContent}>
+                      <View style={styles(wp, hp).tagsRow}>
+                        <View style={styles(wp, hp).fromTag}>
+                          <Text style={styles(wp, hp).tagText}>
+                            From Tuliar
+                          </Text>
+                        </View>
+                        <View style={styles(wp, hp).typeTag}>
+                          <Image
+                            source={
+                              item.premium
+                                ? require('../../assets/icon/badge.png')
+                                : require('../../assets/icon/free.png')
+                            }
+                            style={{ width: wp(5), height: wp(5) }}
+                            resizeMode="contain"
+                          />
+                        </View>
+                      </View>
+                      <Text style={styles(wp, hp).eventTitle}>
+                        Upcoming Wellness & Mental heath workshop
+                      </Text>
+                      <Text style={styles(wp, hp).eventDesc}  numberOfLines={4}>
+                        Lorem ipsum dolor sit amet consectetur. Molestie purus
+                        eu volutpat praesent nec quam et hac. Duis et turpis
+                        nisl arcu amet parturient sodales lorem nunc.
                       </Text>
                     </View>
                   </View>
-                  <Text style={styles(wp, hp).eventTitle}>
-                    Upcoming Wellness & Mental heath workshop
-                  </Text>
-                  <Text style={styles(wp, hp).eventDesc}>
-                    Lorem ipsum dolor sit amet consectetur. Molestie purus eu
-                    volutpat praesent nec quam et hac. Duis et turpis nisl arcu
-                    amet parturient sodales lorem nunc.
-                  </Text>
-                </View>
-              </View>
-              </TouchableOpacity>
-            ))}
-          
+                </TouchableOpacity>
+              ))}
+            </ScrollView>
+
             {/* User Feed */}
-            <View style={styles(wp, hp).sectionHeader}>
+            {/* <View style={styles(wp, hp).sectionHeader}>
               <Text style={styles(wp, hp).sectionTitle}>User Feed</Text>
               <TouchableOpacity>
                 <Ionicons name="chevron-forward" size={wp(7)} color="#000" />
@@ -277,7 +308,7 @@ const HomeScreen = () => {
                   </View>
                 </View>
               </View>
-            ))}
+            ))} */}
           </ScrollView>
 
           <View style={styles(wp, hp).outercontainer}>
@@ -300,4 +331,3 @@ const HomeScreen = () => {
   );
 };
 export default HomeScreen;
-
