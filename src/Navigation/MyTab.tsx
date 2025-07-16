@@ -1,12 +1,13 @@
 /* eslint-disable react-native/no-inline-styles */
 /* eslint-disable react/no-unstable-nested-components */
 
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Text, StyleSheet, Platform, Image } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Icon from 'react-native-vector-icons/Feather';
 import { useResponsive } from 'react-native-responsive-hook';
+import TalkMoreModal from '../components/TalkMoreModal';
 
 // Import your screens
 import HomeScreen from '../Screens/HomeScreen';
@@ -21,155 +22,162 @@ const Stack = createNativeStackNavigator(); // ✅ Added Stack navigator
 // Bottom Tabs
 const BottomTabs = () => {
   const { wp, hp } = useResponsive();
+  const [showTalkMoreModal, setShowTalkMoreModal] = useState(false);
 
   return (
-    <Tab.Navigator
-      screenOptions={{
-        headerShown: false,
-        tabBarShowLabel: true,
-        tabBarStyle: {
-          position: 'absolute',
-          height: hp(8),
-          backgroundColor: '#fff',
-          borderTopWidth: 0,
-          elevation: 0,
-        },
-      }}
-    >
-      {/* Home Tab */}
-      <Tab.Screen
-        name="HomeScreen"
-        component={HomeScreen}
-        options={{
-          tabBarIcon: ({ focused }) => (
-            <Icon
-              name="home"
-              size={wp(6)}
-              color={focused ? '#FFA726' : '#B0B0B0'}
-            />
-          ),
-          tabBarLabel: ({ focused }) => (
-            <Text
-              style={[styles.label, { color: focused ? '#FFA726' : '#B0B0B0' }]}
-            >
-              Home
-            </Text>
-          ),
+    <><TalkMoreModal
+      visible={showTalkMoreModal}
+      onClose={() => setShowTalkMoreModal(false)}
+      onSelect={option => {
+        // Handle navigation or logic here
+        if (option === 'peer') {
+          // navigation.navigate('PeerScreen');
+        } else if (option === 'ai') {
+          // navigation.navigate('AICompanionScreen');
+        } else if (option === 'group') {
+          // navigation.navigate('GroupScreen');
+        }
+      } } /><Tab.Navigator
+        screenOptions={{
+          headerShown: false,
+          tabBarShowLabel: true,
+          tabBarStyle: {
+            position: 'absolute',
+            height: hp(8),
+            backgroundColor: '#fff',
+            borderTopWidth: 0,
+            elevation: 0,
+          },
         }}
-      />
+      >
+        {/* Home Tab */}
+        <Tab.Screen
+          name="HomeScreen"
+          component={HomeScreen}
+          options={{
+            tabBarIcon: ({ focused }) => (
+              <Icon
+                name="home"
+                size={wp(6)}
+                color={focused ? '#FFA726' : '#B0B0B0'} />
+            ),
+            tabBarLabel: ({ focused }) => (
+              <Text
+                style={[styles.label, { color: focused ? '#FFA726' : '#B0B0B0' }]}
+              >
+                Home
+              </Text>
+            ),
+          }} />
 
-      {/* Journal Tab */}
-      <Tab.Screen
-        name="JournalScreen"
-        component={JournalScreen}
-        options={{
-          tabBarIcon: ({ focused }) => (
-            <Icon
-              name="clock"
-              size={wp(6)}
-              color={focused ? '#FFA726' : '#B0B0B0'}
-            />
-          ),
-          tabBarLabel: ({ focused }) => (
-            <Text
-              style={[styles.label, { color: focused ? '#FFA726' : '#B0B0B0' }]}
-            >
-              Journal
-            </Text>
-          ),
-        }}
-      />
+        {/* Journal Tab */}
+        <Tab.Screen
+          name="JournalScreen"
+          component={JournalScreen}
+          options={{
+            tabBarIcon: ({ focused }) => (
+              <Icon
+                name="clock"
+                size={wp(6)}
+                color={focused ? '#FFA726' : '#B0B0B0'} />
+            ),
+            tabBarLabel: ({ focused }) => (
+              <Text
+                style={[styles.label, { color: focused ? '#FFA726' : '#B0B0B0' }]}
+              >
+                Journal
+              </Text>
+            ),
+          }} />
 
-      {/* Mood Tab */}
-      <Tab.Screen
-        name="Mood"
-        component={HomeScreen}
-        options={{
-          tabBarIcon: () => (
-            <View
-              style={[
-                styles.moodButton,
-                {
-                  width: wp(15),
-                  height: wp(15),
-                  borderRadius: wp(7.5),
-                },
-              ]}
-            >
-              <Icon name="plus" size={wp(7)} color="#fff" />
-            </View>
-          ),
-          tabBarLabel: ({ focused }) => (
-            <Text
-              style={[styles.label, { color: focused ? '#FFA726' : '#B0B0B0' }]}
-            >
-              Check-In?
-            </Text>
-          ),
-        }}
-      />
+        {/* Mood Tab */}
+        <Tab.Screen
+          name="Mood"
+          component={HomeScreen}
+          options={{
+            tabBarIcon: () => (
+              <View
+                style={[
+                  styles.moodButton,
+                  {
+                    width: wp(15),
+                    height: wp(15),
+                    borderRadius: wp(7.5),
+                  },
+                ]}
+              >
+                <Icon name="plus" size={wp(7)} color="#fff" />
+              </View>
+            ),
+            tabBarLabel: ({ focused }) => (
+              <Text
+                style={[styles.label, { color: focused ? '#FFA726' : '#B0B0B0' }]}
+              >
+                Check-In?
+              </Text>
+            ),
+          }} />
 
-      {/* Explore Tab */}
-      <Tab.Screen
-        name="Explore"
-        component={ExploreScreen}
-        options={{
-          tabBarIcon: ({ focused }) => (
-            <Image
-              source={
-                focused
+        {/* Explore Tab */}
+        <Tab.Screen
+          name="Explore"
+          component={ExploreScreen}
+          options={{
+            tabBarIcon: ({ focused }) => (
+              <Image
+                source={focused
                   ? require('../../assets/icon/explore.png')
-                  : require('../../assets/icon/explore.png')
-              }
-              style={{
-                width: wp(20),
-                height: wp(20),
-                resizeMode: 'contain',
-                tintColor: focused ? '#FFA726' : '#B0B0B0', // Optional: tint for monochrome images
-              }}
-            />
-          ),
-          tabBarLabel: ({ focused }) => (
-            <Text
-              style={[styles.label, { color: focused ? '#FFA726' : '#B0B0B0' }]}
-            >
-              Explore
-            </Text>
-          ),
-        }}
-      />
+                  : require('../../assets/icon/explore.png')}
+                style={{
+                  width: wp(20),
+                  height: wp(20),
+                  resizeMode: 'contain',
+                  tintColor: focused ? '#FFA726' : '#B0B0B0', // Optional: tint for monochrome images
+                }} />
+            ),
+            tabBarLabel: ({ focused }) => (
+              <Text
+                style={[styles.label, { color: focused ? '#FFA726' : '#B0B0B0' }]}
+              >
+                Explore
+              </Text>
+            ),
+          }} />
 
-      {/* Search Tab */}
-      <Tab.Screen
-        name="SearchScreen"
-        component={SearchScreen}
-        options={{
-          tabBarIcon: ({ focused }) => (
-            <Image
-              source={
-                focused
-                  ? require('../../assets/icon/tabsearch.png')
-                  : require('../../assets/icon/tabsearch.png')
-              }
-              style={{
-                width: wp(8),
-                height: wp(8),
-                resizeMode: 'contain',
-                tintColor: focused ? '#FFA726' : '#B0B0B0', // Optional: tint for monochrome images
-              }}
-            />
-          ),
-          tabBarLabel: ({ focused }) => (
-            <Text
-              style={[styles.label, { color: focused ? '#FFA726' : '#B0B0B0' }]}
-            >
-              Talk More
-            </Text>
-          ),
-        }}
-      />
-    </Tab.Navigator>
+        {/* Search Tab */}
+        <Tab.Screen
+          name="TalkMore"
+          component={SearchScreen} // Use a dummy component, or a blank one
+          options={{
+            tabBarIcon: ({ focused }) => (
+              <Image
+                source={require('../../assets/icon/tabsearch.png')}
+                style={{
+                  width: wp(8),
+                  height: wp(8),
+                  resizeMode: 'contain',
+                  tintColor: focused ? '#FFA726' : '#B0B0B0',
+                }} />
+            ),
+            tabBarLabel: ({ focused }) => (
+              <Text
+                style={[styles.label, { color: focused ? '#FFA726' : '#B0B0B0' }]}
+              >
+                Talk More
+              </Text>
+            ),
+          }}
+          listeners={{
+            tabPress: e => {
+              e.preventDefault();
+              setShowTalkMoreModal(prev => !prev);
+              
+            },
+          }} />
+      </Tab.Navigator></>
+   
   );
+ 
 };
 
 // Stack Navigator

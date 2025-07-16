@@ -12,11 +12,13 @@ import { useResponsive } from 'react-native-responsive-hook';
 import getStyles from '../../style/DoctorProfileStyles';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { useNavigation } from '@react-navigation/native';
+import { StackNavigationProp } from '@react-navigation/stack';
+import { RootStackParamList } from '../../Navigation/Mystack';
 
 const DoctorProfileScreen = () => {
   const { wp, hp } = useResponsive();
   const styles = getStyles(wp, hp);
-  const navigation = useNavigation();
+  const navigation = useNavigation<StackNavigationProp<RootStackParamList, 'DoctorProfileScreen'>>();
 
   return (
     <ImageBackground
@@ -182,6 +184,7 @@ const DoctorProfileScreen = () => {
         >
           <TouchableOpacity
             style={[styles.button, { height: hp(6), borderRadius: wp(10) }]}
+            onPress={() => navigation.navigate("BookAppointment")}
           >
             <Text style={{ color: '#fff', fontSize: wp(4.5), fontWeight: 'bold' }}>
               Book Appointment

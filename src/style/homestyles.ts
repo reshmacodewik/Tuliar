@@ -149,7 +149,7 @@ const styles = (wp: any, hp: any) =>
       fontFamily: 'Poppins-Bold',
     },
     eventCard: {
-      width: wp(65),
+      width: wp(55),
       backgroundColor: '#fff',
       borderRadius: wp(3),
       padding: wp(3),
@@ -157,7 +157,7 @@ const styles = (wp: any, hp: any) =>
     },
     eventImg: {
       width: '100%',
-      height: hp(18),
+      height: hp(15),
       borderRadius: wp(2),
       marginRight: wp(4),
       marginBottom: hp(1),

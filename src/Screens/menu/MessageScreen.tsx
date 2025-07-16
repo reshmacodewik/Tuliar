@@ -86,8 +86,8 @@ const MessageScreen = () => {
           </Text>
         </View>
 
-        <View style={[styles.searchContainer, dynamicStyles.searchContainer]}>
-          <Icon name="search" style={dynamicStyles.tabIcon} color="#FF914D" />
+        <View style={[styles.searchContainer, styles.searchContainer]}>
+          <Icon name="search" style={styles.tabIcon} color="#FF914D" />
           <TextInput
             placeholder="Search ..."
             placeholderTextColor="#999"

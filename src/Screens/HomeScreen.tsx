@@ -265,7 +265,7 @@ const HomeScreen = () => {
             </ScrollView>
 
             {/* User Feed */}
-            {/* <View style={styles(wp, hp).sectionHeader}>
+            <View style={styles(wp, hp).sectionHeader}>
               <Text style={styles(wp, hp).sectionTitle}>User Feed</Text>
               <TouchableOpacity>
                 <Ionicons name="chevron-forward" size={wp(7)} color="#000" />
@@ -308,7 +308,7 @@ const HomeScreen = () => {
                   </View>
                 </View>
               </View>
-            ))} */}
+            ))}
           </ScrollView>
 
           <View style={styles(wp, hp).outercontainer}>

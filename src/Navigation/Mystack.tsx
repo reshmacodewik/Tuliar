@@ -18,6 +18,7 @@ import IncomingCallScreen from '../Screens/call/IncomingCallScreen';
 import VideoCallScreen from '../Screens/call/VideoCallScreen';
 import MessageScreen from '../Screens/menu/MessageScreen';
 import DoctorProfileScreen from '../Screens/Doctor/DoctorProfileScreen';
+import BookAppointment from '../Screens/Doctor/BookAppointment';
 
 
 export type RootStackParamList = {
@@ -39,6 +40,7 @@ export type RootStackParamList = {
   MessageScreen: undefined;
   PaymentConfirmationScreen: undefined;
   DoctorProfileScreen: undefined;
+  BookAppointment: undefined;
 };
 
 const Stack = createStackNavigator<RootStackParamList>();
@@ -66,6 +68,7 @@ const MyStack: React.FC = () => {
         component={PaymentConfirmationScreen}
       />
       <Stack.Screen name="DoctorProfileScreen" component={DoctorProfileScreen} />
+      <Stack.Screen name="BookAppointment" component={BookAppointment}/>
       <Stack.Screen name="MyJourneyScreen" component={MyJourneyScreen} />
       <Stack.Screen name="IncomingCallScreen" component={IncomingCallScreen} />
       <Stack.Screen name="VideoCallScreen" component={VideoCallScreen} />
