@@ -1,155 +1,122 @@
 import React, { useState } from 'react';
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  ScrollView,
-  useWindowDimensions,
-  ImageBackground,
-  Image,
-} from 'react-native';
-import styles from '../../style/BookAppointment';
-import { NavigationProp, useNavigation } from '@react-navigation/core';
+import { View, Text, Image, ImageBackground, Pressable, ScrollView, TouchableOpacity } from 'react-native';
+import { useResponsive } from '../../Responsive/useResponsive';
+
+
 import { Calendar } from 'react-native-calendars';
+import styles from '../../style/BookAppointment';
 
-const SESSION_DURATIONS = [60, 75, 90];
+const services = [
+  { label: 'Video Call', icon: require('../../../assets/image/greenvideo.png') },
+  { label: 'Online Chat', icon: require('../../../assets/image/message.png') },
+  { label: 'Audio call', icon: require('../../../assets/image/phone.png') },
+];
 
-const BookAppointment = () => {
-  const [commStyle, setCommStyle] = useState<'video' | 'chat'>('video');
-  const [duration, setDuration] = useState<number>(60);
-  const [selectedDate, setSelectedDate] = useState('2024-07-15');
-  const { width } = useWindowDimensions();
-  const navigation = useNavigation<NavigationProp<any>>();
+const timeSlots = [
+  '09:00 AM - 09:30 AM',
+  '10:00 AM - 10:30 AM',
+  '11:00 AM - 11:30 AM',
+  '12:00 PM - 12:30 PM',
+  '02:00 PM - 02:30 PM',
+  '03:00 PM - 03:30 PM',
+];
+
+const ScheduleAppointmentScreen = () => {
+  const { wp, hp } = useResponsive();
+  const s = styles(wp, hp);
+  const [selectedService, setSelectedService] = useState(0);
+  const [selectedDate, setSelectedDate] = useState(new Date());
+  const [selectedSlot, setSelectedSlot] = useState('');
+  const [dropdownOpen, setDropdownOpen] = useState(false);
 
   return (
     <ImageBackground
       source={require('../../../assets/image/background.png')}
-      style={{ flex: 1 }}
+      style={s.background}
       resizeMode="cover"
     >
-      <ScrollView contentContainerStyle={styles.container}>
-        <Text style={styles.header}>Book Appointment</Text>
-
-        <View style={styles.successBanner}>
-          <Text style={styles.successText}>
-            <Text style={styles.bold}>Congratulations!</Text> First session is
-            free for new!
-          </Text>
-        </View>
-
-        <Text style={styles.sectionLabel}>Communication Style</Text>
-        <View style={styles.commRow}>
-          {[
-            {
-              type: 'video',
-              label: 'Video Call',
-              icon: require('../../../assets/image/video.png'),
-            },
-            {
-              type: 'chat',
-              label: 'Online Chat',
-              icon: require('../../../assets/image/message.png'),
-            },
-          ].map(item => {
-            const isActive = commStyle === item.type;
-            return (
-              <View key={item.type} style={styles.commColumn}>
-                <TouchableOpacity
-                  style={[
-                    styles.commButtonSquare,
-                    isActive
-                      ? styles.commButtonActive
-                      : styles.commButtonInactive,
-                  ]}
-                  onPress={() => setCommStyle(item.type as 'video' | 'chat')}
-                >
-                  <Image
-                    source={item.icon}
-                    style={[
-                      styles.commIconSquare,
-                      { tintColor: isActive ? '#fff' : '#1c4431' },
-                    ]}
-                  />
-                </TouchableOpacity>
-                <Text style={styles.commLabelSquare}>{item.label}</Text>
-              </View>
-            );
-          })}
-        </View>
-
-        <Text style={styles.sectionLabel}>Select Duration of the Session</Text>
-        <View style={styles.durationBox}>
-          <Text style={styles.durationNote}>
-            Can be extend by 15 minutes for an extra fee.
-          </Text>
-          <View style={styles.durationRow}>
-            {SESSION_DURATIONS.map(min => (
+      <ScrollView contentContainerStyle={{ flexGrow: 1 }} showsVerticalScrollIndicator={false}>
+        <View style={s.container}>
+          <Image source={require('../../../assets/image/logo.png')} style={s.logo} />
+          <Text style={s.header}>Schedule Appointment</Text>
+          <Image source={require('../../../assets/image/maskuser.png')} style={s.avatar} />
+          <Text style={s.name}>Dr. Laurn Miller</Text>
+          <Text style={s.role}>Mentor</Text>
+          <Text style={s.sectionTitle}>Select your Service</Text>
+          <View style={s.serviceRow}>
+            {services.map((service, idx) => (
+             <View key={service.label}>
               <TouchableOpacity
-                key={min}
-                style={[
-                  styles.durationButtonNew,
-                  duration === min && styles.durationButtonActiveNew,
-                ]}
-                onPress={() => setDuration(min)}
+              
+                style={[s.serviceButton, selectedService === idx && s.serviceButtonActive]}
+                onPress={() => setSelectedService(idx)}
               >
-                <Text
-                  style={[
-                    styles.durationButtonTextNew,
-                    duration === min && styles.durationButtonTextActiveNew,
-                  ]}
-                >
-                  {min} min
-                </Text>
+                <Image source={service.icon} style={s.serviceIcon} tintColor={selectedService === idx ? '#fff' : '#264734'} />
+                
               </TouchableOpacity>
+              <View><Text style={[s.serviceLabel, { color: '#000', textAlign: 'center', marginTop: 6 }]}>{service.label}</Text></View>
+              </View>
             ))}
           </View>
+          <Text style={s.sectionTitle}>Pick you preferred Day</Text>
+          <View style={s.calendarContainer}>
+            <Calendar
+              onDayPress={day => setSelectedDate(new Date(day.dateString))}
+              markedDates={{
+                [selectedDate.toISOString().split('T')[0]]: { selected: true, selectedColor: '#264734' },
+              }}
+              theme={{
+                backgroundColor: '#264734',
+                calendarBackground: '#fff',
+                textSectionTitleColor: '#264734',
+                selectedDayBackgroundColor: '#264734',
+                selectedDayTextColor: '#fff',
+                todayTextColor: '#264734',
+                dayTextColor: '#222',
+                textDisabledColor: '#d9d9d9',
+                arrowColor: '#264734',
+                arrowWidth: 10,
+                arrowHeight: 10,
+                monthTextColor: '#264734',
+                textDayFontFamily: 'Montserrat-Medium',
+                textMonthFontFamily: 'Poppins-Bold',
+                textDayHeaderFontFamily: 'Poppins-Bold',
+                textDayFontSize: wp(3.7),
+                textMonthFontSize: wp(4),
+                textDayHeaderFontSize: wp(3.5),
+              }}
+              style={{ borderRadius: wp(4) }}
+            />
+          </View>
+          <Text style={s.sectionTitle}>Select your time slot</Text>
+          <View style={s.dropdown}>
+            <TouchableOpacity onPress={() => setDropdownOpen(!dropdownOpen)}>
+              <Text style={s.dropdownText}>{selectedSlot || 'Select Time Slot'}</Text>
+            </TouchableOpacity>
+            {dropdownOpen && (
+              <View style={{ backgroundColor: '#fff', borderRadius: wp(2), marginTop: hp(1), elevation: 2, position: 'absolute', top: hp(3), left: 0, right: 0, zIndex: 1000 }}>
+                {timeSlots.map((slot, idx) => (
+                  <TouchableOpacity
+                    key={slot}
+                    onPress={() => {
+                      setSelectedSlot(slot);
+                      setDropdownOpen(false);
+                    }}
+                    style={{ padding: wp(3), borderBottomWidth: idx !== timeSlots.length - 1 ? 1 : 0, borderBottomColor: '#eee' }}
+                  >
+                    <Text style={{ color: '#222', fontSize: wp(4) }}>{slot}</Text>
+                  </TouchableOpacity>
+                ))}
+              </View>
+            )}
+          </View>
+          <Pressable style={s.payButton} onPress={() => {}}>
+            <Text style={s.payButtonText}>Pay Now</Text>
+          </Pressable>
         </View>
-
-        <Text style={styles.sectionLabel}>Pick your preferred Day</Text>
-        <View style={styles.calendarBox}>
-          <Calendar
-            current={selectedDate}
-            onDayPress={day => {
-              setSelectedDate(day.dateString);
-            }}
-            markedDates={{
-              [selectedDate]: {
-                selected: true,
-                selectedColor: '#256029',
-                selectedTextColor: '#fff',
-              },
-            }}
-            theme={{
-              backgroundColor: '#fff',
-              calendarBackground: '#fff',
-              textSectionTitleColor: '#888',
-              textSectionTitleDisabledColor: '#d9e1e8',
-              selectedDayBackgroundColor: '#256029',
-              selectedDayTextColor: '#ffffff',
-              todayTextColor: '#256029',
-              dayTextColor: '#222',
-              textDisabledColor: '#d9e1e8',
-              dotColor: '#256029',
-              selectedDotColor: '#ffffff',
-              arrowColor: '#256029',
-              monthTextColor: '#256029',
-              textDayFontWeight: 'normal',
-              textMonthFontWeight: 'bold',
-              textDayFontSize: width < 400 ? 12 : 14,
-              textMonthFontSize: width < 400 ? 14 : 16,
-              textDayHeaderFontSize: width < 400 ? 11 : 13,
-            }}
-            style={{
-              borderRadius: 12,
-              padding: 8,
-            }}
-          />
-        </View>
-
-        {/* Optional: You can add session timing or continue button below here */}
       </ScrollView>
     </ImageBackground>
   );
 };
 
-export default BookAppointment;
+export default ScheduleAppointmentScreen; 

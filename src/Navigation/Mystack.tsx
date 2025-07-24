@@ -2,10 +2,10 @@ import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import SplashScreen from '../Screens/SplashScreen';
 import OnboardingScreen from '../Screens/OnboardingScreen';
-import LoginScreen from '../Screens/LoginScreen';
-import SignUpScreen from '../Screens/SignUpScreen';
-import VerificationCode from '../Screens/VerificationCode';
-import SuccessScreen from '../Screens/SuccessScreen';
+import LoginScreen from '../Screens/Auth/LoginScreen';
+import SignUpScreen from '../Screens/Auth/SignUpScreen';
+import VerificationCode from '../Screens/Auth/VerificationCode';
+import SuccessScreen from '../Screens/Auth/SuccessScreen';
 import BottomTabs from './MyTab';
 import ExploreScreen from '../Screens/ExploreScreen';
 import JournalScreen from '../Screens/JournalScreen';
@@ -16,9 +16,14 @@ import PaymentConfirmationScreen from '../Screens/Event/PaymentConfirmationScree
 import MyJourneyScreen from '../Screens/Home/MyJourneyScreen';
 import IncomingCallScreen from '../Screens/call/IncomingCallScreen';
 import VideoCallScreen from '../Screens/call/VideoCallScreen';
-import MessageScreen from '../Screens/menu/MessageScreen';
+import Coaching from '../Screens/Coaching/Coaching';
 import DoctorProfileScreen from '../Screens/Doctor/DoctorProfileScreen';
 import BookAppointment from '../Screens/Doctor/BookAppointment';
+import QuestionnaireScreen from '../Screens/Coaching/QuestionnaireScreen';
+import SubscriptionScreen from '../Screens/Coaching/SubscriptionScreen';
+import MentorshipApplyScreen from '../Screens/Coaching/MentorshipApplyScreen';
+import MentorshipConnectingScreen from '../Screens/Coaching/MentorshipConnectingScreen';
+import DoctorListScreen from '../Screens/Coaching/DoctorListScreen';
 
 
 export type RootStackParamList = {
@@ -41,13 +46,19 @@ export type RootStackParamList = {
   PaymentConfirmationScreen: undefined;
   DoctorProfileScreen: undefined;
   BookAppointment: undefined;
+  Coaching: undefined;
+  Questionnaire: undefined;
+  Subscription: undefined;
+  MentorshipApply: undefined;
+  MentorshipConnecting: undefined;
+  DoctorList: undefined;
 };
 
 const Stack = createStackNavigator<RootStackParamList>();
 
 const MyStack: React.FC = () => {
   return (
-    <Stack.Navigator screenOptions={{ headerShown: false }}>
+    <Stack.Navigator screenOptions={{ headerShown: false }} >
       <Stack.Screen name="splashScreen" component={SplashScreen} />
       <Stack.Screen name="OnboardingScreen" component={OnboardingScreen} />
       <Stack.Screen name="LoginScreen" component={LoginScreen} />
@@ -72,7 +83,12 @@ const MyStack: React.FC = () => {
       <Stack.Screen name="MyJourneyScreen" component={MyJourneyScreen} />
       <Stack.Screen name="IncomingCallScreen" component={IncomingCallScreen} />
       <Stack.Screen name="VideoCallScreen" component={VideoCallScreen} />
-       <Stack.Screen name="MessageScreen" component={MessageScreen} />
+      <Stack.Screen name="Coaching" component={Coaching} /> 
+      <Stack.Screen name="Questionnaire" component={QuestionnaireScreen} />
+      <Stack.Screen name="Subscription" component={SubscriptionScreen} />
+      <Stack.Screen name="MentorshipApply" component={MentorshipApplyScreen} />
+      <Stack.Screen name="MentorshipConnecting" component={MentorshipConnectingScreen} />
+      <Stack.Screen name="DoctorList" component={DoctorListScreen} />
     </Stack.Navigator>
   );
 };

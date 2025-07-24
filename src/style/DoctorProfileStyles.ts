@@ -48,7 +48,7 @@ const styles = (wp: (val: number) => number, hp: (val: number) => number) =>
       justifyContent: 'center',
     },
     chipColumn: {
-      flexWrap: 'wrap',
+     
       gap: wp(1.5),
       marginTop: hp(0.7),
       justifyContent: 'center',

@@ -8,18 +8,18 @@ import {
   ImageBackground,
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import styles from '../style/otpstyles';
+import styles from '../../style/otpstyles';
 const SuccessScreen = () => {
   const navigation = useNavigation();
 
   return (
     <ImageBackground
-      source={require('../../assets/image/background.png')}
+      source={require('../../../assets/image/background.png')}
       style={styles.bg}
     >
       <View style={styles.otpcontainer}>
         <Image
-          source={require('../../assets/image/check.png')} // replace with your green checkmark
+          source={require('../../../assets/image/check.png')} // replace with your green checkmark
           style={styles.successIcon}
         />
         <Text style={styles.title}>Success!</Text>

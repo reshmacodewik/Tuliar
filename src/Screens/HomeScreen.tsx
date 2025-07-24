@@ -162,7 +162,7 @@ const HomeScreen = () => {
             />
             <Text style={styles(wp, hp).featureText}>Group Sessions</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles(wp, hp).featureBtn}>
+          <TouchableOpacity style={styles(wp, hp).featureBtn} onPress={() => navigation.navigate('Coaching')}>
             <Image
               source={require('../../assets/image/video.png')}
               style={styles(wp, hp).featureIcon}
@@ -266,7 +266,7 @@ const HomeScreen = () => {
 
             {/* User Feed */}
             <View style={styles(wp, hp).sectionHeader}>
-              <Text style={styles(wp, hp).sectionTitle}>User Feed</Text>
+              <Text style={styles(wp, hp).sectionTitle}>My Feed</Text>
               <TouchableOpacity>
                 <Ionicons name="chevron-forward" size={wp(7)} color="#000" />
               </TouchableOpacity>

@@ -9,7 +9,7 @@ import {
   Image,
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import styles from '../style/otpstyles';
+import styles from '../../style/otpstyles';
 
 const VerificationCode = () => {
   const navigation = useNavigation();
@@ -29,12 +29,12 @@ const VerificationCode = () => {
 
   return (
     <ImageBackground
-      source={require('../../assets/image/background.png')}
+      source={require('../../../assets/image/background.png')}
       style={styles.bg}
     >
         <TouchableOpacity onPress={() => navigation.goBack()}>
       <Image
-        source={require('../../assets/icon/arrow.png')} // replace with your green checkmark
+        source={require('../../../assets/icon/arrow.png')} // replace with your green checkmark
         style={styles.arrowIcon}
       />
       </TouchableOpacity>

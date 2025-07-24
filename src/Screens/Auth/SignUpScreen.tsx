@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { Picker } from '@react-native-picker/picker';
-import styles from '../style/signupstyles';
+import styles from '../../style/signupstyles';
 import CheckBox from '@react-native-community/checkbox';
 const SignUpScreen = () => {
   const navigation = useNavigation();
@@ -22,7 +22,7 @@ const SignUpScreen = () => {
 
   return (
     <ImageBackground
-      source={require('../../assets/image/background.png')}
+      source={require('../../../assets/image/background.png')}
       style={styles.bgimg}
     >
       <ScrollView

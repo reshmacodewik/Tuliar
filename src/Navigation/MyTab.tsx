@@ -13,7 +13,7 @@ import TalkMoreModal from '../components/TalkMoreModal';
 import HomeScreen from '../Screens/HomeScreen';
 import ExploreScreen from '../Screens/ExploreScreen';
 import JournalScreen from '../Screens/JournalScreen';
-import SearchScreen from '../Screens/SearchScreen';
+
 import EventScreen from '../Screens/Event/Eventscreen';
 
 const Tab = createBottomTabNavigator();
@@ -25,7 +25,8 @@ const BottomTabs = () => {
   const [showTalkMoreModal, setShowTalkMoreModal] = useState(false);
 
   return (
-    <><TalkMoreModal
+    <>
+    <TalkMoreModal
       visible={showTalkMoreModal}
       onClose={() => setShowTalkMoreModal(false)}
       onSelect={option => {
@@ -147,7 +148,7 @@ const BottomTabs = () => {
         {/* Search Tab */}
         <Tab.Screen
           name="TalkMore"
-          component={SearchScreen} // Use a dummy component, or a blank one
+          component={() => null} // Dummy component, renders nothing// Use a dummy component, or a blank one
           options={{
             tabBarIcon: ({ focused }) => (
               <Image
@@ -171,9 +172,8 @@ const BottomTabs = () => {
             tabPress: e => {
               e.preventDefault();
               setShowTalkMoreModal(prev => !prev);
-              
             },
-          }} />
+          }}/>
       </Tab.Navigator></>
    
   );

@@ -69,6 +69,7 @@ const styles = StyleSheet.create({
     elevation: 8,
     marginBottom: 55,
     marginRight: 25,
+   
   },
   modalText: {
     fontSize: 16,
