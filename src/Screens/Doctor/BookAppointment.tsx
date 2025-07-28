@@ -1,13 +1,24 @@
+/* eslint-disable react-native/no-inline-styles */
 import React, { useState } from 'react';
-import { View, Text, Image, ImageBackground, Pressable, ScrollView, TouchableOpacity } from 'react-native';
+import {
+  View,
+  Text,
+  Image,
+  ImageBackground,
+  Pressable,
+  ScrollView,
+  TouchableOpacity,
+} from 'react-native';
 import { useResponsive } from '../../Responsive/useResponsive';
-
 
 import { Calendar } from 'react-native-calendars';
 import styles from '../../style/BookAppointment';
 
 const services = [
-  { label: 'Video Call', icon: require('../../../assets/image/greenvideo.png') },
+  {
+    label: 'Video Call',
+    icon: require('../../../assets/image/greenvideo.png'),
+  },
   { label: 'Online Chat', icon: require('../../../assets/image/message.png') },
   { label: 'Audio call', icon: require('../../../assets/image/phone.png') },
 ];
@@ -35,35 +46,79 @@ const ScheduleAppointmentScreen = () => {
       style={s.background}
       resizeMode="cover"
     >
-      <ScrollView contentContainerStyle={{ flexGrow: 1 }} showsVerticalScrollIndicator={false}>
+      <ScrollView
+        contentContainerStyle={{ flexGrow: 1 }}
+        showsVerticalScrollIndicator={false}
+      >
         <View style={s.container}>
-          <Image source={require('../../../assets/image/logo.png')} style={s.logo} />
+          <Image
+            source={require('../../../assets/image/logo.png')}
+            style={s.logo}
+          />
           <Text style={s.header}>Schedule Appointment</Text>
-          <Image source={require('../../../assets/image/maskuser.png')} style={s.avatar} />
+          <Image
+            source={require('../../../assets/image/maskuser.png')}
+            style={s.avatar}
+          />
           <Text style={s.name}>Dr. Laurn Miller</Text>
           <Text style={s.role}>Mentor</Text>
+
+          <View style={{ width: '100%' }}>
           <Text style={s.sectionTitle}>Select your Service</Text>
+          </View>
           <View style={s.serviceRow}>
             {services.map((service, idx) => (
-             <View key={service.label}>
-              <TouchableOpacity
-              
-                style={[s.serviceButton, selectedService === idx && s.serviceButtonActive]}
-                onPress={() => setSelectedService(idx)}
-              >
-                <Image source={service.icon} style={s.serviceIcon} tintColor={selectedService === idx ? '#fff' : '#264734'} />
-                
-              </TouchableOpacity>
-              <View><Text style={[s.serviceLabel, { color: '#000', textAlign: 'center', marginTop: 6 }]}>{service.label}</Text></View>
+              <View key={service.label}>
+                <TouchableOpacity
+                  style={[
+                    s.serviceButton,
+                    selectedService === idx && s.serviceButtonActive,
+                  ]}
+                  onPress={() => setSelectedService(idx)}
+                >
+                  <Image
+                    source={service.icon}
+                    style={s.serviceIcon}
+                    tintColor={selectedService === idx ? '#fff' : '#264734'}
+                  />
+                </TouchableOpacity>
+                <View>
+                  <Text
+                    style={[
+                      s.serviceLabel,
+                      { color: '#000', textAlign: 'center', marginTop: 6 },
+                    ]}
+                  >
+                    {service.label}
+                  </Text>
+                </View>
               </View>
             ))}
           </View>
+
+          <View style={{ width: '100%' }}>
           <Text style={s.sectionTitle}>Pick you preferred Day</Text>
+          </View>
           <View style={s.calendarContainer}>
+            <View style={s.customCalendarHeader}>
+              <Text style={s.calendarHeaderYear}>
+                {selectedDate.getFullYear()}
+              </Text>
+              <Text style={s.calendarHeaderDate}>
+                {selectedDate.toLocaleDateString('en-US', {
+                  weekday: 'short',
+                  month: 'long',
+                  day: 'numeric',
+                })}
+              </Text>
+            </View>
             <Calendar
               onDayPress={day => setSelectedDate(new Date(day.dateString))}
               markedDates={{
-                [selectedDate.toISOString().split('T')[0]]: { selected: true, selectedColor: '#264734' },
+                [selectedDate.toISOString().split('T')[0]]: {
+                  selected: true,
+                  selectedColor: '#264734',
+                },
               }}
               theme={{
                 backgroundColor: '#264734',
@@ -74,9 +129,8 @@ const ScheduleAppointmentScreen = () => {
                 todayTextColor: '#264734',
                 dayTextColor: '#222',
                 textDisabledColor: '#d9d9d9',
+                todayBackgroundColor: '#264734',
                 arrowColor: '#264734',
-                arrowWidth: 10,
-                arrowHeight: 10,
                 monthTextColor: '#264734',
                 textDayFontFamily: 'Montserrat-Medium',
                 textMonthFontFamily: 'Poppins-Bold',
@@ -88,13 +142,30 @@ const ScheduleAppointmentScreen = () => {
               style={{ borderRadius: wp(4) }}
             />
           </View>
-          <Text style={s.sectionTitle}>Select your time slot</Text>
+
+          <View style={{ width: '100%' }}>
+            <Text style={s.sectionTitle}>Select your time slot</Text>
+          </View>
           <View style={s.dropdown}>
             <TouchableOpacity onPress={() => setDropdownOpen(!dropdownOpen)}>
-              <Text style={s.dropdownText}>{selectedSlot || 'Select Time Slot'}</Text>
+              <Text style={s.dropdownText}>
+                {selectedSlot || 'Select Time Slot'}
+              </Text>
             </TouchableOpacity>
             {dropdownOpen && (
-              <View style={{ backgroundColor: '#fff', borderRadius: wp(2), marginTop: hp(1), elevation: 2, position: 'absolute', top: hp(3), left: 0, right: 0, zIndex: 1000 }}>
+              <View
+                style={{
+                  backgroundColor: '#fff',
+                  borderRadius: wp(2),
+                  marginTop: hp(1),
+                  elevation: 2,
+                  position: 'absolute',
+                  top: hp(3),
+                  left: 0,
+                  right: 0,
+                  zIndex: 1000,
+                }}
+              >
                 {timeSlots.map((slot, idx) => (
                   <TouchableOpacity
                     key={slot}
@@ -102,9 +173,15 @@ const ScheduleAppointmentScreen = () => {
                       setSelectedSlot(slot);
                       setDropdownOpen(false);
                     }}
-                    style={{ padding: wp(3), borderBottomWidth: idx !== timeSlots.length - 1 ? 1 : 0, borderBottomColor: '#eee' }}
+                    style={{
+                      padding: wp(3),
+                      borderBottomWidth: idx !== timeSlots.length - 1 ? 1 : 0,
+                      borderBottomColor: '#eee',
+                    }}
                   >
-                    <Text style={{ color: '#222', fontSize: wp(4) }}>{slot}</Text>
+                    <Text style={{ color: '#222', fontSize: wp(4) }}>
+                      {slot}
+                    </Text>
                   </TouchableOpacity>
                 ))}
               </View>
@@ -119,4 +196,4 @@ const ScheduleAppointmentScreen = () => {
   );
 };
 
-export default ScheduleAppointmentScreen; 
+export default ScheduleAppointmentScreen;

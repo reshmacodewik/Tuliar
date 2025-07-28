@@ -62,7 +62,7 @@ const styles = (wp: any, hp: any) =>
       borderColor: '#E0E0E0',
     },
     select: {
-      width: '100%',
+      width: '95%',
       height: hp(6.5),
       borderRadius: wp(10),
       backgroundColor: '#F7F8FA',
@@ -80,7 +80,7 @@ const styles = (wp: any, hp: any) =>
       marginLeft: wp(2),
     },
     textarea: {
-      width: '100%',
+      width: '95%',
       minHeight: hp(6.5),
       borderRadius: wp(10),
       backgroundColor: '#F7F8FA',

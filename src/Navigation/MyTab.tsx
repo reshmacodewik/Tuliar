@@ -13,7 +13,6 @@ import TalkMoreModal from '../components/TalkMoreModal';
 import HomeScreen from '../Screens/HomeScreen';
 import ExploreScreen from '../Screens/ExploreScreen';
 import JournalScreen from '../Screens/JournalScreen';
-
 import EventScreen from '../Screens/Event/Eventscreen';
 
 const Tab = createBottomTabNavigator();
@@ -169,11 +168,11 @@ const BottomTabs = () => {
             ),
           }}
           listeners={{
-            tabPress: e => {
-              e.preventDefault();
-              setShowTalkMoreModal(prev => !prev);
-            },
-          }}/>
+  tabPress: e => {
+    e.preventDefault();
+    setShowTalkMoreModal(prev => !prev);
+  },
+}}/>
       </Tab.Navigator></>
    
   );

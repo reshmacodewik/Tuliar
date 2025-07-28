@@ -99,20 +99,23 @@ const styles = (wp: any, hp: any) =>
       marginBottom: hp(2),
       marginTop: hp(2),
     },
-    calendarHeader: {
-      flexDirection: 'row',
-      justifyContent: 'space-between',
-      alignItems: 'center',
-      marginBottom: hp(1),
-    },
-    calendarTitle: {
-      fontSize: wp(4),
-      fontFamily: 'Poppins-Bold',
-      color: '#fff',
+    customCalendarHeader: {
       backgroundColor: '#264734',
-      borderRadius: wp(2),
-      paddingHorizontal: wp(3),
-      paddingVertical: hp(1),
+      borderTopLeftRadius: wp(4),
+      borderTopRightRadius: wp(4),
+      paddingVertical: hp(2),
+      paddingHorizontal: wp(4),
+    },
+    calendarHeaderYear: {
+      color: '#BFC9C6',
+      fontSize: wp(4),
+      fontFamily: 'Montserrat-Medium',
+    },
+    calendarHeaderDate: {
+      color: '#fff',
+      fontSize: wp(5),
+      fontFamily: 'Poppins-Bold',
+      marginTop: hp(0.5),
     },
     calendarNav: {
       fontSize: wp(6),
