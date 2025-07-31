@@ -18,9 +18,22 @@ import {
   MenuOption,
   MenuTrigger,
 } from 'react-native-popup-menu';
+import LinearGradient from 'react-native-linear-gradient';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Feather from 'react-native-vector-icons/Feather';
-import LinearGradient from 'react-native-linear-gradient';
+const features = [
+  {
+    title: 'Chat with experts',
+    image: require('../../assets/image/chatexperts.png'),
+  },
+  {
+    title: 'Group Sessions',
+    image: require('../../assets/image/groupsession.png'),
+  },
+  { title: 'Coaching', image: require('../../assets/image/coachng.png') },
+  { title: 'Therapy', image: require('../../assets/image/Therapy.png') },
+];
+
 const feedPosts = [
   {
     id: '1',
@@ -67,25 +80,31 @@ const HomeScreen = () => {
       source={require('../../assets/image/background.png')}
       style={styles(wp, hp).bgimg}
     >
-      <View style={styles(wp, hp).container}>
-        <View style={styles(wp, hp).header}>
-          <View>
-            <Image
-              source={require('../../assets/image/logo1.png')}
-              style={styles(wp, hp).logo}
-            />
-            <Text style={styles(wp, hp).headerText}>
-              Real Connection. Real Support. Real Growth.
-            </Text>
-          </View>
-          <View style={styles(wp, hp).headerIcons}>
-            <TouchableOpacity>
+      <View style={styles(wp, hp).mainContainer}>
+        <ScrollView
+          style={styles(wp, hp).container}
+          contentContainerStyle={{ paddingBottom: hp(5) }}
+          showsVerticalScrollIndicator={false}
+        >
+          {/* HEADER */}
+          <View style={styles(wp, hp).header}>
+            <View>
               <Image
-                source={require('../../assets/icon/bell.png')}
-                style={styles(wp, hp).bellIcon}
+                source={require('../../assets/image/logo1.png')}
+                style={styles(wp, hp).logo}
               />
-            </TouchableOpacity>
-            <Menu onSelect={handleMenuSelect}>
+              <Text style={styles(wp, hp).headerText}>
+                Real Connection. Real Support. Real Growth.
+              </Text>
+            </View>
+            <View style={styles(wp, hp).headerIcons}>
+              <TouchableOpacity>
+                <Image
+                  source={require('../../assets/icon/bell.png')}
+                  style={styles(wp, hp).bellIcon}
+                />
+              </TouchableOpacity>
+              <Menu onSelect={handleMenuSelect}>
               <MenuTrigger>
                 <Image
                   source={require('../../assets/image/homeuser.png')}
@@ -144,62 +163,52 @@ const HomeScreen = () => {
                 </MenuOption>
               </MenuOptions>
             </Menu>
+            </View>
           </View>
-        </View>
-        <View style={styles(wp, hp).servicesContainer}>
-          <TouchableOpacity style={styles(wp, hp).serviceCard}>
-            <Image
-              source={require('../../assets/image/chatexperts.png')}
-              style={styles(wp, hp).serviceImage}
-            />
-             <LinearGradient
-              colors={['rgba(38, 71, 52, 0)', '#264734']}
-              start={{ x: 0.5, y: 0 }}
-              end={{ x: 0.5, y: 1 }}
-              style={styles(wp, hp).serviceOverlay}
-            >
-              <Text style={styles(wp, hp).serviceText}>Chat with experts</Text>
-           </LinearGradient>
-          </TouchableOpacity>
 
-          <TouchableOpacity style={styles(wp, hp).serviceCard}>
-            <Image
-              source={require('../../assets/image/groupsession.png')}
-              style={styles(wp, hp).serviceImage}
-            />
-            <LinearGradient
-              colors={['rgba(38, 71, 52, 0)', '#264734']}
-              start={{ x: 0.5, y: 0 }}
-              end={{ x: 0.5, y: 1 }}
-              style={styles(wp, hp).serviceOverlay}
-            >
-              <Text style={styles(wp, hp).serviceText}>Group Sessions</Text>
-            </LinearGradient>
-          </TouchableOpacity>
+          {/* FEATURE GRID */}
+          <ScrollView
+            horizontal
+            showsHorizontalScrollIndicator={false}
+            contentContainerStyle={styles(wp, hp).grid}
+          >
+            {features.map((item, i) => (
+              <TouchableOpacity
+                key={i}
+                style={styles(wp, hp).featureBox}
+                              onPress={() => {
+                console.log('Card pressed:', item.title);
+                if (item.title === 'Coaching') {
+                  console.log('Navigating to Coaching screen...');
+                  navigation.navigate('Coaching');
+                } else if (item.title === 'Chat with experts') {
+                  console.log('Chat with experts - screen not implemented yet');
+                } else if (item.title === 'Group Sessions') {
+                  console.log('Group Sessions - screen not implemented yet');
+                } else if (item.title === 'Therapy') {
+                  console.log('Therapy - screen not implemented yet');
+                }
+              }}
+              >
+                <Image
+                  source={item.image}
+                  style={styles(wp, hp).featureImage}
+                />
+                <LinearGradient
+                  colors={['rgba(38, 71, 52, 0)', '#264734']}
+                  start={{ x: 0.5, y: 0 }}
+                  end={{ x: 0.5, y: 1 }}
+                  style={styles(wp, hp).featureOverlay}
+                >
+                  <Text style={styles(wp, hp).featureText}>{item.title}</Text>
+                </LinearGradient>
+              </TouchableOpacity>
+            ))}
+          </ScrollView>
 
-          <TouchableOpacity style={styles(wp, hp).serviceCard}>
-            <Image
-              source={require('../../assets/image/groupsession.png')}
-              style={styles(wp, hp).serviceImage}
-            />
-            <View style={styles(wp, hp).serviceOverlay}>
-              <Text style={styles(wp, hp).serviceText}>Group Sessions</Text>
-            </View>
-          </TouchableOpacity>
-
-          <TouchableOpacity style={styles(wp, hp).serviceCard}>
-            <Image
-              source={require('../../assets/image/groupsession.png')}
-              style={styles(wp, hp).serviceImage}
-            />
-            <View style={styles(wp, hp).serviceOverlay}>
-              <Text style={styles(wp, hp).serviceText}>Therapy</Text>
-            </View>
-          </TouchableOpacity>
-        </View>
-        <View style={styles(wp, hp).innercontainer}>
-          <ScrollView>
-            {/* My Journey */}
+          {/* INNER CONTENT — ALL VISIBLE & SCROLLABLE */}
+          <View style={[styles(wp, hp).innercontainer, { flexGrow: 1 }]}>
+            {/* MY JOURNEY */}
             <View style={styles(wp, hp).sectionHeader}>
               <Text style={styles(wp, hp).sectionTitle}>My Journey</Text>
               <TouchableOpacity
@@ -209,7 +218,12 @@ const HomeScreen = () => {
               </TouchableOpacity>
             </View>
 
-            <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+            <ScrollView
+              horizontal
+              showsHorizontalScrollIndicator={false}
+              style={{ marginBottom: hp(2) }}
+              contentContainerStyle={{ paddingRight: wp(4) }}
+            >
               {[
                 {
                   image: require('../../assets/image/image.png'),
@@ -249,6 +263,8 @@ const HomeScreen = () => {
                 </View>
               ))}
             </ScrollView>
+
+            {/* EVENTS */}
             <View style={styles(wp, hp).sectionHeader}>
               <Text style={styles(wp, hp).sectionTitle}>Events</Text>
               <TouchableOpacity
@@ -307,7 +323,7 @@ const HomeScreen = () => {
               ))}
             </ScrollView>
 
-            {/* User Feed */}
+            {/* FEED */}
             <View style={styles(wp, hp).sectionHeader}>
               <Text style={styles(wp, hp).sectionTitle}>My Feed</Text>
               <TouchableOpacity>
@@ -352,21 +368,21 @@ const HomeScreen = () => {
                 </View>
               </View>
             ))}
-          </ScrollView>
+          </View>
+        </ScrollView>
 
-          <View style={styles(wp, hp).outercontainer}>
-            <TouchableOpacity style={styles(wp, hp).fab}>
-              <Image
-                source={require('../../assets/image/moodicon.png')}
-                style={styles(wp, hp).icon}
-              />
-            </TouchableOpacity>
-
-            <View style={styles(wp, hp).textContainer}>
-              <Text style={styles(wp, hp).text}>
-                Hi <Text style={{ fontWeight: 'bold' }}>Susan</Text> 👋
-              </Text>
-            </View>
+        {/* STATIC FLOATING MOOD BUTTON */}
+        <View style={styles(wp, hp).staticFloatingContainer}>
+          <TouchableOpacity style={styles(wp, hp).fab}>
+            <Image
+              source={require('../../assets/image/moodicon.png')}
+              style={styles(wp, hp).icon}
+            />
+          </TouchableOpacity>
+          <View style={styles(wp, hp).textContainer}>
+            <Text style={styles(wp, hp).text}>
+              Hi <Text style={{ fontWeight: 'bold' }}>Susan</Text> 👋
+            </Text>
           </View>
         </View>
       </View>

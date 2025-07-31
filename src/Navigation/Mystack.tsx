@@ -31,6 +31,7 @@ import AddCardScreen from '../Screens/payments/AddCardScreen';
 import EarnPointsScreen from '../Screens/payments/EarnPointsScreen';
 
 
+
 export type RootStackParamList = {
   splashScreen: undefined;
   OnboardingScreen: undefined;
@@ -62,6 +63,7 @@ export type RootStackParamList = {
   PaymentDetailsScreen: undefined;
   AddCardScreen: undefined;
   EarnPointsScreen: undefined;
+  OnboardingJourneyScreen: undefined;
 };
 
 const Stack = createStackNavigator<RootStackParamList>();
@@ -104,6 +106,7 @@ const MyStack: React.FC = () => {
       <Stack.Screen name="PaymentDetailsScreen" component={PaymentDetailsScreen} />
       <Stack.Screen name="AddCardScreen" component={AddCardScreen} />
       <Stack.Screen name="EarnPointsScreen" component={EarnPointsScreen} />
+      <Stack.Screen name="OnboardingJourneyScreen" component={OnboardingJourneyScreen} />
     </Stack.Navigator>
   );
 };

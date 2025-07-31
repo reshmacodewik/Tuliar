@@ -6,7 +6,7 @@ import { RootStackParamList } from '../../Navigation/Mystack';
 import { useResponsive } from '../../Responsive/useResponsive';
 import styles from '../../style/coachingStyles';
 
-type CoachingNavigationProp = StackNavigationProp<RootStackParamList, 'Questionnaire'>;
+type CoachingNavigationProp = StackNavigationProp<RootStackParamList, 'OnboardingJourneyScreen'>;
 
 const Coaching = () => {
   const { wp, hp } = useResponsive();
@@ -23,7 +23,7 @@ const Coaching = () => {
         source={require('../../../assets/image/coaching.png')}
         style={s.illustration}
       />
-      <Pressable style={s.button} onPress={() => navigation.navigate('Questionnaire')}>
+      <Pressable style={s.button} onPress={() => navigation.navigate('OnboardingJourneyScreen')}>
         <Text style={s.buttonText}>Next</Text>
       </Pressable>
       <Image

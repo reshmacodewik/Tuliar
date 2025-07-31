@@ -1,7 +1,15 @@
+import { Dimensions } from 'react-native';
 import { StyleSheet } from 'react-native';
+const screenWidth = Dimensions.get('window').width;
+const isTablet = screenWidth > 768;
 
+const gridColumn = isTablet ? 4 : 4;
 const styles = (wp: any, hp: any) =>
   StyleSheet.create({
+    mainContainer: {
+      flex: 1,
+      position: 'relative',
+    },
     menuItem: {
       flexDirection: 'row',
       alignItems: 'center',
@@ -21,26 +29,22 @@ const styles = (wp: any, hp: any) =>
       flex: 1,
     },
     innercontainer: {
-   
       borderRadius: 15,
-      height: hp(61),
-      justifyContent: 'center',
-      alignContent: 'center',
-      paddingHorizontal: hp(2),
+      paddingHorizontal: wp(1.2),
       paddingTop: hp(2),
-      marginTop: hp(-2),
       paddingBottom: hp(10),
+      marginTop: hp(2),
     },
     container: {
       flex: 1,
-      padding: wp(4),
-      marginTop: hp(1.5),
+      padding: 16,
+      marginTop: hp(3),
     },
     header: {
       flexDirection: 'row',
       justifyContent: 'space-between',
       alignItems: 'center',
-      marginBottom: hp(3),
+      marginBottom: hp(2),
     },
     logo: {
       width: wp(40),
@@ -89,17 +93,17 @@ const styles = (wp: any, hp: any) =>
       marginBottom: hp(1),
       resizeMode: 'cover',
     },
-    featureText: {
-      fontSize: wp(2.8),
-      textAlign: 'center',
-      fontFamily: 'Poppins-SemiBold',
-    },
+    // featureText: {
+    //   fontSize: wp(2.8),
+    //   textAlign: 'center',
+    //   fontFamily: 'Poppins-SemiBold',
+    // },
     servicesContainer: {
       flexDirection: 'row',
       justifyContent: 'space-between',
       marginBottom: hp(3),
       marginTop: hp(1.5),
-      paddingHorizontal: wp(4),
+      paddingHorizontal: wp(2),
       gap: wp(2),
     },
     serviceCard: {
@@ -107,22 +111,14 @@ const styles = (wp: any, hp: any) =>
       height: wp(28),
       borderRadius: wp(3),
       overflow: 'hidden',
-      borderWidth: 1.5,
+      borderWidth: 1,
       borderColor: '#264734',
       position: 'relative',
-      shadowColor: '#000',
-      shadowOffset: { width: 0, height: 2 },
-      shadowOpacity: 0.1,
-      shadowRadius: 4,
-      elevation: 3,
     },
     serviceCardIcon: {
       width: wp(22),
       height: wp(28),
-    
-      borderRadius: wp(3),
-      borderWidth: 1.5,
-      borderColor: '#264734',
+      borderRadius: wp(0),
       alignItems: 'center',
       justifyContent: 'center',
       padding: wp(2),
@@ -136,6 +132,7 @@ const styles = (wp: any, hp: any) =>
       width: '100%',
       height: '100%',
       resizeMode: 'cover',
+      borderRadius: wp(3),
     },
     serviceIcon: {
       width: wp(12),
@@ -149,15 +146,14 @@ const styles = (wp: any, hp: any) =>
       bottom: 0,
       left: 0,
       right: 0,
-      paddingVertical: hp(1.2),
+      paddingVertical: hp(1),
       paddingHorizontal: wp(1.5),
       alignItems: 'center',
       borderBottomLeftRadius: wp(3),
       borderBottomRightRadius: wp(3),
-    }
-    ,
+    },
     serviceText: {
-      fontSize: 7.,
+      fontSize: wp(2.8),
       color: '#fff',
       fontFamily: 'Poppins-SemiBold',
       textAlign: 'center',
@@ -191,9 +187,12 @@ const styles = (wp: any, hp: any) =>
       borderRadius: wp(4),
       padding: wp(3),
       marginRight: wp(3),
-      marginLeft: wp(0),
-      marginBottom: hp(3),
-      
+      marginBottom: hp(2),
+      shadowColor: '#000',
+      shadowOffset: { width: 0, height: 2 },
+      shadowOpacity: 0.1,
+      shadowRadius: 4,
+      elevation: 3,
     },
     journeyImg: {
       width: '100%',
@@ -222,7 +221,7 @@ const styles = (wp: any, hp: any) =>
     },
     detailsBtn: {
       backgroundColor: '#264734',
-      paddingVertical: hp(1.5),
+      paddingVertical: hp(1),
       borderRadius: wp(6),
       alignItems: 'center',
       shadowColor: '#000',
@@ -288,10 +287,19 @@ const styles = (wp: any, hp: any) =>
     },
     outercontainer: {
       position: 'absolute',
-      bottom: hp(6),
-      right: wp(0),
+      bottom: hp(8),
+      right: wp(4),
       flexDirection: 'column',
       alignItems: 'center',
+      zIndex: 1000,
+    },
+    staticFloatingContainer: {
+      position: 'absolute',
+      bottom: hp(8),
+      right: wp(4),
+      flexDirection: 'column',
+      alignItems: 'center',
+      zIndex: 1000,
     },
     fab: {
       width: wp(17),
@@ -390,6 +398,48 @@ const styles = (wp: any, hp: any) =>
       marginTop: hp(-1),
       marginRight: hp(10),
       textAlign: 'center',
+    },
+    grid: {
+      flexDirection: 'row',
+      paddingHorizontal: wp(4),
+      paddingVertical: hp(1),
+      gap: wp(3),
+    },
+    featureBox: {
+      width: wp(21),
+      height: wp(26),
+      borderRadius: wp(1.5),
+      overflow: 'hidden',
+      borderWidth: 0,
+      borderColor: '#264734',
+      position: 'relative',
+      marginBottom: hp(-1),
+    },
+    featureOverlay: {
+      position: 'absolute',
+      bottom: 5,
+      left: 0,
+      right: 0,
+      paddingVertical: hp(1),
+      paddingHorizontal: wp(1),
+      borderBottomRightRadius: wp(1),
+      borderBottomLeftRadius: wp(1),
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
+    featureImage: {
+      width: '100%',
+      height: '100%',
+      borderRadius: wp(0),
+      resizeMode: 'contain',
+    },
+    featureText: {
+      fontSize: 8.5,
+      textAlign: 'center',
+      color: '#fff',
+      fontFamily: 'Poppins-SemiBold',
+      lineHeight: wp(3.2),
+      fontWeight: '600',
     },
   });
 
