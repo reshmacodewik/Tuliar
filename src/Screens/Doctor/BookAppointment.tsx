@@ -10,9 +10,10 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import { useResponsive } from '../../Responsive/useResponsive';
+import { useNavigation, NavigationProp } from '@react-navigation/native';
 
-import { Calendar } from 'react-native-calendars';
 import styles from '../../style/BookAppointment';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 const services = [
   {
@@ -35,10 +36,72 @@ const timeSlots = [
 const ScheduleAppointmentScreen = () => {
   const { wp, hp } = useResponsive();
   const s = styles(wp, hp);
+  const navigation = useNavigation<NavigationProp<any>>();
   const [selectedService, setSelectedService] = useState(0);
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [selectedSlot, setSelectedSlot] = useState('');
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [currentMonth, setCurrentMonth] = useState(new Date());
+
+  // Custom calendar functions
+  const getDaysInMonth = (date: Date) => {
+    const year = date.getFullYear();
+    const month = date.getMonth();
+    const firstDay = new Date(year, month, 1);
+    const lastDay = new Date(year, month + 1, 0);
+    const daysInMonth = lastDay.getDate();
+    const startingDayOfWeek = firstDay.getDay();
+    
+    const days = [];
+    
+    // Add previous month's days
+    const prevMonth = new Date(year, month, 0);
+    const prevMonthDays = prevMonth.getDate();
+    for (let i = startingDayOfWeek - 1; i >= 0; i--) {
+      days.push({
+        day: prevMonthDays - i,
+        isCurrentMonth: false,
+        date: new Date(year, month - 1, prevMonthDays - i)
+      });
+    }
+    
+    // Add current month's days
+    for (let i = 1; i <= daysInMonth; i++) {
+      days.push({
+        day: i,
+        isCurrentMonth: true,
+        date: new Date(year, month, i)
+      });
+    }
+    
+    // Add next month's days to fill the grid
+    const remainingDays = 42 - days.length; // 6 rows * 7 days
+    for (let i = 1; i <= remainingDays; i++) {
+      days.push({
+        day: i,
+        isCurrentMonth: false,
+        date: new Date(year, month + 1, i)
+      });
+    }
+    
+    return days;
+  };
+
+  const handleDayPress = (day: number, isCurrentMonth: boolean, date: Date) => {
+    if (isCurrentMonth) {
+      setSelectedDate(date);
+    }
+  };
+
+  const changeMonth = (direction: 'prev' | 'next') => {
+    const newMonth = new Date(currentMonth);
+    if (direction === 'prev') {
+      newMonth.setMonth(newMonth.getMonth() - 1);
+    } else {
+      newMonth.setMonth(newMonth.getMonth() + 1);
+    }
+    setCurrentMonth(newMonth);
+  };
 
   return (
     <ImageBackground
@@ -50,6 +113,17 @@ const ScheduleAppointmentScreen = () => {
         contentContainerStyle={{ flexGrow: 1 }}
         showsVerticalScrollIndicator={false}
       >
+          <TouchableOpacity
+                   style={s.backButton}
+                   onPress={() => navigation.goBack()}
+                 >
+                   <MaterialIcons
+                     name="keyboard-arrow-left"
+                     size={wp(8.5)}
+                     color="#000"
+                   />
+                   </TouchableOpacity>
+    
         <View style={s.container}>
           <Image
             source={require('../../../assets/image/logo.png')}
@@ -64,7 +138,7 @@ const ScheduleAppointmentScreen = () => {
           <Text style={s.role}>Mentor</Text>
 
           <View style={{ width: '100%' }}>
-          <Text style={s.sectionTitle}>Select your Service</Text>
+          <Text style={s.sectionTitleservice}>Select your Service</Text>
           </View>
           <View style={s.serviceRow}>
             {services.map((service, idx) => (
@@ -112,35 +186,60 @@ const ScheduleAppointmentScreen = () => {
                 })}
               </Text>
             </View>
-            <Calendar
-              onDayPress={day => setSelectedDate(new Date(day.dateString))}
-              markedDates={{
-                [selectedDate.toISOString().split('T')[0]]: {
-                  selected: true,
-                  selectedColor: '#264734',
-                },
-              }}
-              theme={{
-                backgroundColor: '#264734',
-                calendarBackground: '#fff',
-                textSectionTitleColor: '#264734',
-                selectedDayBackgroundColor: '#264734',
-                selectedDayTextColor: '#fff',
-                todayTextColor: '#264734',
-                dayTextColor: '#222',
-                textDisabledColor: '#d9d9d9',
-                todayBackgroundColor: '#264734',
-                arrowColor: '#264734',
-                monthTextColor: '#264734',
-                textDayFontFamily: 'Montserrat-Medium',
-                textMonthFontFamily: 'Poppins-Bold',
-                textDayHeaderFontFamily: 'Poppins-Bold',
-                textDayFontSize: wp(3.7),
-                textMonthFontSize: wp(4),
-                textDayHeaderFontSize: wp(3.5),
-              }}
-              style={{ borderRadius: wp(4) }}
-            />
+            <View style={s.calendarNav}>
+              <TouchableOpacity onPress={() => changeMonth('prev')}>
+                <MaterialIcons name="chevron-left" size={wp(6)} color="#264734" />
+              </TouchableOpacity>
+              <Text style={{ fontSize: wp(4), color: '#264734', fontFamily: 'Poppins-Bold' }}>
+                {currentMonth.toLocaleDateString('en-US', { month: 'long', year: 'numeric' })}
+              </Text>
+              <TouchableOpacity onPress={() => changeMonth('next')}>
+                <MaterialIcons name="chevron-right" size={wp(6)} color="#264734" />
+              </TouchableOpacity>
+            </View>
+            <View style={s.calendarGrid}>
+              {/* Days of week header */}
+              {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map((day, _index) => (
+                <View key={day} style={[s.calendarDay, { backgroundColor: 'transparent' }]}>
+                  <Text style={[s.calendarDayText, { color: '#264734', fontFamily: 'Poppins-Bold' }]}>
+                    {day}
+                  </Text>
+                </View>
+              ))}
+              
+              {/* Calendar days */}
+              {getDaysInMonth(currentMonth).map((dayData, index) => {
+                const isSelected = selectedDate.toDateString() === dayData.date.toDateString();
+                const isToday = new Date().toDateString() === dayData.date.toDateString();
+                
+                return (
+                  <TouchableOpacity
+                    key={index}
+                    style={[
+                      s.calendarDay,
+                      isSelected && s.calendarDaySelected,
+                      isToday && !isSelected && { backgroundColor: '#fff' }
+                    ]}
+                    onPress={() => handleDayPress(dayData.day, dayData.isCurrentMonth, dayData.date)}
+                  >
+                    <Text
+                                             style={[
+                         s.calendarDayText,
+                         !dayData.isCurrentMonth && { color: '#d9d9d9', },
+                         isSelected && s.calendarDayTextSelected,
+                         isToday && !isSelected && { 
+                           color: '#264734', 
+                           fontFamily: 'Montserrat-Bold',
+                           textDecorationLine: 'underline'
+                         }
+                       ]}
+                    >
+                      {dayData.day}
+                    </Text>
+                  </TouchableOpacity>
+                );
+              })}
+            </View>
           </View>
 
           <View style={{ width: '100%' }}>
@@ -187,7 +286,7 @@ const ScheduleAppointmentScreen = () => {
               </View>
             )}
           </View>
-          <Pressable style={s.payButton} onPress={() => {}}>
+          <Pressable style={s.payButton} onPress={() => navigation.navigate('ReviewPaymentScreen')}>
             <Text style={s.payButtonText}>Pay Now</Text>
           </Pressable>
         </View>

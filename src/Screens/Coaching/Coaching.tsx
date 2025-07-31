@@ -1,17 +1,17 @@
 import React from 'react';
 import { View, Text, Image, Pressable } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import { StackNavigationProp } from '@react-navigation/stack';
+import { RootStackParamList } from '../../Navigation/Mystack';
 import { useResponsive } from '../../Responsive/useResponsive';
 import styles from '../../style/coachingStyles';
-import TailoredScreen from './TailoredScreen';
+
+type CoachingNavigationProp = StackNavigationProp<RootStackParamList, 'Questionnaire'>;
 
 const Coaching = () => {
   const { wp, hp } = useResponsive();
   const s = styles(wp, hp);
-  const [showTailored, setShowTailored] = React.useState(false);
-
-  if (showTailored) {
-    return <TailoredScreen />;
-  }
+  const navigation = useNavigation<CoachingNavigationProp>();
 
   return (
     <View style={s.container}>
@@ -23,8 +23,8 @@ const Coaching = () => {
         source={require('../../../assets/image/coaching.png')}
         style={s.illustration}
       />
-      <Pressable style={s.button} onPress={() => setShowTailored(true)}>
-        <Text style={s.buttonText}>Continue My Journey</Text>
+      <Pressable style={s.button} onPress={() => navigation.navigate('Questionnaire')}>
+        <Text style={s.buttonText}>Next</Text>
       </Pressable>
       <Image
         source={require('../../../assets/image/logo.png')}

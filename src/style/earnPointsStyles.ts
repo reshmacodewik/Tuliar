@@ -1,0 +1,134 @@
+import { StyleSheet } from 'react-native';
+
+const styles = (wp: any, hp: any) =>
+  StyleSheet.create({
+    background: {
+      flex: 1,
+      width: '100%',
+      height: '100%',
+    },
+    container: {
+      flex: 1,
+      paddingHorizontal: wp(5),
+      paddingTop: hp(4),
+      alignItems: 'center',
+    },
+    headerRow: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      width: '100%',
+      marginBottom: hp(2),
+    },
+    backButton: {
+      marginRight: wp(3),
+    },
+    headerTitle: {
+      fontSize: wp(5),
+      fontFamily: 'Poppins-Bold',
+      color: '#222',
+    },
+    logoContainer: {
+      alignItems: 'center',
+      justifyContent: 'center',
+      backgroundColor: '#FFE6C7',
+      borderRadius: wp(6),
+      width: wp(26),
+      height: wp(23),
+      marginBottom: hp(2),
+      alignSelf: 'center',
+    },
+    logo: {
+      width: wp(16),
+      height: wp(16),
+      resizeMode: 'contain',
+    },
+    title: {
+      fontSize: wp(6),
+      fontFamily: 'Poppins-Bold',
+      color: '#000',
+      marginBottom: hp(1),
+      textAlign: 'center',
+    },
+    subtitle: {
+      fontSize: wp(4),
+      fontFamily: 'Quicksand-Regular',
+      color: '#000',
+      textAlign: 'center',
+      marginBottom: hp(1),
+    },
+    conversionRate: {
+      fontSize: wp(4),
+      fontFamily: 'Quicksand-Medium',
+      color: '#000',
+      textAlign: 'center',
+      marginBottom: hp(3),
+    },
+    videoContainer: {
+      width: '100%',
+      height: hp(25),
+      backgroundColor: '#264734',
+      borderRadius: wp(3),
+      marginBottom: hp(3),
+      overflow: 'hidden',
+      position: 'relative',
+    },
+    video: {
+      width: '100%',
+      height: '100%',
+    },
+    videoPlaceholder: {
+      width: '100%',
+      height: '100%',
+      justifyContent: 'center',
+      alignItems: 'center',
+      backgroundColor: '#264734',
+    },
+    progressBarContainer: {
+      position: 'absolute',
+      bottom: 0,
+      left: 0,
+      right: 0,
+      height: hp(0.5),
+      backgroundColor: '#fff',
+    },
+    progressBar: {
+      height: '100%',
+      backgroundColor: '#FF6B35',
+    },
+    pointsAvailable: {
+      fontSize: 18,
+      fontFamily: 'Poppins-Medium',
+      color: '#000',
+      textAlign: 'center',
+      marginBottom: hp(3),
+    },
+    watchAdButton: {
+      backgroundColor: '#264734',
+      borderRadius: wp(10),
+      justifyContent: 'center',
+      alignItems: 'center',
+      width: '100%',
+      height: hp(6),
+      marginBottom: hp(4),
+      shadowColor: '#000',
+      shadowOffset: { width: 0, height: 2 },
+      shadowOpacity: 0.1,
+      shadowRadius: 4,
+      elevation: 3,
+    },
+    watchAdButtonText: {
+      color: '#FFF',
+      fontSize: wp(4.5),
+      fontFamily: 'Poppins-Bold',
+    },
+    disclaimer: {
+      fontSize: wp(3.5),
+      fontFamily: 'Quicksand-Regular',
+      color: '#000',
+      textAlign: 'center',
+      lineHeight: hp(2),
+      paddingHorizontal: wp(5),
+    },
+  });
+
+export default styles; 

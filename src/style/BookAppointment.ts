@@ -13,6 +13,12 @@ const styles = (wp: any, hp: any) =>
       paddingHorizontal: wp(5),
       paddingTop: hp(4),
     },
+    backButton: {
+      top: hp(7),
+      left: wp(3),
+      width: wp(12),
+      height: wp(12),
+    },
     logo: {
       width: wp(32),
       height: hp(7),
@@ -43,7 +49,7 @@ const styles = (wp: any, hp: any) =>
     },
     role: {
       fontSize: wp(4),
-      fontFamily: 'Montserrat-Medium',
+      fontFamily: 'Montserrat-SemiBold',
       color: '#222',
       textAlign: 'center',
       marginBottom: hp(2),
@@ -57,6 +63,15 @@ const styles = (wp: any, hp: any) =>
       textAlign:'left'
       
     },
+    sectionTitleservice: {
+      fontSize: wp(4),
+      fontFamily: 'Poppins-Bold',
+      color: '#222',
+      marginTop: hp(0),
+      marginBottom: hp(1),
+      textAlign:'center'
+      
+    },
     serviceRow: {
       flexDirection: 'row',
       justifyContent: 'center',
@@ -66,8 +81,9 @@ const styles = (wp: any, hp: any) =>
     serviceButton: {
       backgroundColor: '#fff',
       borderRadius: wp(4),
-      padding: wp(4),
+      padding: wp(3),
       marginHorizontal: wp(2),
+      paddingVertical: hp(1),
       alignItems: 'center',
       borderWidth: 2,
       borderColor: '#E0E0E0',
@@ -101,32 +117,40 @@ const styles = (wp: any, hp: any) =>
     },
     customCalendarHeader: {
       backgroundColor: '#264734',
-      borderTopLeftRadius: wp(4),
-      borderTopRightRadius: wp(4),
-      paddingVertical: hp(2),
+      borderTopLeftRadius: 0,
+      borderTopRightRadius: 0,
+      paddingVertical: hp(1.5),
+      paddingBottom: wp(1),
       paddingHorizontal: wp(4),
     },
     calendarHeaderYear: {
       color: '#BFC9C6',
-      fontSize: wp(4),
+      fontSize: 14,
       fontFamily: 'Montserrat-Medium',
     },
     calendarHeaderDate: {
       color: '#fff',
-      fontSize: wp(5),
+      fontSize: 14,
       fontFamily: 'Poppins-Bold',
       marginTop: hp(0.5),
     },
     calendarNav: {
       fontSize: wp(6),
       color: '#264734',
+      flexDirection:'row',
+      justifyContent:'space-between',
+      alignItems:'center',
       paddingHorizontal: wp(2),
+      backgroundColor: '#f5f5f5',
+      paddingVertical: hp(1),
     },
     calendarGrid: {
       flexDirection: 'row',
       flexWrap: 'wrap',
       justifyContent: 'space-between',
       marginTop: hp(1),
+      backgroundColor: '#fff',
+      paddingBottom: wp(-10),
     },
     calendarDay: {
       width: '13%',
@@ -137,7 +161,8 @@ const styles = (wp: any, hp: any) =>
       marginBottom: hp(1),
     },
     calendarDaySelected: {
-      backgroundColor: '#264734',
+      backgroundColor: '#fff',
+      borderRadius: wp(10),
     },
     calendarDayText: {
       fontSize: wp(3.7),
@@ -145,7 +170,7 @@ const styles = (wp: any, hp: any) =>
       fontFamily: 'Montserrat-Medium',
     },
     calendarDayTextSelected: {
-      color: '#fff',
+      color: '#000',
       fontFamily: 'Montserrat-Bold',
     },
     dropdown: {
@@ -170,7 +195,7 @@ const styles = (wp: any, hp: any) =>
       justifyContent: 'center',
       alignItems: 'center',
       width: '85%',
-      height: hp(6.5),
+      height: hp(5.5),
       marginTop: hp(2),
       marginBottom: hp(2),
 

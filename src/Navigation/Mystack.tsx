@@ -17,6 +17,7 @@ import MyJourneyScreen from '../Screens/Home/MyJourneyScreen';
 import IncomingCallScreen from '../Screens/call/IncomingCallScreen';
 import VideoCallScreen from '../Screens/call/VideoCallScreen';
 import Coaching from '../Screens/Coaching/Coaching';
+import OnboardingJourneyScreen from '../Screens/Coaching/OnboardingJourneyScreen';
 import DoctorProfileScreen from '../Screens/Doctor/DoctorProfileScreen';
 import BookAppointment from '../Screens/Doctor/BookAppointment';
 import QuestionnaireScreen from '../Screens/Coaching/QuestionnaireScreen';
@@ -24,6 +25,10 @@ import SubscriptionScreen from '../Screens/Coaching/SubscriptionScreen';
 import MentorshipApplyScreen from '../Screens/Coaching/MentorshipApplyScreen';
 import MentorshipConnectingScreen from '../Screens/Coaching/MentorshipConnectingScreen';
 import DoctorListScreen from '../Screens/Coaching/DoctorListScreen';
+import PaymentsMainScreen from '../Screens/payments/PaymentsMainScreen';
+import PaymentDetailsScreen from '../Screens/payments/PaymentDetailsScreen';
+import AddCardScreen from '../Screens/payments/AddCardScreen';
+import EarnPointsScreen from '../Screens/payments/EarnPointsScreen';
 
 
 export type RootStackParamList = {
@@ -47,18 +52,23 @@ export type RootStackParamList = {
   DoctorProfileScreen: undefined;
   BookAppointment: undefined;
   Coaching: undefined;
+  OnboardingJourney: undefined;
   Questionnaire: undefined;
   Subscription: undefined;
   MentorshipApply: undefined;
   MentorshipConnecting: undefined;
   DoctorList: undefined;
+  PaymentsMainScreen: undefined;
+  PaymentDetailsScreen: undefined;
+  AddCardScreen: undefined;
+  EarnPointsScreen: undefined;
 };
 
 const Stack = createStackNavigator<RootStackParamList>();
 
 const MyStack: React.FC = () => {
   return (
-    <Stack.Navigator screenOptions={{ headerShown: false }} >
+    <Stack.Navigator screenOptions={{ headerShown: false }} initialRouteName='HomeScreen' >
       <Stack.Screen name="splashScreen" component={SplashScreen} />
       <Stack.Screen name="OnboardingScreen" component={OnboardingScreen} />
       <Stack.Screen name="LoginScreen" component={LoginScreen} />
@@ -84,11 +94,16 @@ const MyStack: React.FC = () => {
       <Stack.Screen name="IncomingCallScreen" component={IncomingCallScreen} />
       <Stack.Screen name="VideoCallScreen" component={VideoCallScreen} />
       <Stack.Screen name="Coaching" component={Coaching} /> 
+      <Stack.Screen name="OnboardingJourney" component={OnboardingJourneyScreen} />
       <Stack.Screen name="Questionnaire" component={QuestionnaireScreen} />
       <Stack.Screen name="Subscription" component={SubscriptionScreen} />
       <Stack.Screen name="MentorshipApply" component={MentorshipApplyScreen} />
       <Stack.Screen name="MentorshipConnecting" component={MentorshipConnectingScreen} />
       <Stack.Screen name="DoctorList" component={DoctorListScreen} />
+      <Stack.Screen name="PaymentsMainScreen" component={PaymentsMainScreen} />
+      <Stack.Screen name="PaymentDetailsScreen" component={PaymentDetailsScreen} />
+      <Stack.Screen name="AddCardScreen" component={AddCardScreen} />
+      <Stack.Screen name="EarnPointsScreen" component={EarnPointsScreen} />
     </Stack.Navigator>
   );
 };

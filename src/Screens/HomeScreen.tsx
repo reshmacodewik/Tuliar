@@ -20,6 +20,7 @@ import {
 } from 'react-native-popup-menu';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Feather from 'react-native-vector-icons/Feather';
+import LinearGradient from 'react-native-linear-gradient';
 const feedPosts = [
   {
     id: '1',
@@ -145,36 +146,55 @@ const HomeScreen = () => {
             </Menu>
           </View>
         </View>
-        <View style={styles(wp, hp).featureRow}>
-          <TouchableOpacity style={styles(wp, hp).featureBtn}>
+        <View style={styles(wp, hp).servicesContainer}>
+          <TouchableOpacity style={styles(wp, hp).serviceCard}>
             <Image
-              source={require('../../assets/image/message.png')}
-              style={styles(wp, hp).featureIcon}
+              source={require('../../assets/image/chatexperts.png')}
+              style={styles(wp, hp).serviceImage}
             />
-            <Text style={styles(wp, hp).featureText}>
-              Chat with your experts
-            </Text>
+             <LinearGradient
+              colors={['rgba(38, 71, 52, 0)', '#264734']}
+              start={{ x: 0.5, y: 0 }}
+              end={{ x: 0.5, y: 1 }}
+              style={styles(wp, hp).serviceOverlay}
+            >
+              <Text style={styles(wp, hp).serviceText}>Chat with experts</Text>
+           </LinearGradient>
           </TouchableOpacity>
-          <TouchableOpacity style={styles(wp, hp).featureBtn}>
+
+          <TouchableOpacity style={styles(wp, hp).serviceCard}>
             <Image
-              source={require('../../assets/image/users.png')}
-              style={styles(wp, hp).featureIcon}
+              source={require('../../assets/image/groupsession.png')}
+              style={styles(wp, hp).serviceImage}
             />
-            <Text style={styles(wp, hp).featureText}>Group Sessions</Text>
+            <LinearGradient
+              colors={['rgba(38, 71, 52, 0)', '#264734']}
+              start={{ x: 0.5, y: 0 }}
+              end={{ x: 0.5, y: 1 }}
+              style={styles(wp, hp).serviceOverlay}
+            >
+              <Text style={styles(wp, hp).serviceText}>Group Sessions</Text>
+            </LinearGradient>
           </TouchableOpacity>
-          <TouchableOpacity style={styles(wp, hp).featureBtn} onPress={() => navigation.navigate('Coaching')}>
+
+          <TouchableOpacity style={styles(wp, hp).serviceCard}>
             <Image
-              source={require('../../assets/image/video.png')}
-              style={styles(wp, hp).featureIcon}
+              source={require('../../assets/image/groupsession.png')}
+              style={styles(wp, hp).serviceImage}
             />
-            <Text style={styles(wp, hp).featureText}>Coaching</Text>
+            <View style={styles(wp, hp).serviceOverlay}>
+              <Text style={styles(wp, hp).serviceText}>Group Sessions</Text>
+            </View>
           </TouchableOpacity>
-          <TouchableOpacity style={styles(wp, hp).featureBtn}>
+
+          <TouchableOpacity style={styles(wp, hp).serviceCard}>
             <Image
-              source={require('../../assets/image/feather.png')}
-              style={styles(wp, hp).featureIcon}
+              source={require('../../assets/image/groupsession.png')}
+              style={styles(wp, hp).serviceImage}
             />
-            <Text style={styles(wp, hp).featureText}>Therapy</Text>
+            <View style={styles(wp, hp).serviceOverlay}>
+              <Text style={styles(wp, hp).serviceText}>Therapy</Text>
+            </View>
           </TouchableOpacity>
         </View>
         <View style={styles(wp, hp).innercontainer}>
@@ -190,19 +210,42 @@ const HomeScreen = () => {
             </View>
 
             <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-              {[1, 2, 3].map((_, i) => (
+              {[
+                {
+                  image: require('../../assets/image/image.png'),
+                  title: 'Therapy',
+                  text: 'Next Session with Dr. on April 25 at 10:00 AM',
+                  buttonText: 'View Details',
+                },
+                {
+                  image: require('../../assets/image/journeycard2.png'),
+                  title: 'Complete your today’s  goal',
+                  text: 'Next Session with Dr.  on April 25 at 10:00 AM',
+                  buttonText: 'View my goals',
+                },
+                {
+                  image: require('../../assets/image/journeycard1.png'),
+                  title: 'Weekly Report',
+                  text: 'Next Session with Dr.  on April 25 at 10:00 AM',
+                  buttonText: 'View Report',
+                },
+              ].map((item, i) => (
                 <View key={i} style={styles(wp, hp).journeyCard}>
                   <Image
-                    source={require('../../assets/image/image.png')}
+                    source={item.image}
                     style={styles(wp, hp).journeyImg}
                   />
-                  <Text style={styles(wp, hp).journeyTitle}>Therapy</Text>
-                  <Text style={styles(wp, hp).journeyText}>
-                    Next Session with Dr. on April 25 at 10:00 AM
-                  </Text>
-                  <TouchableOpacity style={styles(wp, hp).detailsBtn}>
-                    <Text style={styles(wp, hp).detailsText}>See Details</Text>
-                  </TouchableOpacity>
+                  <View style={styles(wp, hp).journeyContent}>
+                    <Text style={styles(wp, hp).journeyTitle}>
+                      {item.title}
+                    </Text>
+                    <Text style={styles(wp, hp).journeyText}>{item.text}</Text>
+                    <TouchableOpacity style={styles(wp, hp).detailsBtn}>
+                      <Text style={styles(wp, hp).detailsText}>
+                        {item.buttonText}
+                      </Text>
+                    </TouchableOpacity>
+                  </View>
                 </View>
               ))}
             </ScrollView>
@@ -245,7 +288,7 @@ const HomeScreen = () => {
                                 ? require('../../assets/icon/badge.png')
                                 : require('../../assets/icon/free.png')
                             }
-                            style={{ width: wp(5), height: wp(5) }}
+                            style={{ width: wp(4), height: wp(4) }}
                             resizeMode="contain"
                           />
                         </View>
@@ -253,7 +296,7 @@ const HomeScreen = () => {
                       <Text style={styles(wp, hp).eventTitle}>
                         Upcoming Wellness & Mental heath workshop
                       </Text>
-                      <Text style={styles(wp, hp).eventDesc}  numberOfLines={4}>
+                      <Text style={styles(wp, hp).eventDesc} numberOfLines={4}>
                         Lorem ipsum dolor sit amet consectetur. Molestie purus
                         eu volutpat praesent nec quam et hac. Duis et turpis
                         nisl arcu amet parturient sodales lorem nunc.

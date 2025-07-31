@@ -79,7 +79,7 @@ const MentorshipApplyScreen = () => {
 
           <View style={s.loginRow}>
             <Text style={s.loginText}>Already have a accoun? </Text>
-            <Text style={s.loginLink}>Log In</Text>
+            <Text style={s.loginLink}onPress={() => navigation.navigate('LoginScreen')}>Log In</Text>
           </View>
         </View>
       </ScrollView>

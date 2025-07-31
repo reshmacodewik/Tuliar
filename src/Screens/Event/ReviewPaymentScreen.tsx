@@ -223,7 +223,7 @@ const ReviewPaymentScreen = () => {
                 shadowOpacity: 0.1,
                 shadowRadius: 2,
               }}
-            onPress={() => navigation.navigate('PaymentConfirmationScreen')}>
+            onPress={() => navigation.navigate('PaymentsMainScreen')}>
               <Text
                 style={{
                   color: '#fff',

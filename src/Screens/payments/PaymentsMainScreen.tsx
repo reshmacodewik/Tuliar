@@ -1,16 +1,19 @@
+/* eslint-disable react-native/no-inline-styles */
 import React from 'react';
 import { View, Text, Image, ImageBackground, Pressable, ScrollView } from 'react-native';
-import { useResponsive } from '../Responsive/useResponsive';
+import { useResponsive } from '../../Responsive/useResponsive';
+import { useNavigation, NavigationProp } from '@react-navigation/native';
 import styles from './paymentsMainStyles';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 const PaymentsMainScreen = () => {
   const { wp, hp } = useResponsive();
   const s = styles(wp, hp);
+  const navigation = useNavigation<NavigationProp<any>>();
 
   return (
     <ImageBackground
-      source={require('../../assets/image/background.png')}
+      source={require('../../../assets/image/background.png')}
       style={s.background}
       resizeMode="cover"
     >
@@ -20,10 +23,12 @@ const PaymentsMainScreen = () => {
             <Pressable onPress={() => {}} style={{ marginRight: wp(2) }}>
               <MaterialIcons name="keyboard-arrow-left" size={32} color="black" />
             </Pressable>
+            <View style={s.headertext}>
             <Text style={s.header}>Payments</Text>
             <Pressable onPress={() => {}}>
               <MaterialIcons name="tune" size={28} color="black" />
             </Pressable>
+            </View>
           </View>
           <Text style={s.subheader}>Real Connection. Real Support. Real Growth.</Text>
 
@@ -33,13 +38,13 @@ const PaymentsMainScreen = () => {
             <Text style={s.cardSubtitle}>Your Balance</Text>
             <Text style={s.balance}>KES 2,350</Text>
             <View style={s.paymentLogosRow}>
-              <Image source={require('../../assets/image/visa.png')} style={s.paymentLogo} />
-              <Image source={require('../../assets/image/mpesa.png')} style={s.paymentLogo} />
+              <Image source={require('../../../assets/image/visa.png')} style={s.paymentLogo} />
+              <Image source={require('../../../assets/image/mpesa.png')} style={s.paymentLogo} />
             </View>
             <View style={s.paymentLogosRow}>
-              <Image source={require('../../assets/image/paypal.png')} style={s.paymentLogo} />
+              <Image source={require('../../../assets/image/paypal.png')} style={s.paymentLogo} />
             </View>
-            <Pressable style={s.actionButton} onPress={() => {}}>
+            <Pressable style={s.actionButton} onPress={() => navigation.navigate('PaymentDetailsScreen')}>
               <Text style={s.actionButtonText}>Top Up</Text>
             </Pressable>
           </View>
