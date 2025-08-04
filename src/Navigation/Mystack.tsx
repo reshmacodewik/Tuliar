@@ -8,7 +8,7 @@ import VerificationCode from '../Screens/Auth/VerificationCode';
 import SuccessScreen from '../Screens/Auth/SuccessScreen';
 import BottomTabs from './MyTab';
 import ExploreScreen from '../Screens/ExploreScreen';
-import JournalScreen from '../Screens/JournalScreen';
+
 import SearchScreen from '../Screens/SearchScreen';
 import EventDetailsScreen from '../Screens/Event/EventDetailsScreen';
 import ReviewPaymentScreen from '../Screens/Event/ReviewPaymentScreen';
@@ -29,6 +29,11 @@ import PaymentsMainScreen from '../Screens/payments/PaymentsMainScreen';
 import PaymentDetailsScreen from '../Screens/payments/PaymentDetailsScreen';
 import AddCardScreen from '../Screens/payments/AddCardScreen';
 import EarnPointsScreen from '../Screens/payments/EarnPointsScreen';
+import { ChatWithExpertsScreen, PeerChatScreen ,ChatConfirmationScreen } from '../Screens/ChatWithExperts';
+import AIPeerChatScreen from '../Screens/ChatWithExperts/AIPeerChatScreen';
+import PeerChat from '../Screens/ChatWithExperts/PeerChat';
+import GroupSessionsScreen from '../Screens/GroupSessions';
+import JournalScreen from '../Screens/Journal/JournalScreen';
 
 
 
@@ -64,6 +69,12 @@ export type RootStackParamList = {
   AddCardScreen: undefined;
   EarnPointsScreen: undefined;
   OnboardingJourneyScreen: undefined;
+  ChatWithExpertsScreen: undefined;
+  PeerChatScreen: undefined;
+  ChatConfirmationScreen: undefined;
+  AIPeerChatScreen: undefined;
+  PeerChat: undefined;
+  GroupSessionsScreen: undefined;
 };
 
 const Stack = createStackNavigator<RootStackParamList>();
@@ -107,6 +118,12 @@ const MyStack: React.FC = () => {
       <Stack.Screen name="AddCardScreen" component={AddCardScreen} />
       <Stack.Screen name="EarnPointsScreen" component={EarnPointsScreen} />
       <Stack.Screen name="OnboardingJourneyScreen" component={OnboardingJourneyScreen} />
+      <Stack.Screen name="ChatWithExpertsScreen" component={ChatWithExpertsScreen} />
+      <Stack.Screen name="PeerChatScreen" component={PeerChatScreen} />
+      <Stack.Screen name="AIPeerChatScreen" component={AIPeerChatScreen} />
+      <Stack.Screen name="ChatConfirmationScreen" component={ChatConfirmationScreen} />
+      <Stack.Screen name="PeerChat" component={PeerChat} />
+      <Stack.Screen name="GroupSessionsScreen" component={GroupSessionsScreen} />
     </Stack.Navigator>
   );
 };

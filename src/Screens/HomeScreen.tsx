@@ -179,12 +179,12 @@ const HomeScreen = () => {
                               onPress={() => {
                 console.log('Card pressed:', item.title);
                 if (item.title === 'Coaching') {
-                  console.log('Navigating to Coaching screen...');
+                 
                   navigation.navigate('Coaching');
                 } else if (item.title === 'Chat with experts') {
-                  console.log('Chat with experts - screen not implemented yet');
+                  navigation.navigate('ChatWithExpertsScreen');
                 } else if (item.title === 'Group Sessions') {
-                  console.log('Group Sessions - screen not implemented yet');
+                  navigation.navigate('GroupSessionsScreen');
                 } else if (item.title === 'Therapy') {
                   console.log('Therapy - screen not implemented yet');
                 }

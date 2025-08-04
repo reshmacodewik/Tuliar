@@ -12,7 +12,7 @@ import TalkMoreModal from '../components/TalkMoreModal';
 // Import your screens
 import HomeScreen from '../Screens/HomeScreen';
 import ExploreScreen from '../Screens/ExploreScreen';
-import JournalScreen from '../Screens/JournalScreen';
+import JournalScreen from '../Screens/Journal/JournalScreen';
 import EventScreen from '../Screens/Event/Eventscreen';
 
 const Tab = createBottomTabNavigator();
