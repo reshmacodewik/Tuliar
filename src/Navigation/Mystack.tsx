@@ -34,6 +34,16 @@ import AIPeerChatScreen from '../Screens/ChatWithExperts/AIPeerChatScreen';
 import PeerChat from '../Screens/ChatWithExperts/PeerChat';
 import GroupSessionsScreen from '../Screens/GroupSessions';
 import JournalScreen from '../Screens/Journal/JournalScreen';
+import GoalsScreen from '../Screens/Goals/GoalsScreen';
+import GoalDetailsScreen from '../Screens/Goals/GoalDetailsScreen';
+import CreateStepsScreen from '../Screens/Goals/CreateStepsScreen';
+import GoalsDashboardScreen from '../Screens/Goals/GoalsDashboardScreen';
+import TherapyScreen from '../Screens/Therapy/TherapyScreen';
+import FindTherapistScreen from '../Screens/Therapy/FindTherapistScreen';
+import TherapyReasonsScreen from '../Screens/Therapy/TherapyReasonsScreen';
+import UserSurveyScreen from '../Screens/Therapy/UserSurveyScreen';
+import TherapistPreferenceScreen from '../Screens/Therapy/TherapistPreferenceScreen';
+import TherapistMatchingScreen from '../Screens/Therapy/TherapistMatchingScreen';
 
 
 
@@ -75,6 +85,16 @@ export type RootStackParamList = {
   AIPeerChatScreen: undefined;
   PeerChat: undefined;
   GroupSessionsScreen: undefined;
+  GoalsScreen: undefined;
+  GoalDetailsScreen: undefined;
+  CreateSteps: undefined;
+  GoalsDashboard: undefined;
+  TherapyScreen: undefined;
+  FindTherapist: undefined;
+  TherapyReasons: undefined;
+  UserSurvey: undefined;
+  TherapistPreference: undefined;
+  TherapistMatching: undefined;
 };
 
 const Stack = createStackNavigator<RootStackParamList>();
@@ -124,6 +144,16 @@ const MyStack: React.FC = () => {
       <Stack.Screen name="ChatConfirmationScreen" component={ChatConfirmationScreen} />
       <Stack.Screen name="PeerChat" component={PeerChat} />
       <Stack.Screen name="GroupSessionsScreen" component={GroupSessionsScreen} />
+      <Stack.Screen name="GoalsScreen" component={GoalsScreen} />
+      <Stack.Screen name="GoalDetailsScreen" component={GoalDetailsScreen} />
+      <Stack.Screen name="CreateSteps" component={CreateStepsScreen} />
+      <Stack.Screen name="GoalsDashboard" component={GoalsDashboardScreen} />
+      <Stack.Screen name="TherapyScreen" component={TherapyScreen} />
+      <Stack.Screen name="FindTherapist" component={FindTherapistScreen} />
+      <Stack.Screen name="TherapyReasons" component={TherapyReasonsScreen} />
+      <Stack.Screen name="UserSurvey" component={UserSurveyScreen} />
+      <Stack.Screen name="TherapistPreference" component={TherapistPreferenceScreen} />
+      <Stack.Screen name="TherapistMatching" component={TherapistMatchingScreen} />
     </Stack.Navigator>
   );
 };

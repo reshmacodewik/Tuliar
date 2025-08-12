@@ -55,7 +55,7 @@ const JournalScreen = () => {
   };
 
   const handleSetNewGoal = () => {
-    console.log('Set New Goal pressed');
+    navigation.navigate('GoalsScreen');
   };
   const getDaysInMonth = (date: Date) => {
     const year = date.getFullYear();
@@ -311,7 +311,10 @@ const JournalScreen = () => {
                   </Text>
                 </View>
               </View>
-              <TouchableOpacity style={styles(wp, hp).cardButtonGoal}>
+              <TouchableOpacity 
+                style={styles(wp, hp).cardButtonGoal}
+                onPress={() => navigation.navigate('GoalsScreen')}
+              >
                 <Text style={styles(wp, hp).buttonText}>Set Goal</Text>
               </TouchableOpacity>
             </View>

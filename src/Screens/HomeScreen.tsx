@@ -186,7 +186,7 @@ const HomeScreen = () => {
                 } else if (item.title === 'Group Sessions') {
                   navigation.navigate('GroupSessionsScreen');
                 } else if (item.title === 'Therapy') {
-                  console.log('Therapy - screen not implemented yet');
+                  navigation.navigate('TherapyScreen');
                 }
               }}
               >
