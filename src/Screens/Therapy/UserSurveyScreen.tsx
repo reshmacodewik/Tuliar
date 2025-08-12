@@ -172,9 +172,9 @@ const UserSurveyScreen = () => {
                     <Text style={styles(wp, hp).optionText}>{option}</Text>
                   </TouchableOpacity>
                 ))}
-                <View style={styles(wp, hp).ratingNumbers}>
+                {/* <View style={styles(wp, hp).ratingNumbers}>
                 <Text style={styles(wp, hp).ratingText}>1 2 3 5</Text>
-              </View>
+              </View> */}
             </View>
 
             {/* Question 4: Support Network */}
