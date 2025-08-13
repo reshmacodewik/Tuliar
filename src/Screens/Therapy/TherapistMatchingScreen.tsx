@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   View,
   Text,
@@ -6,6 +6,8 @@ import {
   ImageBackground,
   StatusBar,
   Image,
+  Modal,
+  ScrollView,
 } from 'react-native';
 import { useResponsive } from 'react-native-responsive-hook';
 import styles from './therapistMatchingStyles';
@@ -16,16 +18,128 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 const TherapistMatchingScreen = () => {
   const { wp, hp } = useResponsive();
   const navigation = useNavigation<NavigationProp<any>>();
+  const [showPopup, setShowPopup] = useState(false);
 
   const handleBackPress = () => {
     navigation.goBack();
   };
 
   const handleLearnMore = () => {
-    console.log('Learn How Matching works pressed');
-    // Navigate to matching explanation screen
-    // navigation.navigate('MatchingExplanation');
+    setShowPopup(true);
   };
+
+  const handleClosePopup = () => {
+    setShowPopup(false);
+  };
+
+  const MatchingExplanationPopup = () => (
+    <Modal
+      visible={showPopup}
+      transparent={true}
+      animationType="fade"
+      onRequestClose={handleClosePopup}
+    >
+       
+      <View style={styles(wp, hp).modalOverlay}>
+      <ScrollView 
+            style={styles(wp, hp).modalScrollView}
+            showsVerticalScrollIndicator={false}
+          >
+        <View style={styles(wp, hp).modalContainer}>
+          {/* Header */}
+          <View style={styles(wp, hp).modalHeader}>
+            <View style={styles(wp, hp).modalLogoContainer}>
+              <Image
+                source={require('../../../assets/image/logo.png')}
+                style={styles(wp, hp).modalLogo}
+              />
+            </View>
+            <TouchableOpacity
+              onPress={handleClosePopup}
+              style={styles(wp, hp).closeButton}
+            >
+              <MaterialIcons name="close" size={wp(6)} color="#000" />
+            </TouchableOpacity>
+          </View>
+
+          {/* Title */}
+          <View style={styles(wp, hp).modalTitleContainer}>
+            <Text style={styles(wp, hp).modalTitle}>
+              How We Match You To The Right Therapist
+            </Text>
+          </View>
+
+          {/* Steps */}
+        
+            {/* Step 1 */}
+            <View style={styles(wp, hp).stepCard}>
+              <View style={styles(wp, hp).stepIconContainer}>
+                <View style={styles(wp, hp).stepIcon}>
+                  <Ionicons name="calendar" size={wp(5)} color="#22c55e" />
+                 
+                </View>
+              </View>
+              <View style={styles(wp, hp).stepTextContainer}>
+                <Text style={styles(wp, hp).stepTitle}>We Learn About You</Text>
+                <Text style={styles(wp, hp).stepDescription}>
+                  Your responses to our questionnaire help us understand your needs, and preferences.
+                </Text>
+              </View>
+            </View>
+
+            {/* Step 2 */}
+            <View style={styles(wp, hp).stepCard}>
+              <View style={styles(wp, hp).stepIconContainer}>
+                <View style={styles(wp, hp).stepIcon}>
+                  <Ionicons name="people" size={wp(5)} color="#22c55e" />
+                  
+                </View>
+              </View>
+              <View style={styles(wp, hp).stepTextContainer}>
+                <Text style={styles(wp, hp).stepTitle}>We Scan Our Network of Therapists</Text>
+                <Text style={styles(wp, hp).stepDescription}>
+                  We match you with a therapist who fits your preferences for gender, age, language and therapy style.
+                </Text>
+              </View>
+            </View>
+
+            {/* Step 3 */}
+            <View style={styles(wp, hp).stepCard}>
+              <View style={styles(wp, hp).stepIconContainer}>
+                <View style={styles(wp, hp).stepIcon}>
+                  <Ionicons name="leaf" size={wp(5)} color="#22c55e" />
+                </View>
+              </View>
+              <View style={styles(wp, hp).stepTextContainer}>
+                <Text style={styles(wp, hp).stepTitle}>We Find Your Best Match</Text>
+                <Text style={styles(wp, hp).stepDescription}>
+                  We match you with a therapist who fits your preferences for gender, age, language and therapy style.
+                </Text>
+              </View>
+            </View>
+
+            {/* Step 4 */}
+            <View style={styles(wp, hp).stepCard}>
+              <View style={styles(wp, hp).stepIconContainer}>
+                <View style={styles(wp, hp).stepIcon}>
+                  <Ionicons name="calendar" size={wp(5)} color="#22c55e" />
+                  
+                </View>
+              </View>
+              <View style={styles(wp, hp).stepTextContainer}>
+                <Text style={styles(wp, hp).stepTitle}>You Book and Connect</Text>
+                <Text style={styles(wp, hp).stepDescription}>
+                  You can review their profile, book your first session, and start chatting directly.
+                </Text>
+              </View>
+            </View>
+       
+        </View>
+        </ScrollView>
+      </View>
+     
+    </Modal>
+  );
 
   return (
     <ImageBackground
@@ -92,6 +206,9 @@ const TherapistMatchingScreen = () => {
           </TouchableOpacity>
         </View>
       </View>
+
+      {/* Matching Explanation Popup */}
+      <MatchingExplanationPopup />
     </ImageBackground>
   );
 };
