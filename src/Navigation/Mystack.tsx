@@ -44,6 +44,13 @@ import TherapyReasonsScreen from '../Screens/Therapy/TherapyReasonsScreen';
 import UserSurveyScreen from '../Screens/Therapy/UserSurveyScreen';
 import TherapistPreferenceScreen from '../Screens/Therapy/TherapistPreferenceScreen';
 import TherapistMatchingScreen from '../Screens/Therapy/TherapistMatchingScreen';
+import MessagesScreen from '../Screens/menu/MessagesScreen';
+import ChatScreen from '../Screens/menu/ChatScreen';
+import SettingsScreen from '../Screens/menu/SettingsScreen';
+import NotificationsScreen from '../Screens/menu/NotificationsScreen';
+import ChangePasswordScreen from '../Screens/menu/ChangePasswordScreen';
+
+
 
 
 
@@ -95,6 +102,13 @@ export type RootStackParamList = {
   UserSurvey: undefined;
   TherapistPreference: undefined;
   TherapistMatching: undefined;
+  MessagesScreen:undefined;
+  ChatScreen: undefined;
+  SettingsScreen: undefined;
+  NotificationsScreen: undefined;
+  ChangePasswordScreen: undefined;
+
+
 };
 
 const Stack = createStackNavigator<RootStackParamList>();
@@ -154,6 +168,11 @@ const MyStack: React.FC = () => {
       <Stack.Screen name="UserSurvey" component={UserSurveyScreen} />
       <Stack.Screen name="TherapistPreference" component={TherapistPreferenceScreen} />
       <Stack.Screen name="TherapistMatching" component={TherapistMatchingScreen} />
+      <Stack.Screen name="MessagesScreen" component={MessagesScreen}/>
+      <Stack.Screen name="ChatScreen" component={ChatScreen} />
+      <Stack.Screen name="SettingsScreen" component={SettingsScreen} />
+      <Stack.Screen name="NotificationsScreen" component={NotificationsScreen} />
+      <Stack.Screen name="ChangePasswordScreen" component={ChangePasswordScreen} />
     </Stack.Navigator>
   );
 };

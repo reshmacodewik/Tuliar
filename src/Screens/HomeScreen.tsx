@@ -61,20 +61,39 @@ const HomeScreen = () => {
   const { wp, hp } = useResponsive();
   const navigation = useNavigation<NavigationProp<any>>();
 
-  const handleMenuSelect = (value: string) => {
-    if (value === 'profile') {
+const handleMenuSelect = (raw: string) => {
+  const value = raw.trim().toLowerCase();
+
+  switch (value) {
+    case 'profile':
       navigation.navigate('ProfileScreen');
-    } else if (value === 'message') {
-      navigation.navigate('MessageScreen');
-    } else if (value === 'settings') {
+      break;
+    case 'message':
+      navigation.navigate('MessagesScreen');
+      break;
+    case 'settings':
       navigation.navigate('SettingsScreen');
-    } else if (value === 'payments') {
+      break;
+    case 'my wallet':
       navigation.navigate('PaymentsScreen');
-    } else if (value === 'logout') {
+      break;
+    case 'calendar':
+      navigation.navigate('CalendarScreen');
+      break;
+    case 'help':
+      navigation.navigate('HelpScreen');
+      break;
+    case 'logout':
       console.log('Logging out...');
-    }
-    handleMenuSelect(value);
-  };
+      // await logout(); // if you have one
+      break;
+    default:
+      console.warn('Unknown menu value:', raw);
+  }
+
+  // DO NOT call handleMenuSelect again here!
+};
+
   return (
     <ImageBackground
       source={require('../../assets/image/background.png')}
@@ -122,18 +141,19 @@ const HomeScreen = () => {
                   },
                 }}
               >
-                <MenuOption value="profile">
+                {/* <MenuOption value="profile">
                   <View style={styles(wp, hp).menuItem}>
                     <Feather name="user" size={wp(5)} color="#000" />
                     <Text style={styles(wp, hp).menuText}>My Profile</Text>
                   </View>
-                </MenuOption>
+                </MenuOption> */}
                 <MenuOption value="message">
                   <View style={styles(wp, hp).menuItem}>
                     <Feather name="message-circle" size={wp(5)} color="#000" />
                     <Text style={styles(wp, hp).menuText}>Message</Text>
                   </View>
                 </MenuOption>
+            
 
                 <MenuOption value="settings">
                   <View style={styles(wp, hp).menuItem}>
@@ -145,10 +165,22 @@ const HomeScreen = () => {
                     <Text style={styles(wp, hp).menuText}>Settings</Text>
                   </View>
                 </MenuOption>
-                <MenuOption value="settings">
+                <MenuOption value="my wallet">
                   <View style={styles(wp, hp).menuItem}>
                     <MaterialIcons name="payment" size={wp(5)} color="#000" />
-                    <Text style={styles(wp, hp).menuText}>Payments</Text>
+                    <Text style={styles(wp, hp).menuText}>My Wallets</Text>
+                  </View>
+                </MenuOption>
+                <MenuOption value="calendar">
+                  <View style={styles(wp, hp).menuItem}>
+                    <Ionicons name="calendar-clear-outline" size={wp(5)} color="#000" />
+                    <Text style={styles(wp, hp).menuText}>Calendar</Text>
+                  </View>
+                </MenuOption>
+                <MenuOption value="help">
+                  <View style={styles(wp, hp).menuItem}>
+                    <Ionicons name="help-circle-outline" size={wp(5)} color="#000" />
+                    <Text style={styles(wp, hp).menuText}>Help</Text>
                   </View>
                 </MenuOption>
                 <MenuOption value="logout">
@@ -212,7 +244,7 @@ const HomeScreen = () => {
             <View style={styles(wp, hp).sectionHeader}>
               <Text style={styles(wp, hp).sectionTitle}>My Journey</Text>
               <TouchableOpacity
-                onPress={() => navigation.navigate('MyJourneyScreen')}
+                onPress={() => navigation.navigate('GoalsScreen')}
               >
                 <Ionicons name="chevron-forward" size={wp(7)} color="#000" />
               </TouchableOpacity>
@@ -236,7 +268,9 @@ const HomeScreen = () => {
                   title: 'Complete your today’s  goal',
                   text: 'Next Session with Dr.  on April 25 at 10:00 AM',
                   buttonText: 'View my goals',
+                  
                 },
+                
                 {
                   image: require('../../assets/image/journeycard1.png'),
                   title: 'Weekly Report',

@@ -1,9 +1,9 @@
-import { Dimensions } from 'react-native';
+// import { Dimensions } from 'react-native';
 import { StyleSheet } from 'react-native';
-const screenWidth = Dimensions.get('window').width;
-const isTablet = screenWidth > 768;
+// const screenWidth = Dimensions.get('window').width;
+// const isTablet = screenWidth > 768;
 
-const gridColumn = isTablet ? 4 : 4;
+// const gridColumn = isTablet ? 4 : 4;
 const styles = (wp: any, hp: any) =>
   StyleSheet.create({
     mainContainer: {

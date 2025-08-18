@@ -15,9 +15,10 @@ const styles = (wp: any, hp: any) => {
     header: {
       flexDirection: 'row',
       alignItems: 'center',
-      paddingHorizontal: wp(1),
+      paddingHorizontal: wp(0),
       paddingTop: hp(5),
       paddingBottom: hp(1),
+      marginLeft: wp(-2),
     },
     backButton: {
       width: wp(10),

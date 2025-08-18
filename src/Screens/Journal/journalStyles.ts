@@ -11,7 +11,7 @@ const styles = (wp: any, hp: any) => {
     mainContainer: {
       flex: 1,
       position: 'relative',
-      paddingTop: hp(3),
+      paddingTop: hp(1),
     },
     header: {
       flexDirection: 'row',
