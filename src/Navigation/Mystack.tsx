@@ -7,8 +7,6 @@ import SignUpScreen from '../Screens/Auth/SignUpScreen';
 import VerificationCode from '../Screens/Auth/VerificationCode';
 import SuccessScreen from '../Screens/Auth/SuccessScreen';
 import BottomTabs from './MyTab';
-import ExploreScreen from '../Screens/ExploreScreen';
-
 import SearchScreen from '../Screens/SearchScreen';
 import EventDetailsScreen from '../Screens/Event/EventDetailsScreen';
 import ReviewPaymentScreen from '../Screens/Event/ReviewPaymentScreen';
@@ -49,6 +47,13 @@ import ChatScreen from '../Screens/menu/ChatScreen';
 import SettingsScreen from '../Screens/menu/SettingsScreen';
 import NotificationsScreen from '../Screens/menu/NotificationsScreen';
 import ChangePasswordScreen from '../Screens/menu/ChangePasswordScreen';
+import HelpSupportScreen from '../Screens/menu/HelpSupportScreen';
+import EditProfileScreen from '../Screens/menu/EditProfileScreen';
+import CalendarScreen from '../Screens/menu/CalendarScreen';
+import SessionDetailScreen from '../Screens/menu/SessionDetailScreen';
+import HelpScreen from '../Screens/menu/HelpScreen';
+import ExploreScreen from '../Screens/Explore/ExploreScreen';
+
 
 
 
@@ -62,7 +67,6 @@ export type RootStackParamList = {
   VerificationCode: undefined;
   SuccessScreen: undefined;
   HomeScreen: undefined;
-  ExploreScreen: undefined;
   JournalScreen: undefined;
   SearchScreen: undefined;
   EventDetailsScreen: undefined;
@@ -107,6 +111,12 @@ export type RootStackParamList = {
   SettingsScreen: undefined;
   NotificationsScreen: undefined;
   ChangePasswordScreen: undefined;
+  HelpSupportScreen: undefined;
+  HelpScreen:undefined;
+  EditProfileScreen: undefined;
+  CalendarScreen: undefined;
+  SessionDetailScreen: undefined;
+ExploreScreen: undefined;
 
 
 };
@@ -123,7 +133,6 @@ const MyStack: React.FC = () => {
       <Stack.Screen name="VerificationCode" component={VerificationCode} />
       <Stack.Screen name="SuccessScreen" component={SuccessScreen} />
       <Stack.Screen name="HomeScreen" component={BottomTabs} />
-      <Stack.Screen name="ExploreScreen" component={ExploreScreen} />
       <Stack.Screen name="JournalScreen" component={JournalScreen} />
       <Stack.Screen name="SearchScreen" component={SearchScreen} />
       <Stack.Screen name="EventDetailsScreen" component={EventDetailsScreen} />
@@ -173,6 +182,12 @@ const MyStack: React.FC = () => {
       <Stack.Screen name="SettingsScreen" component={SettingsScreen} />
       <Stack.Screen name="NotificationsScreen" component={NotificationsScreen} />
       <Stack.Screen name="ChangePasswordScreen" component={ChangePasswordScreen} />
+      <Stack.Screen name="HelpSupportScreen" component={HelpSupportScreen} />
+      <Stack.Screen name="HelpScreen" component={HelpScreen}/>
+      <Stack.Screen name="EditProfileScreen" component={EditProfileScreen} />
+      <Stack.Screen name="CalendarScreen" component={CalendarScreen} />
+      <Stack.Screen name="SessionDetailScreen" component={SessionDetailScreen} />
+      <Stack.Screen name="ExploreScreen" component={ExploreScreen} />
     </Stack.Navigator>
   );
 };

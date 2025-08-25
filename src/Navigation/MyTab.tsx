@@ -11,9 +11,9 @@ import TalkMoreModal from '../components/TalkMoreModal';
 
 // Import your screens
 import HomeScreen from '../Screens/HomeScreen';
-import ExploreScreen from '../Screens/ExploreScreen';
 import JournalScreen from '../Screens/Journal/JournalScreen';
 import EventScreen from '../Screens/Event/Eventscreen';
+import ExploreScreen from '../Screens/Explore/ExploreScreen';
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator(); // ✅ Added Stack navigator

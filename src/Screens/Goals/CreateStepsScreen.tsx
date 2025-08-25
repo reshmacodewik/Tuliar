@@ -55,8 +55,14 @@ const CreateStepsScreen = () => {
       source={require('../../../assets/image/background.png')}
       style={styles(wp, hp).bgimg}
     >
-      <StatusBar barStyle="dark-content" backgroundColor="transparent" />
+       
+
       <View style={styles(wp, hp).mainContainer}>
+      <ScrollView
+          style={styles(wp, hp).container}
+          contentContainerStyle={styles(wp, hp).scrollContent}
+          showsVerticalScrollIndicator={false}
+        >
         {/* Header */}
         <View style={styles(wp, hp).header}>
           <TouchableOpacity
@@ -73,11 +79,7 @@ const CreateStepsScreen = () => {
           <View style={styles(wp, hp).headerSpacer} />
         </View>
 
-        <ScrollView
-          style={styles(wp, hp).container}
-          contentContainerStyle={styles(wp, hp).scrollContent}
-          showsVerticalScrollIndicator={false}
-        >
+     
           {/* 3D Illustration Placeholder */}
           <View style={styles(wp, hp).illustrationContainer}>
             <Image source={require('../../../assets/image/progresschart.png')} style={styles(wp, hp).illustration} />
@@ -150,10 +152,10 @@ const CreateStepsScreen = () => {
             <Text style={styles(wp, hp).saveButtonText}>Save</Text>
           </TouchableOpacity>
         </View>
-        </ScrollView>
+       
 
         {/* Save Button */}
-       
+        </ScrollView>
       </View>
     </ImageBackground>
   );

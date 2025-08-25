@@ -4,18 +4,19 @@ const styles = (wp: any, hp: any) =>
   StyleSheet.create({
     background: {
       flex: 1,
-      width: '100%',
-      height: '100%',
+      resizeMode: 'cover',
     },
     container: {
       flex: 1,
       paddingHorizontal: wp(5),
-      paddingTop: hp(4),
+    
     },
     headerRow: {
       flexDirection: 'row',
       alignItems: 'center',
       marginBottom: hp(3),
+      paddingTop: hp(2.5),
+      marginLeft: wp(-2),
     },
     backButton: {
       marginRight: wp(3),

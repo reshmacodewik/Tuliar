@@ -11,14 +11,24 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { NavigationContainer } from '@react-navigation/native';
 import MyStack from './src/Navigation/Mystack';
 import { MenuProvider } from 'react-native-popup-menu';
+import { ThemeProvider, useAppTheme } from './src/Theme/ThemeContext';
+
+const AppNavigation = () => {
+  const { navigationTheme } = useAppTheme();
+  return (
+    <NavigationContainer theme={navigationTheme}>
+      <MyStack />
+    </NavigationContainer>
+  );
+};
 
 const App = () => {
   return (
     <SafeAreaProvider>
       <MenuProvider>
-      <NavigationContainer>
-        <MyStack/>
-      </NavigationContainer>
+        <ThemeProvider>
+          <AppNavigation />
+        </ThemeProvider>
       </MenuProvider>
     </SafeAreaProvider>
   );

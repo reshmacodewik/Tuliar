@@ -4,7 +4,7 @@ export default (wp: (v: number) => number, hp: (v: number) => number) =>
   StyleSheet.create({
     bgimg: {
       flex: 1,
-      paddingTop: hp(6),
+      paddingTop: hp(3),
       paddingHorizontal: wp(5),
     },
                     

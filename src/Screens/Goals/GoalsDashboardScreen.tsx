@@ -53,8 +53,14 @@ const GoalsDashboardScreen = () => {
       source={require('../../../assets/image/background.png')}
       style={styles(wp, hp).bgimg}
     >
-      <StatusBar barStyle="dark-content" backgroundColor="transparent" />
+      
+
       <View style={styles(wp, hp).mainContainer}>
+      <ScrollView
+          style={styles(wp, hp).container}
+          contentContainerStyle={styles(wp, hp).scrollContent}
+          showsVerticalScrollIndicator={false}
+        >
         {/* Header */}
         <View style={styles(wp, hp).header}>
           <TouchableOpacity
@@ -71,11 +77,7 @@ const GoalsDashboardScreen = () => {
           <View style={styles(wp, hp).headerSpacer} />
         </View>
 
-        <ScrollView
-          style={styles(wp, hp).container}
-          contentContainerStyle={styles(wp, hp).scrollContent}
-          showsVerticalScrollIndicator={false}
-        >
+       
           {/* Goal Card */}
           <View style={styles(wp, hp).goalCard}>
             {/* Goal Title */}
