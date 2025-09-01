@@ -14,12 +14,12 @@ const SuccessScreen = () => {
 
   return (
     <ImageBackground
-      source={require('../../../assets/image/background.png')}
+      source={require('../../../assets/Image/background.png')}
       style={styles.bg}
     >
       <View style={styles.otpcontainer}>
         <Image
-          source={require('../../../assets/image/check.png')} // replace with your green checkmark
+          source={require('../../../assets/Image/check.png')} // replace with your green checkmark
           style={styles.successIcon}
         />
         <Text style={styles.title}>Success!</Text>
@@ -29,7 +29,7 @@ const SuccessScreen = () => {
 
         <TouchableOpacity
           style={styles.button}
-          onPress={() => navigation.navigate('HomeScreen')}
+          //onPress={() => navigation.navigate('LoginScreen')}
         >
           <Text style={styles.buttonText}>Let’s Begin</Text>
         </TouchableOpacity>
