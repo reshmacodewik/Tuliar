@@ -2,7 +2,6 @@ import React from 'react';
 import {
   View,
   Text,
-
   Image,
   TouchableOpacity,
   ImageBackground,
@@ -13,13 +12,10 @@ const SuccessScreen = () => {
   const navigation = useNavigation();
 
   return (
-    <ImageBackground
-      source={require('../../../assets/Image/background.png')}
-      style={styles.bg}
-    >
+    <ImageBackground source={require('../../')} style={styles.bg}>
       <View style={styles.otpcontainer}>
         <Image
-          source={require('../../../assets/Image/check.png')} // replace with your green checkmark
+          source={require('../../Theme/assets/Image/check.png')} // replace with your green checkmark
           style={styles.successIcon}
         />
         <Text style={styles.title}>Success!</Text>

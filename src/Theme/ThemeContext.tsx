@@ -1,5 +1,9 @@
 import React, { createContext, useContext, useMemo, useState } from 'react';
-import { DarkTheme as NavigationDarkTheme, DefaultTheme as NavigationLightTheme, Theme } from '@react-navigation/native';
+import {
+  DarkTheme as NavigationDarkTheme,
+  DefaultTheme as NavigationLightTheme,
+  Theme,
+} from '@react-navigation/native';
 
 type ThemeContextValue = {
   isDark: boolean;
@@ -9,7 +13,9 @@ type ThemeContextValue = {
 
 const ThemeContext = createContext<ThemeContextValue | undefined>(undefined);
 
-export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({
+  children,
+}) => {
   const [isDark, setIsDark] = useState(false);
 
   const navigationTheme = useMemo<Theme>(() => {
@@ -39,11 +45,17 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   }, [isDark]);
 
   const value = useMemo<ThemeContextValue>(
-    () => ({ isDark, toggleTheme: () => setIsDark(prev => !prev), navigationTheme }),
-    [isDark, navigationTheme]
+    () => ({
+      isDark,
+      toggleTheme: () => setIsDark(prev => !prev),
+      navigationTheme,
+    }),
+    [isDark, navigationTheme],
   );
 
-  return <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>;
+  return (
+    <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>
+  );
 };
 
 export const useAppTheme = (): ThemeContextValue => {
@@ -51,5 +63,3 @@ export const useAppTheme = (): ThemeContextValue => {
   if (!ctx) throw new Error('useAppTheme must be used within ThemeProvider');
   return ctx;
 };
-
-
