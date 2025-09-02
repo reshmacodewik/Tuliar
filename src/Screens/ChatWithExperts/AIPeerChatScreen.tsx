@@ -69,7 +69,7 @@ const AIPeerChatScreen: React.FC = () => {
     <View key={msg.id} style={msg.type === 'ai' ? styles.aiMessageContainer : styles.userMessageContainer}>
       {msg.type === 'ai' && (
         <Image 
-          source={require('../../../assets/image/doc2.png')} 
+          source={require('../../Theme/assets/image/doc2.png')} 
           style={styles.aiProfileImage} 
         />
       )}
@@ -121,7 +121,7 @@ const AIPeerChatScreen: React.FC = () => {
 
   return (
     <ImageBackground
-      source={require('../../../assets/image/background.png')}
+      source={require('../../Theme/assets/image/background.png')}
       style={{ flex: 1 }}
       resizeMode="cover"
     >
@@ -143,14 +143,14 @@ const AIPeerChatScreen: React.FC = () => {
           
           <View style={styles.headerCenter}>
             <Image 
-              source={require('../../../assets/image/ai1.png')} 
+              source={require('../../Theme/assets/image/ai1.png')} 
               style={styles.headerProfileImage} 
             />
             <Text style={styles.headerTitle}>AI</Text>
           </View>
           
           <Image 
-            source={require('../../../assets/image/aibot.png')} 
+            source={require('../../Theme/assets/image/aibot.png')} 
             style={styles.headerIcon} 
           />
         </View>
@@ -178,7 +178,7 @@ const AIPeerChatScreen: React.FC = () => {
             style={styles.sendButton}
             onPress={handleSendMessage}
           >
-           <Image source={require('../../../assets/icon/sendicon.png')} style={styles.sendButtonImage} />
+           <Image source={require('../../Theme/assets/icon/sendicon.png')} style={styles.sendButtonImage} />
           </TouchableOpacity>
         </View>
       </SafeAreaView>

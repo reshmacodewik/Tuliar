@@ -27,7 +27,7 @@ const MessagesScreen = () => {
         'Lorem ipsum dolor sit amet consectetur. Molestie purus eu volutpat praesent ne',
       timestamp: '09:25 AM',
       unreadCount: 1,
-      avatar: require('../../../assets/image/ellispe.png'),
+      avatar: require('../../Theme/assets/image/ellispe.png'),
     },
     {
       id: 2,
@@ -36,7 +36,7 @@ const MessagesScreen = () => {
         'Lorem ipsum dolor sit amet consectetur. Molestie purus eu volutpat praesent ne',
       timestamp: '09:25 AM',
       unreadCount: 0,
-      avatar: require('../../../assets/image/ellispe.png'),
+      avatar: require('../../Theme/assets/image/ellispe.png'),
     },
     {
       id: 3,
@@ -45,7 +45,7 @@ const MessagesScreen = () => {
         'Lorem ipsum dolor sit amet consectetur. Molestie purus eu volutpat praesent ne',
       timestamp: '09:25 AM',
       unreadCount: 1,
-      avatar: require('../../../assets/image/ellispe.png'),
+      avatar: require('../../Theme/assets/image/ellispe.png'),
     },
     {
       id: 4,
@@ -54,7 +54,7 @@ const MessagesScreen = () => {
         'Lorem ipsum dolor sit amet consectetur. Molestie purus eu volutpat praesent ne',
       timestamp: '09:25 AM',
       unreadCount: 0,
-      avatar: require('../../../assets/image/ellispe.png'),
+      avatar: require('../../Theme/assets/image/ellispe.png'),
     },
     {
       id: 5,
@@ -63,7 +63,7 @@ const MessagesScreen = () => {
         'Lorem ipsum dolor sit amet consectetur. Molestie purus eu volutpat praesent ne',
       timestamp: '09:25 AM',
       unreadCount: 1,
-      avatar: require('../../../assets/image/ellispe.png'),
+      avatar: require('../../Theme/assets/image/ellispe.png'),
     },
   ];
 
@@ -127,7 +127,7 @@ const MessagesScreen = () => {
 
   return (
     <ImageBackground
-      source={require('../../../assets/image/background.png')}
+      source={require('../../Theme/assets/image/background.png')}
       style={styles(wp, hp).bgimg}
     >
       <View style={themedStyles.container}>

@@ -59,7 +59,7 @@ const PeerChat: React.FC = () => {
     <View key={msg.id} style={msg.type === 'ai' ? styles.aiMessageContainer : styles.userMessageContainer}>
       {msg.type === 'ai' && (
         <Image 
-          source={require('../../../assets/image/doc2.png')} 
+          source={require('../../Theme/assets/image/doc2.png')} 
           style={styles.aiProfileImage} 
         />
       )}
@@ -109,7 +109,7 @@ const PeerChat: React.FC = () => {
 
   return (
     <ImageBackground
-      source={require('../../../assets/image/background.png')}
+      source={require('../../Theme/assets/image/background.png')}
       style={{ flex: 1 }}
       resizeMode="cover"
     >
@@ -131,7 +131,7 @@ const PeerChat: React.FC = () => {
           
           <View style={styles.headerCenter}>
             <Image 
-              source={require('../../../assets/image/doc2.png')} 
+              source={require('../../Theme/assets/image/doc2.png')} 
               style={styles.headerProfileImage} 
             />
             <Text style={styles.headerTitle}>Dr. John Smith</Text>
@@ -163,7 +163,7 @@ const PeerChat: React.FC = () => {
             style={styles.sendButton}
             onPress={handleSendMessage}
           >
-           <Image source={require('../../../assets/icon/sendicon.png')} style={styles.sendButtonImage} />
+           <Image source={require('../../Theme/assets/icon/sendicon.png')} style={styles.sendButtonImage} />
           </TouchableOpacity>
         </View>
       </SafeAreaView>

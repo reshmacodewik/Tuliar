@@ -27,11 +27,11 @@ const EventScreen = () => {
 
   return (
     <ImageBackground
-      source={require('../../../assets/image/background.png')}
+      source={require('../../Theme/assets/image/background.png')}
       style={themedStyles.bgimg}
     >
       <View style={themedStyles.container}>
-        <View >
+        <View style={{ flexDirection: 'row', alignItems: 'center' }}  >
           <TouchableOpacity
             onPress={() => navigation.goBack()}
             style={themedStyles.backButton}
@@ -43,7 +43,7 @@ const EventScreen = () => {
             />
           </TouchableOpacity>
           <Text
-            style={[themedStyles.title, { fontSize: wp(5), marginLeft: wp(0) }]}
+            style={themedStyles.title}
           >
             Events
           </Text>
@@ -61,8 +61,8 @@ const EventScreen = () => {
               <Image
                 source={
                   item.premium
-                    ? require('../../../assets/image/events.png') // Image for premium
-                    : require('../../../assets/image/eventuser2.png') // Image for free
+                    ? require('../../Theme/assets/image/events.png') // Image for premium
+                    : require('../../Theme/assets/image/eventuser2.png') // Image for free
                 }
                 style={themedStyles.eventImg}
               />
@@ -75,8 +75,8 @@ const EventScreen = () => {
                     <Image
                       source={
                         item.premium
-                          ? require('../../../assets/icon/badge.png')
-                          : require('../../../assets/icon/free.png')
+                          ? require('../../Theme/assets/icon/badge.png')
+                          : require('../../Theme/assets/icon/free.png')
                       }
                       style={{ width: wp(5), height: wp(5) }}
                       resizeMode="contain"

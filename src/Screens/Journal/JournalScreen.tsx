@@ -22,7 +22,7 @@ const journeyCards = [
     title: 'Therapy',
     subtitle: 'Next session April 25 at 10:00 am',
     buttonText: 'Continue',
-    icon: require('../../../assets/icon/journeylogo.png'),
+    icon: require('../../Theme/assets/icon/journeylogo.png'),
   },
   {
     id: '2',
@@ -30,7 +30,7 @@ const journeyCards = [
     title: 'Goals',
     subtitle: "You're on Goal 2 of 4",
     buttonText: 'Add New Entry',
-    icon: require('../../../assets/icon/journeylogo.png'),
+    icon: require('../../Theme/assets/icon/journeylogo.png'),
   },
 ];
 
@@ -219,7 +219,7 @@ const JournalScreen = () => {
 
   return (
     <ImageBackground
-      source={require('../../../assets/image/background.png')}
+      source={require('../../Theme/assets/image/background.png')}
       style={styles(wp, hp).bgimg}
     >
       <StatusBar barStyle="dark-content" backgroundColor="transparent" />
@@ -300,7 +300,7 @@ const JournalScreen = () => {
               <View style={styles(wp, hp).goalsCardHeader}>
                 <View style={styles(wp, hp).cardIcon}>
                   <Image
-                    source={require('../../../assets/icon/journeylogo.png')}
+                    source={require('../../Theme/assets/icon/journeylogo.png')}
                     style={styles(wp, hp).iconImage}
                   />
                 </View>
@@ -332,7 +332,7 @@ const JournalScreen = () => {
               <View style={styles(wp, hp).cardHeader}>
                 <View style={styles(wp, hp).cardIcon}>
                   <Image
-                    source={require('../../../assets/icon/journeylogo.png')}
+                    source={require('../../Theme/assets/icon/journeylogo.png')}
                     style={styles(wp, hp).iconImage}
                   />
                 </View>

@@ -26,13 +26,12 @@ const styles = (wp: any, hp: any) =>
       top: hp(0),
       width: wp(10),
       height: wp(10),
-      justifyContent: 'center',
-      alignItems: 'center',
+      marginLeft: wp(-2),
     },
     title: {
       fontSize: wp(5),
       fontFamily: 'Poppins-SemiBold',
-      marginTop: hp(-4),
+      marginTop: hp(0),
       marginRight: hp(22),
       textAlign: 'center',
       

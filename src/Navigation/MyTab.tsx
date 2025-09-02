@@ -8,7 +8,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Icon from 'react-native-vector-icons/Feather';
 import { useResponsive } from 'react-native-responsive-hook';
 import TalkMoreModal from '../components/TalkMoreModal';
-
+import { useNavigation, NavigationProp } from '@react-navigation/native';
 // Import your screens
 import HomeScreen from '../Screens/HomeScreen';
 import JournalScreen from '../Screens/Journal/JournalScreen';
@@ -22,6 +22,7 @@ const Stack = createNativeStackNavigator(); // ✅ Added Stack navigator
 const BottomTabs = () => {
   const { wp, hp } = useResponsive();
   const [showTalkMoreModal, setShowTalkMoreModal] = useState(false);
+    const navigation = useNavigation<NavigationProp<any>>();
 
   return (
     <>
@@ -31,11 +32,11 @@ const BottomTabs = () => {
       onSelect={option => {
         // Handle navigation or logic here
         if (option === 'peer') {
-          // navigation.navigate('PeerScreen');
+           navigation.navigate('PeerChatScreen');
         } else if (option === 'ai') {
-          // navigation.navigate('AICompanionScreen');
+           navigation.navigate('PeerChat');
         } else if (option === 'group') {
-          // navigation.navigate('GroupScreen');
+           navigation.navigate('AIPeerChatScreen');
         }
       } } /><Tab.Navigator
         screenOptions={{
@@ -126,8 +127,8 @@ const BottomTabs = () => {
             tabBarIcon: ({ focused }) => (
               <Image
                 source={focused
-                  ? require('../../assets/icon/explore.png')
-                  : require('../../assets/icon/explore.png')}
+                  ? require('../Theme/assets/icon/explore.png')
+                  : require('../Theme/assets/icon/explore.png')}
                 style={{
                   width: wp(20),
                   height: wp(20),
@@ -151,7 +152,7 @@ const BottomTabs = () => {
           options={{
             tabBarIcon: ({ focused }) => (
               <Image
-                source={require('../../assets/icon/tabsearch.png')}
+                source={require('../Theme/assets/icon/tabsearch.png')}
                 style={{
                   width: wp(8),
                   height: wp(8),

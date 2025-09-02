@@ -20,7 +20,7 @@ const MyJourneyScreen = () => {
 
   return (
     <ImageBackground
-      source={require('../../../assets/image/background.png')}
+      source={require('../../Theme/assets/image/background.png')}
       style={themedStyles.bgimg}
     >
       <ScrollView contentContainerStyle={themedStyles.container}>
@@ -42,7 +42,7 @@ const MyJourneyScreen = () => {
         {/* Image Card */}
         <View style={themedStyles.card}>
           <Image
-            source={require('../../../assets/image/image.png')}
+            source={require('../../Theme/assets/image/image.png')}
             style={themedStyles.sessionImage}
           />
           <View style={themedStyles.cardContent}>

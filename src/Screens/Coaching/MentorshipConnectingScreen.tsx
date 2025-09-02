@@ -13,18 +13,18 @@ const MentorshipConnectingScreen = () => {
 
   return (
     <ImageBackground
-      source={require('../../../assets/image/background.png')}
+      source={require('../../Theme/assets/image/background.png')}
       style={s.background}
       resizeMode="cover"
     >
       <View style={s.container}>
         <View style={{ alignItems: 'center', width: '100%' }}>
-          <Image source={require('../../../assets/image/logo.png')} style={s.logo} />
+          <Image source={require('../../Theme/assets/image/logo.png')} style={s.logo} />
           <Text style={s.title}>Looking For Someone{"\n"}Who Gets It...</Text>
           <Text style={s.subtitle}>We’re connecting you to a supportive listener. The usually takes less than a minute.</Text>
         </View>
         <View style={{ alignItems: 'center', width: '100%', flex: 1, justifyContent: 'center' }}>
-          <Image source={require('../../../assets/image/leaf.png')} style={s.image} />
+          <Image source={require('../../Theme/assets/image/leaf.png')} style={s.image} />
           <View style={s.timerDots}>
             <View style={s.dot} />
             <View style={s.dot} />

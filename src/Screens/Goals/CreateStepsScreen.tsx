@@ -52,7 +52,7 @@ const CreateStepsScreen = () => {
 
   return (
     <ImageBackground
-      source={require('../../../assets/image/background.png')}
+      source={require('../../Theme/assets/image/background.png')}
       style={styles(wp, hp).bgimg}
     >
        
@@ -82,7 +82,7 @@ const CreateStepsScreen = () => {
      
           {/* 3D Illustration Placeholder */}
           <View style={styles(wp, hp).illustrationContainer}>
-            <Image source={require('../../../assets/image/progresschart.png')} style={styles(wp, hp).illustration} />
+            <Image source={require('../../Theme/assets/image/progresschart.png')} style={styles(wp, hp).illustration} />
           </View>
 
           {/* Goal Display */}

@@ -17,14 +17,14 @@ const PaymentConfirmationScreen = () => {
 
   return (
     <ImageBackground
-      source={require('../../../assets/image/background.png')}
+      source={require('../../Theme/assets/image/background.png')}
       style={themedStyles.bgimg}
     >
       <View style={themedStyles.container}>
         <Text style={themedStyles.header}>Payment Successful!</Text>
         <View style={themedStyles.iconContainer}>
           <Image
-            source={require('../../../assets/image/check.png')}
+            source={require('../../Theme/assets/image/check.png')}
             style={themedStyles.successIcon}
           />
         </View>
@@ -47,7 +47,7 @@ const PaymentConfirmationScreen = () => {
         <View style={styles(wp, hp).outercontainer}>
           <TouchableOpacity style={styles(wp, hp).fab}>
             <Image
-              source={require('../../../assets/image/moodicon.png')}
+              source={require('../../Theme/assets/image/moodicon.png')}
               style={styles(wp, hp).icon}
             />
           </TouchableOpacity>

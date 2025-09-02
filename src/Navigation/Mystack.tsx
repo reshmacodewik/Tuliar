@@ -27,7 +27,11 @@ import PaymentsMainScreen from '../Screens/payments/PaymentsMainScreen';
 import PaymentDetailsScreen from '../Screens/payments/PaymentDetailsScreen';
 import AddCardScreen from '../Screens/payments/AddCardScreen';
 import EarnPointsScreen from '../Screens/payments/EarnPointsScreen';
-import { ChatWithExpertsScreen, PeerChatScreen ,ChatConfirmationScreen } from '../Screens/ChatWithExperts';
+import {
+  ChatWithExpertsScreen,
+  PeerChatScreen,
+  ChatConfirmationScreen,
+} from '../Screens/ChatWithExperts';
 import AIPeerChatScreen from '../Screens/ChatWithExperts/AIPeerChatScreen';
 import PeerChat from '../Screens/ChatWithExperts/PeerChat';
 import GroupSessionsScreen from '../Screens/GroupSessions';
@@ -53,11 +57,7 @@ import CalendarScreen from '../Screens/menu/CalendarScreen';
 import SessionDetailScreen from '../Screens/menu/SessionDetailScreen';
 import HelpScreen from '../Screens/menu/HelpScreen';
 import ExploreScreen from '../Screens/Explore/ExploreScreen';
-
-
-
-
-
+import MyFeedDetail from '../Screens/Home/MyFeedDetail';
 
 export type RootStackParamList = {
   splashScreen: undefined;
@@ -106,26 +106,28 @@ export type RootStackParamList = {
   UserSurvey: undefined;
   TherapistPreference: undefined;
   TherapistMatching: undefined;
-  MessagesScreen:undefined;
+  MessagesScreen: undefined;
   ChatScreen: undefined;
   SettingsScreen: undefined;
   NotificationsScreen: undefined;
   ChangePasswordScreen: undefined;
   HelpSupportScreen: undefined;
-  HelpScreen:undefined;
+  HelpScreen: undefined;
   EditProfileScreen: undefined;
   CalendarScreen: undefined;
   SessionDetailScreen: undefined;
-ExploreScreen: undefined;
-
-
+  ExploreScreen: undefined;
+  MyFeedDetail: undefined;
 };
 
 const Stack = createStackNavigator<RootStackParamList>();
 
 const MyStack: React.FC = () => {
   return (
-    <Stack.Navigator screenOptions={{ headerShown: false }} initialRouteName='HomeScreen' >
+    <Stack.Navigator
+      screenOptions={{ headerShown: false }}
+      initialRouteName="HomeScreen"
+    >
       <Stack.Screen name="splashScreen" component={SplashScreen} />
       <Stack.Screen name="OnboardingScreen" component={OnboardingScreen} />
       <Stack.Screen name="LoginScreen" component={LoginScreen} />
@@ -144,29 +146,53 @@ const MyStack: React.FC = () => {
         name="PaymentConfirmationScreen"
         component={PaymentConfirmationScreen}
       />
-      <Stack.Screen name="DoctorProfileScreen" component={DoctorProfileScreen} />
-      <Stack.Screen name="BookAppointment" component={BookAppointment}/>
+      <Stack.Screen
+        name="DoctorProfileScreen"
+        component={DoctorProfileScreen}
+      />
+      <Stack.Screen name="BookAppointment" component={BookAppointment} />
       <Stack.Screen name="MyJourneyScreen" component={MyJourneyScreen} />
       <Stack.Screen name="IncomingCallScreen" component={IncomingCallScreen} />
       <Stack.Screen name="VideoCallScreen" component={VideoCallScreen} />
-      <Stack.Screen name="Coaching" component={Coaching} /> 
-      <Stack.Screen name="OnboardingJourney" component={OnboardingJourneyScreen} />
+      <Stack.Screen name="Coaching" component={Coaching} />
+      <Stack.Screen
+        name="OnboardingJourney"
+        component={OnboardingJourneyScreen}
+      />
       <Stack.Screen name="Questionnaire" component={QuestionnaireScreen} />
       <Stack.Screen name="Subscription" component={SubscriptionScreen} />
       <Stack.Screen name="MentorshipApply" component={MentorshipApplyScreen} />
-      <Stack.Screen name="MentorshipConnecting" component={MentorshipConnectingScreen} />
+      <Stack.Screen
+        name="MentorshipConnecting"
+        component={MentorshipConnectingScreen}
+      />
       <Stack.Screen name="DoctorList" component={DoctorListScreen} />
       <Stack.Screen name="PaymentsMainScreen" component={PaymentsMainScreen} />
-      <Stack.Screen name="PaymentDetailsScreen" component={PaymentDetailsScreen} />
+      <Stack.Screen
+        name="PaymentDetailsScreen"
+        component={PaymentDetailsScreen}
+      />
       <Stack.Screen name="AddCardScreen" component={AddCardScreen} />
       <Stack.Screen name="EarnPointsScreen" component={EarnPointsScreen} />
-      <Stack.Screen name="OnboardingJourneyScreen" component={OnboardingJourneyScreen} />
-      <Stack.Screen name="ChatWithExpertsScreen" component={ChatWithExpertsScreen} />
+      <Stack.Screen
+        name="OnboardingJourneyScreen"
+        component={OnboardingJourneyScreen}
+      />
+      <Stack.Screen
+        name="ChatWithExpertsScreen"
+        component={ChatWithExpertsScreen}
+      />
       <Stack.Screen name="PeerChatScreen" component={PeerChatScreen} />
       <Stack.Screen name="AIPeerChatScreen" component={AIPeerChatScreen} />
-      <Stack.Screen name="ChatConfirmationScreen" component={ChatConfirmationScreen} />
+      <Stack.Screen
+        name="ChatConfirmationScreen"
+        component={ChatConfirmationScreen}
+      />
       <Stack.Screen name="PeerChat" component={PeerChat} />
-      <Stack.Screen name="GroupSessionsScreen" component={GroupSessionsScreen} />
+      <Stack.Screen
+        name="GroupSessionsScreen"
+        component={GroupSessionsScreen}
+      />
       <Stack.Screen name="GoalsScreen" component={GoalsScreen} />
       <Stack.Screen name="GoalDetailsScreen" component={GoalDetailsScreen} />
       <Stack.Screen name="CreateSteps" component={CreateStepsScreen} />
@@ -175,19 +201,35 @@ const MyStack: React.FC = () => {
       <Stack.Screen name="FindTherapist" component={FindTherapistScreen} />
       <Stack.Screen name="TherapyReasons" component={TherapyReasonsScreen} />
       <Stack.Screen name="UserSurvey" component={UserSurveyScreen} />
-      <Stack.Screen name="TherapistPreference" component={TherapistPreferenceScreen} />
-      <Stack.Screen name="TherapistMatching" component={TherapistMatchingScreen} />
-      <Stack.Screen name="MessagesScreen" component={MessagesScreen}/>
+      <Stack.Screen
+        name="TherapistPreference"
+        component={TherapistPreferenceScreen}
+      />
+      <Stack.Screen
+        name="TherapistMatching"
+        component={TherapistMatchingScreen}
+      />
+      <Stack.Screen name="MessagesScreen" component={MessagesScreen} />
       <Stack.Screen name="ChatScreen" component={ChatScreen} />
       <Stack.Screen name="SettingsScreen" component={SettingsScreen} />
-      <Stack.Screen name="NotificationsScreen" component={NotificationsScreen} />
-      <Stack.Screen name="ChangePasswordScreen" component={ChangePasswordScreen} />
+      <Stack.Screen
+        name="NotificationsScreen"
+        component={NotificationsScreen}
+      />
+      <Stack.Screen
+        name="ChangePasswordScreen"
+        component={ChangePasswordScreen}
+      />
       <Stack.Screen name="HelpSupportScreen" component={HelpSupportScreen} />
-      <Stack.Screen name="HelpScreen" component={HelpScreen}/>
+      <Stack.Screen name="HelpScreen" component={HelpScreen} />
       <Stack.Screen name="EditProfileScreen" component={EditProfileScreen} />
       <Stack.Screen name="CalendarScreen" component={CalendarScreen} />
-      <Stack.Screen name="SessionDetailScreen" component={SessionDetailScreen} />
+      <Stack.Screen
+        name="SessionDetailScreen"
+        component={SessionDetailScreen}
+      />
       <Stack.Screen name="ExploreScreen" component={ExploreScreen} />
+      <Stack.Screen name="MyFeedDetail" component={MyFeedDetail} />
     </Stack.Navigator>
   );
 };

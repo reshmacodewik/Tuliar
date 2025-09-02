@@ -20,14 +20,14 @@ const Coaching = () => {
         Benefits of coaching await.{"\n"}Embark on a journey of growth today
       </Text>
       <Image
-        source={require('../../../assets/image/coaching.png')}
+        source={require('../../Theme/assets/image/coaching.png')}
         style={s.illustration}
       />
       <Pressable style={s.button} onPress={() => navigation.navigate('OnboardingJourneyScreen')}>
         <Text style={s.buttonText}>Next</Text>
       </Pressable>
       <Image
-        source={require('../../../assets/image/logo.png')}
+        source={require('../../Theme/assets/image/logo.png')}
         style={s.logo}
       />
     </View>

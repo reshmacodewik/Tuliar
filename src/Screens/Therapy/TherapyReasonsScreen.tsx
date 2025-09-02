@@ -56,7 +56,7 @@ const TherapyReasonsScreen = () => {
 
   return (
     <ImageBackground
-      source={require('../../../assets/image/background.png')}
+      source={require('../../Theme/assets/image/background.png')}
       style={styles(wp, hp).bgimg}
     >
        <ScrollView
@@ -82,7 +82,7 @@ const TherapyReasonsScreen = () => {
         {/* Logo */}
         <View style={styles(wp, hp).logoContainer}>
           <Image
-            source={require('../../../assets/image/logo.png')}
+            source={require('../../Theme/assets/image/logo.png')}
             style={styles(wp, hp).logo}
           />
         </View>

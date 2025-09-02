@@ -29,7 +29,7 @@ const ChangePasswordScreen = () => {
 
   return (
     <ImageBackground
-      source={require('../../../assets/image/background.png')}
+      source={require('../../Theme/assets/image/background.png')}
       style={themedStyles.bgimg}
       resizeMode="cover"
     >
@@ -49,7 +49,7 @@ const ChangePasswordScreen = () => {
 
           {/* Illustration */}
           <Image
-            source={require('../../../assets/image/change_password.png')}
+            source={require('../../Theme/assets/image/change_password.png')}
             style={themedStyles.illustration}
             resizeMode="contain"
           />

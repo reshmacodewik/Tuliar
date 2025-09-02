@@ -15,7 +15,7 @@ const AddCardScreen = () => {
 
   return (
     <ImageBackground
-      source={require('../../../assets/image/background.png')}
+      source={require('../../Theme/assets/image/background.png')}
       style={s.background}
       resizeMode="cover"
     >
@@ -31,7 +31,7 @@ const AddCardScreen = () => {
 
           {/* Logo */}
           <View style={s.logoContainer}>
-            <Image source={require('../../../assets/image/logo.png')} style={s.logo} />
+            <Image source={require('../../Theme/assets/image/logo.png')} style={s.logo} />
           </View>
 
           {/* Title & Subtitle */}
@@ -43,7 +43,7 @@ const AddCardScreen = () => {
             <View style={s.cardLabelRow}>
               <Text style={s.cardLabel}>Card Number</Text>
               <View style={s.cardLogosRow}>
-                <Image source={require('../../../assets/image/visa.png')} style={s.cardLogo} />
+                <Image source={require('../../Theme/assets/image/visa.png')} style={s.cardLogo} />
               
               </View>
             </View>

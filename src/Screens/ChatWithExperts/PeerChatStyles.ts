@@ -25,6 +25,7 @@ const styles = StyleSheet.create({
   backButton: {
     paddingVertical: hp(2),
     paddingRight: wp(2),
+    marginLeft:wp(-2)
     
   },
   headerCenter: {

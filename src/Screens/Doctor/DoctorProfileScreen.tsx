@@ -22,7 +22,7 @@ const DoctorProfileScreen = () => {
 
   return (
     <ImageBackground
-      source={require('../../../assets/image/background.png')} // Use your background image
+      source={require('../../Theme/assets/image/background.png')} // Use your background image
       style={{ flex: 1 }}
       resizeMode="cover"
     >
@@ -54,7 +54,7 @@ const DoctorProfileScreen = () => {
       >
         <View style={{ alignItems: 'center' }}>
           <Image
-            source={require('../../../assets/image/doc1.png')} // Use your doctor image
+            source={require('../../Theme/assets/image/doc1.png')} // Use your doctor image
             style={{
               width: wp(20),
               height: wp(20),
@@ -120,7 +120,7 @@ const DoctorProfileScreen = () => {
             <View style={styles.infoRow}>
               <View style={styles.iconCircle}>
                 <Image
-                  source={require('../../../assets/icon/language.png')}
+                  source={require('../../Theme/assets/icon/language.png')}
                   style={{ width: wp(6), height: wp(6), resizeMode: 'contain' }}
                 />
               </View>
@@ -134,7 +134,7 @@ const DoctorProfileScreen = () => {
             <View style={styles.infoRow}>
               <View style={styles.iconCircle}>
                 <Image
-                  source={require('../../../assets/icon/doc-clipboard.png')}
+                  source={require('../../Theme/assets/icon/doc-clipboard.png')}
                   style={{ width: wp(6), height: wp(6), resizeMode: 'contain' }}
                 />
               </View>
@@ -160,7 +160,7 @@ const DoctorProfileScreen = () => {
             <View style={styles.infoRow}>
               <View style={styles.iconCircle}>
                 <Image
-                  source={require('../../../assets/icon/skills.png')}
+                  source={require('../../Theme/assets/icon/skills.png')}
                   style={{ width: wp(6), height: wp(6), resizeMode: 'contain' }}
                 />
               </View>

@@ -1,14 +1,14 @@
-import React, { ReactNode, useEffect, useState } from "react";
-import { AppState } from "react-native";
+import React, { ReactNode, useEffect, useState } from 'react';
+import { AppState } from 'react-native';
 import {
   QueryClient,
   QueryCache,
   focusManager,
   onlineManager,
-} from "@tanstack/react-query";
-import { PersistQueryClientProvider } from "@tanstack/react-query-persist-client";
-import NetInfo from "@react-native-community/netinfo";
-import { mmkvPersister } from "../storage/mmkvPersister";
+} from '@tanstack/react-query';
+import { PersistQueryClientProvider } from '@tanstack/react-query-persist-client';
+import NetInfo from '@react-native-community/netinfo';
+import { mmkvPersister } from '../storage/mmkvPersister';
 
 export default function QueryProvider({ children }: { children: ReactNode }) {
   const [client] = useState(
@@ -24,26 +24,26 @@ export default function QueryProvider({ children }: { children: ReactNode }) {
             retry: 2,
             staleTime: 30_000,
             gcTime: 5 * 60 * 1000,
-            refetchOnMount: "always",
+            refetchOnMount: 'always',
             refetchOnReconnect: true,
             refetchOnWindowFocus: true, // focus is emulated below
           },
           mutations: { retry: 1 },
         },
-      })
+      }),
   );
 
   // Foreground = focused for refetch behavior
   useEffect(() => {
-    const sub = AppState.addEventListener("change", (state) => {
-      focusManager.setFocused(state === "active");
+    const sub = AppState.addEventListener('change', state => {
+      focusManager.setFocused(state === 'active');
     });
     return () => sub.remove();
   }, []);
 
   // Keep RQ aware of connectivity
   useEffect(() => {
-    return NetInfo.addEventListener((state) => {
+    return NetInfo.addEventListener(state => {
       onlineManager.setOnline(Boolean(state.isConnected));
     });
   }, []);

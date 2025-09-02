@@ -15,9 +15,9 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 const attendees = [
-  { id: 1, image: require('../../../assets/icon/user1.png') },
-  { id: 2, image: require('../../../assets/icon/user2.png') }, // Replace with actual image
-  { id: 3, image: require('../../../assets/icon/user3.png') },
+  { id: 1, image: require('../../Theme/assets/icon/user1.png') },
+  { id: 2, image: require('../../Theme/assets/icon/user2.png') }, // Replace with actual image
+  { id: 3, image: require('../../Theme/assets/icon/user3.png') },
 ];
 
 const EventDetailsScreen = () => {
@@ -30,7 +30,7 @@ const EventDetailsScreen = () => {
 
   return (
     <ImageBackground
-      source={require('../../../assets/image/background.png')}
+      source={require('../../Theme/assets/image/background.png')}
       style={themedStyles.bgimg}
     >
       <ScrollView style={themedStyles.container}>
@@ -38,7 +38,7 @@ const EventDetailsScreen = () => {
           <ScrollView>
             <View style={themedStyles.headerContainer}>
               <Image
-                source={require('../../../assets/image/eventdetail.png')}
+                source={require('../../Theme/assets/image/eventdetail.png')}
                 style={[
                   themedStyles.mainImage,
                   { height: hp(32), width: '95%' },
@@ -79,7 +79,7 @@ const EventDetailsScreen = () => {
                   Wellness & Mental Health workshop
                 </Text>
                 <Image
-                  source={require('../../../assets/icon/free.png')}
+                  source={require('../../Theme/assets/icon/free.png')}
                   style={[
                     themedStyles.freeImage,
                  
@@ -133,7 +133,7 @@ const EventDetailsScreen = () => {
               </Text>
               <View style={themedStyles.speakerRow}>
                 <Image
-                  source={require('../../../assets/icon/eventuser.png')}
+                  source={require('../../Theme/assets/icon/eventuser.png')}
                   style={[
                     themedStyles.speakerImage,
                     { width: wp(15), height: wp(15) },

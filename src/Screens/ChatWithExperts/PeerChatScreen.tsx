@@ -26,7 +26,7 @@ const PeerChatScreen: React.FC = () => {
       gender: 'Female',
       condition: 'Anxiety',
       description: "I've been where you are. Let's navigate through this together!",
-      image: require('../../../assets/image/doc2.png'), // Using existing user icon
+      image: require('../../Theme/assets/image/doc2.png'), // Using existing user icon
     },
     {
       id: 2,
@@ -35,7 +35,7 @@ const PeerChatScreen: React.FC = () => {
       gender: 'Female',
       condition: 'Anxiety',
       description: "I've been where you are. Let's navigate through this together!",
-      image: require('../../../assets/image/doc2.png'),
+      image: require('../../Theme/assets/image/doc2.png'),
     },
     {
       id: 3,
@@ -44,7 +44,7 @@ const PeerChatScreen: React.FC = () => {
       gender: 'Female',
       condition: 'Anxiety',
       description: "I've been where you are. Let's navigate through this together!",
-      image: require('../../../assets/image/doc2.png'),
+      image: require('../../Theme/assets/image/doc2.png'),
     },
     {
       id: 4,
@@ -53,7 +53,7 @@ const PeerChatScreen: React.FC = () => {
       gender: 'Female',
       condition: 'Anxiety',
       description: "I've been where you are. Let's navigate through this together!",
-      image: require('../../../assets/image/doc2.png'),
+      image: require('../../Theme/assets/image/doc2.png'),
     },
     
     
@@ -61,7 +61,7 @@ const PeerChatScreen: React.FC = () => {
 
   return (
     <ImageBackground
-    source={require('../../../assets/image/background.png')} // Use your background image
+    source={require('../../Theme/assets/image/background.png')} // Use your background image
     style={{ flex: 1 }}
     resizeMode="cover"
   >
@@ -74,7 +74,7 @@ const PeerChatScreen: React.FC = () => {
       <StatusBar barStyle="dark-content" backgroundColor="#F8FAFC" />
       
       <TouchableOpacity
-          style={[styles.backButton, { top: hp(2), left: wp(5) }]}
+          style={[styles.backButton, { top: hp(0), left: wp(2) }]}
           onPress={handleBackPress}
         >
           <MaterialIcons

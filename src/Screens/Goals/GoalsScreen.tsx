@@ -43,7 +43,7 @@ const GoalsScreen = () => {
 
   return (
     <ImageBackground
-      source={require('../../../assets/image/background.png')}
+      source={require('../../Theme/assets/image/background.png')}
       style={styles(wp, hp).bgimg}
     >
       <StatusBar barStyle="dark-content" backgroundColor="transparent" />

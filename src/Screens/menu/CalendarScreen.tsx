@@ -64,7 +64,7 @@ const CalendarScreen = () => {
   };
 
   return (
-    <ImageBackground source={require('../../../assets/image/background.png')} style={styles.bgimg} resizeMode="cover">
+    <ImageBackground source={require('../../Theme/assets/image/background.png')} style={styles.bgimg} resizeMode="cover">
       <ScrollView contentContainerStyle={styles.scrollContainer} showsVerticalScrollIndicator={false}>
         {/* Header */}
         <View style={styles.headerRow}>

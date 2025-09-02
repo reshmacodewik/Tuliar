@@ -20,12 +20,12 @@ const LoginScreen: React.FC = () => {
 
   return (
     <ImageBackground
-      source={require('../../../assets/image/background.png')}
+      source={require('../../Theme/assets/image/background.png')}
       style={styles.bgimg}
     >
       <View style={styles.container}>
         <Image
-          source={require('../../../assets/image/logo.png')}
+          source={require('../../Theme/assets/image/logo.png')}
           resizeMode="contain"
           style={styles.logo}
         />
@@ -102,19 +102,19 @@ const LoginScreen: React.FC = () => {
         <View style={[styles.socialRow, { marginTop: hp(1) }]}>
           <TouchableOpacity style={styles.socialIcon}>
             <Image
-              source={require('../../../assets/icon/google.png')}
+              source={require('../../Theme/assets/icon/google.png')}
               style={styles.socialImage}
             />
           </TouchableOpacity>
           <TouchableOpacity style={styles.socialIcon}>
             <Image
-              source={require('../../../assets/icon/facebook.png')}
+              source={require('../../Theme/assets/icon/facebook.png')}
               style={styles.socialImage}
             />
           </TouchableOpacity>
           <TouchableOpacity style={styles.socialIcon}>
             <Image
-              source={require('../../../assets/icon/apple.png')}
+              source={require('../../Theme/assets/icon/apple.png')}
               style={styles.socialImage}
             />
           </TouchableOpacity>

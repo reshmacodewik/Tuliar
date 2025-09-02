@@ -20,7 +20,7 @@ const ExploreScreen = () => {
   ];
 
   return (
-    <ImageBackground source={require('../../../assets/image/background.png')} style={styles.bgimg} resizeMode="cover">
+    <ImageBackground source={require('../../Theme/assets/image/background.png')} style={styles.bgimg} resizeMode="cover">
       <ScrollView contentContainerStyle={styles.scrollContainer} showsVerticalScrollIndicator={false}>
         {/* Header */}
         <View style={styles.headerRow}>
@@ -32,7 +32,7 @@ const ExploreScreen = () => {
 
         {/* Logo and subtitle */}
         <View style={styles.logoBlock}>
-        <Image  source={require('../../../assets/image/logo1.png')}  style={styles.logo}/>
+        <Image  source={require('../../Theme/assets/image/logo1.png')}  style={styles.logo}/>
           <Text style={styles.subtitle}>Explore Tuliar</Text>
           <Text style={styles.tagline}>Discover wellness tools, group sessions,{'\n'}
 and more</Text>

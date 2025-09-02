@@ -19,14 +19,14 @@ const ChatConfirmationScreen: React.FC = () => {
 
   return (
     <ImageBackground
-      source={require('../../../assets/image/background.png')} // Use your background image
+      source={require('../../Theme/assets/image/background.png')} // Use your background image
       style={{ flex: 1 }}
       resizeMode="cover"
     >
     <SafeAreaView style={styles.container}>
      
     <TouchableOpacity
-          style={[styles.backButton, { top: hp(2), left: wp(5) }]}
+          style={[styles.backButton, { top: hp(0), left: wp(2) }]}
           onPress={handleBackPress}
         >
           <MaterialIcons
@@ -41,7 +41,7 @@ const ChatConfirmationScreen: React.FC = () => {
 
       {/* Logo */}
       <View style={styles.logoContainer}>
-       <Image source={require('../../../assets/image/logo.png')} style={styles.logoImage} />
+       <Image source={require('../../Theme/assets/image/logo.png')} style={styles.logoImage} />
       </View>
 
       {/* Confirmation Message */}
@@ -53,7 +53,7 @@ const ChatConfirmationScreen: React.FC = () => {
       {/* Profile Picture */}
       <View style={styles.profileContainer}>
         <Image 
-          source={require('../../../assets/image/doc2.png')} 
+          source={require('../../Theme/assets/image/doc2.png')} 
           style={styles.profileImage}
         />
       </View>

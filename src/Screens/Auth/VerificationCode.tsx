@@ -29,12 +29,12 @@ const VerificationCode = () => {
 
   return (
     <ImageBackground
-      source={require('../../../assets/image/background.png')}
+      source={require('../../Theme/assets/image/background.png')}
       style={styles.bg}
     >
         <TouchableOpacity onPress={() => navigation.goBack()}>
       <Image
-        source={require('../../../assets/icon/arrow.png')} // replace with your green checkmark
+        source={require('../../Theme/assets/icon/arrow.png')} // replace with your green checkmark
         style={styles.arrowIcon}
       />
       </TouchableOpacity>

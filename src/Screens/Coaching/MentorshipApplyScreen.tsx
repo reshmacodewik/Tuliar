@@ -20,7 +20,7 @@ const MentorshipApplyScreen = () => {
 
   return (
     <ImageBackground
-      source={require('../../../assets/image/background.png')}
+      source={require('../../Theme/assets/image/background.png')}
       style={s.background}
       resizeMode="cover"
     >
@@ -31,7 +31,7 @@ const MentorshipApplyScreen = () => {
               <MaterialIcons name="keyboard-arrow-left" size={34} color="black" />
             </Pressable>
           </View>
-          <Image source={require('../../../assets/image/logo.png')} style={s.logo} />
+          <Image source={require('../../Theme/assets/image/logo.png')} style={s.logo} />
           <Text style={s.header}>Apply For Mentorship</Text>
           <Text style={s.subheader}>Please fill out the form to help your potential mentor learn about you.</Text>
 

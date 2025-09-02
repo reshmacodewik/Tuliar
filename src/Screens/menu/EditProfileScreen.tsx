@@ -152,7 +152,7 @@ const EditProfileScreen = () => {
 
   return (
     <ImageBackground
-      source={require('../../../assets/image/background.png')}
+      source={require('../../Theme/assets/image/background.png')}
       style={themedStyles.bgimg}
       resizeMode="cover"
     >
@@ -189,9 +189,9 @@ const EditProfileScreen = () => {
               onPress={() => setSelectedProfile(0)}
             >
               <Image
-                source={require('../../../assets/image/user2.png')}
+                source={require('../../Theme/assets/image/user2.png')}
                 style={themedStyles.profileImage}
-                defaultSource={require('../../../assets/image/user2.png')}
+                defaultSource={require('../../Theme/assets/image/user2.png')}
               />
               <TouchableOpacity
                 style={themedStyles.editIcon}

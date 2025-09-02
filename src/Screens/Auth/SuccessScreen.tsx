@@ -12,10 +12,10 @@ const SuccessScreen = () => {
   const navigation = useNavigation();
 
   return (
-    <ImageBackground source={require('../../')} style={styles.bg}>
+    <ImageBackground  source={require('../../Theme/assets/image/background.png')} style={styles.bg}>
       <View style={styles.otpcontainer}>
         <Image
-          source={require('../../Theme/assets/Image/check.png')} // replace with your green checkmark
+          source={require('../../Theme/assets/image/check.png')} // replace with your green checkmark
           style={styles.successIcon}
         />
         <Text style={styles.title}>Success!</Text>

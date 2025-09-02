@@ -13,13 +13,13 @@ const TailoredScreen = () => {
 
   return (
     <ImageBackground
-      source={require('../../../assets/image/background.png')}
+      source={require('../../Theme/assets/image/background.png')}
       style={s.background}
       resizeMode="cover"
     >
       <View style={s.container}>
         <Image
-          source={require('../../../assets/image/comment.png')}
+          source={require('../../Theme/assets/image/comment.png')}
           style={s.icon}
         />
         <Text style={s.title}>Tainred Just For You</Text>

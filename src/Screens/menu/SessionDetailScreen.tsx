@@ -24,7 +24,7 @@ const SessionDetailScreen = () => {
 
         {/* Logo area */}
         <View style={styles.logoRow}>
-        <Image  source={require('../../../assets/image/logo1.png')} resizeMode="contain" style={styles.logo}/>
+        <Image  source={require('../../Theme/assets/image/logo1.png')} resizeMode="contain" style={styles.logo}/>
         </View>
 
         {/* Title Block */}
@@ -35,7 +35,7 @@ const SessionDetailScreen = () => {
         <View style={styles.card}>
           <View style={styles.doctorRow}>
             <View style={styles.avatar}> 
-              <Image  source={require('../../../assets/image/user2.png')} resizeMode="contain" style={styles.userimg}/>
+              <Image  source={require('../../Theme/assets/image/user2.png')} resizeMode="contain" style={styles.userimg}/>
             </View>
             <View style={{ flex: 1 }}>
               <Text style={styles.doctorName}>John Smith</Text>

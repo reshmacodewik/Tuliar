@@ -16,12 +16,12 @@ const VideoCallScreen = () => {
   const navigation = useNavigation<NavigationProp<any>>();
   return (
     <ImageBackground
-      source={require('../../../assets/image/background.png')}
+      source={require('../../Theme/assets/image/background.png')}
       style={styles(wp, hp).container}
     >
       <View style={styles(wp, hp).container}>
         <Image
-          source={require('../../../assets/image/doctor.png')}
+          source={require('../../Theme/assets/image/doctor.png')}
           style={styles(wp, hp).doctorImage}
         />
         <View style={styles(wp, hp).topBar}>
@@ -37,7 +37,7 @@ const VideoCallScreen = () => {
         {/* User Video */}
         <View style={styles(wp, hp).userVideoBox}>
           <Image
-            source={require('../../../assets/image/videouser.png')}
+            source={require('../../Theme/assets/image/videouser.png')}
             style={styles(wp, hp).userVideo}
           />
         </View>

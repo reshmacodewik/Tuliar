@@ -45,7 +45,7 @@ const SubscriptionScreen = () => {
 
   return (
     <ImageBackground
-      source={require('../../../assets/image/background.png')}
+      source={require('../../Theme/assets/image/background.png')}
       style={s.background}
       resizeMode="cover"
     >
@@ -57,7 +57,7 @@ const SubscriptionScreen = () => {
             </Pressable>
             <Text style={s.mainheader}>Subscriptions</Text>
           </View>
-          <Image source={require('../../../assets/image/logo.png')} style={s.logo} />
+          <Image source={require('../../Theme/assets/image/logo.png')} style={s.logo} />
           <Text style={s.header}>Here’s What You’ll Get</Text>
           <Text style={s.subheader}>Choose a plan to start your journey</Text>
           <View style={s.cardContainer}>

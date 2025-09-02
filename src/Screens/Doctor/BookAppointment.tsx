@@ -18,10 +18,10 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 const services = [
   {
     label: 'Video Call',
-    icon: require('../../../assets/image/greenvideo.png'),
+    icon: require('../../Theme/assets/image/greenvideo.png'),
   },
-  { label: 'Online Chat', icon: require('../../../assets/image/message.png') },
-  { label: 'Audio call', icon: require('../../../assets/image/phone.png') },
+  { label: 'Online Chat', icon: require('../../Theme/assets/image/message.png') },
+  { label: 'Audio call', icon: require('../../Theme/assets/image/phone.png') },
 ];
 
 const timeSlots = [
@@ -105,7 +105,7 @@ const ScheduleAppointmentScreen = () => {
 
   return (
     <ImageBackground
-      source={require('../../../assets/image/background.png')}
+      source={require('../../Theme/assets/image/background.png')}
       style={s.background}
       resizeMode="cover"
     >
@@ -126,12 +126,12 @@ const ScheduleAppointmentScreen = () => {
     
         <View style={s.container}>
           <Image
-            source={require('../../../assets/image/logo.png')}
+            source={require('../../Theme/assets/image/logo.png')}
             style={s.logo}
           />
           <Text style={s.header}>Schedule Appointment</Text>
           <Image
-            source={require('../../../assets/image/maskuser.png')}
+            source={require('../../Theme/assets/image/maskuser.png')}
             style={s.avatar}
           />
           <Text style={s.name}>Dr. Laurn Miller</Text>

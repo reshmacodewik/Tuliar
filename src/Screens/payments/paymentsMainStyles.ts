@@ -17,7 +17,7 @@ const styles = (wp: any, hp: any) =>
       flexDirection: 'row',
       alignItems: 'center',
       width: '100%',
-      marginBottom: hp(2),
+      marginBottom: hp(4),
       marginLeft: wp(-3),
     },
     headertext: {
@@ -43,7 +43,7 @@ const styles = (wp: any, hp: any) =>
       fontFamily: 'Quicksand-Bold',
       color: '#000',
       textAlign: 'center',
-      marginBottom: hp(3),
+      marginBottom: hp(4),
     },
     card: {
       backgroundColor: '#fff',

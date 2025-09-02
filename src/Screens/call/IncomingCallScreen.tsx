@@ -15,7 +15,7 @@ const IncomingCallScreen = () => {
 
   return (
     <ImageBackground
-      source={require('../../../assets/image/background.png')} // same gradient background
+      source={require('../../Theme/assets/image/background.png')} // same gradient background
       style={styles(wp, hp).container}
     >
       {/* Incoming text */}
@@ -25,7 +25,7 @@ const IncomingCallScreen = () => {
      <View style={styles(wp, hp).outerBox}>
         <View style={styles(wp, hp).innerBox}>
           <Image
-            source={require('../../../assets/image/doctor.png')}
+            source={require('../../Theme/assets/image/doctor.png')}
             style={styles(wp, hp).doctorImage}
           />
         </View>
@@ -38,14 +38,14 @@ const IncomingCallScreen = () => {
       <View style={styles(wp, hp).buttonRow}>
         <TouchableOpacity style={styles(wp, hp).declineButton}>
           <Image
-            source={require('../../../assets/icon/phone.png')} // red call-end icon
+            source={require('../../Theme/assets/icon/phone.png')} // red call-end icon
             style={styles(wp, hp).buttonIcon}
           />
         </TouchableOpacity>
 
         <TouchableOpacity style={styles(wp, hp).acceptButton}>
           <Image
-            source={require('../../../assets/icon/phone-start.png')} // green call icon
+            source={require('../../Theme/assets/icon/phone-start.png')} // green call icon
             style={styles(wp, hp).buttonIcon}
           />
         </TouchableOpacity>

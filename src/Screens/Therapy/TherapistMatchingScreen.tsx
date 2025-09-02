@@ -50,7 +50,7 @@ const TherapistMatchingScreen = () => {
           <View style={styles(wp, hp).modalHeader}>
             <View style={styles(wp, hp).modalLogoContainer}>
               <Image
-                source={require('../../../assets/image/logo.png')}
+                source={require('../../Theme/assets/image/logo.png')}
                 style={styles(wp, hp).modalLogo}
               />
             </View>
@@ -143,7 +143,7 @@ const TherapistMatchingScreen = () => {
 
   return (
     <ImageBackground
-      source={require('../../../assets/image/background.png')}
+      source={require('../../Theme/assets/image/background.png')}
       style={styles(wp, hp).bgimg}
     >
       <StatusBar barStyle="dark-content" backgroundColor="transparent" />
@@ -165,7 +165,7 @@ const TherapistMatchingScreen = () => {
         {/* Logo */}
         <View style={styles(wp, hp).logoContainer}>
           <Image
-            source={require('../../../assets/image/logo.png')}
+            source={require('../../Theme/assets/image/logo.png')}
             style={styles(wp, hp).logo}
           />
         </View>
@@ -181,7 +181,7 @@ const TherapistMatchingScreen = () => {
         <View style={styles(wp, hp).illustrationContainer}>
           {/* Center Plant */}
           <View style={styles(wp, hp).centerPlant}>
-           <Image source={require('../../../assets/image/photroom.png')} style={styles(wp, hp).plant} />
+           <Image source={require('../../Theme/assets/image/photroom.png')} style={styles(wp, hp).plant} />
           </View>
           
          

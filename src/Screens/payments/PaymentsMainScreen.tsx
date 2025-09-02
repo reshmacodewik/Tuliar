@@ -13,14 +13,14 @@ const PaymentsMainScreen = () => {
 
   return (
     <ImageBackground
-      source={require('../../../assets/image/background.png')}
+      source={require('../../Theme/assets/image/background.png')}
       style={s.background}
       resizeMode="cover"
     >
       <ScrollView contentContainerStyle={{ flexGrow: 1 }} showsVerticalScrollIndicator={false}>
         <View style={s.container}>
           <View style={s.headerRow}>
-            <Pressable onPress={() => {}} style={{ marginRight: wp(2) }}>
+            <Pressable onPress={() => navigation.goBack()} style={{ marginRight: wp(2) }}>
               <MaterialIcons name="keyboard-arrow-left" size={32} color="black" />
             </Pressable>
             <View style={s.headertext}>
@@ -38,11 +38,11 @@ const PaymentsMainScreen = () => {
             <Text style={s.cardSubtitle}>Your Balance</Text>
             <Text style={s.balance}>KES 2,350</Text>
             <View style={s.paymentLogosRow}>
-              <Image source={require('../../../assets/image/visa.png')} style={s.paymentLogo} />
-              <Image source={require('../../../assets/image/mpesa.png')} style={s.paymentLogo} />
+              <Image source={require('../../Theme/assets/image/visa.png')} style={s.paymentLogo} />
+              <Image source={require('../../Theme/assets/image/mpesa.png')} style={s.paymentLogo} />
             </View>
             <View style={s.paymentLogosRow}>
-              <Image source={require('../../../assets/image/paypal.png')} style={s.paymentLogo} />
+              <Image source={require('../../Theme/assets/image/paypal.png')} style={s.paymentLogo} />
             </View>
             <Pressable style={s.actionButton} onPress={() => navigation.navigate('PaymentDetailsScreen')}>
               <Text style={s.actionButtonText}>Top Up</Text>

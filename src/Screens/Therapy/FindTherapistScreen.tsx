@@ -56,7 +56,7 @@ const FindTherapistScreen = () => {
 
   return (
     <ImageBackground
-      source={require('../../../assets/image/background.png')}
+      source={require('../../Theme/assets/image/background.png')}
       style={styles(wp, hp).bgimg}
     >
       <StatusBar barStyle="dark-content" backgroundColor="transparent" />
@@ -78,7 +78,7 @@ const FindTherapistScreen = () => {
         {/* Logo */}
         <View style={styles(wp, hp).logoContainer}>
           <Image
-            source={require('../../../assets/image/logo.png')}
+            source={require('../../Theme/assets/image/logo.png')}
             style={styles(wp, hp).logo}
           />
         </View>
@@ -111,8 +111,8 @@ const FindTherapistScreen = () => {
                   <Image 
                     source={
                       option.id === 'general' 
-                        ? require('../../../assets/icon/leaf.png')
-                        : require('../../../assets/icon/star.png')
+                        ? require('../../Theme/assets/icon/leaf.png')
+                        : require('../../Theme/assets/icon/star.png')
                     } 
                     style={styles(wp, hp).icon} 
                   />

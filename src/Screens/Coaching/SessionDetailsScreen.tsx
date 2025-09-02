@@ -20,7 +20,7 @@ const SessionDetailsScreen = ({ navigation }: any) => {
   const therapist = {
     name: 'John Smith',
     title: 'Licensed Therapist',
-    image: require('../../assets/image/doctor.png'),
+    image: require('../../Theme/assets/image/doctor.png'),
     isOnline: true,
   };
 

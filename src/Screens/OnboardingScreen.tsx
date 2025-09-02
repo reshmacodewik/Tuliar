@@ -12,21 +12,21 @@ const slides = [
     titleLine1: 'Welcome To',
     titleLine2: 'Tuliar',
     text: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
-    image: require('../../assets/image/nursing.png'),
+    image: require('../../src/Theme/assets/image/nursing.png'),
   },
   {
     key: 'slide2',
     titleLine1: 'Emotional',
     titleLine2: 'Distress',
     text: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
-    image: require('../../assets/image/restingman.png'),
+    image: require('../../src/Theme/assets/image/restingman.png'),
   },
   {
     key: 'slide3',
     titleLine1: 'Professional',
     titleLine2: 'Therapy',
     text: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
-    image: require('../../assets/image/therapist.png'),
+    image: require('../../src/Theme/assets/image/therapist.png'),
   },
 ];
 
@@ -48,7 +48,7 @@ const OnboardingScreen: React.FC = () => {
 
   const renderItem = ({ item }: { item: typeof slides[0] }) => (
     <ImageBackground
-      source={require('../../assets/image/background.png')}
+      source={require('../../src/Theme/assets/image/background.png')}
       style={styles.container}
       resizeMode="cover"
     >

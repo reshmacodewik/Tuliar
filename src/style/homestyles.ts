@@ -38,7 +38,7 @@ const styles = (wp: any, hp: any) =>
     container: {
       flex: 1,
       padding: 16,
-      marginTop: hp(3),
+      marginTop: hp(1.5),
     },
     header: {
       flexDirection: 'row',
@@ -176,6 +176,25 @@ const styles = (wp: any, hp: any) =>
       fontSize: wp(5),
       fontWeight: '700',
       fontFamily: 'Poppins-Bold',
+    },
+    thoughtBox: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      paddingVertical: hp(1),
+      paddingHorizontal: wp(3),
+      borderRadius: wp(3),
+      marginHorizontal: wp(2),
+      marginBottom: hp(0),
+      // borderBottomWidth: 1,
+      // borderColor: '#ddd',
+      width: '55%',
+      marginLeft: wp(-13),
+    },
+
+    placeholder: {
+      flex: 1,
+      fontSize: wp(4),
+      color: '#666',
     },
     arrow: {
       fontSize: wp(10),
