@@ -55,34 +55,34 @@ const CreateStepsScreen = () => {
       source={require('../../Theme/assets/image/background.png')}
       style={styles(wp, hp).bgimg}
     >
-       
-
       <View style={styles(wp, hp).mainContainer}>
-      <ScrollView
+        <ScrollView
           style={styles(wp, hp).container}
           contentContainerStyle={styles(wp, hp).scrollContent}
           showsVerticalScrollIndicator={false}
         >
-        {/* Header */}
-        <View style={styles(wp, hp).header}>
-          <TouchableOpacity
-            onPress={handleBackPress}
-            style={styles(wp, hp).backButton}
-          >
-            <MaterialIcons
-              name="keyboard-arrow-left"
-              size={wp(8.5)}
-              color="#000"
-            />
-          </TouchableOpacity>
-          <Text style={styles(wp, hp).headerTitle}>Create Steps</Text>
-          <View style={styles(wp, hp).headerSpacer} />
-        </View>
+          {/* Header */}
+          <View style={styles(wp, hp).header}>
+            <TouchableOpacity
+              onPress={handleBackPress}
+              style={styles(wp, hp).backButton}
+            >
+              <MaterialIcons
+                name="keyboard-arrow-left"
+                size={wp(8.5)}
+                color="#000"
+              />
+            </TouchableOpacity>
+            <Text style={styles(wp, hp).headerTitle}>Create Steps</Text>
+            <View style={styles(wp, hp).headerSpacer} />
+          </View>
 
-     
           {/* 3D Illustration Placeholder */}
           <View style={styles(wp, hp).illustrationContainer}>
-            <Image source={require('../../Theme/assets/image/progresschart.png')} style={styles(wp, hp).illustration} />
+            <Image
+              source={require('../../Theme/assets/image/progresschart.png')}
+              style={styles(wp, hp).illustration}
+            />
           </View>
 
           {/* Goal Display */}
@@ -104,16 +104,18 @@ const CreateStepsScreen = () => {
               multiline
               textAlignVertical="top"
             />
-            
+
             {/* Recurring Checkbox */}
             <TouchableOpacity
               style={styles(wp, hp).checkboxContainer}
               onPress={toggleRecurring}
             >
-              <View style={[
-                styles(wp, hp).checkbox,
-                isRecurring && styles(wp, hp).checkboxChecked
-              ]}>
+              <View
+                style={[
+                  styles(wp, hp).checkbox,
+                  isRecurring && styles(wp, hp).checkboxChecked,
+                ]}
+              >
                 {isRecurring && (
                   <Ionicons name="checkmark" size={wp(4)} color="#fff" />
                 )}
@@ -128,13 +130,17 @@ const CreateStepsScreen = () => {
             onPress={handleAddAnotherStep}
           >
             <Ionicons name="add" size={wp(5)} color="#264734" />
-            <Text style={styles(wp, hp).addAnotherStepText}>Add another step</Text>
+            <Text style={styles(wp, hp).addAnotherStepText}>
+              Add another step
+            </Text>
           </TouchableOpacity>
 
           {/* Display existing steps */}
           {steps.length > 0 && (
             <View style={styles(wp, hp).existingStepsContainer}>
-              <Text style={styles(wp, hp).existingStepsTitle}>Added Steps:</Text>
+              <Text style={styles(wp, hp).existingStepsTitle}>
+                Added Steps:
+              </Text>
               {steps.map((step, index) => (
                 <View key={index} style={styles(wp, hp).existingStepItem}>
                   <Text style={styles(wp, hp).existingStepText}>
@@ -144,21 +150,20 @@ const CreateStepsScreen = () => {
               ))}
             </View>
           )}
-           <View style={styles(wp, hp).bottomActionContainer}>
-          <TouchableOpacity
-            style={styles(wp, hp).saveButton}
-            onPress={handleSave}
-          >
-            <Text style={styles(wp, hp).saveButtonText}>Save</Text>
-          </TouchableOpacity>
-        </View>
-       
+          <View style={styles(wp, hp).bottomActionContainer}>
+            <TouchableOpacity
+              style={styles(wp, hp).saveButton}
+              onPress={handleSave}
+            >
+              <Text style={styles(wp, hp).saveButtonText}>Save</Text>
+            </TouchableOpacity>
+          </View>
 
-        {/* Save Button */}
+          {/* Save Button */}
         </ScrollView>
       </View>
     </ImageBackground>
   );
 };
 
-export default CreateStepsScreen; 
+export default CreateStepsScreen;

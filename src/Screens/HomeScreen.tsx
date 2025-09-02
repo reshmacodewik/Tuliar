@@ -41,28 +41,6 @@ const features = [
   },
 ];
 
-const feedPosts = [
-  {
-    id: '1',
-    user: 'Acnxk ojkb lc',
-    avatar: require('../../src/Theme/assets/image/ellispe.png'),
-    content:
-      'Lorem ipsum dolor sit amet consectetur. Molestie purus eu volutpat praesent nec quam et hac. Duis et turpis nisl arcu amet parturient sodales lorem nunc.',
-    likes: '20k',
-    comments: '10k',
-    shares: '5k',
-  },
-  {
-    id: '2',
-    user: 'Acnxk ojkb lc',
-    avatar: require('../../src/Theme/assets/image/ellispe.png'),
-    content:
-      'Lorem ipsum dolor sit amet consectetur. Molestie purus eu volutpat praesent nec quam et hac. Duis et turpis nisl arcu amet parturient sodales lorem nunc.',
-    likes: '20k',
-    comments: '10k',
-    shares: '5k',
-  },
-];
 
 const HomeScreen = () => {
   const { wp, hp } = useResponsive();
@@ -217,10 +195,8 @@ const HomeScreen = () => {
           </View>
 
           {/* FEATURE GRID */}
-          <ScrollView
-            horizontal
-            showsHorizontalScrollIndicator={false}
-            contentContainerStyle={styles(wp, hp).grid}
+          <View
+            style={styles(wp, hp).grid}
           >
             {features.map((item, i) => (
               <TouchableOpacity
@@ -253,7 +229,7 @@ const HomeScreen = () => {
                 </LinearGradient>
               </TouchableOpacity>
             ))}
-          </ScrollView>
+          </View>
 
           {/* INNER CONTENT — ALL VISIBLE & SCROLLABLE */}
           <View style={[styles(wp, hp).innercontainer, { flexGrow: 1 }]}>
@@ -323,7 +299,6 @@ const HomeScreen = () => {
                 <Ionicons name="chevron-forward" size={wp(7)} color="#000" />
               </TouchableOpacity>
             </View>
-
             <ScrollView
               horizontal
               showsHorizontalScrollIndicator={false}
@@ -372,7 +347,6 @@ const HomeScreen = () => {
                 </TouchableOpacity>
               ))}
             </ScrollView>
-
             {/* FEED */}
             <View style={styles(wp, hp).sectionHeader}>
               <Text style={styles(wp, hp).sectionTitle}>My Feed</Text>
@@ -388,11 +362,9 @@ const HomeScreen = () => {
                 <Ionicons name="chevron-forward" size={wp(7)} color="#000" />
               </TouchableOpacity>
             </View>
-
             <FeedPost />
           </View>
         </ScrollView>
-
         {/* STATIC FLOATING MOOD BUTTON */}
         <View style={styles(wp, hp).staticFloatingContainer}>
           <TouchableOpacity style={styles(wp, hp).fab}>

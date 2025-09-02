@@ -8,7 +8,7 @@ export default (wp: (v: number) => number, hp: (v: number) => number) =>
     headerRow: { flexDirection: 'row', alignItems: 'center', marginBottom: hp(2) },
 
     logoBlock: { alignItems: 'center', marginBottom: hp(4) },
-    logo: {width:wp(40),height:hp(5),marginBottom:hp(3) },
+    logo: {width:wp(45),height:hp(5),marginBottom:hp(3) },
     subtitle: { fontSize: wp(4.5), fontWeight: '700', color: '#000', marginTop: hp(0.5) },
     tagline: { fontSize: wp(3.5), color: '#333', textAlign: 'center', marginTop: hp(0.8) },
 

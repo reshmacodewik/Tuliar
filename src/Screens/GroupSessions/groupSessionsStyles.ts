@@ -15,7 +15,7 @@ const styles = (wp: any, hp: any) =>
       flexDirection: 'row',
       justifyContent: 'space-between',
       alignItems: 'center',
-      paddingTop: hp(5),
+      paddingTop: hp(3.5),
       paddingBottom: hp(1),
     },
     backButton: {
@@ -25,6 +25,7 @@ const styles = (wp: any, hp: any) =>
       alignItems: 'center',
       borderRadius: wp(5),
       marginLeft: wp(-2),
+      marginBottom:wp(2)
     },
     headerCenter: {
       flex: 1,

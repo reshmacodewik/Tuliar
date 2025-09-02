@@ -14,6 +14,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import { useNavigation, NavigationProp } from '@react-navigation/native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import styles from './journalStyles';
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 const journeyCards = [
   {
@@ -41,6 +42,7 @@ const JournalScreen = () => {
   const [selectedSlot, setSelectedSlot] = useState('');
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [currentMonth, setCurrentMonth] = useState(new Date());
+    const { top, bottom } = useSafeAreaInsets();
 
   const handleBackPress = () => {
     navigation.goBack();
@@ -222,8 +224,13 @@ const JournalScreen = () => {
       source={require('../../Theme/assets/image/background.png')}
       style={styles(wp, hp).bgimg}
     >
-      <StatusBar barStyle="dark-content" backgroundColor="transparent" />
-      <View style={styles(wp, hp).mainContainer}>
+     
+      <ScrollView
+          style={styles(wp, hp).container}
+          contentContainerStyle={styles(wp, hp).scrollContent}
+          showsVerticalScrollIndicator={false}
+        >
+       <View style={[styles(wp, hp).mainContainer, { paddingTop: top, paddingBottom: bottom }]}>
         {/* Header */}
         <View style={styles(wp, hp).header}>
           <TouchableOpacity
@@ -240,11 +247,7 @@ const JournalScreen = () => {
           <View style={styles(wp, hp).headerSpacer} />
         </View>
 
-        <ScrollView
-          style={styles(wp, hp).container}
-          contentContainerStyle={styles(wp, hp).scrollContent}
-          showsVerticalScrollIndicator={false}
-        >
+        
           {/* Greeting Section */}
           <View style={styles(wp, hp).greetingSection}>
             <Text style={styles(wp, hp).greetingTitle}>
@@ -305,12 +308,14 @@ const JournalScreen = () => {
                   />
                 </View>
                 <View style={styles(wp, hp).goalsCardContent}>
-                  <Text style={styles(wp, hp).cardTitle}>Goals</Text>
-                  <Text style={styles(wp, hp).cardSubtitle}>
+                  <Text style={styles(wp, hp).cardTitlegoal}>Goals</Text>
+                  
+                </View>
+                
+              </View>
+              <Text style={styles(wp, hp).cardSubtitlegoal}>
                     You're on Goal 2 of 4
                   </Text>
-                </View>
-              </View>
               <TouchableOpacity 
                 style={styles(wp, hp).cardButtonGoal}
                 onPress={() => navigation.navigate('GoalsScreen')}
@@ -372,10 +377,10 @@ const JournalScreen = () => {
               </View>
             </View>
           </View>
-        </ScrollView>
 
         {/* Bottom Action Bar */}
       </View>
+       </ScrollView>
     </ImageBackground>
   );
 };

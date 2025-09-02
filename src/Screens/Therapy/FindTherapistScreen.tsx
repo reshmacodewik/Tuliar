@@ -60,6 +60,11 @@ const FindTherapistScreen = () => {
       style={styles(wp, hp).bgimg}
     >
       <StatusBar barStyle="dark-content" backgroundColor="transparent" />
+       <ScrollView
+          style={styles(wp, hp).optionsContainer}
+          contentContainerStyle={styles(wp, hp).optionsContent}
+          showsVerticalScrollIndicator={false}
+        >
       <View style={styles(wp, hp).mainContainer}>
        
         <View style={styles(wp, hp).header}>
@@ -92,11 +97,7 @@ const FindTherapistScreen = () => {
         </View>
 
         {/* Therapy Options */}
-        <ScrollView
-          style={styles(wp, hp).optionsContainer}
-          contentContainerStyle={styles(wp, hp).optionsContent}
-          showsVerticalScrollIndicator={false}
-        >
+       
           {therapyOptions.map((option) => (
             <TouchableOpacity
               key={option.id}
@@ -141,11 +142,12 @@ const FindTherapistScreen = () => {
             <Text style={styles(wp, hp).continueButtonText}>Continue</Text>
           </TouchableOpacity>
         </View>
-        </ScrollView>
+       
 
         {/* Continue Button */}
        
       </View>
+       </ScrollView>
     </ImageBackground>
   );
 };
