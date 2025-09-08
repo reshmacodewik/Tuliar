@@ -1,5 +1,5 @@
 import React from 'react';
-import { createStackNavigator } from '@react-navigation/stack';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import SplashScreen from '../Screens/SplashScreen';
 import OnboardingScreen from '../Screens/OnboardingScreen';
 import LoginScreen from '../Screens/Auth/LoginScreen';
@@ -58,69 +58,10 @@ import SessionDetailScreen from '../Screens/menu/SessionDetailScreen';
 import HelpScreen from '../Screens/menu/HelpScreen';
 import ExploreScreen from '../Screens/Explore/ExploreScreen';
 import MyFeedDetail from '../Screens/Home/MyFeedDetail';
+import { RootStackParamList } from './types';
 
-export type RootStackParamList = {
-  splashScreen: undefined;
-  OnboardingScreen: undefined;
-  LoginScreen: undefined;
-  SignUpScreen: undefined;
-  VerificationCode: undefined;
-  SuccessScreen: undefined;
-  HomeScreen: undefined;
-  JournalScreen: undefined;
-  SearchScreen: undefined;
-  EventDetailsScreen: undefined;
-  ReviewPaymentScreen: undefined;
-  MyJourneyScreen: undefined;
-  IncomingCallScreen: undefined;
-  VideoCallScreen: undefined;
-  MessageScreen: undefined;
-  PaymentConfirmationScreen: undefined;
-  DoctorProfileScreen: undefined;
-  BookAppointment: undefined;
-  Coaching: undefined;
-  OnboardingJourney: undefined;
-  Questionnaire: undefined;
-  Subscription: undefined;
-  MentorshipApply: undefined;
-  MentorshipConnecting: undefined;
-  DoctorList: undefined;
-  PaymentsMainScreen: undefined;
-  PaymentDetailsScreen: undefined;
-  AddCardScreen: undefined;
-  EarnPointsScreen: undefined;
-  OnboardingJourneyScreen: undefined;
-  ChatWithExpertsScreen: undefined;
-  PeerChatScreen: undefined;
-  ChatConfirmationScreen: undefined;
-  AIPeerChatScreen: undefined;
-  PeerChat: undefined;
-  GroupSessionsScreen: undefined;
-  GoalsScreen: undefined;
-  GoalDetailsScreen: undefined;
-  CreateSteps: undefined;
-  GoalsDashboard: undefined;
-  TherapyScreen: undefined;
-  FindTherapist: undefined;
-  TherapyReasons: undefined;
-  UserSurvey: undefined;
-  TherapistPreference: undefined;
-  TherapistMatching: undefined;
-  MessagesScreen: undefined;
-  ChatScreen: undefined;
-  SettingsScreen: undefined;
-  NotificationsScreen: undefined;
-  ChangePasswordScreen: undefined;
-  HelpSupportScreen: undefined;
-  HelpScreen: undefined;
-  EditProfileScreen: undefined;
-  CalendarScreen: undefined;
-  SessionDetailScreen: undefined;
-  ExploreScreen: undefined;
-  MyFeedDetail: undefined;
-};
 
-const Stack = createStackNavigator<RootStackParamList>();
+const Stack = createNativeStackNavigator<RootStackParamList>();
 
 const MyStack: React.FC = () => {
   return (

@@ -22,23 +22,25 @@ const Stack = createNativeStackNavigator(); // ✅ Added Stack navigator
 const BottomTabs = () => {
   const { wp, hp } = useResponsive();
   const [showTalkMoreModal, setShowTalkMoreModal] = useState(false);
-    const navigation = useNavigation<NavigationProp<any>>();
+  const navigation = useNavigation<NavigationProp<any>>();
 
   return (
     <>
-    <TalkMoreModal
-      visible={showTalkMoreModal}
-      onClose={() => setShowTalkMoreModal(false)}
-      onSelect={option => {
-        // Handle navigation or logic here
-        if (option === 'peer') {
-           navigation.navigate('PeerChatScreen');
-        } else if (option === 'ai') {
-           navigation.navigate('PeerChat');
-        } else if (option === 'group') {
-           navigation.navigate('AIPeerChatScreen');
-        }
-      } } /><Tab.Navigator
+      <TalkMoreModal
+        visible={showTalkMoreModal}
+        onClose={() => setShowTalkMoreModal(false)}
+        onSelect={option => {
+          // Handle navigation or logic here
+          if (option === 'peer') {
+            navigation.navigate('PeerChatScreen');
+          } else if (option === 'ai') {
+            navigation.navigate('PeerChat');
+          } else if (option === 'group') {
+            navigation.navigate('AIPeerChatScreen');
+          }
+        }}
+      />
+      <Tab.Navigator
         screenOptions={{
           headerShown: false,
           tabBarShowLabel: true,
@@ -60,16 +62,21 @@ const BottomTabs = () => {
               <Icon
                 name="home"
                 size={wp(6)}
-                color={focused ? '#FFA726' : '#B0B0B0'} />
+                color={focused ? '#FFA726' : '#B0B0B0'}
+              />
             ),
             tabBarLabel: ({ focused }) => (
               <Text
-                style={[styles.label, { color: focused ? '#FFA726' : '#B0B0B0' }]}
+                style={[
+                  styles.label,
+                  { color: focused ? '#FFA726' : '#B0B0B0' },
+                ]}
               >
                 Home
               </Text>
             ),
-          }} />
+          }}
+        />
 
         {/* Journal Tab */}
         <Tab.Screen
@@ -80,16 +87,21 @@ const BottomTabs = () => {
               <Icon
                 name="clock"
                 size={wp(6)}
-                color={focused ? '#FFA726' : '#B0B0B0'} />
+                color={focused ? '#FFA726' : '#B0B0B0'}
+              />
             ),
             tabBarLabel: ({ focused }) => (
               <Text
-                style={[styles.label, { color: focused ? '#FFA726' : '#B0B0B0' }]}
+                style={[
+                  styles.label,
+                  { color: focused ? '#FFA726' : '#B0B0B0' },
+                ]}
               >
                 Journal
               </Text>
             ),
-          }} />
+          }}
+        />
 
         {/* Mood Tab */}
         <Tab.Screen
@@ -112,12 +124,16 @@ const BottomTabs = () => {
             ),
             tabBarLabel: ({ focused }) => (
               <Text
-                style={[styles.label, { color: focused ? '#FFA726' : '#B0B0B0' }]}
+                style={[
+                  styles.label,
+                  { color: focused ? '#FFA726' : '#B0B0B0' },
+                ]}
               >
                 Check-In?
               </Text>
             ),
-          }} />
+          }}
+        />
 
         {/* Explore Tab */}
         <Tab.Screen
@@ -126,24 +142,31 @@ const BottomTabs = () => {
           options={{
             tabBarIcon: ({ focused }) => (
               <Image
-                source={focused
-                  ? require('../Theme/assets/icon/explore.png')
-                  : require('../Theme/assets/icon/explore.png')}
+                source={
+                  focused
+                    ? require('../Theme/assets/icon/explore.png')
+                    : require('../Theme/assets/icon/explore.png')
+                }
                 style={{
                   width: wp(20),
                   height: wp(20),
                   resizeMode: 'contain',
                   tintColor: focused ? '#FFA726' : '#B0B0B0', // Optional: tint for monochrome images
-                }} />
+                }}
+              />
             ),
             tabBarLabel: ({ focused }) => (
               <Text
-                style={[styles.label, { color: focused ? '#FFA726' : '#B0B0B0' }]}
+                style={[
+                  styles.label,
+                  { color: focused ? '#FFA726' : '#B0B0B0' },
+                ]}
               >
                 Explore
               </Text>
             ),
-          }} />
+          }}
+        />
 
         {/* Search Tab */}
         <Tab.Screen
@@ -158,26 +181,30 @@ const BottomTabs = () => {
                   height: wp(8),
                   resizeMode: 'contain',
                   tintColor: focused ? '#FFA726' : '#B0B0B0',
-                }} />
+                }}
+              />
             ),
             tabBarLabel: ({ focused }) => (
               <Text
-                style={[styles.label, { color: focused ? '#FFA726' : '#B0B0B0' }]}
+                style={[
+                  styles.label,
+                  { color: focused ? '#FFA726' : '#B0B0B0' },
+                ]}
               >
                 Talk More
               </Text>
             ),
           }}
           listeners={{
-  tabPress: e => {
-    e.preventDefault();
-    setShowTalkMoreModal(prev => !prev);
-  },
-}}/>
-      </Tab.Navigator></>
-   
+            tabPress: e => {
+              e.preventDefault();
+              setShowTalkMoreModal(prev => !prev);
+            },
+          }}
+        />
+      </Tab.Navigator>
+    </>
   );
- 
 };
 
 // Stack Navigator
