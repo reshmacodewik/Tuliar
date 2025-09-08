@@ -21,71 +21,41 @@ const SignUpScreen = () => {
   const navigation = useNavigation();
   const [agree, setAgree] = useState(false);
   const [loading, setLoading] = useState(false);
-
   const formik = useFormik({
     initialValues: {
       fullName: '',
+      nickName: '',
+      dob: '',
       email: '',
+      gender: '',
       password: '',
-      phoneNo: '',
       countryCode: '+91',
-      gender: 'Male',
-      day: '5',
-      month: '08',
-      year: '1998',
+      phoneNo: '',
     },
-    // validationSchema: signupSchema,
+   // validationSchema: signupSchema,
     onSubmit: async values => {
-      if (!agree) {
-        Alert.alert('Please agree to the terms and conditions');
-        return;
-      }
-
+      console.log('hello');
       setLoading(true);
-
       try {
-        // Map Formik values to backend payload (RegisterUserDTO)
-        const dob = `${values.year}-${values.month}-${values.day}`;
-        const payload = {
-          fullName: values.fullName,
-          email: values.email,
-          password: values.password,
-          phoneNo: values.phoneNo,
-          countryCode: values.countryCode,
-          gender: values.gender,
-          dob,
-        };
-        console.log('hkjkj', payload);
-        const response = await registerUser(payload);
-
-        console.log('Register success:', response);
-
-        Toast.show({
-          type: 'success',
-          text1: 'Signup Successful',
-          text2: 'You can now login with your account.',
-        });
-
-        setTimeout(() => {
+        const res = await registerUser(values);
+       // 🔹 For debugging
+        if (res.success) {
+          Toast.show({ type: 'success', text1: res.message });
           navigation.navigate('LoginScreen' as never);
-        }, 1500);
-      } catch (error: any) {
-        console.log('Register error:', error.message);
-
-        Toast.show({
-          type: 'error',
-          text1: 'Signup Failed',
-          text2: error.message || 'Something went wrong, please try again.',
-        });
+        } else {
+          Toast.show({
+            type: 'error',
+            text1: res.message ,
+          });
+        }
+      } catch (error) {
+        console.log('API error:', error);
+        Toast.show({ type: 'error', text1: 'Something went wrong' });
       } finally {
         setLoading(false);
       }
     },
   });
-
-  const handleSubmit = () => {
-    console.log("lllllllllllllllllllllllllllllllllllllllllllll")
-  };
 
   console.log(formik, 'formik----------------');
 
@@ -104,7 +74,7 @@ const SignUpScreen = () => {
         <Text style={styles.label}>Full Name</Text>
         <TextInput
           style={styles.input}
-          placeholder="Enter your name"
+          placeholder="Enter your Fullname"
           placeholderTextColor="#999"
           onChangeText={formik.handleChange('fullName')}
           onBlur={formik.handleBlur('fullName')}
@@ -112,6 +82,18 @@ const SignUpScreen = () => {
         />
         {formik.touched.fullName && formik.errors.fullName && (
           <Text style={styles.errorText}>{formik.errors.fullName}</Text>
+        )}
+        <Text style={styles.label}>Nick Name</Text>
+        <TextInput
+          style={styles.input}
+          placeholder="Enter your Nickname"
+          placeholderTextColor="#999"
+          onChangeText={formik.handleChange('nickName')}
+          onBlur={formik.handleBlur('nickName')}
+          value={formik.values.nickName}
+        />
+        {formik.touched.nickName && formik.errors.nickName && (
+          <Text style={styles.errorText}>{formik.errors.nickName}</Text>
         )}
 
         {/* Email */}
@@ -134,8 +116,8 @@ const SignUpScreen = () => {
         <View style={styles.dateRow}>
           <View style={styles.datePicker}>
             <Picker
-              selectedValue={formik.values.month}
-              onValueChange={value => formik.setFieldValue('month', value)}
+              selectedValue={formik.values.dob}
+               onValueChange={value => formik.setFieldValue('month', value)}
             >
               <Picker.Item label="MM" value="" />
               {[...Array(12)].map((_, i) => (
@@ -145,8 +127,8 @@ const SignUpScreen = () => {
           </View>
           <View style={styles.datePicker}>
             <Picker
-              selectedValue={formik.values.day}
-              onValueChange={value => formik.setFieldValue('day', value)}
+              selectedValue={formik.values.dob}
+            onValueChange={value => formik.setFieldValue('month', value)}
             >
               <Picker.Item label="DD" value="" />
               {[...Array(31)].map((_, i) => (
@@ -156,8 +138,8 @@ const SignUpScreen = () => {
           </View>
           <View style={styles.datePicker}>
             <Picker
-              selectedValue={formik.values.year}
-              onValueChange={value => formik.setFieldValue('year', value)}
+              selectedValue={formik.values.dob}
+               onValueChange={value => formik.setFieldValue('month', value)}
             >
               <Picker.Item label="YYYY" value="" />
               {[...Array(50)].map((_, i) => {
@@ -167,10 +149,8 @@ const SignUpScreen = () => {
             </Picker>
           </View>
         </View>
-        {(formik.errors.day || formik.errors.month || formik.errors.year) && (
-          <Text style={styles.errorText}>
-            {formik.errors.day || formik.errors.month || formik.errors.year}
-          </Text>
+        {formik.errors.dob && (
+          <Text style={styles.errorText}>{formik.errors.dob}</Text>
         )}
 
         {/* Gender */}
@@ -242,14 +222,18 @@ const SignUpScreen = () => {
         {/* Submit */}
         <TouchableOpacity
           style={styles.signUpButton}
-          // onPress={() => formik.handleSubmit()}
-          onPress={() => handleSubmit()}
+          onPress={() => {
+            console.log('Button pressed'); // 🔹 Should always appear
+            formik.handleSubmit();
+          }}
+          // onPress={() => handleSubmit()}
           disabled={loading}
         >
           <Text style={styles.signUpText}>
             {loading ? 'Signing Up...' : 'Sign Up'}
           </Text>
         </TouchableOpacity>
+       
       </ScrollView>
     </ImageBackground>
   );
