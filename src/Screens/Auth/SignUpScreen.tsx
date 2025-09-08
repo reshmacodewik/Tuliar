@@ -16,6 +16,9 @@ import Toast from 'react-native-toast-message';
 import styles from '../../style/signupstyles';
 import { signupSchema } from '../../validation/signupSchema';
 import { registerUser } from '../../Api/auth';
+import { apiPost } from '../../utils/api/common';
+import { API_REGISTER } from '../../utils/api/APIConstant';
+import ShowToast from '../../utils/ShowToast';
 
 const SignUpScreen = () => {
   const navigation = useNavigation();
@@ -28,66 +31,32 @@ const SignUpScreen = () => {
       email: '',
       password: '',
       phoneNo: '',
-      countryCode: '+91',
-      gender: 'Male',
-      day: '5',
-      month: '08',
-      year: '1998',
+      countryCode: '',
+      gender: '',
+      day: '',
+      month: '',
+      year: '',
     },
-    // validationSchema: signupSchema,
+    validationSchema: signupSchema,
     onSubmit: async values => {
-      if (!agree) {
-        Alert.alert('Please agree to the terms and conditions');
-        return;
-      }
-
       setLoading(true);
-
       try {
-        // Map Formik values to backend payload (RegisterUserDTO)
         const dob = `${values.year}-${values.month}-${values.day}`;
-        const payload = {
-          fullName: values.fullName,
-          email: values.email,
-          password: values.password,
-          phoneNo: values.phoneNo,
-          countryCode: values.countryCode,
-          gender: values.gender,
-          dob,
-        };
-        console.log('hkjkj', payload);
-        const response = await registerUser(payload);
-
-        console.log('Register success:', response);
-
-        Toast.show({
-          type: 'success',
-          text1: 'Signup Successful',
-          text2: 'You can now login with your account.',
+        const res = await apiPost({
+          url: API_REGISTER,
+          values: { ...values, dob },
         });
-
-        setTimeout(() => {
-          navigation.navigate('LoginScreen' as never);
-        }, 1500);
+        console.log('Register success:', res);
+        navigation.navigate('LoginScreen' as never);
+        ShowToast(res?.message, 'success');
       } catch (error: any) {
         console.log('Register error:', error.message);
-
-        Toast.show({
-          type: 'error',
-          text1: 'Signup Failed',
-          text2: error.message || 'Something went wrong, please try again.',
-        });
+        ShowToast(error?.error, 'success');
       } finally {
         setLoading(false);
       }
     },
   });
-
-  const handleSubmit = () => {
-    console.log("lllllllllllllllllllllllllllllllllllllllllllll")
-  };
-
-  console.log(formik, 'formik----------------');
 
   return (
     <ImageBackground
@@ -242,12 +211,11 @@ const SignUpScreen = () => {
         {/* Submit */}
         <TouchableOpacity
           style={styles.signUpButton}
-          // onPress={() => formik.handleSubmit()}
-          onPress={() => handleSubmit()}
+          onPress={() => formik.handleSubmit()}
           disabled={loading}
         >
           <Text style={styles.signUpText}>
-            {loading ? 'Signing Up...' : 'Sign Up'}
+            {loading ? 'Signing Up...' : 'Sign zxczxcUp'}
           </Text>
         </TouchableOpacity>
       </ScrollView>

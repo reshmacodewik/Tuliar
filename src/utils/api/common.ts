@@ -114,25 +114,6 @@ export const apiPost = async ({ url, values }: postParams): Promise<any> => {
   }
 };
 
-// export const apiPostWithToken = async ({ url, values }: postParams): Promise<any> => {
-//   try {
-//     const token = await AsyncStorage.getItem('@auth_token');
-//     const res = await defaultAxios.post(url, values, {
-//       headers: {
-//         Accept: 'application/json',
-//         'content-type': 'application/json',
-//         Authorization: `Bearer ${token}`, // Add Authorization header with token
-//       },
-//     });
-//     console.log('check', res.data)
-//     // ShowToast(res.data?.message, "success");
-//     return res.data;
-//   } catch (err: any) {
-//     ShowToast(err?.response?.data?.error, 'error');
-//     return err?.response?.data;
-//   }
-// };
-
 export const apiPATCH = async ({ url, values }: postParams): Promise<any> => {
   try {
     const res = await defaultAxios.patch(url, values, {
@@ -148,28 +129,6 @@ export const apiPATCH = async ({ url, values }: postParams): Promise<any> => {
     return err?.response?.data;
   }
 };
-
-// export const apiPostWithMultiFormWithToken = async ({
-//   url,
-//   values,
-// }: postParams): Promise<any> => {
-//   try {
-//     // Get the token from AsyncStorage (or another source)
-//     const token = await AsyncStorage.getItem('@auth_token');
-
-//     const res = await defaultAxios.post(url, values, {
-//       headers: {
-//         Accept: 'application/json',
-//         'Content-Type': 'multipart/form-data',
-//         Authorization: `Bearer ${token}`, // Add the token in Authorization header
-//       },
-//     });
-//     return res.data;
-//   } catch (err: any) {
-//     ShowToast(err?.response?.data?.message, 'error');
-//     return err?.response?.data;
-//   }
-// };
 
 export const apiPostWithMultiForm = async ({
   url,
