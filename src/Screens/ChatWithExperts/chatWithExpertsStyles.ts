@@ -231,7 +231,7 @@ const styles = StyleSheet.create({
   },
   peerSubtitle: {
     fontSize: 15,
-    fontFamily: 'Quicksand-Regular',
+    fontFamily: 'Quicksand-Medium',
     color: '#000',
     textAlign: 'center',
     lineHeight: wp(4.5),
@@ -302,7 +302,7 @@ const styles = StyleSheet.create({
   },
   peerDescription: {
     fontSize: 12,
-    fontFamily: 'Quicksand-Regular',
+    fontFamily: 'Quicksand-Medium',
     color: '#000',
     fontWeight: 400,
     marginBottom: hp(0),

@@ -16,7 +16,7 @@ const styles = (wp: any, hp: any) => {
       flexDirection: 'row',
       alignItems: 'center',
       paddingHorizontal: wp(1),
-      paddingTop: hp(1),
+      paddingTop: hp(5),
       paddingBottom: hp(1),
       marginLeft:-10
     },

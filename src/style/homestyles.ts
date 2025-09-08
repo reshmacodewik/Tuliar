@@ -422,6 +422,7 @@ const styles = (wp: any, hp: any) =>
       flexDirection: 'row',
       paddingHorizontal: wp(4),
       paddingVertical: hp(1),
+      marginLeft:wp(-3.5),
       gap: wp(3),
     },
     featureBox: {

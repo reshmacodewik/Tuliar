@@ -139,4 +139,11 @@ export default StyleSheet.create({
     color: '#003300',
     fontWeight: '600',
   },
+   errorText: {
+    color: "red",
+    fontSize: 12,
+    paddingHorizontal: wp(8),
+    marginBottom:wp(2),
+    alignSelf: "flex-start",
+  },
 });

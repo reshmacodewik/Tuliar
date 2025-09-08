@@ -6,9 +6,10 @@ import {
   TouchableOpacity,
   ImageBackground,
   StatusBar,
+  SafeAreaView,
 } from 'react-native';
 import { useResponsive } from 'react-native-responsive-hook';
-
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { useNavigation, NavigationProp } from '@react-navigation/native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
@@ -32,7 +33,7 @@ const goalSteps = [
 const GoalsScreen = () => {
   const { wp, hp } = useResponsive();
   const navigation = useNavigation<NavigationProp<any>>();
-
+  const { top, bottom } = useSafeAreaInsets();
   const handleBackPress = () => {
     navigation.goBack();
   };
@@ -46,8 +47,8 @@ const GoalsScreen = () => {
       source={require('../../Theme/assets/image/background.png')}
       style={styles(wp, hp).bgimg}
     >
-      <StatusBar barStyle="dark-content" backgroundColor="transparent" />
-      <View style={styles(wp, hp).mainContainer}>
+  
+        <View style={[styles(wp, hp).mainContainer, { paddingTop: top, paddingBottom: bottom }]}>
         {/* Header */}
         <View style={styles(wp, hp).header}>
           <TouchableOpacity
@@ -110,7 +111,9 @@ const GoalsScreen = () => {
           </TouchableOpacity>
         </View>
       </View>
+      
     </ImageBackground>
+   
   );
 };
 

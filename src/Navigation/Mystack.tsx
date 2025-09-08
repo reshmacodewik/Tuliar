@@ -60,15 +60,11 @@ import ExploreScreen from '../Screens/Explore/ExploreScreen';
 import MyFeedDetail from '../Screens/Home/MyFeedDetail';
 import { RootStackParamList } from './types';
 
-
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
 const MyStack: React.FC = () => {
   return (
-    <Stack.Navigator
-      screenOptions={{ headerShown: false }}
-      initialRouteName="HomeScreen"
-    >
+    <Stack.Navigator screenOptions={{ headerShown: false }}>
       <Stack.Screen name="splashScreen" component={SplashScreen} />
       <Stack.Screen name="OnboardingScreen" component={OnboardingScreen} />
       <Stack.Screen name="LoginScreen" component={LoginScreen} />
