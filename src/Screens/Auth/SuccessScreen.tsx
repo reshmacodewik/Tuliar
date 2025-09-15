@@ -25,7 +25,7 @@ const SuccessScreen = () => {
 
         <TouchableOpacity
           style={styles.button}
-          //onPress={() => navigation.navigate('LoginScreen')}
+          onPress={() => navigation.navigate('LoginScreen' as never)}
         >
           <Text style={styles.buttonText}>Let’s Begin</Text>
         </TouchableOpacity>

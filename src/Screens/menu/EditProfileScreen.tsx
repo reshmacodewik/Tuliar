@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   View,
   Text,
@@ -14,6 +14,10 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { useNavigation, NavigationProp } from '@react-navigation/native';
 import { useResponsive } from '../../Responsive/useResponsive';
 import styles from './editProfileStyles';
+import { useMutation, useQuery } from '@tanstack/react-query';
+import { API_PROFILE_LIST, API_UPDATE_PROFILE } from '../../utils/api/APIConstant';
+import { apiPost, getApiWithOutQuery } from '../../utils/api/common';
+import ShowToast from '../../utils/ShowToast';
 
 const EditProfileScreen = () => {
   const { wp, hp } = useResponsive();
@@ -42,6 +46,41 @@ const EditProfileScreen = () => {
   const [showAvatarModal, setShowAvatarModal] = useState(false);
   const [showPhotoModal, setShowPhotoModal] = useState(false);
 
+  const { data, isLoading } = useQuery({
+    queryKey: ['profile-info'], // pass id as dependency
+    queryFn: () => getApiWithOutQuery({ url: API_PROFILE_LIST }),
+  });
+
+  // Mutation for updating profile
+const { mutate: updateProfile, isPending } = useMutation({
+  mutationFn: (payload: any) =>
+    apiPost({ url: API_UPDATE_PROFILE, values: payload }),
+  onSuccess: (res) => {
+      ShowToast(res?.message, 'success');
+    navigation.goBack();
+  },
+  onError: (err) => {
+    console.error("Update failed:", err);
+  },
+});
+const handleUpdated = () => {
+  const dob = `${year}-${month}-${day}`; // build DOB string
+
+  const payload = {
+    fullName,
+    email,
+    profile: selectedProfile === 0 ? "photo" : "avatar", // or avatar id if backend expects
+    phoneNo: phoneNumber,
+    nickName: nickname,
+    country: timezone, // replace with actual country if different
+    countryCode,
+    dob,
+  };
+
+  console.log("Sending payload:", payload);
+  updateProfile(payload); // trigger API call
+};
+
   // Open-only-one modal helpers for date and country pickers
   const openMonth = () => {
     setShowMonthModal(true);
@@ -67,7 +106,15 @@ const EditProfileScreen = () => {
     setShowYearModal(false);
     setShowCountryModal(true);
   };
-
+  useEffect(() => {
+    if (data?.data) {
+      setFullName(data.data.fullName || '');
+      setNickname(data.data.nickName || '');
+      setEmail(data.data.email || '');
+      setCountryCode(data.data.countryCode || '+91');
+      setPhoneNumber(data.data.phoneNo || '');
+    }
+  }, [data]);
   // Generate months, days, and years for dropdowns
   const months = [
     'MM',
@@ -144,11 +191,6 @@ const EditProfileScreen = () => {
     },
   ];
 
-  const handleUpdate = () => {
-    // Handle update logic here
-    console.log('Profile updated');
-    navigation.goBack();
-  };
 
   return (
     <ImageBackground
@@ -219,13 +261,13 @@ const EditProfileScreen = () => {
               >
                 <MaterialIcons name="person" size={wp(12)} color="#fff" />
               </View>
-                             <TouchableOpacity
-                 style={themedStyles.editIcon}
-                 onPress={() => {
-                   setTempSelectedAvatar(selectedAvatar);
-                   setShowAvatarModal(true);
-                 }}
-               >
+              <TouchableOpacity
+                style={themedStyles.editIcon}
+                onPress={() => {
+                  setTempSelectedAvatar(selectedAvatar);
+                  setShowAvatarModal(true);
+                }}
+              >
                 <MaterialIcons name="edit" size={wp(3)} color="#fff" />
               </TouchableOpacity>
             </TouchableOpacity>
@@ -256,7 +298,7 @@ const EditProfileScreen = () => {
               style={themedStyles.textInput}
               placeholder="Enter your nickname"
               placeholderTextColor="#999"
-              value={nickname}
+              value={nickname} // 👈 comes from API
               onChangeText={setNickname}
             />
             <Text style={themedStyles.helperText}>
@@ -284,6 +326,7 @@ const EditProfileScreen = () => {
               placeholder="Enter your email"
               placeholderTextColor="#999"
               value={email}
+              editable={false}
               onChangeText={setEmail}
               keyboardType="email-address"
             />
@@ -373,9 +416,9 @@ const EditProfileScreen = () => {
         {/* Update Button */}
         <TouchableOpacity
           style={themedStyles.updateButton}
-          onPress={handleUpdate}
+          onPress={handleUpdated}
         >
-          <Text style={themedStyles.updateButtonText}>Update</Text>
+          <Text style={themedStyles.updateButtonText}>{isPending ? "Updating..." : "Update"}</Text>
         </TouchableOpacity>
       </ScrollView>
 
@@ -390,7 +433,6 @@ const EditProfileScreen = () => {
       >
         <View style={themedStyles.modalOverlay}>
           <View style={themedStyles.modalContent}>
-           
             <ScrollView style={themedStyles.modalScrollView}>
               {months.map(m => (
                 <TouchableOpacity
@@ -418,7 +460,6 @@ const EditProfileScreen = () => {
       >
         <View style={themedStyles.modalOverlay}>
           <View style={themedStyles.modalContent}>
-            
             <ScrollView style={themedStyles.modalScrollView}>
               {days.map(d => (
                 <TouchableOpacity
@@ -446,7 +487,6 @@ const EditProfileScreen = () => {
       >
         <View style={themedStyles.modalOverlay}>
           <View style={themedStyles.modalContent}>
-           
             <ScrollView style={themedStyles.modalScrollView}>
               {years.map(y => (
                 <TouchableOpacity
@@ -474,7 +514,6 @@ const EditProfileScreen = () => {
       >
         <View style={themedStyles.modalOverlay}>
           <View style={themedStyles.modalContent}>
-           
             <ScrollView style={themedStyles.modalScrollView}>
               {countries.map(c => (
                 <TouchableOpacity
@@ -516,25 +555,25 @@ const EditProfileScreen = () => {
                       backgroundColor: avatar.color,
                       borderColor: avatar.borderColor,
                     },
-                                         tempSelectedAvatar === avatar.id &&
-                       themedStyles.selectedAvatarOption,
+                    tempSelectedAvatar === avatar.id &&
+                      themedStyles.selectedAvatarOption,
                   ]}
-                                     onPress={() => {
-                     setTempSelectedAvatar(avatar.id);
-                   }}
+                  onPress={() => {
+                    setTempSelectedAvatar(avatar.id);
+                  }}
                 >
                   <MaterialIcons name="person" size={wp(8)} color="#fff" />
                 </TouchableOpacity>
               ))}
             </View>
 
-                         <TouchableOpacity
-               style={themedStyles.changeAvatarButton}
-               onPress={() => {
-                 setSelectedAvatar(tempSelectedAvatar);
-                 setShowAvatarModal(false);
-               }}
-             >
+            <TouchableOpacity
+              style={themedStyles.changeAvatarButton}
+              onPress={() => {
+                setSelectedAvatar(tempSelectedAvatar);
+                setShowAvatarModal(false);
+              }}
+            >
               <Text style={themedStyles.changeAvatarButtonText}>
                 Change my avatar
               </Text>
@@ -552,7 +591,9 @@ const EditProfileScreen = () => {
       >
         <View style={themedStyles.modalOverlay}>
           <View style={themedStyles.photoModalContent}>
-            <Text style={themedStyles.photoModalTitle}>Choose your Profile Picture</Text>
+            <Text style={themedStyles.photoModalTitle}>
+              Choose your Profile Picture
+            </Text>
             <TouchableOpacity
               style={themedStyles.mediaButton}
               onPress={() => {
@@ -562,7 +603,11 @@ const EditProfileScreen = () => {
               }}
             >
               <View style={themedStyles.mediaCircle}>
-                <MaterialIcons name="insert-drive-file" size={wp(10)} color="#fff" />
+                <MaterialIcons
+                  name="insert-drive-file"
+                  size={wp(10)}
+                  color="#fff"
+                />
               </View>
               <Text style={themedStyles.mediaText}>Media Files</Text>
             </TouchableOpacity>

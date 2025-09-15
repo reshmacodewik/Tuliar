@@ -80,7 +80,7 @@ const GroupSessionsScreen = () => {
 
   const handleReserveSpot = (sessionId: string) => {
     console.log('Reserve Spot pressed for session:', sessionId);
-    navigation.navigate('ReviewPaymentScreen');
+    navigation.navigate('SessionPaymentScreen');
   };
 
   return (

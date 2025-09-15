@@ -12,52 +12,72 @@ import { useNavigation } from '@react-navigation/native';
 import { Picker } from '@react-native-picker/picker';
 import { useFormik } from 'formik';
 import CheckBox from '@react-native-community/checkbox';
-import Toast from 'react-native-toast-message';
 import styles from '../../style/signupstyles';
 import { signupSchema } from '../../validation/signupSchema';
-import { registerUser } from '../../Api/auth';
+import { apiPost } from '../../utils/api/common';
+import { API_REGISTER } from '../../utils/api/APIConstant';
+import ShowToast from '../../utils/ShowToast';
+import { CountryPicker } from 'react-native-country-codes-picker';
+import { Dropdown } from 'react-native-element-dropdown';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
 const SignUpScreen = () => {
   const navigation = useNavigation();
   const [agree, setAgree] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [showPicker, setShowPicker] = useState(false);
   const formik = useFormik({
     initialValues: {
       fullName: '',
       nickName: '',
-      dob: '',
       email: '',
       gender: '',
       password: '',
-      countryCode: '+91',
       phoneNo: '',
+      countryCode: '+91',
+      month: '',
+      day: '',
+      year: '',
     },
-   // validationSchema: signupSchema,
+    validationSchema: signupSchema,
     onSubmit: async values => {
-      console.log('hello');
-      setLoading(true);
       try {
-        const res = await registerUser(values);
-       // 🔹 For debugging
-        if (res.success) {
-          Toast.show({ type: 'success', text1: res.message });
-          navigation.navigate('LoginScreen' as never);
-        } else {
-          Toast.show({
-            type: 'error',
-            text1: res.message ,
+        // Construct DOB properly
+        const dob = `${values.year}-${values.month}-${values.day}`;
+        const res = await apiPost({
+          url: API_REGISTER,
+          values: { ...values, dob },
+        });
+        if (res?.success) {
+          ShowToast(res?.message, 'success');
+          (navigation as any).navigate('VerificationCode', {
+            email: values.email,
+            phoneNo: values.phoneNo,
           });
+        } else {
+          ShowToast(res?.message || 'Register Failed', 'error');
         }
-      } catch (error) {
-        console.log('API error:', error);
-        Toast.show({ type: 'error', text1: 'Something went wrong' });
+      } catch (error: any) {
+        console.log('Register error:', error);
+        ShowToast(error?.message || 'Something went wrong', 'error');
       } finally {
         setLoading(false);
       }
     },
   });
-
-  console.log(formik, 'formik----------------');
+  const months = Array.from({ length: 12 }, (_, i) => ({
+    label: `${i + 1}`,
+    value: `${i + 1}`,
+  }));
+  const days = Array.from({ length: 31 }, (_, i) => ({
+    label: `${i + 1}`,
+    value: `${i + 1}`,
+  }));
+  const currentYear = new Date().getFullYear();
+  const years = Array.from({ length: 50 }, (_, i) => ({
+    label: `${currentYear - i}`,
+    value: `${currentYear - i}`,
+  }));
 
   return (
     <ImageBackground
@@ -114,57 +134,64 @@ const SignUpScreen = () => {
         {/* Date of Birth */}
         <Text style={styles.label}>Date of Birth</Text>
         <View style={styles.dateRow}>
-          <View style={styles.datePicker}>
-            <Picker
-              selectedValue={formik.values.dob}
-               onValueChange={value => formik.setFieldValue('month', value)}
-            >
-              <Picker.Item label="MM" value="" />
-              {[...Array(12)].map((_, i) => (
-                <Picker.Item key={i} label={`${i + 1}`} value={`${i + 1}`} />
-              ))}
-            </Picker>
-          </View>
-          <View style={styles.datePicker}>
-            <Picker
-              selectedValue={formik.values.dob}
-            onValueChange={value => formik.setFieldValue('month', value)}
-            >
-              <Picker.Item label="DD" value="" />
-              {[...Array(31)].map((_, i) => (
-                <Picker.Item key={i} label={`${i + 1}`} value={`${i + 1}`} />
-              ))}
-            </Picker>
-          </View>
-          <View style={styles.datePicker}>
-            <Picker
-              selectedValue={formik.values.dob}
-               onValueChange={value => formik.setFieldValue('month', value)}
-            >
-              <Picker.Item label="YYYY" value="" />
-              {[...Array(50)].map((_, i) => {
-                const y = new Date().getFullYear() - i;
-                return <Picker.Item key={i} label={`${y}`} value={`${y}`} />;
-              })}
-            </Picker>
-          </View>
-        </View>
-        {formik.errors.dob && (
-          <Text style={styles.errorText}>{formik.errors.dob}</Text>
-        )}
+          {/* Month */}
+          <Dropdown
+            style={styles.dropdown}
+            data={months}
+            labelField="label"
+            valueField="value"
+            placeholder="MM"
+            value={formik.values.month}
+            onChange={item => formik.setFieldValue('month', item.value)}
+          />
 
+          {/* Day */}
+          <Dropdown
+            style={styles.dropdown}
+            data={days}
+            labelField="label"
+            valueField="value"
+            placeholder="DD"
+            value={formik.values.day}
+            onChange={item => formik.setFieldValue('day', item.value)}
+          />
+
+          {/* Year */}
+          <Dropdown
+            style={styles.dropdown}
+            data={years}
+            labelField="label"
+            valueField="value"
+            placeholder="YYYY"
+            value={formik.values.year}
+            onChange={item => formik.setFieldValue('year', item.value)}
+          />
+        </View>
+
+        {(formik.errors.day || formik.errors.month || formik.errors.year) && (
+          <Text style={styles.errorText}>
+            {formik.errors.day || formik.errors.month || formik.errors.year}
+          </Text>
+        )}
         {/* Gender */}
         <Text style={styles.label}>Select your gender</Text>
         <View style={styles.genderPicker}>
-          <Picker
-            selectedValue={formik.values.gender}
-            onValueChange={value => formik.setFieldValue('gender', value)}
-          >
-            <Picker.Item label="Select" value="" />
-            <Picker.Item label="Male" value="male" />
-            <Picker.Item label="Female" value="female" />
-            <Picker.Item label="Other" value="other" />
-          </Picker>
+          <Dropdown
+          style={styles.genderdrop}
+            data={[
+              { label: 'Male', value: 'male' },
+              { label: 'Female', value: 'female' },
+              { label: 'Other', value: 'other' },
+            ]}
+            labelField="label"
+            valueField="value"
+            placeholder="Select"
+            value={formik.values.gender}
+            onChange={item => formik.setFieldValue('gender', item.value)}
+          />
+          {formik.touched.gender && formik.errors.gender && (
+            <Text style={styles.errorText}>{formik.errors.gender}</Text>
+          )}
         </View>
         {formik.touched.gender && formik.errors.gender && (
           <Text style={styles.errorText}>{formik.errors.gender}</Text>
@@ -173,9 +200,14 @@ const SignUpScreen = () => {
         {/* Phone Number */}
         <Text style={styles.label}>Phone Number</Text>
         <View style={styles.phoneRow}>
-          <View style={styles.codeBox}>
+          <TouchableOpacity
+            style={styles.codeBox}
+            onPress={() => setShowPicker(true)}
+          >
             <Text>{formik.values.countryCode}</Text>
-          </View>
+            <Ionicons name="chevron-down" size={16} color="#555" style={{ marginLeft: 12 }} />
+          </TouchableOpacity>
+
           <TextInput
             style={styles.phoneInput}
             placeholder="Enter phone number"
@@ -223,7 +255,6 @@ const SignUpScreen = () => {
         <TouchableOpacity
           style={styles.signUpButton}
           onPress={() => {
-            console.log('Button pressed'); // 🔹 Should always appear
             formik.handleSubmit();
           }}
           // onPress={() => handleSubmit()}
@@ -233,8 +264,24 @@ const SignUpScreen = () => {
             {loading ? 'Signing Up...' : 'Sign Up'}
           </Text>
         </TouchableOpacity>
-       
+          <CountryPicker
+        show={showPicker}
+        lang="en" // ✅ Required prop
+        pickerButtonOnPress={item => {
+          formik.setFieldValue('countryCode', item.dial_code);
+          setShowPicker(false);
+        }}
+        style={{
+          modal: {
+            height: 400,
+          },
+          countryButtonStyles: {
+            paddingVertical: 12,
+          },
+        }}
+      />
       </ScrollView>
+    
     </ImageBackground>
   );
 };

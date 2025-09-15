@@ -87,7 +87,14 @@ const ExploreScreen = () => {
               <Text style={styles.cardTitle}>{c.title}</Text>
               <Text style={styles.cardDesc}>{c.desc}</Text>
             </View>
-            <TouchableOpacity style={styles.ctaBtn}>
+            <TouchableOpacity
+              style={styles.ctaBtn}
+              onPress={() => {
+                if (c.cta === 'Join Now') {
+                  navigation.navigate('GroupSessionsScreen');
+                }
+              }}
+            >
               <Text style={styles.ctaText}>{c.cta}</Text>
             </TouchableOpacity>
           </View>

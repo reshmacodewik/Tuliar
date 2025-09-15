@@ -1,19 +1,26 @@
-import type { Persister } from "@tanstack/query-persist-client-core";
-import { storage } from "./mmkv";
+// authStorage.ts
+import { setItem, getItem, removeItem } from './mmkv';
 
-const KEY = "REACT_QUERY_OFFLINE_CACHE";
+const AUTH_KEY = 'auth-session';
 
-export const mmkvPersister: Persister = {
-  persistClient: async (client) => {
-    try { storage.set(KEY, JSON.stringify(client)); } catch {}
-  },
-  restoreClient: async () => {
-    try {
-      const raw = storage.getString(KEY);
-      return raw ? JSON.parse(raw) : undefined;
-    } catch { return undefined; }
-  },
-  removeClient: async () => {
-    try { storage.delete(KEY); } catch {}
-  },
+export type AuthSession = {
+  accessToken: string;
+  refreshToken?: string;
+  user?: {
+    id: string;
+    email: string;
+    name?: string;
+  };
+};
+
+export const saveSession = (session: AuthSession) => {
+  setItem(AUTH_KEY, session);
+};
+
+export const getSession = (): AuthSession | null => {
+  return getItem<AuthSession>(AUTH_KEY);
+};
+
+export const clearSession = () => {
+  removeItem(AUTH_KEY);
 };

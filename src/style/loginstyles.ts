@@ -22,8 +22,8 @@ const styles = StyleSheet.create({
     justifyContent:'center'
   },
   logo: {
-    width: wp(60),
-    height: hp(8),
+    width: wp(65),
+    height: hp(10),
     marginBottom:wp(5)
   },
   tagline: {
@@ -48,6 +48,13 @@ const styles = StyleSheet.create({
     paddingHorizontal: wp(4),
     backgroundColor: '#fff',
   
+  },
+   errorText: {
+    color: "red",
+    fontSize: 12,
+    paddingHorizontal: wp(8),
+    marginBottom:wp(2),
+    alignSelf: "flex-start",
   },
   passwordContainer: {
     width: wp(80),

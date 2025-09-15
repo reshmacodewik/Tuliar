@@ -105,7 +105,7 @@ const OnboardingScreen: React.FC = () => {
       </TouchableOpacity>
 
       <Text style={styles.bottomText}>
-        Returning user? <Text style={styles.signUpText}>Sign up</Text>
+        Returning user? <Text style={styles.signUpText}  onPress={() => navigation.navigate('SignUpScreen')}>Sign up</Text>
       </Text>
     </ImageBackground>
   );

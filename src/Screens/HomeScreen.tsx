@@ -1,5 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import {
   View,
   Text,
@@ -7,11 +7,11 @@ import {
   Image,
   TouchableOpacity,
   ImageBackground,
+  Modal,
 } from 'react-native';
 import { useResponsive } from 'react-native-responsive-hook';
 import styles from '../style/homestyles';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import { useNavigation, NavigationProp } from '@react-navigation/native';
 import {
   Menu,
   MenuOptions,
@@ -21,7 +21,25 @@ import {
 import LinearGradient from 'react-native-linear-gradient';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Feather from 'react-native-vector-icons/Feather';
+import { apiPost, apiPUT, getApiByParams } from '../utils/api/common';
+import { getSession } from '../storage/mmkvPersister';
+import {
+  useNavigation,
+  useRoute,
+  RouteProp,
+  NavigationProp,
+} from '@react-navigation/native';
+
+import {
+  RichEditor,
+  RichToolbar,
+  actions,
+} from 'react-native-pell-rich-editor';
+import ShowToast from '../utils/ShowToast';
+import { API_FEED_CREATE, API_FEED_UPDATE } from '../utils/api/APIConstant';
+import { htmlToPlainText } from '../components/htmlToPlainText';
 import FeedPost from '../components/FeedPost';
+import { RootStackParamList } from '../Navigation/types';
 const features = [
   {
     title: 'Chat with experts',
@@ -41,11 +59,75 @@ const features = [
   },
 ];
 
-
 const HomeScreen = () => {
   const { wp, hp } = useResponsive();
   const navigation = useNavigation<NavigationProp<any>>();
+  const [logoutVisible, setLogoutVisible] = useState(false);
+  const [refreshKey, setRefreshKey] = useState(0);
+  const [thought, setThought] = useState('');
+  const route = useRoute<RouteProp<RootStackParamList, 'MyFeedDetail'>>();
+  //const editId = route.params?.id; // ✅ id if editing
+ 
+  const s = styles(wp, hp);
+  const richText = useRef<RichEditor>(null);
 
+  // Prefill editor when editing
+  // useEffect(() => {
+  //   if (editId) {
+  //     const fetchFeedDetail = async () => {
+  //       try {
+  //         const session = getSession();
+  //         const token = session?.accessToken;
+  //         const res = await getApiByParams({
+  //           url: '/feed',
+  //           params: editId,
+  //         });
+  //         if (res?.success && res.data?.content) {
+  //           setThought(res.data.content);
+  //           richText.current?.setContentHTML(res.data.content);
+  //         }
+  //       } catch (e) {
+  //         console.error('Error loading feed:', e);
+  //       }
+  //     };
+  //     fetchFeedDetail();
+  //   }
+  // }, [editId]);
+
+
+
+  const handlePost = async () => {
+    try {
+      const session = getSession();
+      const token = session?.accessToken;
+      if (!token) return ShowToast('You must be logged in to post', 'error');
+
+      const html = await richText.current?.getContentHtml?.();
+      const plain = htmlToPlainText(html || thought);
+
+      if (!plain) {
+        return ShowToast('Please write something before posting', 'error');
+      }
+
+      const res = await apiPost({
+        url: API_FEED_CREATE,
+        values: { content: plain },
+        headers: { Authorization: `Bearer ${token}` },
+      });
+
+      if (res?.success) {
+        ShowToast(res?.message || 'Posted!', 'success');
+        setThought('');
+        richText.current?.setContentHTML(''); // clear editor
+        setRefreshKey(prev => prev + 1);
+      } else {
+        ShowToast(res?.message || 'Failed to save feed', 'error');
+      }
+    } catch (e: any) {
+      console.error('Save failed:', e);
+      ShowToast(e?.message || 'Something went wrong', 'error');
+    }
+  };
   const handleMenuSelect = (raw: string) => {
     const value = raw.trim().toLowerCase();
 
@@ -69,8 +151,8 @@ const HomeScreen = () => {
         navigation.navigate('HelpSupportScreen');
         break;
       case 'logout':
-        console.log('Logging out...');
-        // await logout(); // if you have one
+        console.log('Opening logout modal...');
+        setLogoutVisible(true);
         break;
       default:
         console.warn('Unknown menu value:', raw);
@@ -195,9 +277,7 @@ const HomeScreen = () => {
           </View>
 
           {/* FEATURE GRID */}
-          <View
-            style={styles(wp, hp).grid}
-          >
+          <View style={styles(wp, hp).grid}>
             {features.map((item, i) => (
               <TouchableOpacity
                 key={i}
@@ -362,6 +442,53 @@ const HomeScreen = () => {
                 <Ionicons name="chevron-forward" size={wp(7)} color="#000" />
               </TouchableOpacity>
             </View>
+            <View style={s.thoughtBoxcontainer}>
+                <Text style={s.sharetitle}>Share your Thoughts</Text>
+
+              <View
+                style={{
+                  borderWidth: 1,
+                  borderColor: '#ddd',
+                  borderRadius: wp(3),
+                  backgroundColor: '#fff',
+                  overflow: 'hidden',
+                  width: '100%',
+                }}
+              >
+                <ScrollView style={{ maxHeight: hp(40) }}>
+                  <RichEditor
+                    ref={richText}
+                    placeholder="Write something amazing..."
+                    onChange={html => setThought(html)}
+                    initialHeight={hp(12)}
+                    useContainer
+                  />
+                </ScrollView>
+
+                <RichToolbar
+                  editor={richText}
+                  actions={[
+                    actions.setBold,
+                    actions.setItalic,
+                    actions.setUnderline,
+                    actions.insertBulletsList,
+                    actions.insertOrderedList,
+                  ]}
+                  iconTint="#444"
+                  selectedIconTint="#007bff"
+                  style={{
+                    borderTopWidth: 1,
+                    borderTopColor: '#eee',
+                    backgroundColor: '#fafafa',
+                  }}
+                />
+              </View>
+
+              {/* Post / Update button */}
+              <TouchableOpacity style={s.postbutton} onPress={handlePost}>
+                <Text style={s.buttonText}>Post</Text>
+              </TouchableOpacity>
+            </View>
             <FeedPost />
           </View>
         </ScrollView>
@@ -380,6 +507,45 @@ const HomeScreen = () => {
           </View>
         </View>
       </View>
+      {/* LOGOUT MODAL */}
+      <Modal
+        transparent
+        visible={logoutVisible}
+        animationType="fade"
+        onRequestClose={() => setLogoutVisible(false)}
+      >
+        <View style={styles(wp, hp).overlay}>
+          <View style={styles(wp, hp).Modalcontainer}>
+            <Image
+              source={require('../../src/Theme/assets/image/logout.png')} // 🔹 add your logout icon
+              style={styles(wp, hp).Modalicon}
+            />
+            <Text style={styles(wp, hp).Modaltitle}>Logout</Text>
+            <Text style={styles(wp, hp).subtitle}>
+              Lorem Ipsum is simply dummy text of the printing and typesetting
+              industry.
+            </Text>
+
+            <TouchableOpacity
+              style={styles(wp, hp).button}
+              onPress={() => {
+                setLogoutVisible(false);
+
+                // 🔹 Clear session (AsyncStorage/MMKV/Redux etc.)
+                // await AsyncStorage.clear();
+                // dispatch(clearAuth());
+
+                navigation.reset({
+                  index: 0,
+                  routes: [{ name: 'LoginScreen' }],
+                });
+              }}
+            >
+              <Text style={styles(wp, hp).buttonText}>Yes</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </Modal>
     </ImageBackground>
   );
 };

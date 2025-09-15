@@ -13,10 +13,12 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import { useNavigation, NavigationProp } from '@react-navigation/native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import styles from './goalsDashboardStyles';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 const GoalsDashboardScreen = () => {
   const { wp, hp } = useResponsive();
   const navigation = useNavigation<NavigationProp<any>>();
+  const { top, bottom } = useSafeAreaInsets();
   const [progressRating, setProgressRating] = useState(6);
   const [steps, setSteps] = useState([
     { id: 1, text: 'Wake up early', completed: false },
@@ -52,7 +54,7 @@ const GoalsDashboardScreen = () => {
       source={require('../../Theme/assets/image/background.png')}
       style={styles(wp, hp).bgimg}
     >
-      <View style={styles(wp, hp).mainContainer}>
+      <View style={[styles(wp, hp).mainContainer, { paddingTop: top, paddingBottom: bottom }]}>
         <ScrollView
           style={styles(wp, hp).container}
           contentContainerStyle={styles(wp, hp).scrollContent}

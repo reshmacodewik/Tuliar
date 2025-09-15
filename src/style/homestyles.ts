@@ -320,6 +320,18 @@ const styles = (wp: any, hp: any) =>
       alignItems: 'center',
       zIndex: 1000,
     },
+     thoughtBoxcontainer: {
+      backgroundColor: '#fff',
+      borderRadius: wp(3),
+      padding: wp(4),
+      marginBottom:hp(3.5)
+    },
+    sharetitle: {
+      fontSize: wp(4),
+      fontFamily: 'Poppins-Bold',
+      marginBottom: hp(2),
+      color: '#000',
+    },
     fab: {
       width: wp(17),
       height: wp(17),
@@ -361,6 +373,12 @@ const styles = (wp: any, hp: any) =>
       flexDirection: 'row',
       alignItems: 'center',
       marginBottom: hp(1),
+    },
+    feedspace: {
+      flex: 1,
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      alignItems: 'center',
     },
     feedAvatar: {
       width: wp(8),
@@ -422,7 +440,7 @@ const styles = (wp: any, hp: any) =>
       flexDirection: 'row',
       paddingHorizontal: wp(4),
       paddingVertical: hp(1),
-      marginLeft:wp(-3.5),
+      marginLeft: wp(-3.5),
       gap: wp(3),
     },
     featureBox: {
@@ -460,6 +478,62 @@ const styles = (wp: any, hp: any) =>
       fontFamily: 'Poppins-SemiBold',
       lineHeight: wp(3.2),
       fontWeight: '600',
+    },
+    overlay: {
+      flex: 1,
+
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
+    Modalcontainer: {
+      width: '80%',
+      backgroundColor: '#fff',
+      borderRadius: 20,
+      alignItems: 'center',
+      padding: 20,
+    },
+    Modalicon: {
+      width: 60,
+      height: 60,
+      marginBottom: 10,
+      resizeMode: 'contain',
+    },
+    Modaltitle: {
+      fontSize: 20,
+      fontWeight: '700',
+      marginBottom: 10,
+    },
+    subtitle: {
+      textAlign: 'center',
+      fontSize: 14,
+      color: '#666',
+      marginBottom: 20,
+    },
+    button: {
+      backgroundColor: '#234F34',
+      borderRadius: 50,
+      paddingVertical: 12,
+      paddingHorizontal: 40,
+      marginBottom: 10,
+    },
+    postbutton: {
+      backgroundColor: '#264734',
+      paddingVertical: hp(1.1),
+      borderRadius: wp(10),
+      alignItems: 'center',
+      width: '48%',
+      alignSelf: 'flex-end',
+      marginTop:wp(5)
+    },
+    buttonText: {
+      color: '#fff',
+      fontWeight: '700',
+      fontSize: 16,
+    },
+    cancelText: {
+      color: '#234F34',
+      fontSize: 14,
+      marginTop: 5,
     },
   });
 

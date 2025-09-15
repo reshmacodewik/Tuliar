@@ -15,6 +15,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import { useNavigation, NavigationProp } from '@react-navigation/native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import styles from './createStepsStyles';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 const CreateStepsScreen = () => {
   const { wp, hp } = useResponsive();
@@ -22,6 +23,7 @@ const CreateStepsScreen = () => {
   const [stepText, setStepText] = useState('');
   const [isRecurring, setIsRecurring] = useState(false);
   const [steps, setSteps] = useState<string[]>([]);
+    const { top, bottom } = useSafeAreaInsets();
 
   const handleBackPress = () => {
     navigation.goBack();
@@ -55,7 +57,7 @@ const CreateStepsScreen = () => {
       source={require('../../Theme/assets/image/background.png')}
       style={styles(wp, hp).bgimg}
     >
-      <View style={styles(wp, hp).mainContainer}>
+      <View style= {[styles(wp, hp).mainContainer, { paddingTop: top, paddingBottom: bottom }]}>
         <ScrollView
           style={styles(wp, hp).container}
           contentContainerStyle={styles(wp, hp).scrollContent}

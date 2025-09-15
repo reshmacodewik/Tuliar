@@ -39,6 +39,13 @@ export default (wp: (v: number) => number, hp: (v: number) => number) =>
       marginBottom: hp(1),
       color: '#222',
     },
+    errorText: {
+      color: 'red',
+      fontSize: 12,
+      paddingHorizontal: wp(8),
+      marginBottom: wp(2),
+      alignSelf: 'flex-start',
+    },
     inputRow: {
       flexDirection: 'row',
       alignItems: 'center',
