@@ -157,14 +157,14 @@ const styles = (wp: any, hp: any) => {
       backgroundColor: 'rgba(0, 0, 0, 0.5)',
       justifyContent: 'center',
       alignItems: 'center',
-      height: hp(100),
+     
    
     },
     modalContainer: {
       backgroundColor: '#fff',
       borderRadius: wp(4),
       width: wp(100),
-      maxHeight: hp(80),
+     
       paddingHorizontal: wp(4),
       paddingVertical: hp(3),
       shadowColor: '#000',
@@ -172,7 +172,7 @@ const styles = (wp: any, hp: any) => {
       shadowOpacity: 0.25,
       shadowRadius: 8,
       elevation: 8,
-      height: '100%',
+     
       
    
     },

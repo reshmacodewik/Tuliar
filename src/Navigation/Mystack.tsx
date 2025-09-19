@@ -58,6 +58,7 @@ import MyFeedDetail from '../Screens/Home/MyFeedDetail';
 import { RootStackParamList } from './types';
 import { useAuth } from '../Screens/Auth/AuthContext';
 import SessionPaymentScreen from '../Screens/Explore/SessionPaymentScreen';
+import TherapistListScreen from '../Screens/Therapy/TherapistListScreen';
 
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -127,6 +128,7 @@ const PrivateStack = () => (
     <Stack.Screen name="ExploreScreen" component={ExploreScreen} />
     <Stack.Screen name="MyFeedDetail" component={MyFeedDetail} />
     <Stack.Screen name="SessionPaymentScreen" component={SessionPaymentScreen} />
+    <Stack.Screen name="TherapistListScreen" component={TherapistListScreen}/>
   </Stack.Navigator>
 );
 

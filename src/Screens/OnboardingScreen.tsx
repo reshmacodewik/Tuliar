@@ -1,7 +1,13 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, { useState, useRef } from 'react';
 import AppIntroSlider from 'react-native-app-intro-slider';
-import { View, Text, Image, TouchableOpacity, ImageBackground } from 'react-native';
+import {
+  View,
+  Text,
+  Image,
+  TouchableOpacity,
+  ImageBackground,
+} from 'react-native';
 import { useResponsive } from 'react-native-responsive-hook';
 import { useNavigation, NavigationProp } from '@react-navigation/native';
 import styles from '../style/onboarding';
@@ -36,29 +42,22 @@ const OnboardingScreen: React.FC = () => {
   const [activeIndex, setActiveIndex] = useState(0);
   const sliderRef = useRef<AppIntroSlider>(null);
 
-  const handleGetStarted = () => {
-    if (activeIndex < slides.length - 1) {
-      // Go to next slide
-      sliderRef.current?.goToSlide(activeIndex + 1);
-    } else {
-      // Navigate to LoginScreen on last slide
-      navigation.navigate('LoginScreen');
-    }
-  };
+const handleGetStarted = () => {
+  if (activeIndex < slides.length - 1) {
+    // Go to next slide
+    sliderRef.current?.goToSlide(activeIndex + 1);
+  } else {
+    // Navigate to LoginScreen on last slide
+    navigation.navigate('LoginScreen');
+  }
+};
 
-  const renderItem = ({ item }: { item: typeof slides[0] }) => (
+  const renderItem = ({ item }: { item: (typeof slides)[0] }) => (
     <ImageBackground
       source={require('../../src/Theme/assets/image/background.png')}
       style={styles.container}
       resizeMode="cover"
     >
-      <TouchableOpacity
-        style={[styles.skipButton, { top: hp(5), right: wp(5) }]}
-        onPress={() => navigation.navigate('LoginScreen')}
-      >
-        <Text style={styles.skipText}>Skip</Text>
-      </TouchableOpacity>
-
       <Image source={item.image} style={styles.image} />
 
       <View style={styles.dotContainer}>
@@ -75,7 +74,11 @@ const OnboardingScreen: React.FC = () => {
         <Text
           style={[
             styles.title,
-            { fontSize: wp(10), fontFamily: 'Urbanist-SemiBold', color: '#000' },
+            {
+              fontSize: wp(10),
+              fontFamily: 'Urbanist-SemiBold',
+              color: '#000',
+            },
           ]}
         >
           {item.titleLine1}
@@ -99,13 +102,17 @@ const OnboardingScreen: React.FC = () => {
 
       {/* Get Started button */}
       <TouchableOpacity style={styles.button} onPress={handleGetStarted}>
-        <Text style={styles.buttonText}>
-          {activeIndex === slides.length - 1 ? 'Get Started' : 'Get Started'}
-        </Text>
+        <Text style={styles.buttonText}>{'Get Started'}</Text>
       </TouchableOpacity>
 
       <Text style={styles.bottomText}>
-        Returning user? <Text style={styles.signUpText}  onPress={() => navigation.navigate('SignUpScreen')}>Sign up</Text>
+        Returning user?{' '}
+        <Text
+          style={styles.signUpText}
+          onPress={() => navigation.navigate('SignUpScreen')}
+        >
+          Sign up
+        </Text>
       </Text>
     </ImageBackground>
   );
@@ -120,7 +127,7 @@ const OnboardingScreen: React.FC = () => {
       showDoneButton={false}
       dotStyle={{ display: 'none' }} // Hide default dots
       activeDotStyle={{ display: 'none' }} // Hide active dot
-      onSlideChange={(index) => setActiveIndex(index)}
+      onSlideChange={index => setActiveIndex(index)}
     />
   );
 };

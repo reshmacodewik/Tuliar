@@ -19,7 +19,7 @@ const styles = (wp: any, hp: any) => {
       paddingHorizontal: wp(2),
       paddingTop: hp(0),
       paddingBottom: hp(0),
-      marginLeft:wp(-5)
+      marginLeft: wp(-5),
     },
     backButton: {
       width: wp(10),
@@ -118,32 +118,28 @@ const styles = (wp: any, hp: any) => {
       color: '#000',
       marginBottom: hp(1),
       fontWeight: '700',
-     
     },
-     cardTitlegoal: {
+    cardTitlegoal: {
       fontSize: isTablet ? wp(4.5) : 16,
       fontFamily: 'Poppins-SemiBold',
       color: '#000',
       marginBottom: hp(0),
-      marginLeft:wp(-2),
+      marginLeft: wp(-2),
       fontWeight: '700',
-      marginTop:wp(3)
-     
+      marginTop: wp(3),
     },
     cardSubtitle: {
       fontSize: isTablet ? wp(3.5) : 14,
       fontFamily: 'Poppins-Light',
       color: '#A7A7A7',
-      
     },
     cardSubtitlegoal: {
       fontSize: isTablet ? wp(3.5) : 14,
       fontFamily: 'Poppins-Light',
       color: '#A7A7A7',
-      marginHorizontal:wp(3),
-      marginTop:wp(-8),
-      marginBottom:wp(3)
-     
+      marginHorizontal: wp(3),
+      marginTop: wp(-8),
+      marginBottom: wp(3),
     },
     cardButton: {
       backgroundColor: '#ECA14C',
@@ -181,30 +177,27 @@ const styles = (wp: any, hp: any) => {
       fontSize: isTablet ? wp(4) : 16,
       fontFamily: 'Poppins-Bold',
       color: '#000',
-      marginBottom: hp(1),
-      marginTop: hp(-1),
+ 
       fontWeight: '700',
     },
     calendarContainer: {
       borderRadius: wp(4),
-      padding: wp(6),
-      width: wp(53),
-      marginTop: hp(-3.5),
-      marginLeft: wp(-7),
+      width: '100%',
+ 
+   
     },
     customCalendarHeader: {
       backgroundColor: '#264734',
       borderTopLeftRadius: 0,
       borderTopRightRadius: 0,
-      paddingVertical: hp(0),
-      paddingBottom: wp(1),
-      paddingHorizontal: wp(2.5),
+      paddingVertical:5,
+      paddingHorizontal:10
     },
     calendarHeaderYear: {
       color: '#BFC9C6',
       fontSize: 10,
       fontFamily: 'Montserrat-Medium',
-      marginTop:wp(0.5)
+      marginTop: wp(0.5),
     },
     calendarHeaderDate: {
       color: '#fff',
@@ -226,8 +219,8 @@ const styles = (wp: any, hp: any) => {
       flexDirection: 'row',
       flexWrap: 'wrap',
       justifyContent: 'space-between',
-      marginTop: hp(1.5),
-      paddingBottom: wp(-10),
+      marginTop: hp(1),
+     
     },
     calendarDay: {
       width: '13%',
@@ -235,8 +228,6 @@ const styles = (wp: any, hp: any) => {
       alignItems: 'center',
       justifyContent: 'center',
       borderRadius: wp(2),
-      marginBottom: hp(1),
-      marginTop: hp(-1.4),
     },
     calendarDaySelected: {
       borderRadius: wp(10),
@@ -389,13 +380,15 @@ const styles = (wp: any, hp: any) => {
     },
     goalsCalendarSection: {
       flexDirection: 'row',
-      gap: wp(3),
+      flexWrap: 'wrap', // ✅ allow wrapping
+      justifyContent: 'space-between',
       marginTop: hp(2),
       marginBottom: hp(2),
-      width:'100%'
+      width: '100%',
     },
-    goalsCard: {
-      flex: 0,
+
+    gridCard: {
+      flexBasis: '48%', // ✅ 2 columns
       backgroundColor: '#fff',
       borderRadius: wp(3),
       padding: wp(4),
@@ -404,31 +397,34 @@ const styles = (wp: any, hp: any) => {
       shadowOpacity: 0.1,
       shadowRadius: 4,
       elevation: 3,
-      height: hp(23),
-       width:'45%'
+      marginBottom: hp(2), // ✅ space between rows
+    
     },
+
     goalsCardHeader: {
       flexDirection: 'row',
       alignItems: 'flex-start',
       marginBottom: hp(2),
     },
+
     goalsCardContent: {
       flex: 1,
       marginLeft: wp(3),
     },
+
     calendarCard: {
       flex: 1,
       backgroundColor: '#fff',
       borderRadius: wp(3),
       padding: wp(4),
-       width:'50%',
       shadowColor: '#000',
       shadowOffset: { width: 0, height: 2 },
       shadowOpacity: 0.1,
       shadowRadius: 4,
       elevation: 3,
-      height: hp(23),
+      marginLeft: wp(2), // spacing between grid items
     },
+
     trackButton: {
       backgroundColor: '#ECA14C',
       paddingVertical: hp(0.5),

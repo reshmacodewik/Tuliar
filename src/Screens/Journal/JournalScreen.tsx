@@ -14,7 +14,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import { useNavigation, NavigationProp } from '@react-navigation/native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import styles from './journalStyles';
-import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 const journeyCards = [
   {
@@ -42,7 +42,7 @@ const JournalScreen = () => {
   const [selectedSlot, setSelectedSlot] = useState('');
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [currentMonth, setCurrentMonth] = useState(new Date());
-    const { top, bottom } = useSafeAreaInsets();
+  const { top, bottom } = useSafeAreaInsets();
 
   const handleBackPress = () => {
     navigation.goBack();
@@ -137,7 +137,7 @@ const JournalScreen = () => {
         </TouchableOpacity>
         <Text
           style={{
-            fontSize: wp(4),
+            fontSize: wp(3),
             color: '#264734',
             fontFamily: 'Poppins-Bold',
           }}
@@ -224,30 +224,33 @@ const JournalScreen = () => {
       source={require('../../Theme/assets/image/background.png')}
       style={styles(wp, hp).bgimg}
     >
-     
       <ScrollView
-          style={styles(wp, hp).container}
-          contentContainerStyle={styles(wp, hp).scrollContent}
-          showsVerticalScrollIndicator={false}
+        style={styles(wp, hp).container}
+        contentContainerStyle={styles(wp, hp).scrollContent}
+        showsVerticalScrollIndicator={false}
+      >
+        <View
+          style={[
+            styles(wp, hp).mainContainer,
+            { paddingTop: top, paddingBottom: bottom },
+          ]}
         >
-       <View style={[styles(wp, hp).mainContainer, { paddingTop: top, paddingBottom: bottom }]}>
-        {/* Header */}
-        <View style={styles(wp, hp).header}>
-          <TouchableOpacity
-            onPress={handleBackPress}
-            style={styles(wp, hp).backButton}
-          >
-            <MaterialIcons
-              name="keyboard-arrow-left"
-              size={wp(8.5)}
-              color="#000"
-            />
-          </TouchableOpacity>
-          <Text style={styles(wp, hp).headerTitle}>My Journey</Text>
-          <View style={styles(wp, hp).headerSpacer} />
-        </View>
+          {/* Header */}
+          <View style={styles(wp, hp).header}>
+            <TouchableOpacity
+              onPress={handleBackPress}
+              style={styles(wp, hp).backButton}
+            >
+              <MaterialIcons
+                name="keyboard-arrow-left"
+                size={wp(8.5)}
+                color="#000"
+              />
+            </TouchableOpacity>
+            <Text style={styles(wp, hp).headerTitle}>My Journey</Text>
+            <View style={styles(wp, hp).headerSpacer} />
+          </View>
 
-        
           {/* Greeting Section */}
           <View style={styles(wp, hp).greetingSection}>
             <Text style={styles(wp, hp).greetingTitle}>
@@ -258,7 +261,7 @@ const JournalScreen = () => {
             </Text>
           </View>
 
-                    {/* Journey Cards */}
+          {/* Journey Cards */}
           <View style={styles(wp, hp).cardsSection}>
             {journeyCards.map((card, index) => (
               <TouchableOpacity
@@ -275,22 +278,21 @@ const JournalScreen = () => {
                       />
                     </View>
                     <View style={styles(wp, hp).cardText}>
-                        <View style={styles(wp, hp).cardTitleContainer}>
-                      <Text style={styles(wp, hp).cardTitle}>
-                        {card.title}
-                      </Text>
-                      <TouchableOpacity style={styles(wp, hp).cardButton}>
-                    <Text style={styles(wp, hp).buttonText}>
-                      {card.buttonText}
-                    </Text>
-                  </TouchableOpacity>
-                  </View>
+                      <View style={styles(wp, hp).cardTitleContainer}>
+                        <Text style={styles(wp, hp).cardTitle}>
+                          {card.title}
+                        </Text>
+                        <TouchableOpacity style={styles(wp, hp).cardButton}>
+                          <Text style={styles(wp, hp).buttonText}>
+                            {card.buttonText}
+                          </Text>
+                        </TouchableOpacity>
+                      </View>
                       <Text style={styles(wp, hp).cardSubtitle}>
                         {card.subtitle}
                       </Text>
                     </View>
                   </View>
-                 
                 </View>
               </TouchableOpacity>
             ))}
@@ -299,7 +301,7 @@ const JournalScreen = () => {
           {/* Goals and Calendar Cards */}
           <View style={styles(wp, hp).goalsCalendarSection}>
             {/* Goals Card */}
-            <View style={styles(wp, hp).goalsCard}>
+            <View style={styles(wp, hp).gridCard}>
               <View style={styles(wp, hp).goalsCardHeader}>
                 <View style={styles(wp, hp).cardIcon}>
                   <Image
@@ -309,28 +311,25 @@ const JournalScreen = () => {
                 </View>
                 <View style={styles(wp, hp).goalsCardContent}>
                   <Text style={styles(wp, hp).cardTitlegoal}>Goals</Text>
-                  
                 </View>
-                
               </View>
+
               <Text style={styles(wp, hp).cardSubtitlegoal}>
-                    You're on Goal 2 of 4
-                  </Text>
-              <TouchableOpacity 
+                You're on Goal 2 of 4
+              </Text>
+
+              <TouchableOpacity
                 style={styles(wp, hp).cardButtonGoal}
                 onPress={() => navigation.navigate('GoalsScreen')}
               >
                 <Text style={styles(wp, hp).buttonText}>Set Goal</Text>
               </TouchableOpacity>
             </View>
-
-            {/* Calendar Card */}
-            <View style={styles(wp, hp).calendarCard}>
+            <View style={styles(wp, hp).gridCard}>
               <Text style={styles(wp, hp).calendarTitle}>Calendar</Text>
               {renderCalendar()}
             </View>
           </View>
-
           {/* Weekly Progress Card */}
           <View style={styles(wp, hp).journeyCard}>
             <View style={styles(wp, hp).progressCardContent}>
@@ -378,9 +377,9 @@ const JournalScreen = () => {
             </View>
           </View>
 
-        {/* Bottom Action Bar */}
-      </View>
-       </ScrollView>
+          {/* Bottom Action Bar */}
+        </View>
+      </ScrollView>
     </ImageBackground>
   );
 };

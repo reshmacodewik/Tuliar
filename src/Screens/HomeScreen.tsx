@@ -22,7 +22,7 @@ import LinearGradient from 'react-native-linear-gradient';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Feather from 'react-native-vector-icons/Feather';
 import { apiPost, apiPUT, getApiByParams } from '../utils/api/common';
-import { getSession } from '../storage/mmkvPersister';
+import { clearSession, getSession } from '../storage/mmkvPersister';
 import {
   useNavigation,
   useRoute,
@@ -40,6 +40,7 @@ import { API_FEED_CREATE, API_FEED_UPDATE } from '../utils/api/APIConstant';
 import { htmlToPlainText } from '../components/htmlToPlainText';
 import FeedPost from '../components/FeedPost';
 import { RootStackParamList } from '../Navigation/types';
+
 const features = [
   {
     title: 'Chat with experts',
@@ -67,7 +68,7 @@ const HomeScreen = () => {
   const [thought, setThought] = useState('');
   const route = useRoute<RouteProp<RootStackParamList, 'MyFeedDetail'>>();
   //const editId = route.params?.id; // ✅ id if editing
- 
+
   const s = styles(wp, hp);
   const richText = useRef<RichEditor>(null);
 
@@ -93,8 +94,6 @@ const HomeScreen = () => {
   //     fetchFeedDetail();
   //   }
   // }, [editId]);
-
-
 
   const handlePost = async () => {
     try {
@@ -291,7 +290,7 @@ const HomeScreen = () => {
                   } else if (item.title === 'Group Sessions') {
                     navigation.navigate('GroupSessionsScreen');
                   } else if (item.title === 'Therapy') {
-                    navigation.navigate('TherapyScreen');
+                    navigation.navigate('TherapistListScreen');
                   }
                 }}
               >
@@ -317,7 +316,7 @@ const HomeScreen = () => {
             <View style={styles(wp, hp).sectionHeader}>
               <Text style={styles(wp, hp).sectionTitle}>My Journey</Text>
               <TouchableOpacity
-                onPress={() => navigation.navigate('GoalsScreen')}
+                onPress={() => navigation.navigate('JournalScreen')}
               >
                 <Ionicons name="chevron-forward" size={wp(7)} color="#000" />
               </TouchableOpacity>
@@ -443,7 +442,7 @@ const HomeScreen = () => {
               </TouchableOpacity>
             </View>
             <View style={s.thoughtBoxcontainer}>
-                <Text style={s.sharetitle}>Share your Thoughts</Text>
+              <Text style={s.sharetitle}>Share your Thoughts</Text>
 
               <View
                 style={{
@@ -528,20 +527,25 @@ const HomeScreen = () => {
 
             <TouchableOpacity
               style={styles(wp, hp).button}
-              onPress={() => {
-                setLogoutVisible(false);
+              onPress={async () => {
+                try {
+                  // 🔹 Clear AsyncStorage
+                 clearSession();
 
-                // 🔹 Clear session (AsyncStorage/MMKV/Redux etc.)
-                // await AsyncStorage.clear();
-                // dispatch(clearAuth());
+                  // 🔹 If you’re using Redux, also dispatch logout
+                  // dispatch(logout());
 
-                navigation.reset({
-                  index: 0,
-                  routes: [{ name: 'LoginScreen' }],
-                });
+                  // 🔹 Close modal
+                  setLogoutVisible(false);
+
+                  
+                 navigation.navigate('LoginScreen');
+                } catch (err) {
+                  console.log('Error clearing session:', err);
+                }
               }}
             >
-              <Text style={styles(wp, hp).buttonText}>Yes</Text>
+              <Text style={styles(wp, hp).buttonText}>Logout</Text>
             </TouchableOpacity>
           </View>
         </View>

@@ -25,7 +25,7 @@ import {
 
 import Feedpopup from '../../components/Feedpopup';
 import ShowToast from '../../utils/ShowToast';
-import { API_FEED_CREATE, API_FEED_UPDATE } from '../../utils/api/APIConstant';
+import { API_FEED_CREATE, API_FEED_LIST, API_FEED_UPDATE } from '../../utils/api/APIConstant';
 import {
   apiPost,
   apiPATCH,
@@ -55,27 +55,30 @@ const MyFeedDetail = () => {
   const richText = useRef<RichEditor>(null);
 
   // Prefill editor when editing
-  useEffect(() => {
-    if (editId) {
-      const fetchFeedDetail = async () => {
-        try {
-          const session = getSession();
-          const token = session?.accessToken;
-          const res = await getApiByParams({
-            url: '/feed',
-            params: editId,
-          });
-          if (res?.success && res.data?.content) {
-            setThought(res.data.content);
-            richText.current?.setContentHTML(res.data.content);
-          }
-        } catch (e) {
-          console.error('Error loading feed:', e);
+ useEffect(() => {
+  if (editId) {
+    const fetchFeedDetail = async () => {
+      try {
+        const res = await getApiByParams({
+          url: API_FEED_LIST,
+          params: editId,
+        });
+
+     
+        if (res?.success && res?.data?.length > 0) {
+         
+          const content = res.data[0].content; 
+          setThought(content); 
+          richText.current?.setContentHTML(content); 
         }
-      };
-      fetchFeedDetail();
-    }
-  }, [editId]);
+      } catch (e) {
+        console.error('Error loading feed:', e);
+      }
+    };
+    fetchFeedDetail();
+  }
+}, [editId]);
+
 
   const handlePost = async () => {
     try {

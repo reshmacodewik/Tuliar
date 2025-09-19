@@ -1,6 +1,7 @@
 import * as Yup from 'yup';
 
-export const signupSchema = Yup.object()
+
+  export const signupSchema = Yup.object()
   .shape({
     fullName: Yup.string().required('Full Name is required'),
     nickName: Yup.string().required('Nick Name is required'),
@@ -8,12 +9,19 @@ export const signupSchema = Yup.object()
     password: Yup.string()
       .min(6, 'Password must be at least 6 characters')
       .required('Password is required'),
-    phoneNo: Yup.string().required('Phone Number is required'),
+    phoneNo: Yup.string()
+      .required('Phone Number is required')
+      .length(10, 'Phone number must be exactly 10 digits')
+      .matches(/^[0-9]+$/, 'Phone number must be a valid number'),
     gender: Yup.string().required('Gender is required'),
-
     day: Yup.string().required('Day is required'),
     month: Yup.string().required('Month is required'),
     year: Yup.string().required('Year is required'),
+
+    // Add Terms and Conditions field
+    agree: Yup.boolean()
+      .oneOf([true], 'You must accept the terms and conditions')
+      .required('You must accept the terms and conditions'),
   })
   .test('valid-dob', 'Invalid date of birth', values => {
     const { day, month, year } = values as any;
@@ -22,6 +30,7 @@ export const signupSchema = Yup.object()
     const dob = new Date(`${year}-${month}-${day}`);
     return !isNaN(dob.getTime()); // ✅ only valid if real date
   });
+
 
 export const loginSchema = Yup.object().shape({
   email: Yup.string().email('Invalid email').required('Email is required'),

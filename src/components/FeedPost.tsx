@@ -164,7 +164,7 @@ const FeedPost: React.FC<FeedPostProps> = ({ refreshKey }) => {
                         TriggerTouchableComponent: TouchableOpacity,
                         triggerWrapper: { padding: wp(1.5) },
                       }}
-                      hitSlop={{ top: 6, bottom: 6, left: 6, right: 6 }}
+                      //hitSlop={{ top: 6, bottom: 6, left: 6, right: 6 }}
                     >
                       <Ionicons
                         name="ellipsis-vertical"

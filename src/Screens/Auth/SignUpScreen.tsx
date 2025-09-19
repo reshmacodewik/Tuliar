@@ -26,6 +26,7 @@ const SignUpScreen = () => {
   const [agree, setAgree] = useState(false);
   const [loading, setLoading] = useState(false);
   const [showPicker, setShowPicker] = useState(false);
+
   const formik = useFormik({
     initialValues: {
       fullName: '',
@@ -38,9 +39,11 @@ const SignUpScreen = () => {
       month: '',
       day: '',
       year: '',
+      agree: false,
     },
     validationSchema: signupSchema,
     onSubmit: async values => {
+      console.log('======', values);
       try {
         // Construct DOB properly
         const dob = `${values.year}-${values.month}-${values.day}`;
@@ -48,6 +51,7 @@ const SignUpScreen = () => {
           url: API_REGISTER,
           values: { ...values, dob },
         });
+        console.log('======', res);
         if (res?.success) {
           ShowToast(res?.message, 'success');
           (navigation as any).navigate('VerificationCode', {
@@ -65,6 +69,7 @@ const SignUpScreen = () => {
       }
     },
   });
+
   const months = Array.from({ length: 12 }, (_, i) => ({
     label: `${i + 1}`,
     value: `${i + 1}`,
@@ -177,7 +182,7 @@ const SignUpScreen = () => {
         <Text style={styles.label}>Select your gender</Text>
         <View style={styles.genderPicker}>
           <Dropdown
-          style={styles.genderdrop}
+            style={styles.genderdrop}
             data={[
               { label: 'Male', value: 'male' },
               { label: 'Female', value: 'female' },
@@ -189,9 +194,6 @@ const SignUpScreen = () => {
             value={formik.values.gender}
             onChange={item => formik.setFieldValue('gender', item.value)}
           />
-          {formik.touched.gender && formik.errors.gender && (
-            <Text style={styles.errorText}>{formik.errors.gender}</Text>
-          )}
         </View>
         {formik.touched.gender && formik.errors.gender && (
           <Text style={styles.errorText}>{formik.errors.gender}</Text>
@@ -205,7 +207,12 @@ const SignUpScreen = () => {
             onPress={() => setShowPicker(true)}
           >
             <Text>{formik.values.countryCode}</Text>
-            <Ionicons name="chevron-down" size={16} color="#555" style={{ marginLeft: 12 }} />
+            <Ionicons
+              name="chevron-down"
+              size={16}
+              color="#555"
+              style={{ marginLeft: 12 }}
+            />
           </TouchableOpacity>
 
           <TextInput
@@ -240,8 +247,8 @@ const SignUpScreen = () => {
         {/* Terms */}
         <View style={styles.termsRow}>
           <CheckBox
-            value={agree}
-            onValueChange={setAgree}
+            value={formik.values.agree}
+            onValueChange={value => formik.setFieldValue('agree', value)}
             tintColors={{ true: '#264734', false: '#000' }}
           />
           <Text style={styles.termsText}>
@@ -249,6 +256,9 @@ const SignUpScreen = () => {
             <Text style={styles.linkText}>Terms & Conditions</Text> and{' '}
             <Text style={styles.linkText}>Privacy Policy</Text>.
           </Text>
+          {formik.touched.agree && formik.errors.agree && (
+            <Text style={styles.errorText}>{formik.errors.agree}</Text>
+          )}
         </View>
 
         {/* Submit */}
@@ -263,25 +273,25 @@ const SignUpScreen = () => {
           <Text style={styles.signUpText}>
             {loading ? 'Signing Up...' : 'Sign Up'}
           </Text>
+          
         </TouchableOpacity>
-          <CountryPicker
-        show={showPicker}
-        lang="en" // ✅ Required prop
-        pickerButtonOnPress={item => {
-          formik.setFieldValue('countryCode', item.dial_code);
-          setShowPicker(false);
-        }}
-        style={{
-          modal: {
-            height: 400,
-          },
-          countryButtonStyles: {
-            paddingVertical: 12,
-          },
-        }}
-      />
+        <CountryPicker
+          show={showPicker}
+          lang="en" // ✅ Required prop
+          pickerButtonOnPress={item => {
+            formik.setFieldValue('countryCode', item.dial_code);
+            setShowPicker(false);
+          }}
+          style={{
+            modal: {
+              height: 400,
+            },
+            countryButtonStyles: {
+              paddingVertical: 12,
+            },
+          }}
+        />
       </ScrollView>
-    
     </ImageBackground>
   );
 };
