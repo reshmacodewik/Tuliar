@@ -8,7 +8,7 @@ const styles = (wp: any, hp: any) =>
     },
     container: {
       paddingHorizontal: wp(4),
-      paddingTop: hp(3),
+      paddingTop: hp(0),
     },
     headerRow: {
       flexDirection: 'row',

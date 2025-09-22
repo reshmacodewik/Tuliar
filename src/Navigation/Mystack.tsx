@@ -28,7 +28,11 @@ import PaymentsMainScreen from '../Screens/payments/PaymentsMainScreen';
 import PaymentDetailsScreen from '../Screens/payments/PaymentDetailsScreen';
 import AddCardScreen from '../Screens/payments/AddCardScreen';
 import EarnPointsScreen from '../Screens/payments/EarnPointsScreen';
-import { ChatWithExpertsScreen, PeerChatScreen, ChatConfirmationScreen } from '../Screens/ChatWithExperts';
+import {
+  ChatWithExpertsScreen,
+  PeerChatScreen,
+  ChatConfirmationScreen,
+} from '../Screens/ChatWithExperts';
 import AIPeerChatScreen from '../Screens/ChatWithExperts/AIPeerChatScreen';
 import PeerChat from '../Screens/ChatWithExperts/PeerChat';
 import GroupSessionsScreen from '../Screens/GroupSessions';
@@ -59,9 +63,25 @@ import { RootStackParamList } from './types';
 import { useAuth } from '../Screens/Auth/AuthContext';
 import SessionPaymentScreen from '../Screens/Explore/SessionPaymentScreen';
 import TherapistListScreen from '../Screens/Therapy/TherapistListScreen';
-
+import { ImageBackground, Text, TouchableOpacity } from 'react-native';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
+const CustomHeader = ({ navigation, route, options }: any) => {
+  return (
+  
+      <TouchableOpacity
+        onPress={() => navigation.goBack()}
+        style={{ flexDirection: 'row', alignItems: 'center' }}
+      >
+        <MaterialIcons name="keyboard-arrow-left" size={30} color="#000" />
+        <Text style={{ fontSize: 18, fontWeight: 'bold', marginLeft: 8 }}>
+          {options.title || route.name}
+        </Text>
+      </TouchableOpacity>
+  
+  );
+};
 
 const PublicStack = () => (
   <Stack.Navigator screenOptions={{ headerShown: false }}>
@@ -75,34 +95,57 @@ const PublicStack = () => (
 );
 
 const PrivateStack = () => (
-  <Stack.Navigator screenOptions={{ headerShown: false }}>
+  <Stack.Navigator
+    screenOptions={{ headerShown: false }}
+  >
     <Stack.Screen name="HomeScreen" component={BottomTabs} />
     <Stack.Screen name="JournalScreen" component={JournalScreen} />
     <Stack.Screen name="SearchScreen" component={SearchScreen} />
     <Stack.Screen name="EventDetailsScreen" component={EventDetailsScreen} />
     <Stack.Screen name="ReviewPaymentScreen" component={ReviewPaymentScreen} />
-    <Stack.Screen name="PaymentConfirmationScreen" component={PaymentConfirmationScreen} />
+    <Stack.Screen
+      name="PaymentConfirmationScreen"
+      component={PaymentConfirmationScreen}
+    />
     <Stack.Screen name="DoctorProfileScreen" component={DoctorProfileScreen} />
     <Stack.Screen name="BookAppointment" component={BookAppointment} />
     <Stack.Screen name="MyJourneyScreen" component={MyJourneyScreen} />
     <Stack.Screen name="IncomingCallScreen" component={IncomingCallScreen} />
     <Stack.Screen name="VideoCallScreen" component={VideoCallScreen} />
     <Stack.Screen name="Coaching" component={Coaching} />
-    <Stack.Screen name="OnboardingJourney" component={OnboardingJourneyScreen} />
+    <Stack.Screen
+      name="OnboardingJourney"
+      component={OnboardingJourneyScreen}
+    />
     <Stack.Screen name="Questionnaire" component={QuestionnaireScreen} />
     <Stack.Screen name="Subscription" component={SubscriptionScreen} />
     <Stack.Screen name="MentorshipApply" component={MentorshipApplyScreen} />
-    <Stack.Screen name="MentorshipConnecting" component={MentorshipConnectingScreen} />
+    <Stack.Screen
+      name="MentorshipConnecting"
+      component={MentorshipConnectingScreen}
+    />
     <Stack.Screen name="DoctorList" component={DoctorListScreen} />
     <Stack.Screen name="PaymentsMainScreen" component={PaymentsMainScreen} />
-    <Stack.Screen name="PaymentDetailsScreen" component={PaymentDetailsScreen} />
+    <Stack.Screen
+      name="PaymentDetailsScreen"
+      component={PaymentDetailsScreen}
+    />
     <Stack.Screen name="AddCardScreen" component={AddCardScreen} />
     <Stack.Screen name="EarnPointsScreen" component={EarnPointsScreen} />
-    <Stack.Screen name="OnboardingJourneyScreen" component={OnboardingJourneyScreen} />
-    <Stack.Screen name="ChatWithExpertsScreen" component={ChatWithExpertsScreen} />
+    <Stack.Screen
+      name="OnboardingJourneyScreen"
+      component={OnboardingJourneyScreen}
+    />
+    <Stack.Screen
+      name="ChatWithExpertsScreen"
+      component={ChatWithExpertsScreen}
+    />
     <Stack.Screen name="PeerChatScreen" component={PeerChatScreen} />
     <Stack.Screen name="AIPeerChatScreen" component={AIPeerChatScreen} />
-    <Stack.Screen name="ChatConfirmationScreen" component={ChatConfirmationScreen} />
+    <Stack.Screen
+      name="ChatConfirmationScreen"
+      component={ChatConfirmationScreen}
+    />
     <Stack.Screen name="PeerChat" component={PeerChat} />
     <Stack.Screen name="GroupSessionsScreen" component={GroupSessionsScreen} />
     <Stack.Screen name="GoalsScreen" component={GoalsScreen} />
@@ -113,13 +156,22 @@ const PrivateStack = () => (
     <Stack.Screen name="FindTherapist" component={FindTherapistScreen} />
     <Stack.Screen name="TherapyReasons" component={TherapyReasonsScreen} />
     <Stack.Screen name="UserSurvey" component={UserSurveyScreen} />
-    <Stack.Screen name="TherapistPreference" component={TherapistPreferenceScreen} />
-    <Stack.Screen name="TherapistMatching" component={TherapistMatchingScreen} />
+    <Stack.Screen
+      name="TherapistPreference"
+      component={TherapistPreferenceScreen}
+    />
+    <Stack.Screen
+      name="TherapistMatching"
+      component={TherapistMatchingScreen}
+    />
     <Stack.Screen name="MessagesScreen" component={MessagesScreen} />
     <Stack.Screen name="ChatScreen" component={ChatScreen} />
     <Stack.Screen name="SettingsScreen" component={SettingsScreen} />
     <Stack.Screen name="NotificationsScreen" component={NotificationsScreen} />
-    <Stack.Screen name="ChangePasswordScreen" component={ChangePasswordScreen} />
+    <Stack.Screen
+      name="ChangePasswordScreen"
+      component={ChangePasswordScreen}
+    />
     <Stack.Screen name="HelpSupportScreen" component={HelpSupportScreen} />
     <Stack.Screen name="HelpScreen" component={HelpScreen} />
     <Stack.Screen name="EditProfileScreen" component={EditProfileScreen} />
@@ -127,8 +179,11 @@ const PrivateStack = () => (
     <Stack.Screen name="SessionDetailScreen" component={SessionDetailScreen} />
     <Stack.Screen name="ExploreScreen" component={ExploreScreen} />
     <Stack.Screen name="MyFeedDetail" component={MyFeedDetail} />
-    <Stack.Screen name="SessionPaymentScreen" component={SessionPaymentScreen} />
-    <Stack.Screen name="TherapistListScreen" component={TherapistListScreen}/>
+    <Stack.Screen
+      name="SessionPaymentScreen"
+      component={SessionPaymentScreen}
+    />
+    <Stack.Screen name="TherapistListScreen" component={TherapistListScreen} />
   </Stack.Navigator>
 );
 
