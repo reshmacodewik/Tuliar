@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import {
   View,
   Text,
@@ -7,22 +7,36 @@ import {
   ImageBackground,
   Keyboard,
   Image,
+  BackHandler,
 } from 'react-native';
-import { useNavigation, useRoute } from '@react-navigation/native';
+import { useFocusEffect, useNavigation, useRoute } from '@react-navigation/native';
 import { useFormik } from 'formik';
 import styles from '../../style/otpstyles';
 import { apiPost } from '../../utils/api/common';
 import { API_VERIFY_OTP, API_VERIFY_RESEND } from '../../utils/api/APIConstant';
 import ShowToast from '../../utils/ShowToast';
 import { otpSchema } from '../../validation/signupSchema';
+import type { TextInput as RNTextInput } from 'react-native';
+
+const OTP_LENGTH = 4
+const RESEND_COOL_DOWN_SECONDS = 30;
 
 const VerificationCode = () => {
   const navigation = useNavigation();
-  const inputs = useRef<TextInput[]>([]);
+  const inputs = useRef<Array<RNTextInput | null>>([]);
   const route = useRoute<any>();
   const { email, phoneNo } = route.params || {};
   const [activeIndex, setActiveIndex] = useState<number | null>(0);
   const [otpArray, setOtpArray] = useState(['', '', '', '']);
+  const [resendCoolDown, setResendCoolDown] = useState(0);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+    const setInputRef = useCallback((idx: number) => {
+      return (el: RNTextInput | null): void => {
+        inputs.current[idx] = el;
+      };
+    }, []);
+
 
   const formik = useFormik({
     initialValues: { otp: '' },
@@ -40,7 +54,7 @@ const VerificationCode = () => {
           url: API_VERIFY_OTP,
           values: payload,
         });
-        console.log('res=======================', res);
+        console.log('res=================dddd======', res);
         if (res?.success) {
           ShowToast(res?.message, 'success');
           navigation.navigate('SuccessScreen' as never);
@@ -54,44 +68,67 @@ const VerificationCode = () => {
     },
   });
 
-  // ✅ Handle digit-wise input
   const handleChange = (text: string, index: number) => {
-    if (text.length > 1) return;
+    const digit = text.replace(/\D/g, '').slice(0, 1);
     const newOtp = [...otpArray];
-    newOtp[index] = text;
+    newOtp[index] = digit;
     setOtpArray(newOtp);
-
-    // Update Formik as a joined string
-    formik.setFieldValue('otp', newOtp.join(''));
-
-    if (text && index < 3) {
+    formik.setFieldValue('otp', newOtp.join('').slice(0, 4));
+    if (digit && index < OTP_LENGTH - 1) {
       inputs.current[index + 1]?.focus();
     }
   };
-  const handleResendOTP = async () => {
-    try {
-      Keyboard.dismiss();
-      const payload = {
-        email,
-        phoneNo,
-      };
 
-      const res = await apiPost({
-        url: API_VERIFY_RESEND,
-        values: payload,
-      });
-      console.log('=======================', res);
-
-      if (res?.success) {
-        ShowToast(res?.message, 'success');
-      } else {
-        ShowToast(res?.message || 'OTP verification failed', 'error');
+    const handleResendOTP = async () => {
+      try {
+        console.log(email ,"email-----------", phoneNo);
+        if (!email || !phoneNo) {
+        ShowToast('Please provide email or phone to resend.');
+        return;
       }
-    } catch (error: any) {
-      console.log('OTP Verify error:', error);
-      ShowToast('Error', error?.message || 'Something went wrong');
-    }
-  };
+
+        Keyboard.dismiss();
+        const payload = {
+          email,
+          phoneNo,
+        };
+
+        const res = await apiPost({
+          url: API_VERIFY_RESEND,
+          values: payload,
+        });
+
+        console.log(res ,"res-------dddsaaa---------------");
+
+        if (res?.success) {
+          ShowToast(res?.message, 'success');
+          setResendCoolDown(RESEND_COOL_DOWN_SECONDS);
+        } else {
+          ShowToast(res?.message || 'OTP verification failed', 'error');
+        }
+      } catch (error: any) {
+        console.log('OTP Verify error:', error);
+        ShowToast('Error', error?.message || 'Something went wrong');
+      }
+    };
+
+      useEffect(() => {
+      if (resendCoolDown <= 0) return;
+      const id = setInterval(() => {
+        setResendCoolDown(prev => {
+          if (prev <= 1) {
+            clearInterval(id);
+            return 0;
+          }
+          return prev - 1;
+        });
+      }, 1000);
+      return () => clearInterval(id);
+    }, [resendCoolDown]);
+
+    const confirmDisabled = isSubmitting || (formik.values.otp?.replace(/\D/g, '').length ?? 0) !== OTP_LENGTH;
+
+
   return (
     <ImageBackground
       source={require('../../Theme/assets/image/background.png')}
@@ -114,8 +151,8 @@ const VerificationCode = () => {
           {[0, 1, 2, 3].map((_, index) => (
             <TextInput
               key={index}
-              ref={ref => (inputs.current[index] = ref!)}
-              value={formik.values.otp[index] || ''}
+              ref={setInputRef(index)}     
+                value={otpArray[index] ? otpArray[index][0] : ''}
               onChangeText={text => handleChange(text, index)}
               style={[
                 styles.otpBox,
@@ -135,8 +172,10 @@ const VerificationCode = () => {
 
         <View style={styles.resendRow}>
           <Text style={styles.grayText}>Didn’t get code?</Text>
-          <TouchableOpacity onPress={handleResendOTP}>
-            <Text style={styles.resendText}> Resend OTP</Text>
+          <TouchableOpacity onPress={handleResendOTP}  disabled={resendCoolDown > 0 || isSubmitting}>
+            <Text style={styles.resendText}>
+              {resendCoolDown > 0 ? ` Resend in ${resendCoolDown}s` : ' Resend OTP'}
+            </Text>
           </TouchableOpacity>
         </View>
 
@@ -145,6 +184,7 @@ const VerificationCode = () => {
           onPress={() => {
             formik.handleSubmit();
           }}
+          disabled={confirmDisabled}
         >
           <Text style={styles.buttonText}>Confirm</Text>
         </TouchableOpacity>

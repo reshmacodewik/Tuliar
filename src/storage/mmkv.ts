@@ -1,9 +1,8 @@
-// storage.ts
 import { MMKV } from "react-native-mmkv";
 
 export const storage = new MMKV({
   id: "app-storage",
-  encryptionKey: "optional-32-char-secret", 
+    encryptionKey: 'b7d8f1a2e4c9g6h3k1m5n0p8q2r4s9',
 });
 
 // Helpers for typed access

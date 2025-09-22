@@ -134,12 +134,9 @@ const PrivateStack = () => (
 
 const MyStack: React.FC = () => {
   const { loading, session } = useAuth();
-
   if (loading) {
-    // Show your splash while we check MMKV
     return <SplashScreen />;
   }
-
   return session ? <PrivateStack /> : <PublicStack />;
 };
 

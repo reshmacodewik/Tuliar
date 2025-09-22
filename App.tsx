@@ -1,7 +1,11 @@
 import 'react-native-gesture-handler';
 import React, { JSX } from 'react';
+import { StatusBar, useColorScheme } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
+import {
+  SafeAreaProvider,
+  useSafeAreaInsets,
+} from 'react-native-safe-area-context';
 import { NavigationContainer } from '@react-navigation/native';
 import { MenuProvider } from 'react-native-popup-menu';
 import Toast from 'react-native-toast-message';
@@ -20,22 +24,32 @@ function AppNavigation(): JSX.Element {
     </NavigationContainer>
   );
 }
+function ToastWithInsets() {
+  const insets = useSafeAreaInsets();
+  return <Toast topOffset={insets.top + 8} />;
+}
 
 export default function App(): JSX.Element {
+  const isDarkMode = useColorScheme() === 'dark';
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
-      <SafeAreaProvider>
-        <MenuProvider>
-          <ThemeProvider>
+      <ThemeProvider>
+        <SafeAreaProvider>
+          <StatusBar
+            barStyle={isDarkMode ? 'light-content' : 'dark-content'}
+            translucent
+            backgroundColor="transparent" // Android: edge-to-edge
+          />
+          <MenuProvider>
             <QueryProvider>
-            <AuthProvider>
-              <AppNavigation />
-              <Toast />
-            </AuthProvider>
+              <AuthProvider>
+                <AppNavigation />
+                <Toast />
+              </AuthProvider>
             </QueryProvider>
-          </ThemeProvider>
-        </MenuProvider>
-      </SafeAreaProvider>
+          </MenuProvider>
+        </SafeAreaProvider>
+      </ThemeProvider>
     </GestureHandlerRootView>
   );
 }
