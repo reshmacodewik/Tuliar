@@ -6,10 +6,8 @@ import {
   TouchableOpacity,
   ImageBackground,
   ScrollView,
-  Alert,
 } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
-import { Picker } from '@react-native-picker/picker';
+import { NavigationProp, useNavigation } from '@react-navigation/native';
 import { useFormik } from 'formik';
 import CheckBox from '@react-native-community/checkbox';
 import styles from '../../style/signupstyles';
@@ -20,10 +18,11 @@ import ShowToast from '../../utils/ShowToast';
 import { CountryPicker } from 'react-native-country-codes-picker';
 import { Dropdown } from 'react-native-element-dropdown';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import { useResponsive } from 'react-native-responsive-hook';
 
 const SignUpScreen = () => {
-  const navigation = useNavigation();
-  const [agree, setAgree] = useState(false);
+  const { wp, hp } = useResponsive();
+  const navigation = useNavigation<NavigationProp<any>>();
   const [loading, setLoading] = useState(false);
   const [showPicker, setShowPicker] = useState(false);
 
@@ -35,7 +34,8 @@ const SignUpScreen = () => {
       gender: '',
       password: '',
       phoneNo: '',
-      countryCode: '+91',
+      countryCode: '+254',
+      countryIso2: 'KE',
       month: '',
       day: '',
       year: '',
@@ -43,15 +43,13 @@ const SignUpScreen = () => {
     },
     validationSchema: signupSchema,
     onSubmit: async values => {
-      console.log('======', values);
       try {
-        // Construct DOB properly
         const dob = `${values.year}-${values.month}-${values.day}`;
         const res = await apiPost({
           url: API_REGISTER,
           values: { ...values, dob },
         });
-        console.log('======', res);
+
         if (res?.success) {
           ShowToast(res?.message, 'success');
           (navigation as any).navigate('VerificationCode', {
@@ -59,11 +57,11 @@ const SignUpScreen = () => {
             phoneNo: values.phoneNo,
           });
         } else {
-          ShowToast(res?.message || 'Register Failed', 'error');
+          ShowToast(res?.error || 'Register Failed', 'error');
         }
       } catch (error: any) {
         console.log('Register error:', error);
-        ShowToast(error?.message || 'Something went wrong', 'error');
+        ShowToast(error?.error || 'Something went wrong', 'error');
       } finally {
         setLoading(false);
       }
@@ -94,8 +92,6 @@ const SignUpScreen = () => {
         keyboardShouldPersistTaps="handled"
       >
         <Text style={styles.title}>Sign up</Text>
-
-        {/* Full Name */}
         <Text style={styles.label}>Full Name</Text>
         <TextInput
           style={styles.input}
@@ -161,7 +157,6 @@ const SignUpScreen = () => {
             onChange={item => formik.setFieldValue('day', item.value)}
           />
 
-          {/* Year */}
           <Dropdown
             style={styles.dropdown}
             data={years}
@@ -256,10 +251,10 @@ const SignUpScreen = () => {
             <Text style={styles.linkText}>Terms & Conditions</Text> and{' '}
             <Text style={styles.linkText}>Privacy Policy</Text>.
           </Text>
-          {formik.touched.agree && formik.errors.agree && (
-            <Text style={styles.errorText}>{formik.errors.agree}</Text>
-          )}
         </View>
+        {formik.touched.agree && formik.errors.agree && (
+          <Text style={styles.errorText}>{formik.errors.agree}</Text>
+        )}
 
         {/* Submit */}
         <TouchableOpacity
@@ -273,13 +268,25 @@ const SignUpScreen = () => {
           <Text style={styles.signUpText}>
             {loading ? 'Signing Up...' : 'Sign Up'}
           </Text>
-          
         </TouchableOpacity>
+        <Text
+          style={[styles.signupPrompt, { fontSize: wp(3.5), marginTop: hp(2) }]}
+        >
+          Don’t have an account?{' '}
+          <Text
+            style={styles.signupLink}
+            onPress={() => navigation.navigate('LoginScreen')}
+          >
+            Login
+          </Text>
+        </Text>
+
         <CountryPicker
           show={showPicker}
           lang="en" // ✅ Required prop
           pickerButtonOnPress={item => {
             formik.setFieldValue('countryCode', item.dial_code);
+            formik.setFieldValue('countryIso2', item.code);
             setShowPicker(false);
           }}
           style={{

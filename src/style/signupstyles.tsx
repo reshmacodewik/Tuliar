@@ -171,4 +171,11 @@ export default StyleSheet.create({
     marginBottom: wp(2),
     alignSelf: 'flex-start',
   },
+   signupPrompt: {
+    color: '#000',
+  },
+  signupLink: {
+    color: '#0C7C59',
+    fontWeight: '600',
+  },
 });

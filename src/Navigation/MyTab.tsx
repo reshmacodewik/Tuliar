@@ -217,7 +217,7 @@ const AppNavigator = () => {
   );
 };
 
-export default AppNavigator; // ✅ Export AppNavigator instead of BottomTabs
+export default AppNavigator; 
 
 const styles = StyleSheet.create({
   label: {

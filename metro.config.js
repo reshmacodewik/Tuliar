@@ -6,5 +6,9 @@ const defaultConfig = getDefaultConfig(__dirname);
 module.exports = mergeConfig(defaultConfig, {
   resolver: {
     sourceExts: [...defaultConfig.resolver.sourceExts, 'mjs', 'cjs'],
+    resolverMainFields: ['react-native', 'main', 'module'],
+    alias: {
+      'libphonenumber-js': require.resolve('libphonenumber-js/min'),
+    },
   },
 });

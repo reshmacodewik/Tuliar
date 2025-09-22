@@ -44,10 +44,8 @@ const OnboardingScreen: React.FC = () => {
 
 const handleGetStarted = () => {
   if (activeIndex < slides.length - 1) {
-    // Go to next slide
     sliderRef.current?.goToSlide(activeIndex + 1);
   } else {
-    // Navigate to LoginScreen on last slide
     navigation.navigate('LoginScreen');
   }
 };

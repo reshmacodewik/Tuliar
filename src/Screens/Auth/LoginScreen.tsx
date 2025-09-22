@@ -33,17 +33,14 @@ const LoginScreen: React.FC = () => {
         const res = await apiPost({ url: API_LOGIN, values });
         if (res?.success && res?.data?.token) {
           const session: AuthSession = {
-            accessToken: res.data.token, // ✅ map token -> accessToken
+            accessToken: res.data.token,
             refreshToken: res.data?.refreshToken,
             user: res.data?.user,
           };
 
-          signIn(session); // persist session
+          signIn(session);
           console.log('Saved session:', session);
-
           ShowToast(res?.message, 'success');
-
-          // ensure no back to login
           navigation.navigate('HomeScreen' as never);
         } else {
           ShowToast(res?.message || 'Login Failed', 'error');
@@ -53,6 +50,7 @@ const LoginScreen: React.FC = () => {
       }
     },
   });
+  
   return (
     <ImageBackground
       source={require('../../Theme/assets/image/background.png')}

@@ -66,9 +66,9 @@ const ExploreScreen = () => {
   const renderExpert = ({ item }: { item: Expert }) => (
     <TouchableOpacity
    
-    onPress={() => {
-      navigation.navigate('DoctorProfileScreen', { expert: item });
-    }}
+    // onPress={() => {
+    //   navigation.navigate('DoctorProfileScreen', { expert: item });
+    // }}
 
   >
     <View style={[styles(wp, hp).card, { backgroundColor: '#fff' }]}>
