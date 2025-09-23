@@ -61,4 +61,5 @@ export type RootStackParamList = {
   GroupSessionDetailScreen: undefined;
   MyFeedDetail: undefined;
   TherapistListScreen:undefined;
+  WeeklyReportScreen: undefined;
 };

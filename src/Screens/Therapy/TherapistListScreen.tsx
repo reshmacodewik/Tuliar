@@ -16,7 +16,7 @@ const SESSIONS: Session[] = [
   {
     id: '1',
     name: 'Stacy',
-    avatar: 'https://i.pravatar.cc/160?img=16',
+    avatar: require('../../Theme/assets/image/doc2.png'),
     date: 'Tuesday, April 30',
     issue: 'Anxiety',
     time: '10:00 AM',
@@ -26,12 +26,12 @@ const SESSIONS: Session[] = [
   {
     id: '2',
     name: 'Stacy',
-    avatar: 'https://i.pravatar.cc/160?img=16',
+    avatar: require('../../Theme/assets/image/user2.png'),
     date: 'Tuesday, April 30',
     issue: 'Anxiety',
     time: '10:00 AM',
     price: 'KES200',
-    type: 'chat',
+    type: 'video',
   },
 ];
 
@@ -46,7 +46,7 @@ const TherapistListScreen = ({ navigation }: any) => {
     >
       <View style={{ flex: 1, paddingTop: top, paddingBottom: bottom }}>
         <ScrollView
-          contentContainerStyle={{ padding: wp(4) }}
+          contentContainerStyle={{ paddingHorizontal: wp(4) }}
           showsVerticalScrollIndicator={false}
         >
           {/* header */}
@@ -58,10 +58,10 @@ const TherapistListScreen = ({ navigation }: any) => {
             }}
           >
             <TouchableOpacity
-              onPress={() => navigation?.goBack?.()}
+              onPress={() => navigation.goBack()}
               activeOpacity={0.7}
             >
-              <Ionicons name="chevron-back" size={rf(20)} color="#111" />
+              <Ionicons name="chevron-back" size={rf(25)} color="#111" />
             </TouchableOpacity>
 
             <TouchableOpacity
@@ -74,9 +74,15 @@ const TherapistListScreen = ({ navigation }: any) => {
                 alignItems: 'center',
               }}
               activeOpacity={0.85}
-              onPress={()=> navigation.navigate('TherapyScreen')}
+              onPress={() => navigation.navigate('TherapyScreen')}
             >
-              <View style={{backgroundColor:'#fff',borderRadius:20,marginRight:5}}>
+              <View
+                style={{
+                  backgroundColor: '#fff',
+                  borderRadius: 20,
+                  marginRight: 5,
+                }}
+              >
                 <Ionicons name="add" size={rf(18)} color="#000" />
               </View>
 
@@ -100,7 +106,7 @@ const TherapistListScreen = ({ navigation }: any) => {
               fontWeight: '600',
               marginBottom: hp(1),
               textAlign: 'center',
-              fontFamily: 'Quicksand-Regular',
+              fontFamily: 'Quicksand-Bold',
             }}
           >
             Your Therapist
@@ -128,7 +134,7 @@ const TherapistListScreen = ({ navigation }: any) => {
                 onCancel={() => console.log('Cancel', item.id)}
               />
             )}
-            scrollEnabled={false} 
+            scrollEnabled={false}
             contentContainerStyle={{ paddingBottom: hp(4) }}
           />
         </ScrollView>

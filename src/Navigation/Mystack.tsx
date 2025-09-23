@@ -65,21 +65,20 @@ import SessionPaymentScreen from '../Screens/Explore/SessionPaymentScreen';
 import TherapistListScreen from '../Screens/Therapy/TherapistListScreen';
 import { ImageBackground, Text, TouchableOpacity } from 'react-native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import WeeklyReportScreen from '../Screens/Home/WeeklyReportScreen';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 const CustomHeader = ({ navigation, route, options }: any) => {
   return (
-  
-      <TouchableOpacity
-        onPress={() => navigation.goBack()}
-        style={{ flexDirection: 'row', alignItems: 'center' }}
-      >
-        <MaterialIcons name="keyboard-arrow-left" size={30} color="#000" />
-        <Text style={{ fontSize: 18, fontWeight: 'bold', marginLeft: 8 }}>
-          {options.title || route.name}
-        </Text>
-      </TouchableOpacity>
-  
+    <TouchableOpacity
+      onPress={() => navigation.goBack()}
+      style={{ flexDirection: 'row', alignItems: 'center' }}
+    >
+      <MaterialIcons name="keyboard-arrow-left" size={30} color="#000" />
+      <Text style={{ fontSize: 18, fontWeight: 'bold', marginLeft: 8 }}>
+        {options.title || route.name}
+      </Text>
+    </TouchableOpacity>
   );
 };
 
@@ -95,9 +94,7 @@ const PublicStack = () => (
 );
 
 const PrivateStack = () => (
-  <Stack.Navigator
-    screenOptions={{ headerShown: false }}
-  >
+  <Stack.Navigator screenOptions={{ headerShown: false }}>
     <Stack.Screen name="HomeScreen" component={BottomTabs} />
     <Stack.Screen name="JournalScreen" component={JournalScreen} />
     <Stack.Screen name="SearchScreen" component={SearchScreen} />
@@ -184,6 +181,7 @@ const PrivateStack = () => (
       component={SessionPaymentScreen}
     />
     <Stack.Screen name="TherapistListScreen" component={TherapistListScreen} />
+    <Stack.Screen name="WeeklyReportScreen" component={WeeklyReportScreen} />
   </Stack.Navigator>
 );
 
