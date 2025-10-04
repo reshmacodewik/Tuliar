@@ -40,7 +40,7 @@ import { API_FEED_CREATE, API_FEED_UPDATE } from '../utils/api/APIConstant';
 import { htmlToPlainText } from '../components/htmlToPlainText';
 import FeedPost from '../components/FeedPost';
 import { RootStackParamList } from '../Navigation/types';
-
+import { launchImageLibrary } from 'react-native-image-picker';
 const features = [
   {
     title: 'Chat with experts',
@@ -69,6 +69,23 @@ const HomeScreen = () => {
   const route = useRoute<RouteProp<RootStackParamList, 'MyFeedDetail'>>();
   //const editId = route.params?.id; // ✅ id if editing
 
+  const pickImage = async () => {
+    try {
+      const result = await launchImageLibrary({
+        mediaType: 'photo',
+        quality: 0.8,
+      });
+
+      if (result.assets && result.assets[0].uri) {
+        const uri = result.assets[0].uri;
+
+        // Insert image into RichEditor
+        richText.current?.insertImage(uri);
+      }
+    } catch (err) {
+      console.log('Image pick error:', err);
+    }
+  };
   const s = styles(wp, hp);
   const richText = useRef<RichEditor>(null);
 
@@ -347,6 +364,7 @@ const HomeScreen = () => {
                   title: 'Weekly Report',
                   text: 'Next Session with Dr.  on April 25 at 10:00 AM',
                   buttonText: 'View Report',
+                  navigateTo: 'WeeklyReportScreen',
                 },
               ].map((item, i) => (
                 <View key={i} style={styles(wp, hp).journeyCard}>
@@ -359,7 +377,14 @@ const HomeScreen = () => {
                       {item.title}
                     </Text>
                     <Text style={styles(wp, hp).journeyText}>{item.text}</Text>
-                    <TouchableOpacity style={styles(wp, hp).detailsBtn}>
+                    <TouchableOpacity
+                      style={styles(wp, hp).detailsBtn}
+                      onPress={() => {
+                        if (item.navigateTo) {
+                          navigation.navigate(item.navigateTo as never);
+                        }
+                      }}
+                    >
                       <Text style={styles(wp, hp).detailsText}>
                         {item.buttonText}
                       </Text>
@@ -472,6 +497,7 @@ const HomeScreen = () => {
                     actions.setUnderline,
                     actions.insertBulletsList,
                     actions.insertOrderedList,
+                    actions.insertImage,
                   ]}
                   iconTint="#444"
                   selectedIconTint="#007bff"
@@ -480,6 +506,7 @@ const HomeScreen = () => {
                     borderTopColor: '#eee',
                     backgroundColor: '#fafafa',
                   }}
+                  onPressAddImage={pickImage}
                 />
               </View>
 
@@ -530,7 +557,7 @@ const HomeScreen = () => {
               onPress={async () => {
                 try {
                   // 🔹 Clear AsyncStorage
-                 clearSession();
+                  clearSession();
 
                   // 🔹 If you’re using Redux, also dispatch logout
                   // dispatch(logout());
@@ -538,8 +565,7 @@ const HomeScreen = () => {
                   // 🔹 Close modal
                   setLogoutVisible(false);
 
-                  
-                 navigation.navigate('LoginScreen');
+                  navigation.navigate('LoginScreen');
                 } catch (err) {
                   console.log('Error clearing session:', err);
                 }

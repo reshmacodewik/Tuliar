@@ -14,6 +14,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import { useNavigation, NavigationProp } from '@react-navigation/native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import styles from './goalsStyles';
+import CustomHeader from '../../components/CustomHeader';
 
 const goalSteps = [
   {
@@ -49,8 +50,9 @@ const GoalsScreen = () => {
     >
   
         <View style={[styles(wp, hp).mainContainer, { paddingTop: top, paddingBottom: bottom }]}>
+           <CustomHeader title="Goals" onBack={() => navigation.goBack()} />
         {/* Header */}
-        <View style={styles(wp, hp).header}>
+        {/* <View style={styles(wp, hp).header}>
           <TouchableOpacity
             onPress={handleBackPress}
             style={styles(wp, hp).backButton}
@@ -63,7 +65,7 @@ const GoalsScreen = () => {
           </TouchableOpacity>
           <Text style={styles(wp, hp).headerTitle}>Goals</Text>
           <View style={styles(wp, hp).headerSpacer} />
-        </View>
+        </View> */}
 
         <ScrollView
           style={styles(wp, hp).container}

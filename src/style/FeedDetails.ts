@@ -28,7 +28,8 @@ const styles = (wp: any, hp: any) =>
     thoughtBoxcontainer: {
       backgroundColor: '#fff',
       borderRadius: wp(3),
-      padding: wp(4),
+      padding: wp(1.5),
+      marginHorizontal: wp(-3.5),
     },
     textBoxWrapper: {
       borderWidth: 1,
@@ -43,7 +44,6 @@ const styles = (wp: any, hp: any) =>
       padding: 10,
       borderRadius: 10,
     },
-    // 🔹 For Feed header
     sectionHeader: {
       flexDirection: 'row',
       justifyContent: 'space-between',
@@ -90,6 +90,7 @@ const styles = (wp: any, hp: any) =>
       fontFamily: 'Poppins-Bold',
       marginBottom: hp(2),
       color: '#000',
+      marginLeft: wp(1),
     },
     subtitle: {
       fontSize: 16,
@@ -116,7 +117,8 @@ const styles = (wp: any, hp: any) =>
       alignItems: 'center',
       width: '48%',
       alignSelf: 'flex-end',
-      marginTop:wp(5)
+      marginTop:wp(5),
+      marginBottom:hp(1)
     },
     buttonText: {
       color: '#fff',

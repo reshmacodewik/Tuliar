@@ -320,17 +320,20 @@ const styles = (wp: any, hp: any) =>
       alignItems: 'center',
       zIndex: 1000,
     },
-     thoughtBoxcontainer: {
+    thoughtBoxcontainer: {
       backgroundColor: '#fff',
       borderRadius: wp(3),
-      padding: wp(4),
-      marginBottom:hp(3.5)
+      padding: wp(1.5),
+      marginHorizontal: wp(-3.5),
+      marginTop: hp(1),
+      marginBottom: hp(2.5),
     },
     sharetitle: {
       fontSize: wp(4),
       fontFamily: 'Poppins-Bold',
       marginBottom: hp(2),
       color: '#000',
+      marginLeft: wp(1),
     },
     fab: {
       width: wp(17),
@@ -523,8 +526,10 @@ const styles = (wp: any, hp: any) =>
       alignItems: 'center',
       width: '48%',
       alignSelf: 'flex-end',
-      marginTop:wp(5)
+      marginTop: wp(5),
+      marginBottom: hp(1),
     },
+
     buttonText: {
       color: '#fff',
       fontWeight: '700',

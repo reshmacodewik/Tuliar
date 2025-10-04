@@ -14,7 +14,7 @@ import styles from '../style/SessionCard';
 export type Session = {
   id: string;
   name: string;
-  avatar: string;
+  avatar: any;
   date: string;
   issue: string;
   time: string;
@@ -40,7 +40,7 @@ const SessionCard: React.FC<Props> = ({ item, onReschedule, onCancel }) => {
       <View style={s.card}>
         <View style={s.rowTop}>
           <View style={s.rowLeft}>
-            <Image source={{ uri: item.avatar }} style={s.avatar} />
+            <Image source={item.avatar} style={s.avatar} />
             <View>
               <Text style={s.name}>{item.name}</Text>
               <Text style={s.date}>{item.date}</Text>
@@ -49,12 +49,20 @@ const SessionCard: React.FC<Props> = ({ item, onReschedule, onCancel }) => {
           </View>
 
           <View style={s.rowRight}>
-            <Ionicons
-              name={item.type === 'chat' ? 'chatbubble-ellipses' : 'videocam'}
-              size={rf(20)}
-              color="#1F3827"
-              style={{ marginBottom: hp(0.5) }}
+            <Image
+              source={
+                item.type === 'chat'
+                  ? require('../Theme/assets/image/message.png') // chat image
+                  : require('../Theme/assets/image/greenvideo.png') // video image
+              }
+              style={{
+                width: rf(30),
+                height: rf(30),
+                resizeMode: 'contain',
+                marginBottom: hp(0.5),
+              }}
             />
+
             <Text style={s.time}>{item.time}</Text>
             <Text style={s.price}>{item.price}</Text>
           </View>
@@ -92,8 +100,21 @@ const SessionCard: React.FC<Props> = ({ item, onReschedule, onCancel }) => {
               <Ionicons name="close" size={rf(18)} color="red" />
             </TouchableOpacity>
 
-            <Image source={{ uri: item.avatar }} style={s.avatarLarge} />
-            <Text style={s.modalName}>{item.name}</Text>
+            <Image source={item.avatar} style={s.avatarLarge} />
+            <View style={{flexDirection: 'row', alignItems: 'center', gap:5,justifyContent:'center'}}>
+              <Text style={s.modalName}>{item.name}</Text>
+              <Image
+                source={require('../Theme/assets/image/greenvideo.png')}
+                style={{
+                  width: rf(30),
+                  height: rf(30),
+                  resizeMode: 'contain',
+                  alignContent:"center",
+                  alignItems:'center',
+                  marginBottom: hp(0.5),
+                }}
+              />
+            </View>
 
             <View style={s.modalRow}>
               <Text>{item.date}</Text>
@@ -104,8 +125,8 @@ const SessionCard: React.FC<Props> = ({ item, onReschedule, onCancel }) => {
             <View style={s.divider} />
 
             <View style={s.modalRow}>
-              <Text>{item.issue}</Text>
-              <Text>{item.price}</Text>
+              <Text style={s.issusetxt}>{item.issue}</Text>
+              <Text style={s.issuseprice}>{item.price}</Text>
             </View>
 
             <View style={s.rowBtns}>

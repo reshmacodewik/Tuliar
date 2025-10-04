@@ -11,7 +11,7 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { useNavigation, NavigationProp } from '@react-navigation/native';
 import { useResponsive } from 'react-native-responsive-hook';
 import styles from '../../style/MyJourneyScreen';
-
+import CustomHeader from '../../components/CustomHeader';
 
 const MyJourneyScreen = () => {
   const { wp, hp } = useResponsive();
@@ -25,7 +25,7 @@ const MyJourneyScreen = () => {
     >
       <ScrollView contentContainerStyle={themedStyles.container}>
         {/* Header */}
-        <View style={themedStyles.headerRow}>
+        {/* <View style={themedStyles.headerRow}>
           <TouchableOpacity
             onPress={() => navigation.goBack()}
             style={themedStyles.backButton}
@@ -37,8 +37,8 @@ const MyJourneyScreen = () => {
             />
           </TouchableOpacity>
           <Text style={themedStyles.title}>My Journey</Text>
-        </View>
-
+        </View> */}
+        <CustomHeader title="My Journey" onBack={() => navigation.goBack()} />
         {/* Image Card */}
         <View style={themedStyles.card}>
           <Image
@@ -70,7 +70,9 @@ const MyJourneyScreen = () => {
 
         {/* Session Progress */}
         <View style={themedStyles.progressCard}>
-          <Text style={themedStyles.sessionDetailsTitle}>Session Up-til now</Text>
+          <Text style={themedStyles.sessionDetailsTitle}>
+            Session Up-til now
+          </Text>
           <Text style={themedStyles.sessionDetailsText}>
             <Text style={themedStyles.boldLabel}>Completed: </Text>5
           </Text>

@@ -2,7 +2,7 @@ import { StyleSheet } from 'react-native';
 
 const styles = (wp: any, hp: any) => {
   const isTablet = wp(100) > 768;
-  
+
   return StyleSheet.create({
     bgimg: {
       flex: 1,
@@ -50,7 +50,6 @@ const styles = (wp: any, hp: any) => {
       fontWeight: '700',
       textAlign: 'center',
       lineHeight: isTablet ? wp(7) : 40,
-     
     },
     // Illustration Styles
     illustrationContainer: {
@@ -157,14 +156,13 @@ const styles = (wp: any, hp: any) => {
       backgroundColor: 'rgba(0, 0, 0, 0.5)',
       justifyContent: 'center',
       alignItems: 'center',
-     
-   
     },
     modalContainer: {
       backgroundColor: '#fff',
       borderRadius: wp(4),
-      width: wp(100),
-     
+      width: wp(95),
+      height: hp(70),
+      marginTop: hp(5),
       paddingHorizontal: wp(4),
       paddingVertical: hp(3),
       shadowColor: '#000',
@@ -172,9 +170,6 @@ const styles = (wp: any, hp: any) => {
       shadowOpacity: 0.25,
       shadowRadius: 8,
       elevation: 8,
-     
-      
-   
     },
     modalHeader: {
       flexDirection: 'row',
@@ -224,11 +219,7 @@ const styles = (wp: any, hp: any) => {
       borderColor: '#e5e7eb',
       padding: wp(4),
       marginBottom: hp(2),
-      shadowColor: '#000',
-      shadowOffset: { width: 0, height: 1 },
-      shadowOpacity: 0.05,
-      shadowRadius: 2,
-      elevation: 1,
+    
     },
     stepIconContainer: {
       marginRight: wp(3),
@@ -292,4 +283,4 @@ const styles = (wp: any, hp: any) => {
   });
 };
 
-export default styles; 
+export default styles;

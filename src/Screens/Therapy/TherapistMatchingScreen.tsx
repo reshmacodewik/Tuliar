@@ -39,12 +39,7 @@ const TherapistMatchingScreen = () => {
       animationType="fade"
       onRequestClose={handleClosePopup}
     >
-       
       <View style={styles(wp, hp).modalOverlay}>
-      <ScrollView 
-            style={styles(wp, hp).modalScrollView}
-            showsVerticalScrollIndicator={false}
-          >
         <View style={styles(wp, hp).modalContainer}>
           {/* Header */}
           <View style={styles(wp, hp).modalHeader}>
@@ -70,19 +65,23 @@ const TherapistMatchingScreen = () => {
           </View>
 
           {/* Steps */}
-        
+          <ScrollView
+            style={styles(wp, hp).modalScrollView}
+            contentContainerStyle={{ paddingBottom: hp(2) }}
+            showsVerticalScrollIndicator={false}
+          >
             {/* Step 1 */}
             <View style={styles(wp, hp).stepCard}>
               <View style={styles(wp, hp).stepIconContainer}>
                 <View style={styles(wp, hp).stepIcon}>
                   <Ionicons name="calendar" size={wp(5)} color="#22c55e" />
-                 
                 </View>
               </View>
               <View style={styles(wp, hp).stepTextContainer}>
                 <Text style={styles(wp, hp).stepTitle}>We Learn About You</Text>
                 <Text style={styles(wp, hp).stepDescription}>
-                  Your responses to our questionnaire help us understand your needs, and preferences.
+                  Your responses to our questionnaire help us understand your
+                  needs, and preferences.
                 </Text>
               </View>
             </View>
@@ -92,13 +91,15 @@ const TherapistMatchingScreen = () => {
               <View style={styles(wp, hp).stepIconContainer}>
                 <View style={styles(wp, hp).stepIcon}>
                   <Ionicons name="people" size={wp(5)} color="#22c55e" />
-                  
                 </View>
               </View>
               <View style={styles(wp, hp).stepTextContainer}>
-                <Text style={styles(wp, hp).stepTitle}>We Scan Our Network of Therapists</Text>
+                <Text style={styles(wp, hp).stepTitle}>
+                  We Scan Our Network of Therapists
+                </Text>
                 <Text style={styles(wp, hp).stepDescription}>
-                  We match you with a therapist who fits your preferences for gender, age, language and therapy style.
+                  We match you with a therapist who fits your preferences for
+                  gender, age, language and therapy style.
                 </Text>
               </View>
             </View>
@@ -111,9 +112,12 @@ const TherapistMatchingScreen = () => {
                 </View>
               </View>
               <View style={styles(wp, hp).stepTextContainer}>
-                <Text style={styles(wp, hp).stepTitle}>We Find Your Best Match</Text>
+                <Text style={styles(wp, hp).stepTitle}>
+                  We Find Your Best Match
+                </Text>
                 <Text style={styles(wp, hp).stepDescription}>
-                  We match you with a therapist who fits your preferences for gender, age, language and therapy style.
+                  We match you with a therapist who fits your preferences for
+                  gender, age, language and therapy style.
                 </Text>
               </View>
             </View>
@@ -123,21 +127,21 @@ const TherapistMatchingScreen = () => {
               <View style={styles(wp, hp).stepIconContainer}>
                 <View style={styles(wp, hp).stepIcon}>
                   <Ionicons name="calendar" size={wp(5)} color="#22c55e" />
-                  
                 </View>
               </View>
               <View style={styles(wp, hp).stepTextContainer}>
-                <Text style={styles(wp, hp).stepTitle}>You Book and Connect</Text>
+                <Text style={styles(wp, hp).stepTitle}>
+                  You Book and Connect
+                </Text>
                 <Text style={styles(wp, hp).stepDescription}>
-                  You can review their profile, book your first session, and start chatting directly.
+                  You can review their profile, book your first session, and
+                  start chatting directly.
                 </Text>
               </View>
             </View>
-       
+          </ScrollView>
         </View>
-        </ScrollView>
       </View>
-     
     </Modal>
   );
 
@@ -181,16 +185,18 @@ const TherapistMatchingScreen = () => {
         <View style={styles(wp, hp).illustrationContainer}>
           {/* Center Plant */}
           <View style={styles(wp, hp).centerPlant}>
-           <Image source={require('../../Theme/assets/image/photroom.png')} style={styles(wp, hp).plant} />
+            <Image
+              source={require('../../Theme/assets/image/photroom.png')}
+              style={styles(wp, hp).plant}
+            />
           </View>
-          
-         
         </View>
 
         {/* Description Text */}
         <View style={styles(wp, hp).descriptionContainer}>
           <Text style={styles(wp, hp).descriptionText}>
-            This will only take a moment as we carefully match you with a therapist who fits your needs.
+            This will only take a moment as we carefully match you with a
+            therapist who fits your needs.
           </Text>
         </View>
 
@@ -213,4 +219,4 @@ const TherapistMatchingScreen = () => {
   );
 };
 
-export default TherapistMatchingScreen; 
+export default TherapistMatchingScreen;
