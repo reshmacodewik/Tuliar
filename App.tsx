@@ -38,7 +38,7 @@ export default function App(): JSX.Element {
           <StatusBar
             barStyle={isDarkMode ? 'light-content' : 'dark-content'}
             translucent
-            backgroundColor="transparent" // Android: edge-to-edge
+            backgroundColor="transparent"
           />
           <MenuProvider>
             <QueryProvider>
