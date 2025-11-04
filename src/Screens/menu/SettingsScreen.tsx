@@ -11,11 +11,13 @@ import { useNavigation, NavigationProp } from '@react-navigation/native';
 import { useResponsive } from '../../Responsive/useResponsive';
 import styles from './settingsStyles';
 import { ScrollView } from 'react-native-gesture-handler';
+import { useAppTheme } from '../../Theme/ThemeContext';
 
 const SettingsScreen = () => {
   const { wp, hp } = useResponsive();
   const navigation = useNavigation<NavigationProp<any>>();
   const themedStyles = styles(wp, hp);
+  const { isDark, toggleTheme } = useAppTheme();
   const handleNotificationSwitch = (value: boolean) => {
   setNotifications(value);
   if (value) {
@@ -30,7 +32,7 @@ const SettingsScreen = () => {
 
   return (
     <ImageBackground
-      source={require('../../../assets/image/background.png')}
+      source={require('../../Theme/assets/image/background.png')}
       style={themedStyles.bgimg}
       resizeMode="cover"
     >
@@ -68,7 +70,10 @@ const SettingsScreen = () => {
 
         {/* Profiles */}
         <Text style={themedStyles.sectionTitle}>Profiles</Text>
-        <TouchableOpacity style={themedStyles.card}>
+        <TouchableOpacity 
+          style={themedStyles.card}
+          onPress={() => navigation.navigate('EditProfileScreen')}
+        >
           <View style={themedStyles.cardIcon}>
             <MaterialIcons name="person" size={wp(5.5)} color="#000" />
           </View>
@@ -92,10 +97,12 @@ const SettingsScreen = () => {
           </View>
           <Text style={themedStyles.cardText}>Dark Mode</Text>
           <Switch
-            value={darkMode}
-            onValueChange={setDarkMode}
+            value={isDark}
+            onValueChange={() => {
+              toggleTheme();
+            }}
             trackColor={{ false: '#ccc', true: '#A3D9A5' }}
-            thumbColor={darkMode ? '#fff' : '#fff'}
+            thumbColor={isDark ? '#fff' : '#fff'}
             style={themedStyles.switch}
           />
         </View>

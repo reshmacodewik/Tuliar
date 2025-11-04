@@ -10,13 +10,13 @@ const styles = (wp: any, hp: any) => {
     },
     mainContainer: {
       flex: 1,
-      position: 'relative',
+      
     },
     header: {
       flexDirection: 'row',
       alignItems: 'center',
       paddingHorizontal: wp(1),
-      paddingTop: hp(5),
+      paddingTop: hp(0),
       paddingBottom: hp(1),
     },
     backButton: {

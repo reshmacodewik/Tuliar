@@ -19,7 +19,7 @@ const ReviewPaymentScreen = () => {
 
   return (
     <ImageBackground
-      source={require('../../../assets/image/background.png')}
+      source={require('../../Theme/assets/image/background.png')}
       style={themedStyles.bgimg}
     >
       <View style={themedStyles.container}>
@@ -28,7 +28,7 @@ const ReviewPaymentScreen = () => {
           style={{
             flexDirection: 'row',
             alignItems: 'center',
-            marginTop: hp(-2),
+            marginTop: hp(0),
             marginBottom: hp(8),
           }}
         >
@@ -47,9 +47,9 @@ const ReviewPaymentScreen = () => {
 
         {/* Logo */}
         <View>
-          <View style={{ alignItems: 'center', marginBottom: hp(0) }}>
+          <View style={{ alignItems: 'center', marginTop: hp(-2) }}>
             <Image
-              source={require('../../../assets/image/logo1.png')}
+              source={require('../../Theme/assets/image/logo1.png')}
               style={{ width: wp(35), height: wp(18), resizeMode: 'contain' }}
             />
           </View>

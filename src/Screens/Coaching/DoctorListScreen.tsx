@@ -19,56 +19,56 @@ const doctors = [
   {
     name: 'Emily Chen',
     exp: 'Exp: 5+ years',
-    avatar: require('../../../assets/image/maskuser.png'),
+    avatar: require('../../Theme/assets/image/maskuser.png'),
     prices: ['KES 1500', 'KES 1500', 'KES 2000'],
     icons: [
-      require('../../../assets/image/phone.png'),
-      require('../../../assets/image/greenvideo.png'),
-      require('../../../assets/image/message.png'),
+      require('../../Theme/assets/image/phone.png'),
+      require('../../Theme/assets/image/greenvideo.png'),
+      require('../../Theme/assets/image/message.png'),
     ],
   },
   {
     name: 'Michael Kim',
     exp: 'Exp: 5+ years',
-    avatar: require('../../../assets/image/user2.png'),
+    avatar: require('../../Theme/assets/image/user2.png'),
     prices: ['KES 1500', 'KES 1500', 'KES 2000'],
     icons: [
-      require('../../../assets/image/phone.png'),
-      require('../../../assets/image/greenvideo.png'),
-      require('../../../assets/image/message.png'),
+      require('../../Theme/assets/image/phone.png'),
+      require('../../Theme/assets/image/greenvideo.png'),
+      require('../../Theme/assets/image/message.png'),
     ],
   },
   {
     name: 'Emily Chen',
     exp: 'Exp: 5+ years',
-    avatar: require('../../../assets/image/maskuser.png'),
+    avatar: require('../../Theme/assets/image/maskuser.png'),
     prices: ['KES 1500', 'KES 1500', 'KES 2000'],
     icons: [
-      require('../../../assets/image/phone.png'),
-      require('../../../assets/image/greenvideo.png'),
-      require('../../../assets/image/message.png'),
+      require('../../Theme/assets/image/phone.png'),
+      require('../../Theme/assets/image/greenvideo.png'),
+      require('../../Theme/assets/image/message.png'),
     ],
   },
   {
     name: 'Michael Kim',
     exp: 'Exp: 5+ years',
-    avatar: require('../../../assets/image/user2.png'),
+    avatar: require('../../Theme/assets/image/user2.png'),
     prices: ['KES 1500', 'KES 1500', 'KES 2000'],
     icons: [
-      require('../../../assets/image/phone.png'),
-      require('../../../assets/image/greenvideo.png'),
-      require('../../../assets/image/message.png'),
+      require('../../Theme/assets/image/phone.png'),
+      require('../../Theme/assets/image/greenvideo.png'),
+      require('../../Theme/assets/image/message.png'),
     ],
   },
   {
     name: 'Emily Chen',
     exp: 'Exp: 5+ years',
-    avatar: require('../../../assets/image/maskuser.png'),
+    avatar: require('../../Theme/assets/image/maskuser.png'),
     prices: ['KES 1500', 'KES 1500', 'KES 2000'],
     icons: [
-      require('../../../assets/image/phone.png'),
-      require('../../../assets/image/greenvideo.png'),
-      require('../../../assets/image/message.png'),
+      require('../../Theme/assets/image/phone.png'),
+      require('../../Theme/assets/image/greenvideo.png'),
+      require('../../Theme/assets/image/message.png'),
     ],
   },
 ];
@@ -80,7 +80,7 @@ const DoctorListScreen = () => {
 
   return (
     <ImageBackground
-      source={require('../../../assets/image/background.png')}
+      source={require('../../Theme/assets/image/background.png')}
       style={s.background}
       resizeMode="cover"
     >
@@ -103,7 +103,7 @@ const DoctorListScreen = () => {
           </View>
 
           <Image
-            source={require('../../../assets/image/logo.png')}
+            source={require('../../Theme/assets/image/logo.png')}
             style={s.logo}
           />
           <Text style={s.header}>Doctors</Text>

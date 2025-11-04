@@ -11,7 +11,7 @@ const styles = (wp: any, hp: any) =>
       padding: wp(4),
     },
     backButton: {
-      top: hp(3),
+      top: hp(0.8),
       left: wp(-2),
       width: wp(10),
       height: wp(10),
@@ -34,7 +34,7 @@ const styles = (wp: any, hp: any) =>
     title: {
       fontSize: wp(5),
       fontFamily: 'Poppins-Bold',
-      marginTop: hp(6),
+      marginTop: hp(2),
       marginRight: hp(10),
       textAlign: 'center',
     },

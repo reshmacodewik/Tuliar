@@ -20,7 +20,7 @@ const PaymentDetailsScreen = () => {
 
   return (
     <ImageBackground
-      source={require('../../../assets/image/background.png')}
+      source={require('../../Theme/assets/image/background.png')}
       style={s.background}
       resizeMode="cover"
     >
@@ -36,7 +36,7 @@ const PaymentDetailsScreen = () => {
 
           {/* Logo */}
           <View style={s.logoContainer}>
-            <Image source={require('../../../assets/image/logo.png')} style={s.logo} />
+            <Image source={require('../../Theme/assets/image/logo.png')} style={s.logo} />
           </View>
 
           {/* Top Up Section */}
@@ -91,7 +91,7 @@ const PaymentDetailsScreen = () => {
                 onPress={() => setSelectedPaymentMethod('mpesa')}
               >
               <Image
-                    source={require('../../../assets/image/mpesa.png')}
+                    source={require('../../Theme/assets/image/mpesa.png')}
                     style={s.paymentMethodIcon}
                   />
                  
@@ -121,7 +121,7 @@ const PaymentDetailsScreen = () => {
               >
                 <View style={s.paypalRow}>
                   <Image
-                    source={require('../../../assets/image/paypal.png')}
+                    source={require('../../Theme/assets/image/paypal.png')}
                     style={s.paypalIcon}
                   />
                  

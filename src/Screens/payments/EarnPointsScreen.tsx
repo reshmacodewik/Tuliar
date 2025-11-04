@@ -37,7 +37,7 @@ const EarnPointsScreen = () => {
   };
   return (
     <ImageBackground
-      source={require('../../../assets/image/background.png')}
+      source={require('../../Theme/assets/image/background.png')}
       style={s.background}
       resizeMode="cover"
     >
@@ -53,7 +53,7 @@ const EarnPointsScreen = () => {
 
           {/* Logo */}
           <View style={s.logoContainer}>
-            <Image source={require('../../../assets/image/logo.png')} style={s.logo} />
+            <Image source={require('../../Theme/assets/image/logo.png')} style={s.logo} />
           </View>
 
           {/* Title & Subtitle */}

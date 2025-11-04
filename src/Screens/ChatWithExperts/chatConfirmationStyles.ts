@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
   },
   logoContainer: {
     alignItems: 'center',
-    marginTop: hp(10),
+    marginTop: hp(8),
     marginBottom: hp(0),
   },
   logoImage: {

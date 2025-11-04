@@ -17,13 +17,13 @@ const styles = (wp: any, hp: any) => {
       flexDirection: 'row',
       alignItems: 'center',
       paddingHorizontal: wp(2),
-      paddingTop: hp(2),
-      paddingBottom: hp(1),
+      paddingTop: hp(0),
+      paddingBottom: hp(0),
+      marginLeft: wp(-5),
     },
     backButton: {
       width: wp(10),
       height: wp(10),
-
       borderRadius: wp(5),
     },
     headerTitle: {
@@ -53,7 +53,7 @@ const styles = (wp: any, hp: any) => {
       color: '#000',
       marginBottom: hp(1),
       paddingRight: wp(10),
-      lineHeight: 40,
+      lineHeight: 32,
       marginTop: hp(1),
     },
     greetingSubtitle: {
@@ -90,7 +90,7 @@ const styles = (wp: any, hp: any) => {
       width: wp(12),
       height: wp(12),
       borderRadius: wp(6),
-      backgroundColor: '#F0F8FF',
+      backgroundColor: '#F1EFDA',
       justifyContent: 'center',
       alignItems: 'center',
       marginRight: wp(3),
@@ -119,10 +119,27 @@ const styles = (wp: any, hp: any) => {
       marginBottom: hp(1),
       fontWeight: '700',
     },
+    cardTitlegoal: {
+      fontSize: isTablet ? wp(4.5) : 16,
+      fontFamily: 'Poppins-SemiBold',
+      color: '#000',
+      marginBottom: hp(0),
+      marginLeft: wp(-2),
+      fontWeight: '700',
+      marginTop: wp(3),
+    },
     cardSubtitle: {
       fontSize: isTablet ? wp(3.5) : 14,
       fontFamily: 'Poppins-Light',
       color: '#A7A7A7',
+    },
+    cardSubtitlegoal: {
+      fontSize: isTablet ? wp(3.5) : 14,
+      fontFamily: 'Poppins-Light',
+      color: '#A7A7A7',
+      marginHorizontal: wp(3),
+      marginTop: wp(-8),
+      marginBottom: wp(3),
     },
     cardButton: {
       backgroundColor: '#ECA14C',
@@ -160,35 +177,33 @@ const styles = (wp: any, hp: any) => {
       fontSize: isTablet ? wp(4) : 16,
       fontFamily: 'Poppins-Bold',
       color: '#000',
-      marginBottom: hp(1),
-      marginTop: hp(-1),
+ 
       fontWeight: '700',
     },
     calendarContainer: {
       borderRadius: wp(4),
-      padding: wp(6),
-      width: wp(50),
-      marginTop: hp(-3.5),
-      marginLeft: wp(-7),
+      width: '100%',
+ 
+   
     },
     customCalendarHeader: {
       backgroundColor: '#264734',
       borderTopLeftRadius: 0,
       borderTopRightRadius: 0,
-      paddingVertical: hp(0.5),
-      paddingBottom: wp(1),
-      paddingHorizontal: wp(4),
+      paddingVertical:5,
+      paddingHorizontal:10
     },
     calendarHeaderYear: {
       color: '#BFC9C6',
       fontSize: 10,
       fontFamily: 'Montserrat-Medium',
+      marginTop: wp(0.5),
     },
     calendarHeaderDate: {
       color: '#fff',
       fontSize: 10,
       fontFamily: 'Poppins-Bold',
-      marginTop: hp(0.5),
+      marginTop: hp(0),
     },
     calendarNav: {
       fontSize: 10,
@@ -205,17 +220,14 @@ const styles = (wp: any, hp: any) => {
       flexWrap: 'wrap',
       justifyContent: 'space-between',
       marginTop: hp(1),
-
-      paddingBottom: wp(-10),
+     
     },
     calendarDay: {
       width: '13%',
-      aspectRatio: 1,
+      aspectRatio: 1.1,
       alignItems: 'center',
       justifyContent: 'center',
       borderRadius: wp(2),
-      marginBottom: hp(1),
-      marginTop: hp(-1.4),
     },
     calendarDaySelected: {
       borderRadius: wp(10),
@@ -368,12 +380,15 @@ const styles = (wp: any, hp: any) => {
     },
     goalsCalendarSection: {
       flexDirection: 'row',
-      gap: wp(3),
+      flexWrap: 'wrap', // ✅ allow wrapping
+      justifyContent: 'space-between',
       marginTop: hp(2),
       marginBottom: hp(2),
+      width: '100%',
     },
-    goalsCard: {
-      flex: 1,
+
+    gridCard: {
+      flexBasis: '48%', // ✅ 2 columns
       backgroundColor: '#fff',
       borderRadius: wp(3),
       padding: wp(4),
@@ -382,30 +397,34 @@ const styles = (wp: any, hp: any) => {
       shadowOpacity: 0.1,
       shadowRadius: 4,
       elevation: 3,
-      height: hp(23),
+      marginBottom: hp(2), // ✅ space between rows
+    
     },
+
     goalsCardHeader: {
       flexDirection: 'row',
       alignItems: 'flex-start',
       marginBottom: hp(2),
     },
+
     goalsCardContent: {
       flex: 1,
       marginLeft: wp(3),
     },
+
     calendarCard: {
       flex: 1,
       backgroundColor: '#fff',
       borderRadius: wp(3),
       padding: wp(4),
-
       shadowColor: '#000',
       shadowOffset: { width: 0, height: 2 },
       shadowOpacity: 0.1,
       shadowRadius: 4,
       elevation: 3,
-      height: hp(23),
+      marginLeft: wp(2), // spacing between grid items
     },
+
     trackButton: {
       backgroundColor: '#ECA14C',
       paddingVertical: hp(0.5),

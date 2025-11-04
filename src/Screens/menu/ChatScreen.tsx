@@ -64,7 +64,7 @@ const ChatScreen = () => {
 
   return (
     <ImageBackground
-      source={require('../../../assets/image/background.png')}
+      source={require('../../Theme/assets/image/background.png')}
       style={themedStyles.bgimg}
       resizeMode="cover"
     >
@@ -83,7 +83,7 @@ const ChatScreen = () => {
             />
           </TouchableOpacity>
           <Image
-            source={require('../../../assets/image/ellispe.png')}
+            source={require('../../Theme/assets/image/ellispe.png')}
             style={themedStyles.avatar}
           />
           <Text style={themedStyles.headerTitle}>Dr. John Smith</Text>
@@ -99,7 +99,7 @@ const ChatScreen = () => {
             msg.sender === 'doctor' ? (
               <View key={msg.id} style={themedStyles.doctorRow}>
                 <Image
-                  source={require('../../../assets/image/ellispe.png')}
+                  source={require('../../Theme/assets/image/ellispe.png')}
                   style={themedStyles.doctorAvatar}
                 />
                
@@ -158,7 +158,7 @@ const ChatScreen = () => {
           </View>
           <TouchableOpacity onPress={handleSend} disabled={!input.trim()}>
             <Image
-              source={require('../../../assets/icon/sendicon.png')}
+              source={require('../../Theme/assets/icon/sendicon.png')}
               style={themedStyles.sendButtonImage}
             />
           </TouchableOpacity>

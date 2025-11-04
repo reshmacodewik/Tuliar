@@ -4,18 +4,19 @@ const styles = (wp: any, hp: any) =>
   StyleSheet.create({
     background: {
       flex: 1,
-      width: '100%',
-      height: '100%',
+      resizeMode: 'cover',
     },
     container: {
       flex: 1,
       paddingHorizontal: wp(5),
-      paddingTop: hp(4),
+    
     },
     headerRow: {
       flexDirection: 'row',
       alignItems: 'center',
       marginBottom: hp(3),
+      paddingTop: hp(2.5),
+      marginLeft: wp(-2),
     },
     backButton: {
       marginRight: wp(3),
@@ -127,17 +128,19 @@ const styles = (wp: any, hp: any) =>
     paymentMethodButton: {
       flex: 1,
       borderRadius: wp(2),
-      paddingVertical: hp(1.5),
+      paddingVertical: hp(0),
       paddingHorizontal: wp(5),
       marginHorizontal: wp(-0),
       alignItems: 'center',
+      backgroundColor:'#fff',
  
 
     },
     paymentMethodButtonSelected: {
       backgroundColor: '#264734',
       borderColor: '#264734',
-      paddingVertical: hp(2),
+      paddingVertical: hp(2.7),
+      borderRadius: wp(2),
      
    
     },
@@ -159,7 +162,6 @@ const styles = (wp: any, hp: any) =>
     paymentMethodButtonLeft: {
       borderTopLeftRadius: wp(2),
       borderBottomLeftRadius: wp(2),
-      backgroundColor: '#264734',
       marginRight: 0,
     },
     paymentMethodButtonCenter: {

@@ -28,7 +28,7 @@ const experts = [
     price: 'KSh 2,500',
     tags: ['Sleep', 'Anxiety'],
     selected: 24,
-    image: require('../../assets/image/doc1.png'),
+    image: require('../../src/Theme/assets/image/doc1.png'),
   },
   {
     id: '2',
@@ -37,7 +37,7 @@ const experts = [
     price: 'KSh 2,500',
     tags: ['Relax', 'Anger'],
     selected: 24,
-    image: require('../../assets/image/doc2.png'),
+    image: require('../../src/Theme/assets/image/doc2.png'),
   },
 ];
 
@@ -46,7 +46,7 @@ const SearchScreen = () => {
   const navigation = useNavigation<NavigationProp<any>>();
   return (
     <ImageBackground
-      source={require('../../assets/image/background.png')}
+      source={require('../../src/Theme/assets/image/background.png')}
       style={styles.bgimg}
     >
       <View style={[styles.container, { padding: wp(4) }]}>
@@ -57,7 +57,7 @@ const SearchScreen = () => {
           ]}
         >
           <Image
-            source={require('../../assets/icon/search.png')}
+            source={require('../../src/Theme/assets/icon/search.png')}
             style={{
               width: wp(5),
               height: wp(5),
@@ -74,7 +74,7 @@ const SearchScreen = () => {
             ]}
           />
           <Image
-            source={require('../../assets/icon/mic.png')}
+            source={require('../../src/Theme/assets/icon/mic.png')}
             style={{ width: wp(5), height: wp(5), resizeMode: 'contain' }}
           />
         </View>
@@ -115,7 +115,7 @@ const SearchScreen = () => {
                 </Text>
                 <TouchableOpacity>
                   <Image
-                    source={require('../../assets/icon/x.png')}
+                    source={require('../../src/Theme/assets/icon/x.png')}
                     style={{
                       width: wp(5),
                       height: wp(5),
@@ -183,17 +183,17 @@ const SearchScreen = () => {
               <View style={styles.iconRow}>
                  <TouchableOpacity onPress={() => navigation.navigate('VideoCallScreen')}>
                 <Image
-                  source={require('../../assets/image/video.png')}
+                  source={require('../../src/Theme/assets/image/video.png')}
                   style={styles.icon}
                 />
                 </TouchableOpacity>
                 <Image
-                  source={require('../../assets/image/message.png')}
+                  source={require('../../src/Theme/assets/image/message.png')}
                   style={styles.icon}
                 />
                <TouchableOpacity onPress={() => navigation.navigate('IncomingCallScreen')}>
                 <Image
-                  source={require('../../assets/image/call.png')}
+                  source={require('../../src/Theme/assets/image/call.png')}
                   style={styles.icon}
                 />
                 </TouchableOpacity>
@@ -271,15 +271,15 @@ const SearchScreen = () => {
 
               <View style={styles.iconRow}>
                 <Image
-                  source={require('../../assets/image/video.png')}
+                  source={require('../../src/Theme/assets/image/video.png')}
                   style={styles.icon}
                 />
                 <Image
-                  source={require('../../assets/image/message.png')}
+                  source={require('../../src/Theme/assets/image/message.png')}
                   style={styles.icon}
                 />
                 <Image
-                  source={require('../../assets/image/call.png')}
+                  source={require('../../src/Theme/assets/image/call.png')}
                   style={styles.icon}
                 />
               </View>

@@ -10,7 +10,7 @@ const PaymentsScreen = () => {
 
   return (
     <ImageBackground
-      source={require('../../assets/image/background.png')}
+      source={require('../../src/Theme/assets/image/background.png')}
       style={s.background}
       resizeMode="cover"
     >
@@ -33,11 +33,11 @@ const PaymentsScreen = () => {
             <Text style={s.cardSubtitle}>Your Balance</Text>
             <Text style={s.balance}>KES 2,350</Text>
             <View style={s.paymentLogosRow}>
-              <Image source={require('../../assets/image/visa.png')} style={s.paymentLogo} />
-              <Image source={require('../../assets/image/mpesa.png')} style={s.paymentLogo} />
+              <Image source={require('../../src/Theme/assets/image/visa.png')} style={s.paymentLogo} />
+              <Image source={require('../../src/Theme/assets/image/mpesa.png')} style={s.paymentLogo} />
             </View>
             <View style={s.paymentLogosRow}>
-              <Image source={require('../../assets/image/paypal.png')} style={s.paymentLogo} />
+              <Image source={require('../../src/Theme/assets/image/paypal.png')} style={s.paymentLogo} />
             </View>
             <Pressable style={s.actionButton} onPress={() => {}}>
               <Text style={s.actionButtonText}>Top Up</Text>

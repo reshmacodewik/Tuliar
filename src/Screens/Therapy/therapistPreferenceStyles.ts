@@ -16,7 +16,7 @@ const styles = (wp: any, hp: any) => {
       flexDirection: 'row',
       alignItems: 'center',
       paddingHorizontal: wp(0),
-      paddingTop: hp(5),
+      paddingTop: hp(2),
       paddingBottom: hp(1),
     },
     backButton: {
@@ -66,7 +66,7 @@ const styles = (wp: any, hp: any) => {
       fontSize: isTablet ? wp(4.5) : 18,
       fontFamily: 'Montserrat-SemiBold',
       color: '#000',
-      fontWeight: '700',
+      fontWeight: '600',
       marginBottom: hp(2),
       lineHeight: isTablet ? wp(6) : 26,
     },

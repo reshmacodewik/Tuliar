@@ -10,7 +10,7 @@ const styles = (wp: any, hp: any) =>
     container: {
       flex: 1,
       paddingHorizontal: wp(5),
-      paddingTop: hp(4),
+      paddingTop: hp(3),
       alignItems: 'center',
     },
     headerRow: {
@@ -21,7 +21,7 @@ const styles = (wp: any, hp: any) =>
     },
     backButton: {
       marginRight: wp(2),
-      marginLeft: wp(-2),
+      marginLeft: wp(-2.5),
     },
     headerTitle: {
       fontSize: wp(5),

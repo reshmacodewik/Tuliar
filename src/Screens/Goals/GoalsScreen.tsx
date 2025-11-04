@@ -6,13 +6,15 @@ import {
   TouchableOpacity,
   ImageBackground,
   StatusBar,
+  SafeAreaView,
 } from 'react-native';
 import { useResponsive } from 'react-native-responsive-hook';
-
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { useNavigation, NavigationProp } from '@react-navigation/native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import styles from './goalsStyles';
+import CustomHeader from '../../components/CustomHeader';
 
 const goalSteps = [
   {
@@ -32,7 +34,7 @@ const goalSteps = [
 const GoalsScreen = () => {
   const { wp, hp } = useResponsive();
   const navigation = useNavigation<NavigationProp<any>>();
-
+  const { top, bottom } = useSafeAreaInsets();
   const handleBackPress = () => {
     navigation.goBack();
   };
@@ -43,13 +45,14 @@ const GoalsScreen = () => {
 
   return (
     <ImageBackground
-      source={require('../../../assets/image/background.png')}
+      source={require('../../Theme/assets/image/background.png')}
       style={styles(wp, hp).bgimg}
     >
-      <StatusBar barStyle="dark-content" backgroundColor="transparent" />
-      <View style={styles(wp, hp).mainContainer}>
+  
+        <View style={[styles(wp, hp).mainContainer, { paddingTop: top, paddingBottom: bottom }]}>
+           <CustomHeader title="Goals" onBack={() => navigation.goBack()} />
         {/* Header */}
-        <View style={styles(wp, hp).header}>
+        {/* <View style={styles(wp, hp).header}>
           <TouchableOpacity
             onPress={handleBackPress}
             style={styles(wp, hp).backButton}
@@ -62,7 +65,7 @@ const GoalsScreen = () => {
           </TouchableOpacity>
           <Text style={styles(wp, hp).headerTitle}>Goals</Text>
           <View style={styles(wp, hp).headerSpacer} />
-        </View>
+        </View> */}
 
         <ScrollView
           style={styles(wp, hp).container}
@@ -110,7 +113,9 @@ const GoalsScreen = () => {
           </TouchableOpacity>
         </View>
       </View>
+      
     </ImageBackground>
+   
   );
 };
 

@@ -38,14 +38,14 @@ const ChatWithExpertsScreen: React.FC = () => {
 
   return (
     <ImageBackground
-      source={require('../../../assets/image/background.png')} // Use your background image
+      source={require('../../Theme/assets/image/background.png')} // Use your background image
       style={{ flex: 1 }}
       resizeMode="cover"
     >
       <SafeAreaView style={styles.container}>
         {/* Back Arrow */}
         <TouchableOpacity
-          style={[styles.backButton, { top: hp(2), left: wp(5) }]}
+          style={[styles.backButton, { top: hp(0), left: wp(2) }]}
           onPress={handleBackPress}
         >
           <MaterialIcons
@@ -58,7 +58,7 @@ const ChatWithExpertsScreen: React.FC = () => {
         {/* Logo */}
         <View style={styles.logoContainer}>
           <Image
-            source={require('../../../assets/image/logo.png')}
+            source={require('../../Theme/assets/image/logo.png')}
             style={styles.logo}
           />
         </View>
@@ -81,7 +81,7 @@ const ChatWithExpertsScreen: React.FC = () => {
               <View style={styles.iconContainer}>
                 <View style={styles.peerIcon}>
                   <Image
-                    source={require('../../../assets/image/chAT.png')}
+                    source={require('../../Theme/assets/image/chAT.png')}
                     style={styles.peerIcon}
                   />
                 </View>
@@ -108,7 +108,7 @@ const ChatWithExpertsScreen: React.FC = () => {
               <View style={styles.iconContainer}>
                 <View style={styles.aiIcon}>
                   <Image
-                    source={require('../../../assets/image/ai-bot.png')}
+                    source={require('../../Theme/assets/image/ai-bot.png')}
                     style={styles.peerIcon}
                   />
                 </View>

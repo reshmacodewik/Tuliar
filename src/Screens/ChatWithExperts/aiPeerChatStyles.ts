@@ -12,7 +12,7 @@ function hp(percentage: number): number {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop: hp(1),
+    marginTop: hp(-1),
   },
 
   // Header Styles
@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
   backButton: {
     paddingVertical: hp(2),
     paddingRight: wp(2),
-    
+    marginLeft:wp(-2)
   },
   headerCenter: {
     flexDirection: 'row',

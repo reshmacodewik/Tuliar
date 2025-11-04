@@ -29,7 +29,7 @@ const TherapyScreen = () => {
 
   return (
     <ImageBackground
-      source={require('../../../assets/image/background.png')}
+      source={require('../../Theme/assets/image/background.png')}
       style={styles(wp, hp).bgimg}
     >
       <StatusBar barStyle="dark-content" backgroundColor="transparent" />
@@ -51,7 +51,7 @@ const TherapyScreen = () => {
         {/* Logo */}
         <View style={styles(wp, hp).logoContainer}>
           <Image
-            source={require('../../../assets/image/logo.png')}
+            source={require('../../Theme/assets/image/logo.png')}
             style={styles(wp, hp).logo}
           />
         </View>
@@ -69,7 +69,7 @@ const TherapyScreen = () => {
         <View style={styles(wp, hp).profileContainer}>
           <View style={styles(wp, hp).profileImageContainer}>
           <Image
-            source={require('../../../assets/image/doc2.png')}
+            source={require('../../Theme/assets/image/doc2.png')}
             style={styles(wp, hp).profileImage}
             resizeMode="cover"
           />

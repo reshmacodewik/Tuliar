@@ -7,6 +7,13 @@ export default StyleSheet.create({
   bg: {
     flex: 1,
   },
+    errorText: {
+    color: "red",
+    fontSize: 12,
+    paddingHorizontal: wp(8),
+    marginBottom:wp(2),
+    alignSelf: "flex-start",
+  },
   container: {
     flex: 1,
     alignItems: 'center',

@@ -1,8 +1,8 @@
-import { StyleSheet } from 'react-native';
-
+import { Platform, StatusBar, StyleSheet } from 'react-native';
+import { getStatusBarHeight } from 'react-native-status-bar-height';
 const styles = (wp: any, hp: any) => {
   const isTablet = wp(100) > 768;
-  
+
   return StyleSheet.create({
     bgimg: {
       flex: 1,
@@ -16,7 +16,10 @@ const styles = (wp: any, hp: any) => {
       flexDirection: 'row',
       alignItems: 'center',
       paddingHorizontal: wp(0),
-      paddingTop: hp(5),
+      paddingTop:
+        Platform.OS === 'android'
+          ? StatusBar.currentHeight
+          : getStatusBarHeight(),
       paddingBottom: hp(1),
       marginLeft: wp(-2),
     },
@@ -93,7 +96,7 @@ const styles = (wp: any, hp: any) => {
       lineHeight: isTablet ? wp(5.5) : 24,
     },
     exampleButton: {
-     borderWidth:1,
+      borderWidth: 1,
       borderColor: '#E0E0E0',
       borderRadius: wp(2),
       paddingVertical: hp(1.5),
@@ -231,4 +234,4 @@ const styles = (wp: any, hp: any) => {
   });
 };
 
-export default styles; 
+export default styles;

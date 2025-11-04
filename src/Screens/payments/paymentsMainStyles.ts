@@ -11,18 +11,21 @@ const styles = (wp: any, hp: any) =>
       flex: 1,
       alignItems: 'center',
       paddingHorizontal: wp(5),
-      paddingTop: hp(6),
+      paddingTop: hp(3),
     },
     headerRow: {
       flexDirection: 'row',
       alignItems: 'center',
       width: '100%',
-      marginBottom: hp(2),
+      marginBottom: hp(4),
+      marginLeft: wp(-3),
     },
     headertext: {
       flexDirection: 'row',
       justifyContent: 'space-between',
-      width: '88%',
+      alignItems: 'center',
+      width: '90%',
+    
     
     },
     header: {
@@ -40,7 +43,7 @@ const styles = (wp: any, hp: any) =>
       fontFamily: 'Quicksand-Bold',
       color: '#000',
       textAlign: 'center',
-      marginBottom: hp(3),
+      marginBottom: hp(4),
     },
     card: {
       backgroundColor: '#fff',

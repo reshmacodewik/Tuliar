@@ -1,139 +1,263 @@
-import React from 'react';
-import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
+import React, { useEffect, useRef, useState } from 'react';
+import { View, Text, Image, TouchableOpacity } from 'react-native';
 import { useResponsive } from '../Responsive/useResponsive';
-
+import styles from '../style/homestyles';
+import { apiDelete, apiPost, getApiWithOutQuery } from '../utils/api/common';
+import {
+  API_ADD_COMMENT,
+  API_FEED_DELETE,
+  API_FEED_LIST,
+  API_FEED_TOGGLE_FAVORITE,
+} from '../utils/api/APIConstant';
+import {
+  Menu,
+  MenuOptions,
+  MenuOption,
+  MenuTrigger,
+} from 'react-native-popup-menu';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import { getSession } from '../storage/mmkvPersister';
+import { useNavigation, NavigationProp } from '@react-navigation/native';
+import ShowToast from '../utils/ShowToast';
+import CommentSheet from './CommentSheet';
+import { useQuery } from '@tanstack/react-query';
 interface FeedPostProps {
-  post: {
-    id: string;
-    user: string;
-    avatar: any;
-    content: string;
-    likes: string;
-    comments: string;
-    shares: string;
-  };
-  onLikePress?: () => void;
-  onCommentPress?: () => void;
-  onSharePress?: () => void;
+  refreshKey?: number;
 }
+const FeedPost: React.FC<FeedPostProps> = ({ refreshKey }) => {
+  const { wp, hp } = useResponsive();
+  const s = styles(wp, hp);
+  const navigation = useNavigation<NavigationProp<any>>();
+  const [feedPosts, setFeedPosts] = useState<any[]>([]);
+  const [loading, setLoading] = useState(false);
+  const [selectedPostId, setSelectedPostId] = useState<string | null>(null);
 
-const FeedPost: React.FC<FeedPostProps> = ({ 
-  post, 
-  onLikePress, 
-  onCommentPress, 
-  onSharePress 
-}) => {
-  const { wp, hp, fontSize, borderRadius } = useResponsive();
+  const commentSheetRef = useRef<InstanceType<any> | null>(null);
 
-  const styles = StyleSheet.create({
-    feedCard: {
-      backgroundColor: '#FFFFFF',
-      borderRadius: borderRadius(12),
-      padding: wp(4),
-      marginBottom: hp(2),
-      shadowColor: '#000000',
-      shadowOffset: {
-        width: 0,
-        height: 2,
-      },
-      shadowOpacity: 0.1,
-      shadowRadius: 4,
-      elevation: 3,
-    },
-    feedHeader: {
-      flexDirection: 'row',
-      alignItems: 'center',
-      marginBottom: hp(2),
-    },
-    feedAvatar: {
-      width: wp(10),
-      height: wp(10),
-      borderRadius: wp(5),
-      marginRight: wp(3),
-    },
-    feedUser: {
-      fontSize: fontSize(14),
-      fontWeight: '600',
-      color: '#000000',
-    },
-    feedText: {
-      fontSize: fontSize(13),
-      color: '#374151',
-      lineHeight: fontSize(18),
-      marginBottom: hp(2),
-    },
-    feedStats: {
-      flexDirection: 'row',
-      justifyContent: 'space-between',
-      alignItems: 'center',
-    },
-    statItem: {
-      flexDirection: 'row',
-      alignItems: 'center',
-      flex: 1,
-      justifyContent: 'center',
-    },
-    feedicon: {
-      width: wp(4),
-      height: wp(4),
-      marginRight: wp(1),
-      tintColor: '#6B7280',
-    },
-    statText: {
-      fontSize: fontSize(12),
-      color: '#6B7280',
-      fontWeight: '500',
-    },
+  const bumpCommentsCount = (postId: string, inc = 1) => {
+    setFeedPosts(prev =>
+      prev.map(p =>
+        p._id === postId ? { ...p, comments: (p.comments ?? 0) + inc } : p,
+      ),
+    );
+  };
+
+  const openComments = (postId: string) => {
+    setSelectedPostId(postId);
+    setTimeout(() => commentSheetRef.current?.open(), 0);
+  };
+
+  const { data, refetch, isFetched, isLoading } = useQuery({
+    queryKey: ['feed-list'],
+    queryFn: () => getApiWithOutQuery({ url: API_FEED_LIST }),
   });
 
+  const handleEdit = (id: string) => {
+    navigation.navigate('MyFeedDetail', { id });
+  };
+
+  const handleDelete = async (id: string) => {
+    try {
+      const res = await apiDelete({ url: API_FEED_DELETE(id) });
+
+      if (res?.success) {
+        setFeedPosts(prev => prev.filter(p => p._id !== id));
+        refetch();
+      }
+    } catch (error) {
+      console.error('Error deleting feed:', error);
+    }
+  };
+
+  useEffect(() => {
+    refetch();
+  }, [refreshKey]);
+
+  const toggleLike = async (post: any) => {
+    const isLiked = !!post.isLike;
+    const delta = isLiked ? -1 : 1;
+
+    // optimistic update
+    setFeedPosts(prev =>
+      prev.map(p =>
+        p._id === post._id
+          ? {
+              ...p,
+              isFavorite: !isLiked,
+              likes: Math.max(0, (p.likes ?? 0) + delta),
+            }
+          : p,
+      ),
+    );
+
+    try {
+      const res = await apiPost({
+        url: API_FEED_TOGGLE_FAVORITE,
+        values: { referenceId: post._id, type: !isLiked ? 1 : 0 },
+      });
+
+      if (!res?.success) {
+        // rollback
+        setFeedPosts(prev =>
+          prev.map(p =>
+            p._id === post._id
+              ? {
+                  ...p,
+                  isFavorite: isLiked,
+                  likes: Math.max(0, (p.likes ?? 0) - delta),
+                }
+              : p,
+          ),
+        );
+        ShowToast(res?.message || 'Failed to update like', 'error');
+      }
+    } catch (e) {
+      // rollback on error
+      setFeedPosts(prev =>
+        prev.map(p =>
+          p._id === post._id
+            ? {
+                ...p,
+                isFavorite: isLiked,
+                likes: Math.max(0, (p.likes ?? 0) - delta),
+              }
+            : p,
+        ),
+      );
+      ShowToast('Error updating like', 'error');
+    }
+  };
+
   return (
-    <View style={styles.feedCard}>
-      <View style={styles.feedHeader}>
-        <Image
-          source={post.avatar}
-          style={styles.feedAvatar}
+    <View>
+      {Array.isArray(data?.data) &&
+        data?.data?.map((post: any) => {
+          const liked = !!post.isLike;
+          return (
+            <View key={post._id} style={s.feedCard}>
+              {/* Header */}
+              <View style={s.feedHeader}>
+                <Image
+                  source={require('../../src/Theme/assets/image/ellispe.png')}
+                  style={s.feedAvatar}
+                />
+
+                {/* Username + menu aligned right */}
+                <View
+                  style={[
+                    s.feedspace,
+                    {
+                      flex: 1,
+                      flexDirection: 'row',
+                      alignItems: 'center',
+                      justifyContent: 'space-between',
+                    },
+                  ]}
+                >
+                  <Text style={s.feedUser}>
+                    {post.author?.nickName || 'Unknown'}
+                  </Text>
+
+                  <Menu>
+                    <MenuTrigger
+                      customStyles={{
+                        TriggerTouchableComponent: TouchableOpacity,
+                        triggerWrapper: { padding: wp(1.5) },
+                      }}
+                      //hitSlop={{ top: 6, bottom: 6, left: 6, right: 6 }}
+                    >
+                      <Ionicons
+                        name="ellipsis-vertical"
+                        size={wp(5)}
+                        color="#555"
+                      />
+                    </MenuTrigger>
+
+                    <MenuOptions
+                      customStyles={{
+                        optionsContainer: {
+                          width: wp(32),
+                          paddingVertical: 6,
+                          borderRadius: 10,
+                          marginTop: 6,
+                        },
+                        optionsWrapper: { paddingVertical: 2 },
+                      }}
+                    >
+                      <MenuOption onSelect={() => handleEdit(post._id)}>
+                        <Text
+                          style={{ paddingVertical: 8, paddingHorizontal: 12 }}
+                        >
+                          Edit
+                        </Text>
+                      </MenuOption>
+                      <MenuOption onSelect={() => handleDelete(post._id)}>
+                        <Text
+                          style={{
+                            paddingVertical: 8,
+                            paddingHorizontal: 12,
+                            color: 'red',
+                          }}
+                        >
+                          Delete
+                        </Text>
+                      </MenuOption>
+                    </MenuOptions>
+                  </Menu>
+                </View>
+              </View>
+
+              <Text style={s.feedText}>{post.content}</Text>
+              <View style={s.feedStats}>
+                <TouchableOpacity
+                  style={s.statItem}
+                  onPress={() => toggleLike(post)}
+                >
+                  <Ionicons
+                    name={liked ? 'heart' : 'heart-outline'}
+                    size={wp(5.2)}
+                    color={liked ? '#E53935' : '#9e9e9e'}
+                  />
+                  <Text style={s.statText}>{post.likeCount ?? 0}</Text>
+                </TouchableOpacity>
+
+                <View style={s.statItem}>
+                  <TouchableOpacity
+                    style={s.statItem}
+                    onPress={() => openComments(post._id)}
+                  >
+                    <Image
+                      source={require('../../src/Theme/assets/image/feedchat.png')}
+                      style={s.feedicon}
+                    />
+                    <Text style={s.statText}>{post.commentCount ?? 0}</Text>
+                  </TouchableOpacity>
+                </View>
+
+                <View style={s.statItem}>
+                  <Image
+                    source={require('../../src/Theme/assets/image/send.png')}
+                    style={s.feedicon}
+                  />
+                  <Text style={s.statText}>{post.shares ?? 0}</Text>
+                </View>
+              </View>
+            </View>
+          );
+        })}
+      {/* Comment Sheet */}
+      {selectedPostId && (
+        <CommentSheet
+          onRefReady={ref => {
+            commentSheetRef.current = ref?.current ?? null;
+          }}
+          postId={selectedPostId}
+          onSuccess={refetch}
+          onClosed={() => setSelectedPostId(null)}
         />
-        <Text style={styles.feedUser}>{post.user}</Text>
-      </View>
-      
-      <Text style={styles.feedText}>{post.content}</Text>
-      
-      <View style={styles.feedStats}>
-        <TouchableOpacity 
-          style={styles.statItem}
-          onPress={onLikePress}
-        >
-          <Image
-            source={require('../../assets/image/heart.png')}
-            style={styles.feedicon}
-          />
-          <Text style={styles.statText}>{post.likes}</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity 
-          style={styles.statItem}
-          onPress={onCommentPress}
-        >
-          <Image
-            source={require('../../assets/image/feedchat.png')}
-            style={styles.feedicon}
-          />
-          <Text style={styles.statText}>{post.comments}</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity 
-          style={styles.statItem}
-          onPress={onSharePress}
-        >
-          <Image
-            source={require('../../assets/image/send.png')}
-            style={styles.feedicon}
-          />
-          <Text style={styles.statText}>{post.shares}</Text>
-        </TouchableOpacity>
-      </View>
+      )}
     </View>
   );
 };
 
-export default FeedPost; 
+export default FeedPost;

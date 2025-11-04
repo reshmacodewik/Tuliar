@@ -15,7 +15,7 @@ const styles = (wp: any, hp: any) =>
       flexDirection: 'row',
       justifyContent: 'space-between',
       alignItems: 'center',
-      paddingTop: hp(5),
+      paddingTop: hp(3.5),
       paddingBottom: hp(1),
     },
     backButton: {
@@ -25,6 +25,7 @@ const styles = (wp: any, hp: any) =>
       alignItems: 'center',
       borderRadius: wp(5),
       marginLeft: wp(-2),
+      marginBottom:wp(2)
     },
     headerCenter: {
       flex: 1,
@@ -111,11 +112,11 @@ const styles = (wp: any, hp: any) =>
       paddingHorizontal: wp(4),
       borderRadius: wp(6),
       alignItems: 'center',
-      marginBottom: hp(1),
+      marginBottom: hp(0.5),
       width: wp(35),
     },
     watchAdButton: {
-      backgroundColor: '#F97316',
+      backgroundColor: '#ECA14C',
       paddingVertical: hp(1.2),
       paddingHorizontal: wp(4),
       borderRadius: wp(6),
@@ -179,11 +180,11 @@ const styles = (wp: any, hp: any) =>
     payButton: {
       backgroundColor: '#264734',
       paddingVertical: hp(0.5),
-      paddingHorizontal: wp(3),
+      paddingHorizontal: wp(3.5),
       borderRadius: wp(5),
       alignItems: 'center',
       marginTop: hp(1),
-      alignSelf: 'flex-end',
+      alignSelf: 'center',
       position: 'absolute',
       bottom: hp(1.8),
       right: wp(7.5),

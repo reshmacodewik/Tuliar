@@ -35,7 +35,7 @@ const experts: Expert[] = [
     type: 'Therapist',
     price: 'KSh 2,500',
     chosenBy: 24,
-    image: require('../../assets/image/doc1.png'),
+    image: require('../../src/Theme/assets/image/doc1.png'),
   },
   {
     id: '2',
@@ -45,7 +45,7 @@ const experts: Expert[] = [
     type: 'Mentor',
     price: 'KSh 2,500',
     chosenBy: 24,
-    image: require('../../assets/image/doc2.png'),
+    image: require('../../src/Theme/assets/image/doc2.png'),
   },
   {
     id: '3',
@@ -55,7 +55,7 @@ const experts: Expert[] = [
     type: 'Mentor',
     price: 'KSh 2,500',
     chosenBy: 24,
-    image: require('../../assets/image/doc2.png'),
+    image: require('../../src/Theme/assets/image/doc2.png'),
   },
 ];
 
@@ -66,9 +66,9 @@ const ExploreScreen = () => {
   const renderExpert = ({ item }: { item: Expert }) => (
     <TouchableOpacity
    
-    onPress={() => {
-      navigation.navigate('DoctorProfileScreen', { expert: item });
-    }}
+    // onPress={() => {
+    //   navigation.navigate('DoctorProfileScreen', { expert: item });
+    // }}
 
   >
     <View style={[styles(wp, hp).card, { backgroundColor: '#fff' }]}>
@@ -119,15 +119,15 @@ const ExploreScreen = () => {
 
             <View style={styles(wp, hp).iconRow}>
               <Image
-                source={require('../../assets/image/users.png')}
+                source={require('../../src/Theme/assets/image/users.png')}
                 style={styles(wp, hp).icon}
               />
               <Image
-                source={require('../../assets/image/video.png')}
+                source={require('../../src/Theme/assets/image/video.png')}
                 style={styles(wp, hp).icon}
               />
               <Image
-                source={require('../../assets/image/message.png')}
+                source={require('../../src/Theme/assets/image/message.png')}
                 style={styles(wp, hp).icon}
               />
             </View>
@@ -155,7 +155,7 @@ const ExploreScreen = () => {
 
   return (
     <ImageBackground
-      source={require('../../assets/image/background.png')}
+      source={require('../../src/Theme/assets/image/background.png')}
       style={styles(wp, hp).bgimg}
     >
       <View style={styles(wp, hp).container}>

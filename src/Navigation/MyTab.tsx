@@ -8,12 +8,12 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Icon from 'react-native-vector-icons/Feather';
 import { useResponsive } from 'react-native-responsive-hook';
 import TalkMoreModal from '../components/TalkMoreModal';
-
+import { useNavigation, NavigationProp } from '@react-navigation/native';
 // Import your screens
 import HomeScreen from '../Screens/HomeScreen';
-import ExploreScreen from '../Screens/ExploreScreen';
 import JournalScreen from '../Screens/Journal/JournalScreen';
 import EventScreen from '../Screens/Event/Eventscreen';
+import ExploreScreen from '../Screens/Explore/ExploreScreen';
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator(); // ✅ Added Stack navigator
@@ -22,22 +22,25 @@ const Stack = createNativeStackNavigator(); // ✅ Added Stack navigator
 const BottomTabs = () => {
   const { wp, hp } = useResponsive();
   const [showTalkMoreModal, setShowTalkMoreModal] = useState(false);
+  const navigation = useNavigation<NavigationProp<any>>();
 
   return (
     <>
-    <TalkMoreModal
-      visible={showTalkMoreModal}
-      onClose={() => setShowTalkMoreModal(false)}
-      onSelect={option => {
-        // Handle navigation or logic here
-        if (option === 'peer') {
-          // navigation.navigate('PeerScreen');
-        } else if (option === 'ai') {
-          // navigation.navigate('AICompanionScreen');
-        } else if (option === 'group') {
-          // navigation.navigate('GroupScreen');
-        }
-      } } /><Tab.Navigator
+      <TalkMoreModal
+        visible={showTalkMoreModal}
+        onClose={() => setShowTalkMoreModal(false)}
+        onSelect={option => {
+          // Handle navigation or logic here
+          if (option === 'peer') {
+            navigation.navigate('PeerChatScreen');
+          } else if (option === 'ai') {
+            navigation.navigate('PeerChat');
+          } else if (option === 'group') {
+            navigation.navigate('AIPeerChatScreen');
+          }
+        }}
+      />
+      <Tab.Navigator
         screenOptions={{
           headerShown: false,
           tabBarShowLabel: true,
@@ -59,16 +62,21 @@ const BottomTabs = () => {
               <Icon
                 name="home"
                 size={wp(6)}
-                color={focused ? '#FFA726' : '#B0B0B0'} />
+                color={focused ? '#FFA726' : '#B0B0B0'}
+              />
             ),
             tabBarLabel: ({ focused }) => (
               <Text
-                style={[styles.label, { color: focused ? '#FFA726' : '#B0B0B0' }]}
+                style={[
+                  styles.label,
+                  { color: focused ? '#FFA726' : '#B0B0B0' },
+                ]}
               >
                 Home
               </Text>
             ),
-          }} />
+          }}
+        />
 
         {/* Journal Tab */}
         <Tab.Screen
@@ -79,16 +87,21 @@ const BottomTabs = () => {
               <Icon
                 name="clock"
                 size={wp(6)}
-                color={focused ? '#FFA726' : '#B0B0B0'} />
+                color={focused ? '#FFA726' : '#B0B0B0'}
+              />
             ),
             tabBarLabel: ({ focused }) => (
               <Text
-                style={[styles.label, { color: focused ? '#FFA726' : '#B0B0B0' }]}
+                style={[
+                  styles.label,
+                  { color: focused ? '#FFA726' : '#B0B0B0' },
+                ]}
               >
                 Journal
               </Text>
             ),
-          }} />
+          }}
+        />
 
         {/* Mood Tab */}
         <Tab.Screen
@@ -111,12 +124,16 @@ const BottomTabs = () => {
             ),
             tabBarLabel: ({ focused }) => (
               <Text
-                style={[styles.label, { color: focused ? '#FFA726' : '#B0B0B0' }]}
+                style={[
+                  styles.label,
+                  { color: focused ? '#FFA726' : '#B0B0B0' },
+                ]}
               >
                 Check-In?
               </Text>
             ),
-          }} />
+          }}
+        />
 
         {/* Explore Tab */}
         <Tab.Screen
@@ -125,24 +142,31 @@ const BottomTabs = () => {
           options={{
             tabBarIcon: ({ focused }) => (
               <Image
-                source={focused
-                  ? require('../../assets/icon/explore.png')
-                  : require('../../assets/icon/explore.png')}
+                source={
+                  focused
+                    ? require('../Theme/assets/icon/explore.png')
+                    : require('../Theme/assets/icon/explore.png')
+                }
                 style={{
                   width: wp(20),
                   height: wp(20),
                   resizeMode: 'contain',
                   tintColor: focused ? '#FFA726' : '#B0B0B0', // Optional: tint for monochrome images
-                }} />
+                }}
+              />
             ),
             tabBarLabel: ({ focused }) => (
               <Text
-                style={[styles.label, { color: focused ? '#FFA726' : '#B0B0B0' }]}
+                style={[
+                  styles.label,
+                  { color: focused ? '#FFA726' : '#B0B0B0' },
+                ]}
               >
                 Explore
               </Text>
             ),
-          }} />
+          }}
+        />
 
         {/* Search Tab */}
         <Tab.Screen
@@ -151,32 +175,36 @@ const BottomTabs = () => {
           options={{
             tabBarIcon: ({ focused }) => (
               <Image
-                source={require('../../assets/icon/tabsearch.png')}
+                source={require('../Theme/assets/icon/tabsearch.png')}
                 style={{
                   width: wp(8),
                   height: wp(8),
                   resizeMode: 'contain',
                   tintColor: focused ? '#FFA726' : '#B0B0B0',
-                }} />
+                }}
+              />
             ),
             tabBarLabel: ({ focused }) => (
               <Text
-                style={[styles.label, { color: focused ? '#FFA726' : '#B0B0B0' }]}
+                style={[
+                  styles.label,
+                  { color: focused ? '#FFA726' : '#B0B0B0' },
+                ]}
               >
                 Talk More
               </Text>
             ),
           }}
           listeners={{
-  tabPress: e => {
-    e.preventDefault();
-    setShowTalkMoreModal(prev => !prev);
-  },
-}}/>
-      </Tab.Navigator></>
-   
+            tabPress: e => {
+              e.preventDefault();
+              setShowTalkMoreModal(prev => !prev);
+            },
+          }}
+        />
+      </Tab.Navigator>
+    </>
   );
- 
 };
 
 // Stack Navigator
@@ -189,7 +217,7 @@ const AppNavigator = () => {
   );
 };
 
-export default AppNavigator; // ✅ Export AppNavigator instead of BottomTabs
+export default AppNavigator; 
 
 const styles = StyleSheet.create({
   label: {

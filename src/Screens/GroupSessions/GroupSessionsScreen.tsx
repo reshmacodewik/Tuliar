@@ -20,7 +20,7 @@ const featuredSession = {
   date: 'Apr 26, 6:00 PM',
   leader: {
     name: 'Alex M.',
-    image: require('../../../assets/icon/groupdoc.png'),
+    image: require('../../Theme/assets/icon/groupdoc.png'),
     participants: '15 people registered',
   },
 };
@@ -32,7 +32,7 @@ const sessions = [
     date: 'Apr 26, 6:00 PM',
     leader: {
       name: 'John K.',
-      image: require('../../../assets/image/doc2.png'),
+      image: require('../../Theme/assets/image/doc2.png'),
     },
     isFree: true,
   },
@@ -42,7 +42,7 @@ const sessions = [
     date: 'Apr 26, 6:00 PM',
     leader: {
       name: 'John K.',
-      image: require('../../../assets/image/doc2.png'),
+      image: require('../../Theme/assets/image/doc2.png'),
     },
     isFree: true,
   },
@@ -52,7 +52,7 @@ const sessions = [
     date: 'Apr 26, 6:00 PM',
     leader: {
       name: 'John K.',
-      image: require('../../../assets/image/doc2.png'),
+      image: require('../../Theme/assets/image/doc2.png'),
     },
     isFree: true,
   },
@@ -80,12 +80,12 @@ const GroupSessionsScreen = () => {
 
   const handleReserveSpot = (sessionId: string) => {
     console.log('Reserve Spot pressed for session:', sessionId);
-    navigation.navigate('ReviewPaymentScreen');
+    navigation.navigate('SessionPaymentScreen');
   };
 
   return (
     <ImageBackground
-      source={require('../../../assets/image/background.png')}
+      source={require('../../Theme/assets/image/background.png')}
       style={styles(wp, hp).bgimg}
     >
       <StatusBar barStyle="dark-content" backgroundColor="transparent" />
@@ -110,7 +110,7 @@ const GroupSessionsScreen = () => {
 
           <TouchableOpacity style={styles(wp, hp).profileButton}>
             <Image
-              source={require('../../../assets/image/doc2.png')}
+              source={require('../../Theme/assets/image/doc2.png')}
               style={styles(wp, hp).profileImage}
             />
           </TouchableOpacity>
@@ -187,7 +187,7 @@ const GroupSessionsScreen = () => {
                       </Text>
                       {session.isFree && (
                         <View style={styles(wp, hp).freeBadge}>
-                         <Image source={require('../../../assets/icon/free.png')} style={styles(wp, hp).freeIcon}/>
+                         <Image source={require('../../Theme/assets/icon/free.png')} style={styles(wp, hp).freeIcon}/>
                         </View>
                       )}
                     </View>

@@ -22,7 +22,7 @@ const OnboardingJourneyScreen = () => {
 
   return (
     <ImageBackground
-      source={require('../../../assets/image/background.png')}
+      source={require('../../Theme/assets/image/background.png')}
       style={s.backgroundImage}
     >
       <View style={s.container}>
@@ -35,7 +35,7 @@ const OnboardingJourneyScreen = () => {
         {/* Centered Mentor Image */}
         <View style={s.mentorIllustration}>
           <Image
-            source={require('../../../assets/image/mentor.png')}
+            source={require('../../Theme/assets/image/mentor.png')}
             style={s.mentorImage}
           />
         </View>

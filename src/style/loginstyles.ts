@@ -1,4 +1,3 @@
-
 import { Dimensions, StyleSheet } from 'react-native';
 const { width } = Dimensions.get('window');
 
@@ -10,26 +9,24 @@ function hp(percentage: number): number {
   return (width * percentage) / 100;
 }
 
-
 const styles = StyleSheet.create({
-  bgimg:{
-    flex: 1, 
-    resizeMode: 'cover' 
+  bgimg: {
+    flex: 1,
+    resizeMode: 'cover',
   },
   container: {
     flex: 1,
     alignItems: 'center',
-    justifyContent:'center'
+    justifyContent: 'center',
   },
   logo: {
-    width: wp(60),
-    height: hp(8),
-    marginBottom:wp(5)
+    width: wp(65),
+    height: hp(10),
+    marginBottom: wp(5),
   },
   tagline: {
     color: '#000',
     textAlign: 'center',
-   
   },
   label: {
     color: '#000',
@@ -37,7 +34,6 @@ const styles = StyleSheet.create({
     marginLeft: wp(10),
     marginBottom: wp(2),
     fontWeight: '500',
- 
   },
   input: {
     width: wp(80),
@@ -47,7 +43,13 @@ const styles = StyleSheet.create({
     borderRadius: wp(10),
     paddingHorizontal: wp(4),
     backgroundColor: '#fff',
-  
+  },
+  errorText: {
+    color: 'red',
+    fontSize: 12,
+    paddingHorizontal: wp(8),
+    marginBottom: wp(2),
+    alignSelf: 'flex-start',
   },
   passwordContainer: {
     width: wp(80),
@@ -71,7 +73,7 @@ const styles = StyleSheet.create({
     marginRight: wp(10),
   },
   loginButton: {
-     backgroundColor: '#264734',
+    backgroundColor: '#264734',
     width: wp(80),
     height: wp(12),
     borderRadius: wp(10),
@@ -119,6 +121,7 @@ const styles = StyleSheet.create({
     height: wp(6),
     resizeMode: 'contain',
   },
+
 });
 
 export default styles;

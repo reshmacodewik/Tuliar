@@ -14,22 +14,52 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { useNavigation, NavigationProp } from '@react-navigation/native';
 import { useResponsive } from '../../Responsive/useResponsive';
 import styles from './changePasswordStyles';
+import { useFormik } from 'formik';
+import { apiPost } from '../../utils/api/common';
+import { changepasswordSchema } from '../../validation/signupSchema';
+import ShowToast from '../../utils/ShowToast';
+import { API_CHANGE_PASSWORD } from '../../utils/api/APIConstant';
 
 const ChangePasswordScreen = () => {
   const { wp, hp } = useResponsive();
   const navigation = useNavigation<NavigationProp<any>>();
   const themedStyles = styles(wp, hp);
 
-  const [oldPassword, setOldPassword] = useState('');
-  const [newPassword, setNewPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
   const [showOld, setShowOld] = useState(false);
   const [showNew, setShowNew] = useState(false);
   const [showConfirm, setShowConfirm] = useState(false);
 
+  const formik = useFormik({
+    initialValues: {
+      currentPassword: '',
+      newPassword: '',
+      confirmPassword: '',
+    },
+    validationSchema: changepasswordSchema,
+    onSubmit: async values => {
+      try {
+        const payload = {
+          currentPassword: values.currentPassword,
+          password: values.newPassword, 
+        };
+
+        const res = await apiPost({ url: API_CHANGE_PASSWORD, values: payload });
+
+        if (res?.success) {
+          ShowToast(res?.message, 'success');
+          navigation.navigate('LoginScreen' as never);
+        } else {
+          ShowToast(res?.message || 'Change Password Failed', 'error');
+        }
+      } catch (e: any) {
+        ShowToast(e?.message || 'Something went wrong', 'error');
+      }
+    },
+  });
+
   return (
     <ImageBackground
-      source={require('../../../assets/image/background.png')}
+      source={require('../../Theme/assets/image/background.png')}
       style={themedStyles.bgimg}
       resizeMode="cover"
     >
@@ -38,7 +68,10 @@ const ChangePasswordScreen = () => {
         behavior={Platform.OS === 'ios' ? 'padding' : undefined}
         keyboardVerticalOffset={hp(2)}
       >
-        <ScrollView contentContainerStyle={themedStyles.scrollContent} showsVerticalScrollIndicator={false}>
+        <ScrollView
+          contentContainerStyle={themedStyles.scrollContent}
+          showsVerticalScrollIndicator={false}
+        >
           {/* Header */}
           <View style={themedStyles.header}>
             <TouchableOpacity onPress={() => navigation.goBack()}>
@@ -49,22 +82,23 @@ const ChangePasswordScreen = () => {
 
           {/* Illustration */}
           <Image
-            source={require('../../../assets/image/change_password.png')}
+            source={require('../../Theme/assets/image/change_password.png')}
             style={themedStyles.illustration}
             resizeMode="contain"
           />
 
-          {/* Form */}
+          {/* Current Password */}
           <View style={themedStyles.formGroup}>
-            <Text style={themedStyles.label}>Old Password</Text>
+            <Text style={themedStyles.label}>Current Password</Text>
             <View style={themedStyles.inputRow}>
               <TextInput
                 style={themedStyles.input}
-                placeholder="Enter old password"
+                placeholder="Enter current password"
                 placeholderTextColor="#9CA3AF"
                 secureTextEntry={!showOld}
-                value={oldPassword}
-                onChangeText={setOldPassword}
+                value={formik.values.currentPassword}
+                onChangeText={formik.handleChange('currentPassword')}
+                onBlur={formik.handleBlur('currentPassword')}
               />
               <TouchableOpacity onPress={() => setShowOld(!showOld)}>
                 <MaterialIcons
@@ -74,8 +108,12 @@ const ChangePasswordScreen = () => {
                 />
               </TouchableOpacity>
             </View>
+            {formik.touched.currentPassword && formik.errors.currentPassword && (
+              <Text style={themedStyles.errorText}>{formik.errors.currentPassword}</Text>
+            )}
           </View>
 
+          {/* New Password */}
           <View style={themedStyles.formGroup}>
             <Text style={themedStyles.label}>New Password</Text>
             <View style={themedStyles.inputRow}>
@@ -84,8 +122,9 @@ const ChangePasswordScreen = () => {
                 placeholder="Enter new password"
                 placeholderTextColor="#9CA3AF"
                 secureTextEntry={!showNew}
-                value={newPassword}
-                onChangeText={setNewPassword}
+                value={formik.values.newPassword}
+                onChangeText={formik.handleChange('newPassword')}
+                onBlur={formik.handleBlur('newPassword')}
               />
               <TouchableOpacity onPress={() => setShowNew(!showNew)}>
                 <MaterialIcons
@@ -95,18 +134,23 @@ const ChangePasswordScreen = () => {
                 />
               </TouchableOpacity>
             </View>
+            {formik.touched.newPassword && formik.errors.newPassword && (
+              <Text style={themedStyles.errorText}>{formik.errors.newPassword}</Text>
+            )}
           </View>
 
+          {/* Confirm Password */}
           <View style={themedStyles.formGroup}>
             <Text style={themedStyles.label}>Confirm New Password</Text>
             <View style={themedStyles.inputRow}>
               <TextInput
                 style={themedStyles.input}
-                placeholder="Enter confirm new password"
+                placeholder="Confirm new password"
                 placeholderTextColor="#9CA3AF"
                 secureTextEntry={!showConfirm}
-                value={confirmPassword}
-                onChangeText={setConfirmPassword}
+                value={formik.values.confirmPassword}
+                onChangeText={formik.handleChange('confirmPassword')}
+                onBlur={formik.handleBlur('confirmPassword')}
               />
               <TouchableOpacity onPress={() => setShowConfirm(!showConfirm)}>
                 <MaterialIcons
@@ -116,10 +160,13 @@ const ChangePasswordScreen = () => {
                 />
               </TouchableOpacity>
             </View>
+            {formik.touched.confirmPassword && formik.errors.confirmPassword && (
+              <Text style={themedStyles.errorText}>{formik.errors.confirmPassword}</Text>
+            )}
           </View>
 
           {/* Submit Button */}
-          <TouchableOpacity style={themedStyles.submitBtn}>
+          <TouchableOpacity style={themedStyles.submitBtn} onPress={() => formik.handleSubmit()}>
             <Text style={themedStyles.submitText}>Submit</Text>
           </TouchableOpacity>
         </ScrollView>
