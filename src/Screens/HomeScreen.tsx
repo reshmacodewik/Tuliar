@@ -75,7 +75,7 @@ const handleMenuSelect = (raw: string) => {
       navigation.navigate('SettingsScreen');
       break;
     case 'my wallet':
-      navigation.navigate('PaymentsScreen');
+      navigation.navigate('PaymentsMainScreen');
       break;
     case 'calendar':
       navigation.navigate('CalendarScreen');
