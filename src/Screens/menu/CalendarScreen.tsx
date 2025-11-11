@@ -73,7 +73,7 @@ const CalendarScreen = () => {
           </TouchableOpacity>
           <View style={styles.filtertext}>
           <Text style={styles.header}>Calendar</Text>
-          <TouchableOpacity onPress={() => setShowFilter(true)}>
+          <TouchableOpacity onPress={() => setShowFilter(true)} style={styles.filterButton}>
             <MaterialIcons name="tune" size={wp(6)} color="#000" />
           </TouchableOpacity>
           </View>

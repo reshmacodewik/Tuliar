@@ -25,7 +25,11 @@ import {
 
 import Feedpopup from '../../components/Feedpopup';
 import ShowToast from '../../utils/ShowToast';
-import { API_FEED_CREATE, API_FEED_LIST, API_FEED_UPDATE } from '../../utils/api/APIConstant';
+import {
+  API_FEED_CREATE,
+  API_FEED_LIST,
+  API_FEED_UPDATE,
+} from '../../utils/api/APIConstant';
 import {
   apiPost,
   apiPATCH,
@@ -53,32 +57,36 @@ const MyFeedDetail = () => {
   const s = styles(wp, hp);
 
   const richText = useRef<RichEditor>(null);
+useEffect(() => {
+  if (editId && thought && richText.current) {
+    setTimeout(() => {
+      richText.current?.setContentHTML(thought);
+    }, 500);
+  }
+}, [thought]);
 
   // Prefill editor when editing
- useEffect(() => {
-  if (editId) {
-    const fetchFeedDetail = async () => {
-      try {
-        const res = await getApiByParams({
-          url: API_FEED_LIST,
-          params: editId,
-        });
+  useEffect(() => {
+    if (editId) {
+      const fetchFeedDetail = async () => {
+        try {
+          const res = await getApiByParams({
+            url: API_FEED_LIST,
+            params: editId,
+          });
 
-     
-        if (res?.success && res?.data?.length > 0) {
-         
-          const content = res.data[0].content; 
-          setThought(content); 
-          richText.current?.setContentHTML(content); 
+          if (res?.success && res?.data?.length > 0) {
+            const content = res.data[0].content;
+            setThought(content);
+            richText.current?.setContentHTML(content);
+          }
+        } catch (e) {
+          console.error('Error loading feed:', e);
         }
-      } catch (e) {
-        console.error('Error loading feed:', e);
-      }
-    };
-    fetchFeedDetail();
-  }
-}, [editId]);
-
+      };
+      fetchFeedDetail();
+    }
+  }, [editId]);
 
   const handlePost = async () => {
     try {
@@ -115,7 +123,6 @@ const MyFeedDetail = () => {
         if (!editId) {
           setThought(res.data.content);
           richText.current?.setContentHTML('');
-       
         } else {
           navigation.goBack();
         }
@@ -169,9 +176,17 @@ const MyFeedDetail = () => {
               <RichEditor
                 ref={richText}
                 placeholder="Write something amazing..."
-                onChange={html => setThought(html)}
                 initialHeight={hp(12)}
                 useContainer
+                onChange={html => setThought(html)}
+                editorInitializedCallback={() => {
+                  // 🔹 This callback name actually works in v1.10.0
+                  if (editId && thought) {
+                    setTimeout(() => {
+                      richText.current?.setContentHTML(thought);
+                    }, 300); // delay ensures editor WebView is ready
+                  }
+                }}
               />
             </ScrollView>
 

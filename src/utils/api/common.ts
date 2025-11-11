@@ -98,22 +98,21 @@ export const getApiByParams = async ({
 export const apiPost = async ({
   url,
   values,
-  
 }: postParams): Promise<any> => {
   try {
     const res = await defaultAxios.post(url, values);
     return res.data;
   } catch (err: any) {
-    ShowToast(err?.response?.data?.error, 'error');
+    ShowToast(err?.response?.data?.error || 'Error', 'error');
     return err?.response?.data;
   }
 };
-
 export const apiPATCH = async ({ url, values }: postParams): Promise<any> => {
   try {
     const res = await defaultAxios.patch(url, values, {
       headers: {
         Accept: 'application/json',
+        'Content-Type': 'application/json',
       },
     });
     console.log(res, 'res--0000000');

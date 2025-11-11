@@ -21,7 +21,7 @@ import {
 import LinearGradient from 'react-native-linear-gradient';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Feather from 'react-native-vector-icons/Feather';
-import { apiPost, apiPUT, getApiByParams } from '../utils/api/common';
+import { apiPost, apiPUT, getApiByParams, getApiWithOutQuery } from '../utils/api/common';
 import { clearSession, getSession } from '../storage/mmkvPersister';
 import {
   useNavigation,
@@ -36,11 +36,12 @@ import {
   actions,
 } from 'react-native-pell-rich-editor';
 import ShowToast from '../utils/ShowToast';
-import { API_FEED_CREATE, API_FEED_UPDATE } from '../utils/api/APIConstant';
+import { API_FEED_CREATE, API_FEED_LIST, API_FEED_UPDATE } from '../utils/api/APIConstant';
 import { htmlToPlainText } from '../components/htmlToPlainText';
 import FeedPost from '../components/FeedPost';
 import { RootStackParamList } from '../Navigation/types';
 import { launchImageLibrary } from 'react-native-image-picker';
+import { useQuery } from '@tanstack/react-query';
 const features = [
   {
     title: 'Chat with experts',
@@ -111,7 +112,14 @@ const HomeScreen = () => {
   //     fetchFeedDetail();
   //   }
   // }, [editId]);
+  const { data, refetch, isFetched, isLoading } = useQuery({
+    queryKey: ['feed-list'],
+    queryFn: () => getApiWithOutQuery({ url: API_FEED_LIST }),
+  });
 
+   useEffect(() => {
+      refetch();
+    }, [refreshKey]);
   const handlePost = async () => {
     try {
       const session = getSession();

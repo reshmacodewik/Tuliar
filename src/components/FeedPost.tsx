@@ -77,14 +77,14 @@ const FeedPost: React.FC<FeedPostProps> = ({ refreshKey }) => {
     const isLiked = !!post.isLike;
     const delta = isLiked ? -1 : 1;
 
-    // optimistic update
+    // 🟢 Optimistic UI update using correct field names
     setFeedPosts(prev =>
       prev.map(p =>
         p._id === post._id
           ? {
               ...p,
-              isFavorite: !isLiked,
-              likes: Math.max(0, (p.likes ?? 0) + delta),
+              isLike: !isLiked, // <-- match your API field
+              likeCount: Math.max(0, (p.likeCount ?? 0) + delta),
             }
           : p,
       ),
@@ -96,15 +96,18 @@ const FeedPost: React.FC<FeedPostProps> = ({ refreshKey }) => {
         values: { referenceId: post._id, type: !isLiked ? 1 : 0 },
       });
 
-      if (!res?.success) {
-        // rollback
+      console.log('Toggle Like Response:', res);
+
+      if (res?.success) {
+        refetch();
+        // rollback UI if API failed
         setFeedPosts(prev =>
           prev.map(p =>
             p._id === post._id
               ? {
                   ...p,
-                  isFavorite: isLiked,
-                  likes: Math.max(0, (p.likes ?? 0) - delta),
+                  isLike: isLiked,
+                  likeCount: Math.max(0, (p.likeCount ?? 0) - delta),
                 }
               : p,
           ),
@@ -118,8 +121,8 @@ const FeedPost: React.FC<FeedPostProps> = ({ refreshKey }) => {
           p._id === post._id
             ? {
                 ...p,
-                isFavorite: isLiked,
-                likes: Math.max(0, (p.likes ?? 0) - delta),
+                isLike: isLiked,
+                likeCount: Math.max(0, (p.likeCount ?? 0) - delta),
               }
             : p,
         ),

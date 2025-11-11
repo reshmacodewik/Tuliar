@@ -3,15 +3,21 @@ import { StyleSheet } from 'react-native';
 export default (wp: (v: number) => number, hp: (v: number) => number) =>
   StyleSheet.create({
     bgimg: { flex: 1, paddingTop: hp(3.5) },
-    scrollContainer: { flexGrow: 1, paddingHorizontal: wp(5), paddingBottom: hp(4) },
+    scrollContainer: { flexGrow: 1, paddingHorizontal: wp(4), paddingBottom: hp(4) },
 
     headerRow: {
       flexDirection: 'row',
       alignItems: 'center',
       marginBottom: hp(3),
+      marginLeft:wp(-1.5)
     },
     header: { fontSize: wp(5), fontWeight: '700', color: '#000' },
-    filtertext:{flexDirection:'row',justifyContent:'space-around', alignItems: 'center',},
+    filtertext:{flexDirection:'row',justifyContent:'space-between', alignItems: 'center',},
+    filterButton: {
+      paddingLeft: hp(25),
+      borderRadius: wp(2),
+     
+    },
     card: {
       backgroundColor: '#fff',
       borderRadius: wp(3),

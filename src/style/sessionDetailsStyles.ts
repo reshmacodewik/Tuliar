@@ -3,7 +3,7 @@ import { StyleSheet } from 'react-native';
 export const createSessionDetailsStyles = (wp: (percent: number) => number, hp: (percent: number) => number) => StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F8F9FA',
+
     paddingHorizontal: wp(5),
   },
   

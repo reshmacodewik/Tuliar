@@ -11,7 +11,8 @@ const styles = (wp: any, hp: any) =>
       flexDirection: 'row',
       alignItems: 'center',
       marginBottom: hp(2),
-      marginLeft: wp(-2.2),
+      marginLeft: wp(-2.5),
+      marginTop: hp(3),
     },
     backButton: {
       width: wp(10),
