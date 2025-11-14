@@ -31,6 +31,14 @@ const FeedPost: React.FC<FeedPostProps> = ({ refreshKey }) => {
   const [feedPosts, setFeedPosts] = useState<any[]>([]);
   const [loading, setLoading] = useState(false);
   const [selectedPostId, setSelectedPostId] = useState<string | null>(null);
+  const [currentUser, setCurrentUser] = useState<any>(null);
+
+  useEffect(() => {
+    const session = getSession(); // already imported
+    if (session?.user) {
+      setCurrentUser(session.user);
+    }
+  }, []);
 
   const commentSheetRef = useRef<InstanceType<any> | null>(null);
 
@@ -161,52 +169,56 @@ const FeedPost: React.FC<FeedPostProps> = ({ refreshKey }) => {
                     {post.author?.nickName || 'Unknown'}
                   </Text>
 
-                  <Menu>
-                    <MenuTrigger
-                      customStyles={{
-                        TriggerTouchableComponent: TouchableOpacity,
-                        triggerWrapper: { padding: wp(1.5) },
-                      }}
-                      //hitSlop={{ top: 6, bottom: 6, left: 6, right: 6 }}
-                    >
-                      <Ionicons
-                        name="ellipsis-vertical"
-                        size={wp(5)}
-                        color="#555"
-                      />
-                    </MenuTrigger>
+                  {currentUser?._id === post.author?._id && (
+                    <Menu>
+                      <MenuTrigger
+                        customStyles={{
+                          TriggerTouchableComponent: TouchableOpacity,
+                          triggerWrapper: { padding: wp(1.5) },
+                        }}
+                      >
+                        <Ionicons
+                          name="ellipsis-vertical"
+                          size={wp(5)}
+                          color="#555"
+                        />
+                      </MenuTrigger>
 
-                    <MenuOptions
-                      customStyles={{
-                        optionsContainer: {
-                          width: wp(32),
-                          paddingVertical: 6,
-                          borderRadius: 10,
-                          marginTop: 6,
-                        },
-                        optionsWrapper: { paddingVertical: 2 },
-                      }}
-                    >
-                      <MenuOption onSelect={() => handleEdit(post._id)}>
-                        <Text
-                          style={{ paddingVertical: 8, paddingHorizontal: 12 }}
-                        >
-                          Edit
-                        </Text>
-                      </MenuOption>
-                      <MenuOption onSelect={() => handleDelete(post._id)}>
-                        <Text
-                          style={{
-                            paddingVertical: 8,
-                            paddingHorizontal: 12,
-                            color: 'red',
-                          }}
-                        >
-                          Delete
-                        </Text>
-                      </MenuOption>
-                    </MenuOptions>
-                  </Menu>
+                      <MenuOptions
+                        customStyles={{
+                          optionsContainer: {
+                            width: wp(32),
+                            paddingVertical: 6,
+                            borderRadius: 10,
+                            marginTop: 6,
+                          },
+                          optionsWrapper: { paddingVertical: 2 },
+                        }}
+                      >
+                        <MenuOption onSelect={() => handleEdit(post._id)}>
+                          <Text
+                            style={{
+                              paddingVertical: 8,
+                              paddingHorizontal: 12,
+                            }}
+                          >
+                            Edit
+                          </Text>
+                        </MenuOption>
+                        <MenuOption onSelect={() => handleDelete(post._id)}>
+                          <Text
+                            style={{
+                              paddingVertical: 8,
+                              paddingHorizontal: 12,
+                              color: 'red',
+                            }}
+                          >
+                            Delete
+                          </Text>
+                        </MenuOption>
+                      </MenuOptions>
+                    </Menu>
+                  )}
                 </View>
               </View>
 

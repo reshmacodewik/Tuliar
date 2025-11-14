@@ -2,10 +2,10 @@ import { StyleSheet } from 'react-native';
 
 export default (wp: (v: number) => number, hp: (v: number) => number) =>
   StyleSheet.create({
-    bgimg: { flex: 1, paddingTop: hp(3) },
+    bgimg: { flex: 1, paddingTop: hp(4) },
     scrollContainer: { flexGrow: 1, paddingHorizontal: wp(5), paddingBottom: hp(6) },
 
-    headerRow: { flexDirection: 'row', alignItems: 'center', marginBottom: hp(2) },
+    headerRow: { flexDirection: 'row', alignItems: 'center', marginBottom: hp(2),marginLeft:wp(-1.5) },
 
     logoBlock: { alignItems: 'center', marginBottom: hp(4) },
     logo: {width:wp(45),height:hp(5),marginBottom:hp(3) },

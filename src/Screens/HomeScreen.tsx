@@ -21,7 +21,12 @@ import {
 import LinearGradient from 'react-native-linear-gradient';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Feather from 'react-native-vector-icons/Feather';
-import { apiPost, apiPUT, getApiByParams, getApiWithOutQuery } from '../utils/api/common';
+import {
+  apiPost,
+  apiPUT,
+  getApiByParams,
+  getApiWithOutQuery,
+} from '../utils/api/common';
 import { clearSession, getSession } from '../storage/mmkvPersister';
 import {
   useNavigation,
@@ -36,7 +41,11 @@ import {
   actions,
 } from 'react-native-pell-rich-editor';
 import ShowToast from '../utils/ShowToast';
-import { API_FEED_CREATE, API_FEED_LIST, API_FEED_UPDATE } from '../utils/api/APIConstant';
+import {
+  API_FEED_CREATE,
+  API_FEED_LIST,
+  API_FEED_UPDATE,
+} from '../utils/api/APIConstant';
 import { htmlToPlainText } from '../components/htmlToPlainText';
 import FeedPost from '../components/FeedPost';
 import { RootStackParamList } from '../Navigation/types';
@@ -117,9 +126,9 @@ const HomeScreen = () => {
     queryFn: () => getApiWithOutQuery({ url: API_FEED_LIST }),
   });
 
-   useEffect(() => {
-      refetch();
-    }, [refreshKey]);
+  useEffect(() => {
+    refetch();
+  }, [refreshKey]);
   const handlePost = async () => {
     try {
       const session = getSession();
@@ -155,32 +164,33 @@ const HomeScreen = () => {
   const handleMenuSelect = (raw: string) => {
     const value = raw.trim().toLowerCase();
 
-  switch (value) {
-    case 'profile':
-      navigation.navigate('ProfileScreen');
-      break;
-    case 'message':
-      navigation.navigate('MessagesScreen');
-      break;
-    case 'settings':
-      navigation.navigate('SettingsScreen');
-      break;
-    case 'my wallet':
-      navigation.navigate('PaymentsScreen');
-      break;
-    case 'calendar':
-      navigation.navigate('CalendarScreen');
-      break;
-    case 'help':
-      navigation.navigate('HelpScreen');
-      break;
-    case 'logout':
-      console.log('Logging out...');
-      // await logout(); // if you have one
-      break;
-    default:
-      console.warn('Unknown menu value:', raw);
-  }
+    switch (value) {
+      case 'profile':
+        navigation.navigate('ProfileScreen');
+        break;
+      case 'message':
+        navigation.navigate('MessagesScreen');
+        break;
+      case 'settings':
+        navigation.navigate('SettingsScreen');
+        break;
+      case 'my wallet':
+        navigation.navigate('PaymentsScreen');
+        break;
+      case 'calendar':
+        navigation.navigate('CalendarScreen');
+        break;
+      case 'help':
+        navigation.navigate('HelpScreen');
+        break;
+      // inside handleMenuSelect
+      case 'logout':
+        setLogoutVisible(true);
+        break;
+
+      default:
+        console.warn('Unknown menu value:', raw);
+    }
 
     // DO NOT call handleMenuSelect again here!
   };
@@ -285,7 +295,7 @@ const HomeScreen = () => {
                       <Text style={styles(wp, hp).menuText}>Help</Text>
                     </View>
                   </MenuOption>
-                  <MenuOption value="logout">
+                  <MenuOption onSelect={() => setLogoutVisible(true)}>
                     <View style={styles(wp, hp).menuItem}>
                       <Ionicons
                         name="log-out-outline"
@@ -573,7 +583,7 @@ const HomeScreen = () => {
                   // 🔹 Close modal
                   setLogoutVisible(false);
 
-                  navigation.navigate('LoginScreen');
+                navigation.navigate('LoginScreen')
                 } catch (err) {
                   console.log('Error clearing session:', err);
                 }
