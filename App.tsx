@@ -4,7 +4,6 @@ import { StatusBar, useColorScheme } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import {
   SafeAreaProvider,
-  useSafeAreaInsets,
 } from 'react-native-safe-area-context';
 import { NavigationContainer } from '@react-navigation/native';
 import { MenuProvider } from 'react-native-popup-menu';
@@ -24,10 +23,7 @@ function AppNavigation(): JSX.Element {
     </NavigationContainer>
   );
 }
-function ToastWithInsets() {
-  const insets = useSafeAreaInsets();
-  return <Toast topOffset={insets.top + 8} />;
-}
+
 
 export default function App(): JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';

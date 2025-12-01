@@ -4,7 +4,7 @@ import { useResponsive } from '../../Responsive/useResponsive';
 import styles from '../../style/mentorshipConnectingStyles';
 import { useNavigation } from '@react-navigation/native';
 import type { StackNavigationProp } from '@react-navigation/stack';
-import type { RootStackParamList } from '../../Navigation/Mystack';
+import { RootStackParamList } from '../../Navigation/types';
 
 const MentorshipConnectingScreen = () => {
   const { wp, hp } = useResponsive();

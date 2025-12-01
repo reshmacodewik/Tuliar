@@ -1,12 +1,11 @@
-/* eslint-disable react-native/no-inline-styles */
 import React, { useState } from 'react';
 import { View, Text, Pressable, ImageBackground, ScrollView} from 'react-native';
 import { useResponsive } from '../../Responsive/useResponsive';
 import styles from '../../style/questionnaireStyles';
-import { RootStackParamList } from '../../Navigation/Mystack';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { useNavigation } from '@react-navigation/native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import { RootStackParamList } from '../../Navigation/types';
 
 const QUESTIONS = [
   {

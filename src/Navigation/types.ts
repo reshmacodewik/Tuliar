@@ -59,7 +59,7 @@ export type RootStackParamList = {
   SessionDetailScreen: undefined;
   ExploreScreen: undefined;
   GroupSessionDetailScreen: undefined;
-  MyFeedDetail: undefined;
+  MyFeedDetail: { id: string };
   TherapistListScreen:undefined;
   WeeklyReportScreen: undefined;
 };

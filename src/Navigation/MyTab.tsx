@@ -1,5 +1,3 @@
-/* eslint-disable react-native/no-inline-styles */
-/* eslint-disable react/no-unstable-nested-components */
 
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, Platform, Image } from 'react-native';
@@ -9,14 +7,13 @@ import Icon from 'react-native-vector-icons/Feather';
 import { useResponsive } from 'react-native-responsive-hook';
 import TalkMoreModal from '../components/TalkMoreModal';
 import { useNavigation, NavigationProp } from '@react-navigation/native';
-// Import your screens
 import HomeScreen from '../Screens/HomeScreen';
 import JournalScreen from '../Screens/Journal/JournalScreen';
 import EventScreen from '../Screens/Event/Eventscreen';
 import ExploreScreen from '../Screens/Explore/ExploreScreen';
 
 const Tab = createBottomTabNavigator();
-const Stack = createNativeStackNavigator(); // ✅ Added Stack navigator
+const Stack = createNativeStackNavigator();
 
 // Bottom Tabs
 const BottomTabs = () => {
@@ -30,7 +27,6 @@ const BottomTabs = () => {
         visible={showTalkMoreModal}
         onClose={() => setShowTalkMoreModal(false)}
         onSelect={option => {
-          // Handle navigation or logic here
           if (option === 'peer') {
             navigation.navigate('PeerChatScreen');
           } else if (option === 'ai') {
@@ -168,10 +164,9 @@ const BottomTabs = () => {
           }}
         />
 
-        {/* Search Tab */}
         <Tab.Screen
           name="TalkMore"
-          component={() => null} // Dummy component, renders nothing// Use a dummy component, or a blank one
+          component={() => null} 
           options={{
             tabBarIcon: ({ focused }) => (
               <Image
@@ -217,7 +212,7 @@ const AppNavigator = () => {
   );
 };
 
-export default AppNavigator; 
+export default AppNavigator;
 
 const styles = StyleSheet.create({
   label: {

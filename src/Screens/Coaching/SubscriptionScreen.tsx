@@ -5,8 +5,8 @@ import styles from '../../style/subscriptionStyles';
 import SubscriptionCard from '../../components/SubscriptionCard';
 import { useNavigation } from '@react-navigation/native';
 import type { StackNavigationProp } from '@react-navigation/stack';
-import type { RootStackParamList } from '../../Navigation/Mystack';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import { RootStackParamList } from '../../Navigation/types';
 
 const plans = [
   {

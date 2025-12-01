@@ -11,9 +11,9 @@ import { useResponsive } from '../../Responsive/useResponsive';
 import styles from '../../style/doctorListStyles';
 import DoctorCard from '../../components/DoctorCard';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import { RootStackParamList } from '../../Navigation/Mystack';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { useNavigation } from '@react-navigation/native';
+import { RootStackParamList } from '../../Navigation/types';
 
 const doctors = [
   {

@@ -1,4 +1,3 @@
-// src/Navigation/Mystack.tsx
 import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import SplashScreen from '../Screens/SplashScreen';
@@ -63,24 +62,9 @@ import { RootStackParamList } from './types';
 import { useAuth } from '../Screens/Auth/AuthContext';
 import SessionPaymentScreen from '../Screens/Explore/SessionPaymentScreen';
 import TherapistListScreen from '../Screens/Therapy/TherapistListScreen';
-import { ImageBackground, Text, TouchableOpacity } from 'react-native';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import WeeklyReportScreen from '../Screens/Home/WeeklyReportScreen';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
-const CustomHeader = ({ navigation, route, options }: any) => {
-  return (
-    <TouchableOpacity
-      onPress={() => navigation.goBack()}
-      style={{ flexDirection: 'row', alignItems: 'center' }}
-    >
-      <MaterialIcons name="keyboard-arrow-left" size={30} color="#000" />
-      <Text style={{ fontSize: 18, fontWeight: 'bold', marginLeft: 8 }}>
-        {options.title || route.name}
-      </Text>
-    </TouchableOpacity>
-  );
-};
 
 const PublicStack = () => (
   <Stack.Navigator screenOptions={{ headerShown: false }}>
@@ -186,11 +170,11 @@ const PrivateStack = () => (
 );
 
 const MyStack: React.FC = () => {
-  const { loading, session } = useAuth();
+  const { loading, token } = useAuth();
   if (loading) {
     return <SplashScreen />;
   }
-  return session ? <PrivateStack /> : <PublicStack />;
+  return token ? <PrivateStack /> : <PublicStack />;
 };
 
 export default MyStack;

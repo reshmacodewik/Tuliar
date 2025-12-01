@@ -15,29 +15,18 @@ import {
   RouteProp,
   NavigationProp,
 } from '@react-navigation/native';
-
 import FeedPost from '../../components/FeedPost';
-import {
-  RichEditor,
-  RichToolbar,
-  actions,
-} from 'react-native-pell-rich-editor';
-
 import Feedpopup from '../../components/Feedpopup';
 import ShowToast from '../../utils/ShowToast';
 import {
   API_FEED_CREATE,
-  API_FEED_LIST,
+  API_FEED_DETAIL_BY_ID,
   API_FEED_UPDATE,
 } from '../../utils/api/APIConstant';
-import {
-  apiPost,
-  apiPATCH,
-  getApiByParams,
-  apiPUT,
-} from '../../utils/api/common';
-import { getSession } from '../../storage/mmkvPersister';
+import { apiPost, getApiByParams, apiPUT } from '../../utils/api/common';
 import { htmlToPlainText } from '../../components/htmlToPlainText';
+import CommonTextEditor from '../../components/CommonTextEditor';
+import { RichEditor } from 'react-native-pell-rich-editor';
 
 type RootStackParamList = {
   MyFeedDetail: { id?: string };
@@ -46,39 +35,27 @@ type RootStackParamList = {
 const MyFeedDetail = () => {
   const [thought, setThought] = useState('');
   const [showPopup, setShowPopup] = useState(false);
-  const [isChecked, setIsChecked] = useState(false);
   const [refreshKey, setRefreshKey] = useState(0);
-
+  const richText = useRef<RichEditor>(null);
   const navigation = useNavigation<NavigationProp<any>>();
   const route = useRoute<RouteProp<RootStackParamList, 'MyFeedDetail'>>();
-  const editId = route.params?.id; // ✅ id if editing
+  const editId = route.params?.id;
 
   const { wp, hp } = useResponsive();
   const s = styles(wp, hp);
 
-  const richText = useRef<RichEditor>(null);
-useEffect(() => {
-  if (editId && thought && richText.current) {
-    setTimeout(() => {
-      richText.current?.setContentHTML(thought);
-    }, 500);
-  }
-}, [thought]);
 
-  // Prefill editor when editing
   useEffect(() => {
     if (editId) {
       const fetchFeedDetail = async () => {
         try {
           const res = await getApiByParams({
-            url: API_FEED_LIST,
+            url: API_FEED_DETAIL_BY_ID,
             params: editId,
           });
-
-          if (res?.success && res?.data?.length > 0) {
-            const content = res.data[0].content;
+          if (res?.success) {
+            const content = res.data.content;
             setThought(content);
-            richText.current?.setContentHTML(content);
           }
         } catch (e) {
           console.error('Error loading feed:', e);
@@ -90,31 +67,21 @@ useEffect(() => {
 
   const handlePost = async () => {
     try {
-      const session = getSession();
-      const token = session?.accessToken;
-      if (!token) return ShowToast('You must be logged in to post', 'error');
-
-      const html = await richText.current?.getContentHtml?.();
-      const plain = htmlToPlainText(html || thought);
-
+      const plain = htmlToPlainText(thought);
       if (!plain) {
         return ShowToast('Please write something before posting', 'error');
       }
 
       let res;
       if (editId) {
-        // Update
         res = await apiPUT({
           url: API_FEED_UPDATE,
           values: { id: editId, content: plain },
-          headers: { Authorization: `Bearer ${token}` },
         });
       } else {
-        // Create
         res = await apiPost({
           url: API_FEED_CREATE,
           values: { content: plain },
-          headers: { Authorization: `Bearer ${token}` },
         });
       }
 
@@ -122,7 +89,6 @@ useEffect(() => {
         ShowToast(res?.message || (editId ? 'Updated!' : 'Posted!'), 'success');
         if (!editId) {
           setThought(res.data.content);
-          richText.current?.setContentHTML('');
         } else {
           navigation.goBack();
         }
@@ -135,6 +101,8 @@ useEffect(() => {
       ShowToast(e?.message || 'Something went wrong', 'error');
     }
   };
+
+
   return (
     <ImageBackground
       source={require('../../Theme/assets/image/background.png')}
@@ -172,60 +140,27 @@ useEffect(() => {
               width: '100%',
             }}
           >
-            <ScrollView style={{ maxHeight: hp(40) }}>
-              <RichEditor
-                ref={richText}
-                placeholder="Write something amazing..."
-                initialHeight={hp(12)}
-                useContainer
-                onChange={html => setThought(html)}
-                editorInitializedCallback={() => {
-                  // 🔹 This callback name actually works in v1.10.0
-                  if (editId && thought) {
-                    setTimeout(() => {
-                      richText.current?.setContentHTML(thought);
-                    }, 300); // delay ensures editor WebView is ready
-                  }
-                }}
-              />
-            </ScrollView>
-
-            <RichToolbar
-              editor={richText}
-              actions={[
-                actions.setBold,
-                actions.setItalic,
-                actions.setUnderline,
-                actions.insertBulletsList,
-                actions.insertOrderedList,
-              ]}
-              iconTint="#444"
-              selectedIconTint="#007bff"
-              style={{
-                borderTopWidth: 1,
-                borderTopColor: '#eee',
-                backgroundColor: '#fafafa',
-              }}
+            <CommonTextEditor
+              key={editId}
+              value={thought}
+              onChange={setThought}
+              editorRef={richText}
+              maxHeight={hp(15)}
             />
           </View>
 
-          {/* Post / Update button */}
           <TouchableOpacity style={s.button} onPress={handlePost}>
             <Text style={s.buttonText}>{editId ? 'Update' : 'Post'}</Text>
           </TouchableOpacity>
         </View>
 
-        {/* Recent Feed */}
-
         <Text style={s.subtitle}>Recent Feed</Text>
         <FeedPost refreshKey={refreshKey} />
 
-        {/* Popup */}
         <Feedpopup
           visible={showPopup}
           onClose={() => {
             setShowPopup(false);
-            setIsChecked(false);
           }}
           onAgree={() => setShowPopup(false)}
         />

@@ -50,7 +50,7 @@ const SHEET_HEIGHT = Math.round(SCREEN_HEIGHT * 0.65);
 
 const RowInner = ({ c }: { c: Comment }) => (
   <View style={{ paddingVertical: 12, flexDirection: 'row' }}>
-      <Image
+    <Image
       source={require('../../src/Theme/assets/image/ellispe.png')} // replace with your static image path
       style={{
         width: 32,

@@ -17,7 +17,6 @@ import ShowToast from '../../utils/ShowToast';
 import { useFormik } from 'formik';
 import { loginSchema } from '../../validation/signupSchema';
 import { useAuth } from './AuthContext';
-import { AuthSession } from '../../storage/mmkvPersister';
 
 const LoginScreen: React.FC = () => {
   const { wp, hp } = useResponsive();
@@ -32,16 +31,15 @@ const LoginScreen: React.FC = () => {
       try {
         const res = await apiPost({ url: API_LOGIN, values });
         if (res?.success && res?.data?.token) {
-          const session: AuthSession = {
+          const session = {
             accessToken: res.data.token,
             refreshToken: res.data?.refreshToken,
             user: res.data?.user,
           };
 
           signIn(session);
-          console.log('Saved session:', session);
           ShowToast(res?.message, 'success');
-          navigation.navigate('HomeScreen' as never);
+          navigation.navigate('HomeScreen');
         } else {
           ShowToast(res?.message || 'Login Failed', 'error');
         }
@@ -50,7 +48,7 @@ const LoginScreen: React.FC = () => {
       }
     },
   });
-  
+
   return (
     <ImageBackground
       source={require('../../Theme/assets/image/background.png')}

@@ -8,7 +8,7 @@ export const API_FEED_CREATE: string = '/feed/create';
 export const API_FEED_UPDATE: string = '/feed/update';
 export const API_FEED_DELETE = (id: string) => `/feed/${id}`;
 export const API_FEED_TOGGLE_FAVORITE = '/feed/add-favorite';
-export const API_FEED_DETAIL_BY_ID = (id: string) => `/feed/${id}`;
+export const API_FEED_DETAIL_BY_ID = `/feed`;
 export const API_ADD_COMMENT: string = '/feed/add-comment';
 export const API_COMMENT_LIST : string = `/feed/get-comment`;
 export const API_COMMENT_DELETE : string = `/feed/comment`;

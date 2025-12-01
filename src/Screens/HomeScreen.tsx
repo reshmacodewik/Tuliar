@@ -1,5 +1,4 @@
-/* eslint-disable react-native/no-inline-styles */
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import {
   View,
   Text,
@@ -18,16 +17,14 @@ import {
   MenuOption,
   MenuTrigger,
 } from 'react-native-popup-menu';
+import debounce from "lodash.debounce";
 import LinearGradient from 'react-native-linear-gradient';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Feather from 'react-native-vector-icons/Feather';
 import {
   apiPost,
-  apiPUT,
-  getApiByParams,
   getApiWithOutQuery,
 } from '../utils/api/common';
-import { clearSession, getSession } from '../storage/mmkvPersister';
 import {
   useNavigation,
   useRoute,
@@ -37,20 +34,20 @@ import {
 
 import {
   RichEditor,
-  RichToolbar,
-  actions,
 } from 'react-native-pell-rich-editor';
 import ShowToast from '../utils/ShowToast';
 import {
   API_FEED_CREATE,
   API_FEED_LIST,
-  API_FEED_UPDATE,
 } from '../utils/api/APIConstant';
 import { htmlToPlainText } from '../components/htmlToPlainText';
 import FeedPost from '../components/FeedPost';
 import { RootStackParamList } from '../Navigation/types';
 import { launchImageLibrary } from 'react-native-image-picker';
 import { useQuery } from '@tanstack/react-query';
+import { handleLogout } from '../libs/auth';
+import CommonTextEditor from '../components/CommonTextEditor';
+
 const features = [
   {
     title: 'Chat with experts',
@@ -77,51 +74,34 @@ const HomeScreen = () => {
   const [refreshKey, setRefreshKey] = useState(0);
   const [thought, setThought] = useState('');
   const route = useRoute<RouteProp<RootStackParamList, 'MyFeedDetail'>>();
-  //const editId = route.params?.id; // ✅ id if editing
+  const richContentRef = useRef('');
+  // const pickImage = async () => {
+  //   try {
+  //     const result = await launchImageLibrary({
+  //       mediaType: 'photo',
+  //       quality: 0.8,
+  //     });
 
-  const pickImage = async () => {
-    try {
-      const result = await launchImageLibrary({
-        mediaType: 'photo',
-        quality: 0.8,
-      });
+  //     if (result.assets && result.assets[0].uri) {
+  //       const uri = result.assets[0].uri;
+  //       richText.current?.insertImage(uri);
+  //     }
+  //   } catch (err) {
+  //     console.log('Image pick error:', err);
+  //   }
+  // };
 
-      if (result.assets && result.assets[0].uri) {
-        const uri = result.assets[0].uri;
+  const debouncedChange = useCallback(
+    debounce((html: string) => {
+      richContentRef.current = html;
+    }, 150),
+    []
+  );
 
-        // Insert image into RichEditor
-        richText.current?.insertImage(uri);
-      }
-    } catch (err) {
-      console.log('Image pick error:', err);
-    }
-  };
   const s = styles(wp, hp);
   const richText = useRef<RichEditor>(null);
 
-  // Prefill editor when editing
-  // useEffect(() => {
-  //   if (editId) {
-  //     const fetchFeedDetail = async () => {
-  //       try {
-  //         const session = getSession();
-  //         const token = session?.accessToken;
-  //         const res = await getApiByParams({
-  //           url: '/feed',
-  //           params: editId,
-  //         });
-  //         if (res?.success && res.data?.content) {
-  //           setThought(res.data.content);
-  //           richText.current?.setContentHTML(res.data.content);
-  //         }
-  //       } catch (e) {
-  //         console.error('Error loading feed:', e);
-  //       }
-  //     };
-  //     fetchFeedDetail();
-  //   }
-  // }, [editId]);
-  const { data, refetch, isFetched, isLoading } = useQuery({
+  const { refetch, } = useQuery({
     queryKey: ['feed-list'],
     queryFn: () => getApiWithOutQuery({ url: API_FEED_LIST }),
   });
@@ -129,15 +109,11 @@ const HomeScreen = () => {
   useEffect(() => {
     refetch();
   }, [refreshKey]);
+
   const handlePost = async () => {
     try {
-      const session = getSession();
-      const token = session?.accessToken;
-      if (!token) return ShowToast('You must be logged in to post', 'error');
 
-      const html = await richText.current?.getContentHtml?.();
-      const plain = htmlToPlainText(html || thought);
-
+      const plain = htmlToPlainText(richContentRef.current);
       if (!plain) {
         return ShowToast('Please write something before posting', 'error');
       }
@@ -145,13 +121,12 @@ const HomeScreen = () => {
       const res = await apiPost({
         url: API_FEED_CREATE,
         values: { content: plain },
-        headers: { Authorization: `Bearer ${token}` },
       });
 
       if (res?.success) {
         ShowToast(res?.message || 'Posted!', 'success');
         setThought('');
-        richText.current?.setContentHTML(''); // clear editor
+        richText.current?.setContentHTML('');
         setRefreshKey(prev => prev + 1);
       } else {
         ShowToast(res?.message || 'Failed to save feed', 'error');
@@ -474,13 +449,13 @@ const HomeScreen = () => {
               <Text style={styles(wp, hp).sectionTitle}>My Feed</Text>
               <TouchableOpacity
                 style={styles(wp, hp).thoughtBox}
-                onPress={() => navigation.navigate('MyFeedDetail')}
+              // onPress={() => navigation.navigate('MyFeedDetail')}
               >
                 <Text style={styles(wp, hp).placeholder}>
                   What's on your mind?
                 </Text>
               </TouchableOpacity>
-              <TouchableOpacity>
+              <TouchableOpacity onPress={() => navigation.navigate('MyFeedDetail')}>
                 <Ionicons name="chevron-forward" size={wp(7)} color="#000" />
               </TouchableOpacity>
             </View>
@@ -497,38 +472,13 @@ const HomeScreen = () => {
                   width: '100%',
                 }}
               >
-                <ScrollView style={{ maxHeight: hp(40) }}>
-                  <RichEditor
-                    ref={richText}
-                    placeholder="Write something amazing..."
-                    onChange={html => setThought(html)}
-                    initialHeight={hp(12)}
-                    useContainer
-                  />
-                </ScrollView>
-
-                <RichToolbar
-                  editor={richText}
-                  actions={[
-                    actions.setBold,
-                    actions.setItalic,
-                    actions.setUnderline,
-                    actions.insertBulletsList,
-                    actions.insertOrderedList,
-                    actions.insertImage,
-                  ]}
-                  iconTint="#444"
-                  selectedIconTint="#007bff"
-                  style={{
-                    borderTopWidth: 1,
-                    borderTopColor: '#eee',
-                    backgroundColor: '#fafafa',
-                  }}
-                  onPressAddImage={pickImage}
+                <CommonTextEditor
+                  value={thought}
+                  onChange={debouncedChange}
+                  editorRef={richText}
+                  maxHeight={hp(15)}
                 />
               </View>
-
-              {/* Post / Update button */}
               <TouchableOpacity style={s.postbutton} onPress={handlePost}>
                 <Text style={s.buttonText}>Post</Text>
               </TouchableOpacity>
@@ -536,7 +486,6 @@ const HomeScreen = () => {
             <FeedPost />
           </View>
         </ScrollView>
-        {/* STATIC FLOATING MOOD BUTTON */}
         <View style={styles(wp, hp).staticFloatingContainer}>
           <TouchableOpacity style={styles(wp, hp).fab}>
             <Image
@@ -551,7 +500,6 @@ const HomeScreen = () => {
           </View>
         </View>
       </View>
-      {/* LOGOUT MODAL */}
       <Modal
         transparent
         visible={logoutVisible}
@@ -561,7 +509,7 @@ const HomeScreen = () => {
         <View style={styles(wp, hp).overlay}>
           <View style={styles(wp, hp).Modalcontainer}>
             <Image
-              source={require('../../src/Theme/assets/image/logout.png')} // 🔹 add your logout icon
+              source={require('../../src/Theme/assets/image/logout.png')}
               style={styles(wp, hp).Modalicon}
             />
             <Text style={styles(wp, hp).Modaltitle}>Logout</Text>
@@ -574,16 +522,9 @@ const HomeScreen = () => {
               style={styles(wp, hp).button}
               onPress={async () => {
                 try {
-                  // 🔹 Clear AsyncStorage
-                  clearSession();
-
-                  // 🔹 If you’re using Redux, also dispatch logout
-                  // dispatch(logout());
-
-                  // 🔹 Close modal
+                  await handleLogout();
                   setLogoutVisible(false);
-
-                navigation.navigate('LoginScreen')
+                  navigation.navigate('LoginScreen')
                 } catch (err) {
                   console.log('Error clearing session:', err);
                 }

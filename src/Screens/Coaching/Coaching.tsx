@@ -2,9 +2,9 @@ import React from 'react';
 import { View, Text, Image, Pressable } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
-import { RootStackParamList } from '../../Navigation/Mystack';
 import { useResponsive } from '../../Responsive/useResponsive';
 import styles from '../../style/coachingStyles';
+import { RootStackParamList } from '../../Navigation/types';
 
 type CoachingNavigationProp = StackNavigationProp<RootStackParamList, 'OnboardingJourneyScreen'>;
 

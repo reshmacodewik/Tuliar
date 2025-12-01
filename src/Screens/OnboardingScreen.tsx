@@ -42,13 +42,13 @@ const OnboardingScreen: React.FC = () => {
   const [activeIndex, setActiveIndex] = useState(0);
   const sliderRef = useRef<AppIntroSlider>(null);
 
-const handleGetStarted = () => {
-  if (activeIndex < slides.length - 1) {
-    sliderRef.current?.goToSlide(activeIndex + 1);
-  } else {
-    navigation.navigate('LoginScreen');
-  }
-};
+  const handleGetStarted = () => {
+    if (activeIndex < slides.length - 1) {
+      sliderRef.current?.goToSlide(activeIndex + 1, true);
+    } else {
+      navigation.navigate('LoginScreen');
+    }
+  };
 
   const renderItem = ({ item }: { item: (typeof slides)[0] }) => (
     <ImageBackground
@@ -97,8 +97,6 @@ const handleGetStarted = () => {
       </View>
 
       <Text style={styles.desc}>{item.text}</Text>
-
-      {/* Get Started button */}
       <TouchableOpacity style={styles.button} onPress={handleGetStarted}>
         <Text style={styles.buttonText}>{'Get Started'}</Text>
       </TouchableOpacity>
@@ -123,10 +121,11 @@ const handleGetStarted = () => {
       showSkipButton={false}
       showNextButton={false}
       showDoneButton={false}
-      dotStyle={{ display: 'none' }} // Hide default dots
-      activeDotStyle={{ display: 'none' }} // Hide active dot
-      onSlideChange={index => setActiveIndex(index)}
+      dotStyle={{ display: 'none' }}
+      activeDotStyle={{ display: 'none' }}
+      onSlideChange={(index, lastIndex) => setActiveIndex(index)}
     />
+
   );
 };
 

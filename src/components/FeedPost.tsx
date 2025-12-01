@@ -16,52 +16,47 @@ import {
   MenuTrigger,
 } from 'react-native-popup-menu';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import { getSession } from '../storage/mmkvPersister';
-import { useNavigation, NavigationProp } from '@react-navigation/native';
 import ShowToast from '../utils/ShowToast';
 import CommentSheet from './CommentSheet';
 import { useQuery } from '@tanstack/react-query';
+import { getCurrentUserInfo } from '../libs/auth';
+import { navigate } from '../Navigation/RootNavigation';
+
 interface FeedPostProps {
   refreshKey?: number;
 }
 const FeedPost: React.FC<FeedPostProps> = ({ refreshKey }) => {
   const { wp, hp } = useResponsive();
   const s = styles(wp, hp);
-  const navigation = useNavigation<NavigationProp<any>>();
   const [feedPosts, setFeedPosts] = useState<any[]>([]);
   const [loading, setLoading] = useState(false);
   const [selectedPostId, setSelectedPostId] = useState<string | null>(null);
   const [currentUser, setCurrentUser] = useState<any>(null);
 
   useEffect(() => {
-    const session = getSession(); // already imported
-    if (session?.user) {
-      setCurrentUser(session.user);
-    }
+    (async () => {
+      setLoading(true);
+      const user = await getCurrentUserInfo();
+      if (user) setCurrentUser(user);
+      setLoading(false);
+    })();
   }, []);
 
-  const commentSheetRef = useRef<InstanceType<any> | null>(null);
 
-  const bumpCommentsCount = (postId: string, inc = 1) => {
-    setFeedPosts(prev =>
-      prev.map(p =>
-        p._id === postId ? { ...p, comments: (p.comments ?? 0) + inc } : p,
-      ),
-    );
-  };
+  const commentSheetRef = useRef<InstanceType<any> | null>(null);
 
   const openComments = (postId: string) => {
     setSelectedPostId(postId);
     setTimeout(() => commentSheetRef.current?.open(), 0);
   };
 
-  const { data, refetch, isFetched, isLoading } = useQuery({
+  const { data, refetch } = useQuery({
     queryKey: ['feed-list'],
     queryFn: () => getApiWithOutQuery({ url: API_FEED_LIST }),
   });
 
   const handleEdit = (id: string) => {
-    navigation.navigate('MyFeedDetail', { id });
+    navigate({ name: 'MyFeedDetail', params: { id } });
   };
 
   const handleDelete = async (id: string) => {
@@ -85,15 +80,14 @@ const FeedPost: React.FC<FeedPostProps> = ({ refreshKey }) => {
     const isLiked = !!post.isLike;
     const delta = isLiked ? -1 : 1;
 
-    // 🟢 Optimistic UI update using correct field names
     setFeedPosts(prev =>
       prev.map(p =>
         p._id === post._id
           ? {
-              ...p,
-              isLike: !isLiked, // <-- match your API field
-              likeCount: Math.max(0, (p.likeCount ?? 0) + delta),
-            }
+            ...p,
+            isLike: !isLiked,
+            likeCount: Math.max(0, (p.likeCount ?? 0) + delta),
+          }
           : p,
       ),
     );
@@ -104,23 +98,20 @@ const FeedPost: React.FC<FeedPostProps> = ({ refreshKey }) => {
         values: { referenceId: post._id, type: !isLiked ? 1 : 0 },
       });
 
-      console.log('Toggle Like Response:', res);
-
       if (res?.success) {
         refetch();
-        // rollback UI if API failed
         setFeedPosts(prev =>
           prev.map(p =>
             p._id === post._id
               ? {
-                  ...p,
-                  isLike: isLiked,
-                  likeCount: Math.max(0, (p.likeCount ?? 0) - delta),
-                }
+                ...p,
+                isLike: isLiked,
+                likeCount: Math.max(0, (p.likeCount ?? 0) - delta),
+              }
               : p,
           ),
         );
-        ShowToast(res?.message || 'Failed to update like', 'error');
+        // ShowToast(res?.message || 'Failed to update like', 'error');
       }
     } catch (e) {
       // rollback on error
@@ -128,10 +119,10 @@ const FeedPost: React.FC<FeedPostProps> = ({ refreshKey }) => {
         prev.map(p =>
           p._id === post._id
             ? {
-                ...p,
-                isLike: isLiked,
-                likeCount: Math.max(0, (p.likeCount ?? 0) - delta),
-              }
+              ...p,
+              isLike: isLiked,
+              likeCount: Math.max(0, (p.likeCount ?? 0) - delta),
+            }
             : p,
         ),
       );
@@ -146,14 +137,11 @@ const FeedPost: React.FC<FeedPostProps> = ({ refreshKey }) => {
           const liked = !!post.isLike;
           return (
             <View key={post._id} style={s.feedCard}>
-              {/* Header */}
               <View style={s.feedHeader}>
                 <Image
                   source={require('../../src/Theme/assets/image/ellispe.png')}
                   style={s.feedAvatar}
                 />
-
-                {/* Username + menu aligned right */}
                 <View
                   style={[
                     s.feedspace,

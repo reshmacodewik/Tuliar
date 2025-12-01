@@ -13,7 +13,7 @@ import getStyles from '../../style/DoctorProfileStyles';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
-import { RootStackParamList } from '../../Navigation/Mystack';
+import { RootStackParamList } from '../../Navigation/types';
 
 const DoctorProfileScreen = () => {
   const { wp, hp } = useResponsive();
@@ -33,16 +33,16 @@ const DoctorProfileScreen = () => {
           { paddingTop: hp(6), paddingBottom: hp(-4), paddingHorizontal: wp(5) },
         ]}
       >
-         <TouchableOpacity
-                   style={styles.backButton}
-                   onPress={() => navigation.goBack()}
-                 >
-                   <MaterialIcons
-                     name="keyboard-arrow-left"
-                     size={wp(8.5)}
-                     color="#000"
-                   />
-                 </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.backButton}
+          onPress={() => navigation.goBack()}
+        >
+          <MaterialIcons
+            name="keyboard-arrow-left"
+            size={wp(8.5)}
+            color="#000"
+          />
+        </TouchableOpacity>
       </View>
       <ScrollView
         style={{ flex: 1, marginTop: hp(0) }}
@@ -166,7 +166,7 @@ const DoctorProfileScreen = () => {
               </View>
               <Text style={styles.infoTitle}>Proficiency</Text>
             </View>
-            <View style={{marginHorizontal: wp(15),marginTop:hp(-3)}}>
+            <View style={{ marginHorizontal: wp(15), marginTop: hp(-3) }}>
               <Text style={styles.infoContent}>
                 • Cognitive Behaviour therapy{'\n'}• trauma-informed
                 counseling{'\n'}• mindfulness-based stress reduction
