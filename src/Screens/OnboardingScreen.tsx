@@ -17,101 +17,81 @@ const slides = [
     key: 'slide1',
     titleLine1: 'Welcome To',
     titleLine2: 'Tuliar',
-    text: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
+    text: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
     image: require('../../src/Theme/assets/image/nursing.png'),
   },
   {
     key: 'slide2',
     titleLine1: 'Emotional',
     titleLine2: 'Distress',
-    text: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
+    text: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
     image: require('../../src/Theme/assets/image/restingman.png'),
   },
   {
     key: 'slide3',
     titleLine1: 'Professional',
     titleLine2: 'Therapy',
-    text: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
+    text: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum is simply dummy text of the printing and typesetting industry',
     image: require('../../src/Theme/assets/image/therapist.png'),
   },
 ];
 
-const OnboardingScreen: React.FC = () => {
-  const { wp, hp } = useResponsive();
-  const navigation = useNavigation<NavigationProp<any>>();
-  const [activeIndex, setActiveIndex] = useState(0);
+const OnboardingScreen = () => {
+  const navigation = useNavigation<any>();
   const sliderRef = useRef<AppIntroSlider>(null);
+  const [index, setIndex] = useState(0);
+  const { wp, hp } = useResponsive();
 
-const handleGetStarted = () => {
-  if (activeIndex < slides.length - 1) {
-    sliderRef.current?.goToSlide(activeIndex + 1);
-  } else {
-    navigation.navigate('LoginScreen');
-  }
-};
+  const onGetStarted = () => {
+    if (index < slides.length - 1) {
+      sliderRef.current?.goToSlide(index + 1);
+    } else {
+      navigation.navigate('LoginScreen');
+    }
+  };
 
-  const renderItem = ({ item }: { item: (typeof slides)[0] }) => (
+  const renderItem = ({ item }: any) => (
     <ImageBackground
-      source={require('../../src/Theme/assets/image/background.png')}
+      source={item.image}
       style={styles.container}
       resizeMode="cover"
     >
-      <Image source={item.image} style={styles.image} />
+      {/* Bottom content */}
+      <View style={styles.content}>
+       
 
-      <View style={styles.dotContainer}>
-        {slides.map((_, index) => (
-          <View
-            key={index}
-            style={index === activeIndex ? styles.activeDot : styles.dot}
-          />
-        ))}
-      </View>
-
-      {/* Title */}
-      <View style={{ alignItems: 'center', marginTop: hp(0) }}>
-        <Text
-          style={[
-            styles.title,
-            {
-              fontSize: wp(10),
-              fontFamily: 'Urbanist-SemiBold',
-              color: '#000',
-            },
-          ]}
-        >
+        {/* Titles */}
+        <Text style={[styles.title, { fontSize: wp(9) }]}>
           {item.titleLine1}
         </Text>
-        <Text
-          style={[
-            styles.title,
-            {
-              fontSize: wp(10),
-              fontFamily: 'Urbanist-SemiBold',
-              color: '#0B0B0B',
-              marginTop: hp(-1.2),
-            },
-          ]}
-        >
+        <Text style={[styles.titleBold, { fontSize: wp(9.5) }]}>
           {item.titleLine2}
         </Text>
-      </View>
 
-      <Text style={styles.desc}>{item.text}</Text>
-
-      {/* Get Started button */}
-      <TouchableOpacity style={styles.button} onPress={handleGetStarted}>
-        <Text style={styles.buttonText}>{'Get Started'}</Text>
-      </TouchableOpacity>
-
-      <Text style={styles.bottomText}>
-        Returning user?{' '}
-        <Text
-          style={styles.signUpText}
-          onPress={() => navigation.navigate('SignUpScreen')}
-        >
-          Sign up
+        {/* Description */}
+        <Text style={[styles.desc, { marginTop: hp(1.5) }]}>
+          {item.text}
         </Text>
-      </Text>
+
+        {/* Button */}
+        <TouchableOpacity
+          style={[styles.button, { marginTop: hp(3) }]}
+          onPress={onGetStarted}
+        >
+          <Text style={styles.buttonText}>Get Started</Text>
+        </TouchableOpacity>
+
+         {/* Dots */}
+        <View style={styles.dotContainer}>
+          {slides.map((_, i) => (
+            <View
+              key={i}
+              style={i === index ? styles.activeDot : styles.dot}
+            />
+          ))}
+        </View>
+       
+      </View>
     </ImageBackground>
   );
 
@@ -120,12 +100,12 @@ const handleGetStarted = () => {
       ref={sliderRef}
       data={slides}
       renderItem={renderItem}
-      showSkipButton={false}
       showNextButton={false}
       showDoneButton={false}
-      dotStyle={{ display: 'none' }} // Hide default dots
-      activeDotStyle={{ display: 'none' }} // Hide active dot
-      onSlideChange={index => setActiveIndex(index)}
+      showSkipButton={false}
+      onSlideChange={i => setIndex(i)}
+      dotStyle={{ display: 'none' }}
+      activeDotStyle={{ display: 'none' }}
     />
   );
 };

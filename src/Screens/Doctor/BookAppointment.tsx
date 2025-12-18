@@ -8,6 +8,7 @@ import {
   Pressable,
   ScrollView,
   TouchableOpacity,
+  Modal,
 } from 'react-native';
 import { useResponsive } from '../../Responsive/useResponsive';
 import { useNavigation, NavigationProp } from '@react-navigation/native';
@@ -20,17 +21,20 @@ const services = [
     label: 'Video Call',
     icon: require('../../Theme/assets/image/greenvideo.png'),
   },
-  { label: 'Online Chat', icon: require('../../Theme/assets/image/message.png') },
+  {
+    label: 'Online Chat',
+    icon: require('../../Theme/assets/image/message.png'),
+  },
   { label: 'Audio call', icon: require('../../Theme/assets/image/phone.png') },
 ];
 
-const timeSlots = [
-  '09:00 AM - 09:30 AM',
-  '10:00 AM - 10:30 AM',
-  '11:00 AM - 11:30 AM',
-  '12:00 PM - 12:30 PM',
-  '02:00 PM - 02:30 PM',
-  '03:00 PM - 03:30 PM',
+const timeRanges = [
+  '10:00 - 11:00',
+  '11:00 - 12:00',
+  '12:00 - 1:00',
+  '2:00 - 3:00',
+  '3:00 - 4:00',
+  '4:00 - 5:00',
 ];
 
 const ScheduleAppointmentScreen = () => {
@@ -39,9 +43,10 @@ const ScheduleAppointmentScreen = () => {
   const navigation = useNavigation<NavigationProp<any>>();
   const [selectedService, setSelectedService] = useState(0);
   const [selectedDate, setSelectedDate] = useState(new Date());
-  const [selectedSlot, setSelectedSlot] = useState('');
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [currentMonth, setCurrentMonth] = useState(new Date());
+  const [timeModalVisible, setTimeModalVisible] = useState(false);
+  const [selectedSlot, setSelectedSlot] = useState<string | null>(null);
 
   // Custom calendar functions
   const getDaysInMonth = (date: Date) => {
@@ -51,9 +56,9 @@ const ScheduleAppointmentScreen = () => {
     const lastDay = new Date(year, month + 1, 0);
     const daysInMonth = lastDay.getDate();
     const startingDayOfWeek = firstDay.getDay();
-    
+
     const days = [];
-    
+
     // Add previous month's days
     const prevMonth = new Date(year, month, 0);
     const prevMonthDays = prevMonth.getDate();
@@ -61,29 +66,29 @@ const ScheduleAppointmentScreen = () => {
       days.push({
         day: prevMonthDays - i,
         isCurrentMonth: false,
-        date: new Date(year, month - 1, prevMonthDays - i)
+        date: new Date(year, month - 1, prevMonthDays - i),
       });
     }
-    
+
     // Add current month's days
     for (let i = 1; i <= daysInMonth; i++) {
       days.push({
         day: i,
         isCurrentMonth: true,
-        date: new Date(year, month, i)
+        date: new Date(year, month, i),
       });
     }
-    
+
     // Add next month's days to fill the grid
     const remainingDays = 42 - days.length; // 6 rows * 7 days
     for (let i = 1; i <= remainingDays; i++) {
       days.push({
         day: i,
         isCurrentMonth: false,
-        date: new Date(year, month + 1, i)
+        date: new Date(year, month + 1, i),
       });
     }
-    
+
     return days;
   };
 
@@ -113,17 +118,17 @@ const ScheduleAppointmentScreen = () => {
         contentContainerStyle={{ flexGrow: 1 }}
         showsVerticalScrollIndicator={false}
       >
-          <TouchableOpacity
-                   style={s.backButton}
-                   onPress={() => navigation.goBack()}
-                 >
-                   <MaterialIcons
-                     name="keyboard-arrow-left"
-                     size={wp(8.5)}
-                     color="#000"
-                   />
-                   </TouchableOpacity>
-    
+        <TouchableOpacity
+          style={s.backButton}
+          onPress={() => navigation.goBack()}
+        >
+          <MaterialIcons
+            name="keyboard-arrow-left"
+            size={wp(8.5)}
+            color="#000"
+          />
+        </TouchableOpacity>
+
         <View style={s.container}>
           <Image
             source={require('../../Theme/assets/image/logo.png')}
@@ -138,7 +143,7 @@ const ScheduleAppointmentScreen = () => {
           <Text style={s.role}>Mentor</Text>
 
           <View style={{ width: '100%' }}>
-          <Text style={s.sectionTitleservice}>Select your Service</Text>
+            <Text style={s.sectionTitleservice}>Select your Service</Text>
           </View>
           <View style={s.serviceRow}>
             {services.map((service, idx) => (
@@ -171,7 +176,7 @@ const ScheduleAppointmentScreen = () => {
           </View>
 
           <View style={{ width: '100%' }}>
-          <Text style={s.sectionTitle}>Pick you preferred Day</Text>
+            <Text style={s.sectionTitle}>Pick you preferred Day</Text>
           </View>
           <View style={s.calendarContainer}>
             <View style={s.customCalendarHeader}>
@@ -188,51 +193,87 @@ const ScheduleAppointmentScreen = () => {
             </View>
             <View style={s.calendarNav}>
               <TouchableOpacity onPress={() => changeMonth('prev')}>
-                <MaterialIcons name="chevron-left" size={wp(6)} color="#264734" />
+                <MaterialIcons
+                  name="chevron-left"
+                  size={wp(6)}
+                  color="#264734"
+                />
               </TouchableOpacity>
-              <Text style={{ fontSize: wp(4), color: '#264734', fontFamily: 'Poppins-Bold' }}>
-                {currentMonth.toLocaleDateString('en-US', { month: 'long', year: 'numeric' })}
+              <Text
+                style={{
+                  fontSize: wp(4),
+                  color: '#264734',
+                  fontFamily: 'Poppins-Bold',
+                }}
+              >
+                {currentMonth.toLocaleDateString('en-US', {
+                  month: 'long',
+                  year: 'numeric',
+                })}
               </Text>
               <TouchableOpacity onPress={() => changeMonth('next')}>
-                <MaterialIcons name="chevron-right" size={wp(6)} color="#264734" />
+                <MaterialIcons
+                  name="chevron-right"
+                  size={wp(6)}
+                  color="#264734"
+                />
               </TouchableOpacity>
             </View>
             <View style={s.calendarGrid}>
               {/* Days of week header */}
-              {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map((day, _index) => (
-                <View key={day} style={[s.calendarDay, { backgroundColor: 'transparent' }]}>
-                  <Text style={[s.calendarDayText, { color: '#264734', fontFamily: 'Poppins-Bold' }]}>
-                    {day}
-                  </Text>
-                </View>
-              ))}
-              
+              {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map(
+                (day, _index) => (
+                  <View
+                    key={day}
+                    style={[s.calendarDay, { backgroundColor: 'transparent' }]}
+                  >
+                    <Text
+                      style={[
+                        s.calendarDayText,
+                        { color: '#264734', fontFamily: 'Poppins-Bold' },
+                      ]}
+                    >
+                      {day}
+                    </Text>
+                  </View>
+                ),
+              )}
+
               {/* Calendar days */}
               {getDaysInMonth(currentMonth).map((dayData, index) => {
-                const isSelected = selectedDate.toDateString() === dayData.date.toDateString();
-                const isToday = new Date().toDateString() === dayData.date.toDateString();
-                
+                const isSelected =
+                  selectedDate.toDateString() === dayData.date.toDateString();
+                const isToday =
+                  new Date().toDateString() === dayData.date.toDateString();
+
                 return (
                   <TouchableOpacity
                     key={index}
                     style={[
                       s.calendarDay,
                       isSelected && s.calendarDaySelected,
-                      isToday && !isSelected && { backgroundColor: '#fff' }
+                      isToday && !isSelected && { backgroundColor: '#fff' },
                     ]}
-                    onPress={() => handleDayPress(dayData.day, dayData.isCurrentMonth, dayData.date)}
+                    onPress={() =>
+                      handleDayPress(
+                        dayData.day,
+                        dayData.isCurrentMonth,
+                        dayData.date,
+                      )
+                    }
                   >
                     <Text
-                                             style={[
-                         s.calendarDayText,
-                         !dayData.isCurrentMonth && { color: '#d9d9d9', },
-                         isSelected && s.calendarDayTextSelected,
-                         isToday && !isSelected && { 
-                           color: '#264734', 
-                           fontFamily: 'Montserrat-Bold',
-                           textDecorationLine: 'underline'
-                         }
-                       ]}
+                      style={[
+                        s.calendarDayText,
+                        !dayData.isCurrentMonth && { color: '#d9d9d9' },
+                        isSelected && s.calendarDayTextSelected,
+                        isToday &&
+                          !isSelected && {
+                            color: '#264734',
+                            fontFamily: 'Montserrat-Bold',
+                            textDecorationLine: 'underline',
+                          },
+                      ]}
                     >
                       {dayData.day}
                     </Text>
@@ -246,49 +287,85 @@ const ScheduleAppointmentScreen = () => {
             <Text style={s.sectionTitle}>Select your time slot</Text>
           </View>
           <View style={s.dropdown}>
-            <TouchableOpacity onPress={() => setDropdownOpen(!dropdownOpen)}>
-              <Text style={s.dropdownText}>
-                {selectedSlot || 'Select Time Slot'}
-              </Text>
-            </TouchableOpacity>
-            {dropdownOpen && (
-              <View
-                style={{
-                  backgroundColor: '#fff',
-                  borderRadius: wp(2),
-                  marginTop: hp(1),
-                  elevation: 2,
-                  position: 'absolute',
-                  top: hp(3),
-                  left: 0,
-                  right: 0,
-                  zIndex: 1000,
-                }}
-              >
-                {timeSlots.map((slot, idx) => (
+            <View style={s.timeSlotGrid}>
+              {[
+                '10:00 - 11:00',
+                '11:00 - 12:00',
+                '12:00 - 1:00',
+                '2:00 - 3:00',
+                '3:00 - 4:00',
+                '4:00 - 5:00',
+              ].map(slot => {
+                const active = selectedSlot === slot;
+
+                return (
                   <TouchableOpacity
                     key={slot}
+                    style={[s.timePill, active && s.timePillActive]}
                     onPress={() => {
                       setSelectedSlot(slot);
-                      setDropdownOpen(false);
-                    }}
-                    style={{
-                      padding: wp(3),
-                      borderBottomWidth: idx !== timeSlots.length - 1 ? 1 : 0,
-                      borderBottomColor: '#eee',
+                      setTimeModalVisible(true); // 👈 popup opens here
                     }}
                   >
-                    <Text style={{ color: '#222', fontSize: wp(4) }}>
+                    <Text
+                      style={[s.timePillText, active && s.timePillTextActive]}
+                    >
                       {slot}
                     </Text>
                   </TouchableOpacity>
-                ))}
+                );
+              })}
+            </View>
+
+            <Modal visible={timeModalVisible} transparent animationType="slide">
+              <View style={s.modalOverlay}>
+                <View style={s.modalContainer}>
+                  {/* Header */}
+                  <Text style={s.modalTitle}>Select your time slot</Text>
+
+                  {/* Slots */}
+                  {[
+                    '10:00 - 10:15',
+                    '10:15 - 10:30',
+                    '10:30 - 10:45',
+                    '10:45 - 11:00',
+                  ].map(slot => (
+                    <TouchableOpacity
+                      key={slot}
+                      style={[
+                        s.slotButton,
+                        selectedSlot === slot && s.slotButtonActive,
+                      ]}
+                      onPress={() => setSelectedSlot(slot)}
+                    >
+                      <Text
+                        style={[
+                          s.slotText,
+                          selectedSlot === slot && s.slotTextActive,
+                        ]}
+                      >
+                        {slot}
+                      </Text>
+                    </TouchableOpacity>
+                  ))}
+
+                  {/* Book Now */}
+                  <TouchableOpacity
+                    style={s.bookNowButton}
+                    onPress={() => setTimeModalVisible(false)}
+                  >
+                    <Text style={s.bookNowText}>Book Now</Text>
+                  </TouchableOpacity>
+                </View>
               </View>
-            )}
+            </Modal>
           </View>
-          <Pressable style={s.payButton} onPress={() => navigation.navigate('ReviewPaymentScreen')}>
+          {/* <Pressable
+            style={s.payButton}
+            onPress={() => navigation.navigate('ReviewPaymentScreen')}
+          >
             <Text style={s.payButtonText}>Pay Now</Text>
-          </Pressable>
+          </Pressable> */}
         </View>
       </ScrollView>
     </ImageBackground>

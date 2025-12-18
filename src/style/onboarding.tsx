@@ -31,23 +31,36 @@ const styles = StyleSheet.create({
     fontWeight: '400',
   },
   image: {
-    width: wp(100),
-    height: hp(48),
-    resizeMode: 'contain',
+   height: '100%',
+    resizeMode: 'cover',
+  },
+    content: {
+    flex: 1,
+    justifyContent: 'flex-end',
+    alignItems: 'center',
+    paddingHorizontal: 24,
+    paddingBottom: 30,
+     marginTop: hp(0),
+    marginBottom: hp(5),
+  },
+    titleBold: {
+    fontFamily: 'Urbanist-SemiBold',
+    color: '#000',
+   
   },
   dotContainer: {
     flexDirection: 'row',
-    marginTop: hp(6),
+    marginTop: hp(2),
   },
   dot: {
-    width: wp(3.5),
+    width: wp(4.5),
     height: wp(1),
     borderRadius: wp(1.25),
-    backgroundColor: '#C4C4C4',
+    backgroundColor: '#C0DDEF',
     marginHorizontal: wp(1),
   },
   activeDot: {
-    width: wp(10.5),
+    width: wp(15.5),
     height: wp(1.0),
     borderRadius: wp(1.25),
     backgroundColor: '#275258',
@@ -62,7 +75,7 @@ const styles = StyleSheet.create({
   },
   desc: {
     textAlign: 'center',
-    color: '#6E6E6E',
+    color: '#000',
     fontSize: wp(3.5),
     marginTop: hp(1),
     width: wp(80),

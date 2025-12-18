@@ -10,7 +10,11 @@ export const signupSchema = Yup.object()
     password: Yup.string()
       .min(6, 'Password must be at least 6 characters')
       .required('Password is required'),
-
+    confirmpassword: Yup.string()
+      .min(6, 'Confirm Password must be at least 6 characters')
+      .required('Confirm Password is required')
+      .oneOf([Yup.ref('password')], 'Passwords must match'),
+    
     // We’ll let the library validate — no fixed length here.
     phoneNo: Yup.string()
       .required('Phone Number is required')

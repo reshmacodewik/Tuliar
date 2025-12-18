@@ -175,7 +175,8 @@ export default StyleSheet.create({
     color: '#000',
   },
   signupLink: {
-    color: '#0C7C59',
+    color: '#000',
     fontWeight: '600',
+    textDecorationLine: 'underline',
   },
 });

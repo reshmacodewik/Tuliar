@@ -33,6 +33,7 @@ const SignUpScreen = () => {
       email: '',
       gender: '',
       password: '',
+      confirmpassword: '',
       phoneNo: '',
       countryCode: '+254',
       countryIso2: 'KE',
@@ -238,6 +239,19 @@ const SignUpScreen = () => {
         {formik.touched.password && formik.errors.password && (
           <Text style={styles.errorText}>{formik.errors.password}</Text>
         )}
+         <Text style={styles.label}>Confirm Password</Text>
+        <TextInput
+          style={styles.input}
+          placeholder="Enter Confirm password"
+          secureTextEntry
+          placeholderTextColor="#999"
+          onChangeText={formik.handleChange('confirmpassword')}
+          onBlur={formik.handleBlur('confirmpassword')}
+          value={formik.values.confirmpassword}
+        />
+        {formik.touched.confirmpassword && formik.errors.confirmpassword && (
+          <Text style={styles.errorText}>{formik.errors.confirmpassword}</Text>
+        )}
 
         {/* Terms */}
         <View style={styles.termsRow}>
@@ -272,7 +286,7 @@ const SignUpScreen = () => {
         <Text
           style={[styles.signupPrompt, { fontSize: wp(3.5), marginTop: hp(2) }]}
         >
-          Don’t have an account?{' '}
+         Already have an account?{' '}
           <Text
             style={styles.signupLink}
             onPress={() => navigation.navigate('LoginScreen')}

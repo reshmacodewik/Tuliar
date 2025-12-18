@@ -60,8 +60,7 @@ const styles = (wp: any, hp: any) =>
       color: '#222',
       marginTop: hp(2),
       marginBottom: hp(1),
-      textAlign:'left'
-      
+      textAlign: 'left',
     },
     sectionTitleservice: {
       fontSize: wp(4),
@@ -69,8 +68,7 @@ const styles = (wp: any, hp: any) =>
       color: '#222',
       marginTop: hp(0),
       marginBottom: hp(1),
-      textAlign:'center'
-      
+      textAlign: 'center',
     },
     serviceRow: {
       flexDirection: 'row',
@@ -137,9 +135,9 @@ const styles = (wp: any, hp: any) =>
     calendarNav: {
       fontSize: wp(6),
       color: '#264734',
-      flexDirection:'row',
-      justifyContent:'space-between',
-      alignItems:'center',
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      alignItems: 'center',
       paddingHorizontal: wp(2),
       backgroundColor: '#f5f5f5',
       paddingVertical: hp(1),
@@ -175,14 +173,13 @@ const styles = (wp: any, hp: any) =>
     },
     dropdown: {
       width: '100%',
-      height: hp(6),
-      borderRadius: wp(10),
+      height: hp(16),
+      borderRadius: wp(6),
       backgroundColor: '#fff',
-      borderWidth: 1,
-      borderColor: '#E0E0E0',
       justifyContent: 'center',
       paddingHorizontal: wp(4),
       marginBottom: hp(2),
+   
     },
     dropdownText: {
       fontSize: wp(4),
@@ -198,13 +195,120 @@ const styles = (wp: any, hp: any) =>
       height: hp(5.5),
       marginTop: hp(2),
       marginBottom: hp(2),
-
     },
     payButtonText: {
       color: '#FFF',
       fontSize: wp(4.5),
       fontFamily: 'Poppins-Bold',
     },
+    timeSlotTrigger: {
+      width: '100%',
+      height: 52,
+      borderRadius: 26,
+      borderWidth: 1.5,
+      borderColor: '#264734',
+      justifyContent: 'center',
+      alignItems: 'center',
+      marginTop: 12,
+    },
+
+    timeSlotTriggerText: {
+      fontSize: 16,
+      color: '#264734',
+      fontFamily: 'Poppins-Medium',
+    },
+
+    modalOverlay: {
+      flex: 1,
+      backgroundColor: 'rgba(0,0,0,0.4)',
+      justifyContent: 'flex-end',
+    },
+
+    modalContainer: {
+      backgroundColor: '#fff',
+      borderTopLeftRadius: 28,
+      borderTopRightRadius: 28,
+      padding: 24,
+    },
+
+    modalTitle: {
+      fontSize: 18,
+      fontFamily: 'Poppins-Bold',
+      textAlign: 'center',
+      marginBottom: 20,
+    },
+
+    slotButton: {
+      height: 50,
+      borderRadius: 25,
+      borderWidth: 1.5,
+      borderColor: '#264734',
+      justifyContent: 'center',
+      alignItems: 'center',
+      marginBottom: 12,
+    },
+
+    slotButtonActive: {
+      backgroundColor: '#9E9E9E',
+      borderColor: '#9E9E9E',
+    },
+
+    slotText: {
+      color: '#264734',
+      fontSize: 15,
+      fontFamily: 'Poppins-Medium',
+    },
+
+    slotTextActive: {
+      color: '#fff',
+    },
+
+    bookNowButton: {
+      height: 56,
+      borderRadius: 28,
+      backgroundColor: '#264734',
+      justifyContent: 'center',
+      alignItems: 'center',
+      marginTop: 20,
+    },
+
+    bookNowText: {
+      color: '#fff',
+      fontSize: 16,
+      fontFamily: 'Poppins-Bold',
+    },
+    timeSlotGrid: {
+      flexDirection: 'row',
+      flexWrap: 'wrap',
+      justifyContent: 'space-between',
+      marginTop: 12,
+    },
+
+    timePill: {
+      width: '32%',
+      height: 35,
+      borderRadius: 22,
+      borderWidth: 1.5,
+      borderColor: '#264734',
+      justifyContent: 'center',
+      alignItems: 'center',
+      marginBottom: 14,
+      backgroundColor: '#fff',
+    },
+
+    timePillActive: {
+      backgroundColor: '#264734',
+    },
+
+    timePillText: {
+      fontSize: 14,
+      color: '#264734',
+      fontFamily: 'Poppins-Medium',
+    },
+
+    timePillTextActive: {
+      color: '#fff',
+    },
   });
 
-export default styles; 
+export default styles;
