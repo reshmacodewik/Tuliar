@@ -152,7 +152,7 @@ const styles = (wp: any, hp: any) =>
       backgroundColor: '#fff',
       padding: wp(1.5),
       borderRadius: wp(2),
-      alignItems: 'center',
+      width: wp(25),
       shadowColor: '#000',
       shadowOffset: { width: 0, height: 1 },
       shadowOpacity: 0.1,
@@ -160,7 +160,7 @@ const styles = (wp: any, hp: any) =>
       elevation: 2,
       position: 'absolute',
       bottom: hp(-7),
-      left: wp(0.5),
+      left: wp(3),
       right: wp(0.5),
       zIndex: 1,
     },
@@ -278,8 +278,21 @@ const styles = (wp: any, hp: any) =>
    freeIcon:{
     width: wp(5),
     height: wp(5),
-   }
-    
+   },
+    dotsRow: {
+  flexDirection: 'row',
+  justifyContent: 'center',
+  marginTop: 12,
+},
+
+dot: {
+  width: 8,
+  height: 8,
+  borderRadius: 4,
+  backgroundColor: '#D1D5DB',
+  marginHorizontal: 4,
+},
+
   });
 
 export default styles;

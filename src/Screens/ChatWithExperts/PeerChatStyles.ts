@@ -12,7 +12,7 @@ function hp(percentage: number): number {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop: hp(-1),
+    marginTop: hp(2),
   },
 
   // Header Styles
@@ -21,6 +21,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingHorizontal: wp(5),
     paddingVertical: hp(2),
+    
   },
   backButton: {
     paddingVertical: hp(2),
@@ -40,8 +41,12 @@ const styles = StyleSheet.create({
     borderRadius: wp(6),
     marginRight: wp(3),
   },
+  headerTextContainer: {
+    flexDirection: 'column',
+    alignItems: 'flex-start',
+  },
   headerTitle: {
-    fontSize: wp(4.5),
+    fontSize: 15,
     fontFamily: 'Quicksand-Bold',
     color: '#1A1A1A',
   },
@@ -320,6 +325,192 @@ const styles = StyleSheet.create({
     fontSize: wp(3.5),
     fontFamily: 'Urbanist-SemiBold',
   },
+  timeWarningContainer: {
+  alignSelf: 'center',
+  backgroundColor: '#FFFFFF',
+  paddingVertical: 10,
+  paddingHorizontal: 18,
+  borderRadius: 20,
+  marginVertical: 12,
+},
+
+timeWarningText: {
+  fontSize: 13,
+  color: '#000',
+  fontWeight: '500',
+  textAlign: 'center',
+},
+
+chatPausedCard: {
+  backgroundColor: '#FFFFFF',
+  borderRadius: 16,
+  padding: 16,
+  marginHorizontal: 16,
+  marginTop: 20,
+},
+
+chatPausedTitle: {
+  fontSize: 16,
+  fontWeight: '700',
+  color: '#000',
+  marginBottom: 6,
+},
+
+chatPausedSubtitle: {
+  fontSize: 13,
+  color: '#6B7280',
+  marginBottom: 16,
+},
+
+chatPausedActions: {
+  flexDirection: 'row',
+  justifyContent: 'space-between',
+  marginBottom: 16,
+},
+
+topUpButton: {
+  backgroundColor: '#1F3827',
+  paddingVertical: 10,
+  width: '48%',
+  borderRadius: 20,
+},
+
+topUpButtonText: {
+  color: '#FFF',
+  fontWeight: '600',
+  textAlign: 'center',
+},
+
+cancelButton: {
+  borderWidth: 1,
+  borderColor: '#1F3827',
+  paddingVertical: 10,
+  width: '48%',
+  borderRadius: 20,
+},
+
+cancelButtonText: {
+  color: '#1F3827',
+  fontWeight: '600',
+  textAlign: 'center',
+},
+
+urgentHelpBox: {
+  backgroundColor: '#F9FAFB',
+  borderRadius: 12,
+  padding: 14,
+  borderWidth: 1,
+  borderColor: '#E5E7EB',
+  marginBottom: 16,
+},
+
+urgentTitle: {
+  fontSize: 14,
+  fontWeight: '700',
+  marginBottom: 4,
+},
+
+urgentSubtitle: {
+  fontSize: 12,
+  color: '#6B7280',
+  marginBottom: 12,
+},
+
+requestApprovalButton: {
+  backgroundColor: '#1F3827',
+  paddingVertical: 10,
+  borderRadius: 20,
+  alignItems: 'center',
+  marginHorizontal: 50,
+},
+
+requestApprovalText: {
+  color: '#FFF',
+  fontWeight: '600',
+},
+
+inputDisabled: {
+  backgroundColor: '#F3F4F6',
+},
+
+sendDisabled: {
+  opacity: 0.4,
+},
+headerSubtitle: {
+  fontSize: 12,
+  color: '#6B7280',
+  marginTop: 2,
+},
+modalOverlay: {
+  flex: 1,
+  backgroundColor: 'rgba(0,0,0,0.4)',
+  justifyContent: 'center',
+  alignItems: 'center',
+},
+modalContainer: {
+  width: '90%',
+  backgroundColor: '#fff',
+  borderRadius: 16,
+  padding: 20,
+},
+modalTitle: {
+  fontSize: 18,
+  fontWeight: '700',
+  textAlign: 'center',
+},
+modalSubtitle: {
+  fontSize: 14,
+  color: '#6B7280',
+  textAlign: 'center',
+  marginVertical: 8,
+},
+planOption: {
+  flexDirection: 'row',
+  justifyContent: 'space-between',
+  alignItems: 'center',
+  borderWidth: 1,
+  borderColor: '#E5E7EB',
+  borderRadius: 12,
+  padding: 14,
+  marginTop: 12,
+},
+planSelected: {
+  borderColor: '#14532D',
+  backgroundColor: '#F0FDF4',
+},
+planLabel: {
+  fontSize: 15,
+  fontWeight: '600',
+},
+planPrice: {
+  fontSize: 15,
+  fontWeight: '700',
+},
+planNote: {
+  fontSize: 12,
+  color: '#6B7280',
+  marginTop: 4,
+},
+payButton: {
+  backgroundColor: '#14532D',
+  paddingVertical: 14,
+  borderRadius: 28,
+  marginTop: 20,
+},
+payButtonText: {
+  color: '#fff',
+  textAlign: 'center',
+  fontSize: 16,
+  fontWeight: '700',
+},
+cancelText: {
+  textAlign: 'center',
+  marginTop: 12,
+  fontSize: 14,
+  color: '#374151',
+},
+
+
 });
 
 export default styles;

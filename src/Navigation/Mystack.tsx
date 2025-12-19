@@ -66,6 +66,8 @@ import TherapistListScreen from '../Screens/Therapy/TherapistListScreen';
 import { ImageBackground, Text, TouchableOpacity } from 'react-native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import WeeklyReportScreen from '../Screens/Home/WeeklyReportScreen';
+import SessionBookedScreen from '../Screens/Therapy/SessionBookedScreen';
+
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 const CustomHeader = ({ navigation, route, options }: any) => {
@@ -182,6 +184,7 @@ const PrivateStack = () => (
     />
     <Stack.Screen name="TherapistListScreen" component={TherapistListScreen} />
     <Stack.Screen name="WeeklyReportScreen" component={WeeklyReportScreen} />
+    <Stack.Screen name="SessionBookedScreen" component={SessionBookedScreen} />
   </Stack.Navigator>
 );
 

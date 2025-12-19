@@ -20,6 +20,7 @@ export type Session = {
   time: string;
   price: string;
   type: 'chat' | 'video';
+  showNotes?: boolean; // 👈 NEW
 };
 
 type Props = {
@@ -43,7 +44,12 @@ const SessionCard: React.FC<Props> = ({ item, onReschedule, onCancel }) => {
             <Image source={item.avatar} style={s.avatar} />
             <View>
               <Text style={s.name}>{item.name}</Text>
-              <Text style={s.date}>{item.date}</Text>
+              {item.showNotes && (
+                <>
+                  <Text style={s.time}>{item.date}</Text>
+                </>
+              )}
+
               <Text style={s.issue}>{item.issue}</Text>
             </View>
           </View>
@@ -63,7 +69,12 @@ const SessionCard: React.FC<Props> = ({ item, onReschedule, onCancel }) => {
               }}
             />
 
-            <Text style={s.time}>{item.time}</Text>
+            {item.showNotes && (
+              <>
+                <Text style={s.time}>{item.time}</Text>
+              </>
+            )}
+
             <Text style={s.price}>{item.price}</Text>
           </View>
         </View>
@@ -71,15 +82,22 @@ const SessionCard: React.FC<Props> = ({ item, onReschedule, onCancel }) => {
         <View style={s.rowBtns}>
           <TouchableOpacity
             style={s.primaryBtn}
-            onPress={() => setShowReschedule(true)}
+            onPress={() =>
+              item.showNotes
+                ? console.log('Add Notes')
+                : console.log('Book Appointment')
+            }
           >
-            <Text style={s.primaryBtnText}>Reschedule</Text>
+            <Text style={s.primaryBtnText}>
+              {item.showNotes ? 'Add Notes' : 'Book Appointment'}
+            </Text>
           </TouchableOpacity>
+
           <TouchableOpacity
             style={s.ghostBtn}
             onPress={() => setShowCancel(true)}
           >
-            <Text style={s.ghostBtnText}>Cancel</Text>
+            <Text style={s.ghostBtnText}>Change The Therapist</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -101,7 +119,14 @@ const SessionCard: React.FC<Props> = ({ item, onReschedule, onCancel }) => {
             </TouchableOpacity>
 
             <Image source={item.avatar} style={s.avatarLarge} />
-            <View style={{flexDirection: 'row', alignItems: 'center', gap:5,justifyContent:'center'}}>
+            <View
+              style={{
+                flexDirection: 'row',
+                alignItems: 'center',
+                gap: 5,
+                justifyContent: 'center',
+              }}
+            >
               <Text style={s.modalName}>{item.name}</Text>
               <Image
                 source={require('../Theme/assets/image/greenvideo.png')}
@@ -109,8 +134,8 @@ const SessionCard: React.FC<Props> = ({ item, onReschedule, onCancel }) => {
                   width: rf(30),
                   height: rf(30),
                   resizeMode: 'contain',
-                  alignContent:"center",
-                  alignItems:'center',
+                  alignContent: 'center',
+                  alignItems: 'center',
                   marginBottom: hp(0.5),
                 }}
               />

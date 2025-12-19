@@ -196,13 +196,8 @@ const GroupSessionsScreen = () => {
                     </Text>
                     <View style={styles(wp, hp).sessionLeader}>
                       <View style={styles(wp, hp).sessionLeaderInfo}>
-                      <Image
-                        source={session.leader.image}
-                        style={styles(wp, hp).sessionLeaderSmall}
-                      />
-                      <Text style={styles(wp, hp).sessionLeaderName}>
-                        {session.leader.name}
-                      </Text>
+                     
+                    
                       </View>
                       <TouchableOpacity
                         style={styles(wp, hp).reserveButton}

@@ -26,8 +26,8 @@ const styles = (wp: any, hp: any, rf: any) =>
       flex: 1,
     },
     avatar: {
-      width: wp(20),
-      height: wp(20),
+      width: wp(16),
+      height: wp(16),
       borderRadius: wp(10),
       marginRight: wp(3),
     },
@@ -68,7 +68,8 @@ const styles = (wp: any, hp: any, rf: any) =>
     rowBtns: {
       flexDirection: 'row',
       justifyContent: 'space-between',
-      marginTop: hp(1),
+      marginTop: hp(-1),
+
     },
     primaryBtn: {
       flex: 1,

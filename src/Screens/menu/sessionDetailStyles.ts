@@ -14,7 +14,8 @@ export default (wp: (v: number) => number, hp: (v: number) => number) =>
       alignItems: 'center',
       marginBottom: hp(2),
       gap:2,
-      marginLeft:-5
+      marginLeft:-5,
+      marginTop:25
       
     },
     header: { fontSize: wp(5), fontWeight: '700', color: '#000' },

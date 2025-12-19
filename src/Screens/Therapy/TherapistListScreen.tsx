@@ -11,33 +11,61 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import SessionCard, { Session } from '../../components/SessionCard';
 import { useResponsive } from 'react-native-responsive-hook';
+import TherapyCard from '../../components/TherapyCard';
 
 const SESSIONS: Session[] = [
   {
     id: '1',
-    name: 'Stacy',
+    name: 'Rachel',
     avatar: require('../../Theme/assets/image/doc2.png'),
-    date: 'Tuesday, April 30',
+    date: '',
     issue: 'Anxiety',
-    time: '10:00 AM',
+    time: '',
     price: 'KES200',
-    type: 'chat',
+    type: 'video',
+    showNotes: false, // ❌ no notes
   },
   {
     id: '2',
-    name: 'Stacy',
+    name: 'Jordan',
     avatar: require('../../Theme/assets/image/user2.png'),
-    date: 'Tuesday, April 30',
+    date: 'Wednesday, May 1',
     issue: 'Anxiety',
-    time: '10:00 AM',
+    time: '02:00 PM',
     price: 'KES200',
-    type: 'video',
+    type: 'chat',
+    showNotes: true, // ✅ show notes
+  },
+];
+
+const THERAPY_SESSIONS = [
+  {
+    id: '1',
+    title: 'Therapy',
+    subtitle: 'Next Session with Dr. on April 25 at 10:00 AM',
+  },
+  {
+    id: '2',
+    title: 'Therapy',
+    subtitle: 'Next Session with Dr. on April 26 at 10:00 AM',
   },
 ];
 
 const TherapistListScreen = ({ navigation }: any) => {
   const { top, bottom } = useSafeAreaInsets();
   const { wp, hp, rf } = useResponsive();
+  const handleJoinNow = (sessionTime: string) => {
+    const now = new Date();
+    const sessionDate = new Date(sessionTime);
+
+    const diffInMinutes = (sessionDate.getTime() - now.getTime()) / (1000 * 60);
+
+    if (diffInMinutes <= 5) {
+      navigation.navigate('SessionDetailScreen');
+    } else {
+      navigation.navigate('SessionBookedScreen');
+    }
+  };
 
   return (
     <ImageBackground
@@ -102,14 +130,14 @@ const TherapistListScreen = ({ navigation }: any) => {
           {/* title + subtitle */}
           <Text
             style={{
-              fontSize: 28,
+              fontSize: 22,
               fontWeight: '600',
               marginBottom: hp(1),
               textAlign: 'center',
               fontFamily: 'Quicksand-Bold',
             }}
           >
-            Your Therapist
+            Your Therapist & Therapy
           </Text>
           <Text
             style={{
@@ -122,6 +150,69 @@ const TherapistListScreen = ({ navigation }: any) => {
             Your sessions are listed below.{'\n'}Manage, change, or cancel
             anytime.
           </Text>
+          <TouchableOpacity
+            style={{
+              flexDirection: 'row',
+              backgroundColor: '#1F3827',
+              paddingHorizontal: wp(4),
+              paddingVertical: hp(1.5),
+              borderRadius: wp(1),
+              alignItems: 'center',
+              justifyContent: 'center',
+              marginBottom: hp(2),
+            }}
+            activeOpacity={0.85}
+          >
+            <Text
+              style={{
+                color: '#fff',
+                marginLeft: wp(1),
+                fontWeight: '700',
+                fontFamily: 'Quicksand-Bold',
+                textAlign: 'center',
+                fontSize: 15,
+              }}
+            >
+              Your Therapy
+            </Text>
+          </TouchableOpacity>
+          <FlatList
+            data={THERAPY_SESSIONS}
+            keyExtractor={item => item.id}
+            renderItem={({ item }) => (
+              <TherapyCard
+                title={item.title}
+                subtitle={item.subtitle}
+                onJoin={() => handleJoinNow('2025-04-25T14:00:00')}
+                onReschedule={() => console.log('Reschedule', item.id)}
+              />
+            )}
+            scrollEnabled={false}
+          />
+          <TouchableOpacity
+            style={{
+              backgroundColor: '#1F3827',
+              paddingHorizontal: wp(4),
+              paddingVertical: hp(1.5),
+              borderRadius: wp(1),
+              alignItems: 'center',
+              justifyContent: 'center',
+              marginBottom: hp(2),
+            }}
+            activeOpacity={0.85}
+          >
+            <Text
+              style={{
+                color: '#fff',
+                fontWeight: '700',
+                fontFamily: 'Quicksand-Bold',
+                textAlign: 'center',
+                fontSize: 15,
+              }}
+            >
+              Your Therapist
+            </Text>
+          </TouchableOpacity>
 
           {/* list */}
           <FlatList

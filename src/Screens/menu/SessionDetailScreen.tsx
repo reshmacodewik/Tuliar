@@ -11,7 +11,7 @@ const SessionDetailScreen = () => {
   const navigation = useNavigation<NavigationProp<any>>();
 
   return (
-    <ImageBackground  style={styles.bgimg} resizeMode="cover">
+    <ImageBackground  style={styles.bgimg} resizeMode="cover" source={require('../../Theme/assets/image/background.png')}>
       <ScrollView contentContainerStyle={styles.scrollContainer} showsVerticalScrollIndicator={false}>
         {/* Header */}
         <View style={styles.headerRow}>
@@ -61,14 +61,7 @@ const SessionDetailScreen = () => {
             <Text style={styles.primaryBtnText}>Join Session</Text>
           </TouchableOpacity>
 
-          <View style={styles.actionRow}>
-            <TouchableOpacity style={styles.secondaryBtn}>
-              <Text style={styles.secondaryBtnText}>Edit</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.dangerBtn}>
-              <Text style={styles.dangerBtnText}>Cancel</Text>
-            </TouchableOpacity>
-          </View>
+        
         <View style={{ marginTop: hp(1) }}>
           <Text style={styles.prepareTitle}>Prepare for the session</Text>
           <Text style={styles.prepareText}>Take a few deep breaths, have water nearby.</Text>

@@ -319,15 +319,23 @@ const styles = StyleSheet.create({
     paddingVertical: hp(0.8),
     alignItems: 'center',
     justifyContent: 'center',
-    alignSelf: 'flex-end',
+    alignSelf: 'flex-start',
     paddingHorizontal: wp(5),
-    marginTop: hp(-1.8),
+    marginTop: hp(-1),
+    marginLeft: wp(20),
   },
   chatNowButtonText: {
     color: '#FFFFFF',
     fontSize: wp(3.5),
     fontFamily: 'Urbanist-SemiBold',
   },
+  sectionTitle: {
+  fontSize: 18,
+  fontFamily: 'Quicksand-Bold',
+  marginVertical: 12,
+  marginHorizontal: 18,
+},
+
 });
 
 export default styles; 
